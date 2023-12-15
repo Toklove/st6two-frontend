@@ -1,5 +1,5 @@
 <template>
-    <div :class="`${className} ${isDark ? 'dark' : ''}`" class='wrap'>
+    <div :class='`${className}`' class='wrap'>
         <!-- 导航条:开始 -->
         <TnNavbar
             v-if='layoutData.showTopBar'

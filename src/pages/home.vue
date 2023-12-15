@@ -161,13 +161,4 @@ navigationStyle: custom
 .sub-title {
     color: #8c8c8c !important;
 }
-
-.stock-row {
-    display: grid;
-    grid-template-columns: auto 156px 156px;
-    margin-bottom: 14px;
-    padding: 26px 20px;
-    background-color: #f5f7f9;
-    border-radius: 30px;
-}
 </style>
