@@ -86,6 +86,14 @@ $green-block: rgb(51, 205, 153);
     background-color: $red-block;
 }
 
+.green-text {
+    color: $green-block;
+}
+
+.red-text {
+    color: $red-block;
+}
+
 .stock-row {
     display: grid;
     grid-template-columns: auto 156px 156px;
