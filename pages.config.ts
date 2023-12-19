@@ -19,6 +19,8 @@ export default defineUniPages({
         'backgroundColorBottom': '@bgColorBottom',
         'app-plus': {
             titleNView: false, // 移除 H5、APP 顶部导航
+            animationType: 'slide-in-right',
+            animationDuration: 300,
         },
         // rpx 计算所支持的最大设备宽度，单位 px
         'rpxCalcMaxDeviceWidth': 750,
@@ -30,31 +32,32 @@ export default defineUniPages({
         selectedColor: '#333333',
         backgroundColor: '#ffffff',
         borderStyle: 'black',
+        iconWidth: '30px',
         list: [
             {
-                'pagePath': 'pages/home',
-                'iconPath': 'static/tabbar/home-unselect.png',
-                'selectedIconPath': 'static/tabbar/home-select.png',
+                pagePath: 'pages/tabbar/home',
+                iconPath: 'static/tabbar/home-unselect.png',
+                selectedIconPath: 'static/tabbar/home-select.png',
             },
             {
-                'pagePath': 'pages/quotes',
-                'iconPath': 'static/tabbar/quotes-unselect.png',
-                'selectedIconPath': 'static/tabbar/quotes-select.png',
+                pagePath: 'pages/tabbar/quotes',
+                iconPath: 'static/tabbar/quotes-unselect.png',
+                selectedIconPath: 'static/tabbar/quotes-select.png',
             },
             {
-                'pagePath': 'pages/position',
-                'iconPath': 'static/tabbar/position-unselect.png',
-                'selectedIconPath': 'static/tabbar/position-select.png',
+                pagePath: 'pages/tabbar/position',
+                iconPath: 'static/tabbar/position-unselect.png',
+                selectedIconPath: 'static/tabbar/position-select.png',
             },
             {
-                'pagePath': 'pages/history',
-                'iconPath': 'static/tabbar/history-unselect.png',
-                'selectedIconPath': 'static/tabbar/history-select.png',
+                pagePath: 'pages/tabbar/history',
+                iconPath: 'static/tabbar/history-unselect.png',
+                selectedIconPath: 'static/tabbar/history-select.png',
             },
             {
-                'pagePath': 'pages/mine',
-                'iconPath': 'static/tabbar/mine-unselect.png',
-                'selectedIconPath': 'static/tabbar/mine-select.png',
+                pagePath: 'pages/tabbar/mine',
+                iconPath: 'static/tabbar/mine-unselect.png',
+                selectedIconPath: 'static/tabbar/mine-select.png',
             },
         ],
     },

@@ -1,5 +1,4 @@
 <template>
-	<!--本文件由FirstUI授权予南宁风吹雨网络科技有限公司（会员ID： 15  41，营业执照号：9    1 450   100     MA  B NH73 09B）专用，请尊重知识产权，勿私下传播，违者追究法律责任。-->
 	<view :style="getStyle">
 		<view class="fui-nav__bar"
 			:class="{'fui-nav__bar-line':splitLine,'fui-nva__bar-bg':!background,'fui-nav__bar-fixed':isFixed}"
@@ -115,7 +114,7 @@
 				let style = ''
 				if (this.isOccupy) {
 					let height = this.statusBar ? (this.statusBarHeight + 44) : 44
-					style += `height:${height}px;`
+					style += `height:${height*100}px;`
 				}
 				return style
 			}
@@ -172,7 +171,7 @@
 	}
 
 	.fui-nav__header {
-		height: 44px;
+		height: 88px;
 		/* #ifndef APP-NVUE */
 		width: 100%;
 		display: flex;

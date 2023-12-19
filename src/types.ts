@@ -9,7 +9,12 @@ export interface LayoutOtherDataType {
     topBarBgColor: string
     /** 导航条是否显示后退按钮 */
     showTopBarBackBtn: boolean
+    /** 导航条类名 */
+    className?: string
+    /** 导航条返回按钮颜色 */
+    backIconColor?: string
 }
+
 export interface _LayoutDataType {
     /** 数据是否加载完成 */
     dataIsLoaded: boolean

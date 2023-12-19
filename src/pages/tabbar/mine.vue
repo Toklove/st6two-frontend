@@ -1,0 +1,266 @@
+<template>
+    <page-meta />
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="card mx-auto">
+            <view class="flex">
+                <image class="w-[132px] h-[132px] rounded-full" src="/static/images/avatar.png"></image>
+                <view class="flex-1 ml-[19px]">
+                    <view class="flex items-center justify-between text-white">
+                        <text class="text-[38px] font-bold">
+                            username
+                        </text>
+                        <image
+                            class="w-[54px] h-[54px]" src="/static/images/icon-edit.png"
+                            @click="toPage('/pages/mine/userInfo')"
+                        ></image>
+                    </view>
+                    <view class="text-[25px] text-white">
+                        <text>ID:680012</text>
+                    </view>
+                    <view
+                        class="copy-wrap flex items-center text-center h-[40px] mt-[24px] px-[24px] bg-white rounded-[20px]"
+                    >
+                        <view class="mr-[14px] grid place-items-center">
+                            <image class="w-[24px] h-[24px]" src="/static/images/icon-small-invite.png"></image>
+                        </view>
+                        <text class="text-[24px]">邀请码</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="mt-[40px] px-[34px]">
+            <text class="text-[45px]">Account Details</text>
+            <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
+                <view class="flex items-center justify-between" @click="toPage('/pages/mine/option')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-option.png"></image>
+                        <text class="text-[28px]">Option Orders</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/wallet')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-wallet.png"></image>
+                        <text class="text-[28px]">Purse</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/certified')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-real.png"></image>
+                        <text class="text-[28px]">Certified</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-language.png"></image>
+                        <text class="text-[28px]">Language</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/changePassword')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-password.png"></image>
+                        <text class="text-[28px]">Change password</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="mt-[40px] px-[34px]">
+            <text class="text-[45px]">Help and support</text>
+            <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
+                <view class="flex items-center justify-between">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-market.png"></image>
+                        <text class="text-[28px]">Market pattern</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/service')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-service.png"></image>
+                        <text class="text-[28px]">Customer service</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-invite.png"></image>
+                        <text class="text-[28px]">Invitation Link</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/about')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-about.png"></image>
+                        <text class="text-[28px]">About us</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-logout.png"></image>
+                        <text class="text-[28px]">Log out</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="transition hidden">
+            <view class="popup-wrap">
+                <view class="container">
+                    <view class="text-center">
+                        <image class="icon" src="/static/images/icon-popup-language.png"></image>
+                    </view>
+                    <view class="slot-wrap text-center">
+                        <view class="mt-[120px]">
+                            <view
+                                v-for="(item, index) in LangList" :key="index" :class="index === 0 ? 'active' : ''"
+                                class="p-[15px] text-[26px] sub-title"
+                            >
+                                <text>{{ item.title }}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="btn-wrap flex justify-around items-center font-bold">
+                        <text class="btn sub-title bg-[#f5f7f9]">Cancel</text>
+                        <text class="btn text-white bg-black">Confirm</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </layout>
+</template>
+
+<script lang="ts" setup>
+function toPage(url) {
+    uni.navigateTo({ url })
+}
+
+const LangList = [
+    {
+        title: 'English',
+        value: 'en',
+    },
+    {
+        title: '日本語',
+        value: 'ja',
+    },
+    {
+        title: '한국어',
+        value: 'ko',
+    },
+    {
+        title: '繁体中文',
+        value: 'zh-Hant',
+    },
+    {
+        title: 'Deutsch',
+        value: 'de',
+    },
+    {
+        title: 'Français',
+        value: 'fr',
+    },
+    {
+        title: 'Русский язык',
+        value: 'ru',
+    },
+    {
+        title: 'Português',
+        value: 'pt',
+    },
+    {
+        title: 'italiano',
+        value: 'it',
+    },
+]
+</script>
+
+<route lang="yaml">
+style:
+navigationStyle: custom
+</route>
+
+<style>
+.card {
+    width: 708px;
+    height: 248px;
+    margin-top: 16px;
+    padding: 50px 30px 62px;
+    background: url("/static/images/bg-account.png") no-repeat;
+    background-size: cover;
+
+    .copy-wrap {
+        width: 208px;
+    }
+}
+
+.transition {
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity;
+}
+
+.popup-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 550px;
+        height: 900px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: linear-gradient(180deg, #d9efff, #fff);
+        border-radius: 50px;
+
+        .icon {
+            width: 164px;
+            height: 164px;
+            margin-top: -100px;
+        }
+    }
+}
+
+.sub-title {
+    color: #8c8c8c !important
+}
+
+.active {
+    border-top: 2px solid #d6d6d6;
+    border-bottom: 2px solid #d6d6d6;
+    font-size: 26px;
+    padding: 15px;
+    font-weight: bold;
+    color: black !important;
+}
+
+.btn-wrap {
+    position: absolute;
+    bottom: 34px;
+    width: 100%;
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 220px;
+        height: 80px;
+        border-radius: 40px;
+        font-size: 28px;
+    }
+}
+</style>
