@@ -1,22 +1,24 @@
 <template>
     <page-meta />
-    <div class="init-top" />
-    <layout class-name="IndexRouter">
-        <view class="px-[34px]">
-            <view class="relative text-center">
-                <image class="w-[200px] h-[200px]" src="/static/images/avatar.png"></image>
+    <div class='init-top' />
+    <layout class-name='IndexRouter'>
+        <view class='px-[34px]'>
+            <view class='relative text-center'>
+                <image :src='userStore.userInfo.avatar?userStore.userInfo.avatar:"/static/images/no-login.png"'
+                       class='w-[200px] h-[200px] rounded-full'
+                       @click='upload'></image>
                 <image
-                    class="absolute right-[40%] bottom-[10px] w-[36px] h-[36px]"
-                    src="/static/images/icon-edit-avator.png"
+                    class='absolute right-[40%] bottom-[10px] w-[36px] h-[36px]'
+                    src='/static/images/icon-edit-avator.png'
                 ></image>
             </view>
-            <view class="input mt-[71px] p-[30px] rounded-[20px] bg-[#f5f7f9]">
-                <input placeholder="Please enter the Nickname" type="text">
+            <view class='input mt-[71px] p-[30px] rounded-[20px] bg-[#f5f7f9]'>
+                <input v-model='userStore.userInfo.nickname' placeholder='Please enter the Nickname' type='text'>
             </view>
         </view>
-        <view class="btn-wrap text-center">
-            <view class="bg-black py-[33px] rounded-[20px]">
-                <text class="text-[32px] font-bold text-white">
+        <view class='btn-wrap text-center'>
+            <view class='bg-black py-[33px] rounded-[20px]' @click='saveInfo'>
+                <text class='text-[32px] font-bold text-white'>
                     Submit
                 </text>
             </view>
@@ -25,8 +27,58 @@
     </layout>
 </template>
 
-<script lang="ts" setup>
+<script lang='ts' setup>
 import { layoutDataKey } from '~/composables/provide'
+
+import { useUserStore } from '~/pinia/useUserInfo'
+
+useHead({
+    title: '用户信息',
+})
+
+const userStore = useUserStore()
+
+function saveInfo() {
+    userStore.saveUserInfo()
+    $api.post('/user/update', userStore.userInfo).then((res) => {
+        if (res.code === 1) {
+            uni.showToast({
+                title: 'Save success',
+                icon: 'none',
+            })
+        } else {
+            uni.showToast({
+                title: 'Save failed',
+                icon: 'none',
+            })
+        }
+    })
+}
+
+
+function upload() {
+    //调用uniapp上传文件方法
+    uni.chooseImage({
+        count: 1, //默认9
+        sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'], //从相册选择
+        success: async function(res) {
+            console.log(res.tempFilePaths)
+            //上传图片
+            const { data, code } = await $api.uploadFile('/common/upload', res.tempFilePaths[0])
+            console.log(data)
+            if (code === 1) {
+                userStore.userInfo.avatar = data.url
+            } else {
+                uni.showToast({
+                    title: 'Upload failed',
+                    icon: 'none',
+                })
+            }
+
+        },
+    })
+}
 
 const layoutData = ref({
     showTopBar: true,
@@ -38,7 +90,7 @@ const layoutData = ref({
 provide(layoutDataKey, layoutData)
 </script>
 
-<route lang="yaml">
+<route lang='yaml'>
 style:
 navigationStyle: custom
 </route>

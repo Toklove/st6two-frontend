@@ -5,7 +5,7 @@ const config: { server: ServerOptions; build: BuildOptions } = {
         port: 6778,
         proxy: {
             '/api': {
-                target: 'https://php.mmxiaowu.com',
+                target: 'http://127.0.0.1:8000',
                 changeOrigin: true,
                 rewrite: (path: string) => path.replace(/^\/api/, '/api'),
             },

@@ -5,10 +5,16 @@
 
 interface NavigateToOptions {
   url: "pages/tabbar/home" |
+       "pages/history" |
+       "pages/home" |
+       "pages/mine" |
+       "pages/position" |
+       "pages/quotes" |
        "pages/common/forget" |
        "pages/common/login" |
        "pages/common/register" |
        "pages/mine/about" |
+       "pages/mine/addWallet" |
        "pages/mine/certified" |
        "pages/mine/changePassword" |
        "pages/mine/option" |
@@ -22,7 +28,10 @@ interface NavigateToOptions {
        "pages/tabbar/history" |
        "pages/tabbar/mine" |
        "pages/tabbar/position" |
-       "pages/tabbar/quotes";
+       "pages/tabbar/quotes" |
+       "pages-sub/acticity/detail" |
+       "pages-sub/user/avatar-cropper" |
+       "pages-sub/user/login";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

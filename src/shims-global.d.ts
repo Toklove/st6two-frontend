@@ -44,9 +44,9 @@ declare interface ResponseData<T> {
  * ```
  * {
  *  hasNext: number | boolean
-    hasPrev: number | boolean
-    total: number
-    data: T
+ hasPrev: number | boolean
+ total: number
+ data: T
  * }
  * ```
  */
@@ -61,15 +61,27 @@ type Methods = 'get' | 'post' | 'delete' | 'put'
 
 declare interface ApiType {
     get<T>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
+
     get<T, U = Obj>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T> & U>
+
     post<T>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
+
     post<T, U = Obj>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T> & U>
+
     put<T>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
+
     put<T, U = Obj>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T> & U>
+
     delete<T>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
+
     delete<T, U = Obj>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T> & U>
+
     downFile(url: string, method: Methods, data?: Obj): Promise<any>
+
+    uploadFile(url: string, files, name: string, formData?: Obj, header?: Obj): Promise<any>
+
     RESTful<T>(url: string, method: Methods, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
+
     $RESTful<T>(url: string, method: Methods, data?: Obj, header?: Obj): Promise<ResponseData<T>>
 }
 

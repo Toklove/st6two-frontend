@@ -40,7 +40,7 @@ function checkStatus(response: AxiosResponse): ResponseData<any> {
         return response.data
 
     return {
-        status: -404,
+        status: response.status || -404,
         code: -404,
         info: response.statusText || response.toString(),
         data: response.statusText || response.toString(),
@@ -49,22 +49,24 @@ function checkStatus(response: AxiosResponse): ResponseData<any> {
 }
 
 function checkCodeFn(data: ResponseData<any>) {
-    const code = [0, 200, 1000]
+    const code = [200, 1000, 1]
+    console.log('checkCodeFn', data)
     if (data.status === 401 || data.code === 401) {
         uni.showModal({
             title: '提示',
             content: '当前未登录或者登录超时, 请重新登陆',
             success: () => {
                 //
+
+                ls.del('token')
+                uni.navigateTo({ url: '/pages/common/login' })
             },
         })
-    }
-    else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
+    } else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
         showToast(data.message)
-    }
-    else {
-        data.code = 200
-        data.status = 200
+    } else {
+        data.code = 1
+        data.status = 1
     }
     return {
         ...data,
@@ -76,10 +78,10 @@ function checkCodeFn(data: ResponseData<any>) {
 /**
  * axios Api 封装
  * ```
-    get<T>(url: string, params?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
-    post<T>(url: string, data: Obj = {}, header: Obj = {}, checkCode?: boolean): Promise<ResponseData<T>>
-    put<T>(url: string, data: Obj = {}, header: Obj = {}, checkCode?: boolean): Promise<ResponseData<T>>
-    delete<T>(url: string, data: Obj = {}, header: Obj = {}, checkCode?: boolean): Promise<ResponseData<T>>
+ get<T>(url: string, params?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
+ post<T>(url: string, data: Obj = {}, header: Obj = {}, checkCode?: boolean): Promise<ResponseData<T>>
+ put<T>(url: string, data: Obj = {}, header: Obj = {}, checkCode?: boolean): Promise<ResponseData<T>>
+ delete<T>(url: string, data: Obj = {}, header: Obj = {}, checkCode?: boolean): Promise<ResponseData<T>>
  * ```
  */
 export const $api: ApiType = {
@@ -94,6 +96,28 @@ export const $api: ApiType = {
     },
     delete(url: string, data: Obj = {}, header: Obj = {}, checkCode = true) {
         return this.RESTful(url, 'delete', data, header, checkCode)
+    },
+    //封装上传文件函数
+    async uploadFile(url, filePath = '', name = 'files', header = {}) {
+        const token = ls.get('token') || ''
+        return new Promise((resolve, reject) => {
+            uni.uploadFile({
+                url: import.meta.env.VITE_APP_API + url,
+                name,
+                filePath,
+                header: {
+                    ...header,
+                    'Authorization': `Bearer ${token}`,
+                },
+                success: res => {
+                    //返回的是字符串，需要转换成对象
+                    resolve(JSON.parse(res.data))
+                },
+                fail: err => {
+                    reject(err)
+                },
+            })
+        })
     },
     async downFile(url, method = 'get', data) {
         const config: AxiosRequestConfig = {
@@ -130,7 +154,7 @@ export const $api: ApiType = {
             headers: {
                 ...baseConfig.headers,
                 ...header,
-                'Access-Token': token,
+                'Authorization': `Bearer ${token}`,
             },
             method,
             url,

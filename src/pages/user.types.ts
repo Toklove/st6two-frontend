@@ -1,12 +1,12 @@
 export interface UserInfo {
     /** 用户ID */
-    user_id: number
-    /** 手机号（隐藏显示） */
-    mobile: string
+    id: number
+    /** 邮箱（隐藏显示） */
+    email: string
     /** 用户昵称 */
-    nick_name: string
-    /** 头像ID */
-    avatar_id: number
+    nickname: string
+    /** 头像 */
+    avatar: number
     /** 性别 */
     gender: string
     /** 默认收货地址ID */
@@ -25,8 +25,8 @@ export interface UserInfo {
     platform: string
     /** 最后登录时间 */
     last_login_time: number
-    /** 头像URL */
-    avatar_url: string
+    /** 邀请码 */
+    invite_code: string
     /** 会员等级信息 */
     grade: Obj
 }

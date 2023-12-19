@@ -12,15 +12,19 @@ export const useUserStore = defineStore('userInfo', () => {
     })
 
     async function getUserInfo() {
-        const { code, data } = await $api.get<UserData>('/user/info', { })
-        if (code === 200 && data && data.userInfo) {
-            state.userInfo = data.userInfo
-            ls.set('user-info', data.userInfo)
+        const { code, data } = await $api.get<UserData>('/auth/me', {})
+        if (code === 1 && data) {
+            state.userInfo = data
+            ls.set('user-info', data)
         }
+    }
+
+    function saveUserInfo() {
+        ls.set('user-info', state.userInfo)
     }
 
     return {
         ...toRefs(state),
-        getUserInfo,
+        getUserInfo, saveUserInfo,
     }
 })
