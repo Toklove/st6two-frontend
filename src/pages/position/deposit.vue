@@ -1,31 +1,40 @@
 <template>
     <page-meta />
-    <div class="init-top" />
-    <layout class-name="IndexRouter">
-        <view class="mt-[20px] mx-[34px]">
-            <view class="relative">
-                <view class="flex justify-between items-center">
-                    <text class="text-[35px]">貨幣選擇</text>
-                    <view class="flex justify-between items-center py-[12px] px-[24px] rounded-full bg-black">
-                        <text class="text-[26px] text-white">USDT-TRC20</text>
+    <div class='init-top' />
+    <layout class-name='IndexRouter'>
+        <view class='mt-[20px] mx-[34px]'>
+            <view class='relative'>
+                <view class='flex items-center justify-between'>
+                    <text class='text-[35px]'>Choice of currency</text>
+                    <view class='flex items-center justify-between bg-black dropdown'
+                          @click='showDropdown = !showDropdown'>
+                        <text class='text-[26px] text-white px-[10px]'>{{ form.currency_name }}</text>
+                        <image :src='showDropdown?"/static/images/icon-dropup.png":"/static/images/icon-dropdown.png"'
+                               class='w-[18px] h-[18px]'></image>
+                    </view>
+                </view>
+                <view :class='showDropdown?"h-auto":"h-0"' class='dropdown-item bg-black text-white'>
+                    <view v-for='(item,index) in CurrencyList' :key='index' class='item' @click='changeCurrency(item)'>
+                        <text class='text-[26px]'>{{ item.name }}</text>
                     </view>
                 </view>
             </view>
-            <view class="p-[30px] mt-[40px] bg-[#f5f7f9] rounded-[20px]">
-                <text class="text-24px] sub-title">
+            <view class='p-[30px] mt-[40px] bg-[#f5f7f9] rounded-[20px]'>
+                <text class='text-24px] sub-title'>
                     將TOKEN转账到以下地址
                 </text>
-                <view class="grid place-items-center p-[12px]">
-                    <view class="qrcode">
-                        二维码
+                <view class='grid place-items-center p-[36px]'>
+                    <view class='qrcode'>
+                        <fui-qrcode :value='form.address' height='222' width='222' />
                     </view>
                 </view>
-                <view class="flex items-center justify-center py-[4px] text-center bg-white rounded-[25px]">
+                <view class='flex items-center justify-center py-[4px] px-[16px] text-center bg-white rounded-[25px]'
+                      @click='CopyAddress'>
                     <view>
-                        <image class="w-[22px] h-[22px]" src="/static/images/icon-copy-deposit.png"></image>
+                        <image class='w-[22px] h-[22px]' src='/static/images/icon-copy-deposit.png'></image>
                     </view>
-                    <text class="ml-[10px] text-[24px]">
-                        TFEdKESckBxiJLhXGP9CVX7qp396PeyoBv
+                    <text class='ml-[10px] text-[24px]'>
+                        {{ form.address }}
                     </text>
                 </view>
             </view>
@@ -33,8 +42,45 @@
     </layout>
 </template>
 
-<script lang="ts" setup>
+<script lang='ts' setup>
 import { layoutDataKey } from '~/composables/provide'
+import FuiQrcode from '~/components/firstui/fui-qrcode/fui-qrcode.vue'
+
+const showDropdown = ref(false)
+const form = ref({
+    currency_id: '',
+    currency_name: '',
+    address: '',
+})
+
+function changeCurrency(item) {
+    form.value.currency_id = item.id
+    form.value.currency_name = item.name
+    form.value.address = item.address
+    showDropdown.value = false
+}
+
+const CurrencyList = ref([])
+onShow(() => {
+    $api.get('/user/getCurrency').then((res) => {
+        CurrencyList.value = res.data
+        form.value.currency_name = CurrencyList.value[0].name
+        form.value.currency_id = CurrencyList.value[0].id
+        form.value.address = CurrencyList.value[0].address
+    })
+})
+
+function CopyAddress() {
+    uni.setClipboardData({
+        data: form.value.address,
+        success: function() {
+            uni.showToast({
+                title: 'Copy success',
+                icon: 'none',
+            })
+        },
+    })
+}
 
 const layoutData = ref({
     showTopBar: true,
@@ -46,12 +92,12 @@ const layoutData = ref({
 provide(layoutDataKey, layoutData)
 </script>
 
-<route lang="yaml">
+<route lang='yaml'>
 style:
 navigationStyle: custom
 </route>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .wallet-item {
     width: 682px;
     height: 210px;
@@ -85,5 +131,42 @@ navigationStyle: custom
     bottom: 100px;
     width: 650px;
     transform: translateX(-50%);
+}
+
+.dropdown {
+    min-width: 208px;
+    height: 46px;
+    padding: 0 20px;
+    border-radius: 22px;
+}
+
+.dropdown-item {
+    width: 208px;
+    position: absolute;
+    right: 0;
+    top: 72px;
+    padding: 0 18px;
+    border-radius: 22px;
+}
+
+.h-0 {
+    height: 0;
+    transition: .3s linear;
+    overflow: hidden;
+}
+
+.h-auto {
+    height: auto;
+    padding: 30px 18px;
+    transition: .3s linear;
+    overflow: hidden;
+
+    .item {
+        margin-top: 26px;
+    }
+
+    .item:first-child {
+        margin-top: 0;
+    }
 }
 </style>

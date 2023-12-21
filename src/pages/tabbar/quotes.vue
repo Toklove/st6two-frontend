@@ -15,7 +15,7 @@
                     </view>
                 </view>
                 <view class='mt-[20px]'>
-                    <view v-for='item in 10' class='stock-row items-center'>
+                    <view v-for='item in 10' class='stock-row items-center' @click='toPage("/pages/position/chart")'>
                         <view class='flex'>
                             <image class='rounded-full w-[72px] h-[72px]'
                                    src='https://api.gomarketes.com/storage/products/MTQYoOCxnMQtPiXtP7Yx2yL9wikyYL1K5gc04VMD.png'></image>
@@ -40,7 +40,9 @@
 </template>
 
 <script lang='ts' setup>
-
+function toPage(url) {
+    uni.navigateTo({ url })
+}
 
 </script>
 

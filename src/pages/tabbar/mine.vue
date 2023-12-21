@@ -93,7 +93,7 @@
                         <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-invite.png'></image>
                         <text class='text-[28px]'>Invitation Link</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <text class='text-[28px] sub-title' @click='copyInviteCode'>Click to copy</text>
                 </view>
                 <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/about')">
                     <view class='flex items-center'>
@@ -102,7 +102,7 @@
                     </view>
                     <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]'>
+                <view class='flex items-center justify-between mt-[35px]' @click='logout'>
                     <view class='flex items-center'>
                         <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-logout.png'></image>
                         <text class='text-[28px]'>Log out</text>
@@ -141,6 +141,32 @@
 import { useUserStore } from '~/pinia/useUserInfo'
 
 const userStore = useUserStore()
+
+async function logout() {
+    //请求登录接口并清除本来缓存数据
+    uni.showModal({
+        title: 'Log out',
+        content: 'Are you sure you want to log out?',
+        success: async function(res) {
+            if (res.confirm) {
+                console.log('用户点击确定')
+                //发送请求退出登录
+                const { code } = await $api.get('/user/logout')
+                if (code === 1) {
+                    uni.clearStorageSync()
+                    uni.reLaunch({
+                        url: '/pages/common/login',
+                    })
+                } else {
+                    uni.showToast({
+                        title: 'Log out failed',
+                        icon: 'none',
+                    })
+                }
+            }
+        },
+    })
+}
 
 function toPage(url) {
     uni.navigateTo({ url })

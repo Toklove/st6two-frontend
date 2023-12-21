@@ -6,15 +6,29 @@
             <view class='relative'>
                 <view class='flex items-center justify-between'>
                     <text class='text-[35px]'>Choice of currency</text>
-                    <view class='flex items-center justify-between bg-black dropdown'>
-                        <text class='text-[26px] text-white'>ERC20</text>
-                        <image class='w-[18px] h-[18px]' src='/static/images/icon-dropup.png'></image>
+                    <view class='flex items-center justify-between bg-black dropdown'
+                          @click='showDropdown = !showDropdown'>
+                        <text class='text-[26px] text-white px-[10px]'>{{ form.currency_name }}</text>
+                        <image :src='showDropdown?"/static/images/icon-dropup.png":"/static/images/icon-dropdown.png"'
+                               class='w-[18px] h-[18px]'></image>
                     </view>
                 </view>
-                <view class='dropdown-item bg-black text-white h-auto'>
-                    <view v-for='(item,index) in CurrencyList' :key='index' class='item'>
+                <view :class='showDropdown?"h-auto":"h-0"' class='dropdown-item bg-black text-white'>
+                    <view v-for='(item,index) in CurrencyList' :key='index' class='item' @click='changeCurrency(item)'>
                         <text class='text-[26px]'>{{ item.name }}</text>
                     </view>
+                </view>
+            </view>
+            <view class='mt-[40px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                <text class='text-[30px]'>Add address</text>
+                <input v-model='form.address' class='input mt-[29px] text-[14px]'
+                       placeholder='Fill in your address here' type='text'>
+            </view>
+            <view class='btn-wrap text-center'>
+                <view class='bg-black py-[33px] rounded-[20px]' @click='submit'>
+                    <text class='text-[32px] font-bold text-white'>
+                        Save
+                    </text>
                 </view>
             </view>
         </view>
@@ -24,10 +38,56 @@
 <script lang='ts' setup>
 import { layoutDataKey } from '~/composables/provide'
 
+const showDropdown = ref(false)
+const form = ref({
+    currency_id: '',
+    currency_name: '',
+    address: '',
+})
+
+function submit() {
+    if (!form.value.currency_id) {
+        uni.showToast({
+            title: 'Please select currency',
+            icon: 'none',
+        })
+        return
+    }
+    if (!form.value.address) {
+        uni.showToast({
+            title: 'Please enter address',
+            icon: 'none',
+        })
+        return
+    }
+    $api.post('/user/addWallet', form.value).then((res) => {
+        if (res.code === 1) {
+            uni.showToast({
+                title: 'Add success',
+                icon: 'none',
+            })
+            uni.navigateBack()
+        } else {
+            uni.showToast({
+                title: 'Add failed',
+                icon: 'none',
+            })
+        }
+    })
+}
+
+function changeCurrency(item) {
+    form.value.currency_id = item.id
+    form.value.currency_name = item.name
+    showDropdown.value = false
+}
+
 const CurrencyList = ref([])
 onShow(() => {
     $api.get('/user/getCurrency').then((res) => {
         CurrencyList.value = res.data
+        form.value.currency_name = CurrencyList.value[0].name
+        form.value.currency_id = CurrencyList.value[0].id
     })
 })
 
@@ -47,6 +107,14 @@ navigationStyle: custom
 </route>
 
 <style lang='scss' scoped>
+.btn-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    width: 650px;
+    transform: translateX(-50%);
+}
+
 .dropdown {
     min-width: 208px;
     height: 46px;
@@ -63,13 +131,20 @@ navigationStyle: custom
     border-radius: 22px;
 }
 
+.h-0 {
+    height: 0;
+    transition: .3s linear;
+    overflow: hidden;
+}
+
 .h-auto {
     height: auto;
     padding: 30px 18px;
     transition: .3s linear;
+    overflow: hidden;
 
     .item {
-        margin-top: 18px;
+        margin-top: 26px;
     }
 
     .item:first-child {

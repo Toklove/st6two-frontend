@@ -14,6 +14,7 @@ interface NavigateToOptions {
        "pages/common/login" |
        "pages/common/register" |
        "pages/mine/about" |
+       "pages/mine/addBank" |
        "pages/mine/addWallet" |
        "pages/mine/certified" |
        "pages/mine/changePassword" |
@@ -24,6 +25,7 @@ interface NavigateToOptions {
        "pages/position/bill" |
        "pages/position/chart" |
        "pages/position/deposit" |
+       "pages/position/record" |
        "pages/position/withdraw" |
        "pages/tabbar/history" |
        "pages/tabbar/mine" |
