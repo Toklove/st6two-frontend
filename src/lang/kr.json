@@ -1,5 +1,150 @@
 {
-  "index": {
-    "title": "Kr Index"
+  "tabBar": {
+    "home": {
+      "hot": "인기 있는",
+      "news": "소식",
+      "seeMore": "더 보기",
+      "market": "시장",
+      "home": "집"
+    },
+    "mine": {
+      "AccountDetails": "계정 세부 정보",
+      "OptionOrders": "옵션 주문",
+      "Purse": "지갑",
+      "Certified": "인증",
+      "Language": "언어",
+      "ChangePassword": "비밀번호 변경",
+      "HelpAndSupport": "도움말 및 지원",
+      "MarketPattern": "시장 패턴",
+      "CustomerService": "고객 서비스",
+      "InvitationLink": "초대 링크",
+      "ClickToCopy": "복사하려면 클릭하십시오.",
+      "AboutUs": "우리에 관해서",
+      "Logout": "로그아웃",
+      "Cancel": "취소",
+      "Confirm": "확인하다"
+    },
+    "position": {
+      "RealAccount": "실제 계정",
+      "TotalAccountValue": "총 계정 가치",
+      "FreezeFunds": "자금 동결",
+      "Withdraw": "물러서다",
+      "Deposit": "보증금",
+      "Buy": "사다"
+    },
+    "quotes": {
+      "EnterTheContentHere": "여기에 내용을 입력합니다.",
+      "Market": "시장",
+      "PleaseSelect": "선택해 주세요"
+    }
+  },
+  "common": {
+    "forget": {
+      "Retrieve": "되찾다",
+      "RetrieveUpToJoin": "조인할 수 있도록 검색",
+      "Send": "보내기",
+      "Submit": "전송",
+      "ExistingAccount": "기존 계정",
+      "Login": "로그인"
+    },
+    "login": {
+      "Login": "로그인",
+      "LoginToContinue": "계속하려면 로그인하십시오.",
+      "RememberPassword": "비밀번호 기억",
+      "ForgotYourPassword": "비밀번호를 잊으셨나요?",
+      "Retrieve": "되찾다",
+      "haveAnAccount": "계정이 있으신가요?",
+      "Register": "등록기"
+    },
+    "register": {
+      "Register": "등록기",
+      "SignUpToJoin": "가입하기"
+    }
+  },
+  "mine": {
+    "addBank": {
+      "bankTitle": "플랫폼은 실시간으로 정보 보안을 보장하기 위해 정보를 암호화합니다",
+      "Save": "구해내다",
+      "bankName": "은행명을 입력해 주세요",
+      "bankCard": "은행 카드를 입력해 주세요",
+      "account": "계정 소유자를 입력하십시오.",
+      "bankAddress": "은행 주소를 입력해 주세요",
+      "bankCode": "은행 국제 코드를 입력하십시오."
+    },
+    "addWallet": {
+      "ChoiceOfCurrency": "통화 선택",
+      "AddAddress": "주소 추가",
+      "Save": "구해내다",
+      "addressHere": "여기에 주소를 입력하십시오."
+    },
+    "certified": {
+      "UploadIDPhoto": "증명사진 업로드",
+      "MakeSureTheBorderIsComplete": "테두리가 완전한지 확인",
+      "cerTitle": "플랫폼은 실시간으로 정보 보안을 보장하기 위해 정보를 암호화합니다",
+      "Submit": "전송",
+      "realName": "실명을 입력해 주세요",
+      "idNumber": "ID 번호를 입력해 주세요"
+    },
+    "changePassword": {
+      "Submit": "전송",
+      "inputNewPassWord": "새 비밀번호를 입력하십시오.",
+      "reNewPassWord": "비밀번호 확인을 입력해 주세요",
+      "oldPassword": "이전 비밀번호를 입력하십시오."
+    },
+    "option": {
+      "Buy": "사다",
+      "amount": "분량",
+      "duration": "기간",
+      "HandlingFee": "수수료",
+      "OrderTime": "주문 시간",
+      "SettlementTime": "정산 시간",
+      "ProfitLoss": "이익과 손실"
+    },
+    "userInfo": {
+      "Submit": "전송"
+    }
+  },
+  "position": {
+    "bill": {
+      "date": "날짜",
+      "all": "모두",
+      "classification": "분류",
+      "money": "분량",
+      "option": "선택",
+      "SettlementAmount": "결제 금액",
+      "bill": "계산서"
+    },
+    "chart": {
+      "Statistics": "통계",
+      "Open": "열다",
+      "Low": "낮다",
+      "High": "높이",
+      "volume": "음량",
+      "Sell": "팔다",
+      "Buy": "사다"
+    },
+    "deposit": {
+      "ChoiceCurrency": "통화 선택",
+      "TokenAddress": "TOKEN을 다음 주소로 이체"
+    },
+    "record": {
+      "pass": "합격"
+    },
+    "withDraw": {
+      "amount": "분량",
+      "HandlingCharge": "취급 수수료",
+      "WalletAddress": "지갑 주소",
+      "Submit": "전송",
+      "inputAmount": "금액을 입력해 주세요",
+      "Purse": "지갑",
+      "BankCard": "은행 카드"
+    }
+  },
+  "components": {
+    "isEmpty": {
+      "LoadingPleaseWait": "로딩 중, 잠시만 기다려 주십시오",
+      "ClickToRefresh": "새로 고치려면 클릭",
+      "dataIsAvailable": "관련 데이터를 사용할 수 없습니다."
+    }
   }
 }

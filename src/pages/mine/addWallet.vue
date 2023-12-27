@@ -1,33 +1,39 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='px-[34px]'>
-            <view class='relative'>
-                <view class='flex items-center justify-between'>
-                    <text class='text-[35px]'>Choice of currency</text>
-                    <view class='flex items-center justify-between bg-black dropdown'
-                          @click='showDropdown = !showDropdown'>
-                        <text class='text-[26px] text-white px-[10px]'>{{ form.currency_name }}</text>
-                        <image :src='showDropdown?"/static/images/icon-dropup.png":"/static/images/icon-dropdown.png"'
-                               class='w-[18px] h-[18px]'></image>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="px-[34px]">
+            <view class="relative">
+                <view class="flex items-center justify-between">
+                    <text class="text-[35px]">{{ t('mine.addWallet.ChoiceOfCurrency') }}</text>
+                    <view
+                        class="flex items-center justify-between bg-black dropdown"
+                        @click="showDropdown = !showDropdown"
+                    >
+                        <text class="text-[26px] text-white px-[10px]">{{ form.currency_name }}</text>
+                        <image
+                            :src="showDropdown ? &quot;/static/images/icon-dropup.png&quot; : &quot;/static/images/icon-dropdown.png&quot;"
+                            class="w-[18px] h-[18px]"
+                        ></image>
                     </view>
                 </view>
-                <view :class='showDropdown?"h-auto":"h-0"' class='dropdown-item bg-black text-white'>
-                    <view v-for='(item,index) in CurrencyList' :key='index' class='item' @click='changeCurrency(item)'>
-                        <text class='text-[26px]'>{{ item.name }}</text>
+                <view :class="showDropdown ? &quot;h-auto&quot; : &quot;h-0&quot;" class="dropdown-item bg-black text-white">
+                    <view v-for="(item, index) in CurrencyList" :key="index" class="item" @click="changeCurrency(item)">
+                        <text class="text-[26px]">{{ item.name }}</text>
                     </view>
                 </view>
             </view>
-            <view class='mt-[40px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
-                <text class='text-[30px]'>Add address</text>
-                <input v-model='form.address' class='input mt-[29px] text-[14px]'
-                       placeholder='Fill in your address here' type='text'>
+            <view class="mt-[40px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
+                <text class="text-[30px]">{{ t('mine.addWallet.AddAddress') }}</text>
+                <input
+                    v-model="form.address" class="input mt-[29px] text-[14px]"
+                    :placeholder="t('mine.addWallet.addressHere')" type="text"
+                >
             </view>
-            <view class='btn-wrap text-center'>
-                <view class='bg-black py-[33px] rounded-[20px]' @click='submit'>
-                    <text class='text-[32px] font-bold text-white'>
-                        Save
+            <view class="btn-wrap text-center">
+                <view class="bg-black py-[33px] rounded-[20px]" @click="submit">
+                    <text class="text-[32px] font-bold text-white">
+                        {{ t('mine.addWallet.Save') }}
                     </text>
                 </view>
             </view>
@@ -36,6 +42,7 @@
 </template>
 
 <script lang='ts' setup>
+import { useI18n } from 'vue-i18n'
 import { layoutDataKey } from '~/composables/provide'
 
 const showDropdown = ref(false)
@@ -44,6 +51,8 @@ const form = ref({
     currency_name: '',
     address: '',
 })
+
+const { t } = useI18n()
 
 function submit() {
     if (!form.value.currency_id) {
@@ -67,7 +76,8 @@ function submit() {
                 icon: 'none',
             })
             uni.navigateBack()
-        } else {
+        }
+        else {
             uni.showToast({
                 title: 'Add failed',
                 icon: 'none',

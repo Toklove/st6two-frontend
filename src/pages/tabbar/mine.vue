@@ -34,80 +34,82 @@
             </view>
         </view>
         <view class="mt-[40px] px-[34px]">
-            <text class="text-[45px]">Account Details</text>
+            <text class="text-[45px]">{{ t('tabBar.mine.AccountDetails') }}</text>
             <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
                 <view class="flex items-center justify-between" @click="toPage('/pages/mine/option')">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-option.png"></image>
-                        <text class="text-[28px]">Option Orders</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.OptionOrders') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/wallet')">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-wallet.png"></image>
-                        <text class="text-[28px]">Purse</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Purse') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/certified')">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-real.png"></image>
-                        <text class="text-[28px]">Certified</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Certified') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="showChangeLang = true">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-language.png"></image>
-                        <text class="text-[28px]">Language</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Language') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/changePassword')">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-password.png"></image>
-                        <text class="text-[28px]">Change password</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.ChangePassword') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
             </view>
         </view>
         <view class="mt-[40px] px-[34px]">
-            <text class="text-[45px]">Help and support</text>
+            <text class="text-[45px]">{{ t('tabBar.mine.HelpAndSupport') }}</text>
             <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
                 <view class="flex items-center justify-between">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-market.png"></image>
-                        <text class="text-[28px]">Market pattern</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.MarketPattern') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/service')">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-service.png"></image>
-                        <text class="text-[28px]">Customer service</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.CustomerService') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-invite.png"></image>
-                        <text class="text-[28px]">Invitation Link</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.InvitationLink') }}</text>
                     </view>
-                    <text class="text-[28px] sub-title" @click="copyInviteCode">Click to copy</text>
+                    <text class="text-[28px] sub-title" @click="copyInviteCode">
+                        {{ t('tabBar.mine.ClickToCopy') }}
+                    </text>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/about')">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-about.png"></image>
-                        <text class="text-[28px]">About us</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.AboutUs') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="logout">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-logout.png"></image>
-                        <text class="text-[28px]">Log out</text>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Logout') }}</text>
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
@@ -122,7 +124,8 @@
                     <view class="slot-wrap text-center">
                         <view class="mt-[120px]">
                             <view
-                                v-for="(item) in LangList" :key="item.code" :class="item.value === activeCode ? 'active' : ''"
+                                v-for="(item) in LangList" :key="item.code"
+                                :class="item.value === locale ? 'active' : ''"
                                 class="p-[15px] text-[26px] sub-title"
                                 @click="changeLang(item.value)"
                             >
@@ -131,8 +134,12 @@
                         </view>
                     </view>
                     <view class="btn-wrap flex justify-around items-center font-bold">
-                        <text class="btn sub-title bg-[#f5f7f9]" @click="showChangeLang = false">Cancel</text>
-                        <text class="btn text-white bg-black" @click="showChangeLang = false">Confirm</text>
+                        <text class="btn sub-title bg-[#f5f7f9]" @click="showChangeLang = false">
+                            {{ t('tabBar.mine.Cancel') }}
+                        </text>
+                        <text class="btn text-white bg-black" @click="showChangeLang = false">
+                            {{ t('tabBar.mine.Confirm') }}
+                        </text>
                     </view>
                 </view>
             </view>
@@ -141,19 +148,24 @@
 </template>
 
 <script lang='ts' setup>
+import { useI18n } from 'vue-i18n'
 import { useUserStore } from '~/pinia/useUserInfo'
 
 const userStore = useUserStore()
 
+const { t, locale } = useI18n()
+
 const showChangeLang = ref(false)
 
-const activeCode = ref(uni.getLocale())
+const activeCode = ref(locale.value)
 
 function changeLang(code) {
     console.log(activeCode.value)
     console.log(code)
     uni.setStorageSync('lang', code)
     uni.setLocale(code)
+    locale.value = code
+
     showChangeLang.value = false
 }
 
@@ -215,7 +227,7 @@ const LangList = [
     },
     {
         title: '繁体中文',
-        value: 'zh-Hant',
+        value: 'zhHant',
     },
     {
         title: 'Deutsch',

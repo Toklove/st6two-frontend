@@ -1,35 +1,45 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='px-[34px]'>
-            <view class='p-[30px] bg-[#f5f7f9] rounded-[20px]'>
-                <input v-model='form.bank_name' class='input text-[14px]'
-                       placeholder='Please enter the Bank Name' type='text'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="px-[34px]">
+            <view class="p-[30px] bg-[#f5f7f9] rounded-[20px]">
+                <input
+                    v-model="form.bank_name" class="input text-[14px]"
+                    :placeholder="t('mine.addBank.bankName')" type="text"
+                >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
-                <input v-model='form.account' class='input text-[14px]'
-                       placeholder='Please enter the Bank Card' type='text'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
+                <input
+                    v-model="form.account" class="input text-[14px]"
+                    :placeholder="t('mine.addBank.bankCard')" type="text"
+                >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
-                <input v-model='form.account_user' class='input text-[14px]'
-                       placeholder='Please enter the Account Holder' type='text'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
+                <input
+                    v-model="form.account_user" class="input text-[14px]"
+                    :placeholder="t('mine.addBank.account')" type="text"
+                >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
-                <input v-model='form.bank_address' class='input text-[14px]'
-                       placeholder='Please enter the Bank address' type='text'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
+                <input
+                    v-model="form.bank_address" class="input text-[14px]"
+                    :placeholder="t('mine.addBank.bankAddress')" type="text"
+                >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
-                <input v-model='form.bank_code' class='input text-[14px]'
-                       placeholder='Please enter the Bank International Code' type='text'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
+                <input
+                    v-model="form.bank_code" class="input text-[14px]"
+                    :placeholder="t('mine.addBank.bankCode')" type="text"
+                >
             </view>
-            <view class='btn-wrap text-center'>
-                <text class='text-[22px] sub-title'>
-                    The platform will encrypt information to ensure information security in real time
+            <view class="btn-wrap text-center">
+                <text class="text-[22px] sub-title">
+                    {{ t('mine.addBank.bankTitle') }}
                 </text>
-                <view class='bg-black py-[33px] rounded-[20px] mt-[20px]' @click='submit'>
-                    <text class='text-[32px] font-bold text-white'>
-                        Save
+                <view class="bg-black py-[33px] rounded-[20px] mt-[20px]" @click="submit">
+                    <text class="text-[32px] font-bold text-white">
+                        {{ t('mine.addBank.Save') }}
                     </text>
                 </view>
             </view>
@@ -38,6 +48,7 @@
 </template>
 
 <script lang='ts' setup>
+import { useI18n } from 'vue-i18n'
 import { layoutDataKey } from '~/composables/provide'
 
 const form = ref({
@@ -47,6 +58,8 @@ const form = ref({
     bank_address: '',
     bank_code: '',
 })
+
+const { t } = useI18n()
 
 function submit() {
     if (!form.value.bank_name) {
@@ -91,7 +104,8 @@ function submit() {
                 icon: 'none',
             })
             uni.navigateBack()
-        } else {
+        }
+        else {
             uni.showToast({
                 title: 'Add failed',
                 icon: 'none',

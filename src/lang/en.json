@@ -1,5 +1,150 @@
 {
-  "index": {
-    "title": "Welcome to the Index"
+  "tabBar": {
+    "home": {
+      "hot": "Popular",
+      "news": "News",
+      "seeMore": "See more",
+      "market": "Market",
+      "home": "Home"
+    },
+    "mine": {
+      "AccountDetails": "Account Details",
+      "OptionOrders": "Option Orders",
+      "Purse": "Purse",
+      "Certified": "Certified",
+      "Language": "Language",
+      "ChangePassword": "Change password",
+      "HelpAndSupport": "Help and support",
+      "MarketPattern": "Market pattern",
+      "CustomerService": "Customer service",
+      "InvitationLink": "Invitation Link",
+      "ClickToCopy": "Click to copy",
+      "AboutUs": "About us",
+      "Logout": "Log out",
+      "Cancel": "Cancel",
+      "Confirm": "Confirm"
+    },
+    "position": {
+      "RealAccount": "Real account",
+      "TotalAccountValue": "Total account value",
+      "FreezeFunds": "freeze funds",
+      "Withdraw": "Withdraw",
+      "Deposit": "Deposit",
+      "Buy": "Buy"
+    },
+    "quotes": {
+      "EnterTheContentHere": "Enter the content here",
+      "Market": "Market",
+      "PleaseSelect": "Please select"
+    }
+  },
+  "common": {
+    "forget": {
+      "Retrieve": "Retrieve",
+      "RetrieveUpToJoin": "Retrieve up to join",
+      "Send": "Send",
+      "Submit": "Submit",
+      "ExistingAccount": "Existing account",
+      "Login": "Log in"
+    },
+    "login": {
+      "Login": "Log in",
+      "LoginToContinue": "Log in to continue",
+      "RememberPassword": "remember password",
+      "ForgotYourPassword": "Forgot your password？",
+      "Retrieve": "Retrieve",
+      "haveAnAccount": "have`an account?",
+      "Register": "Register"
+    },
+    "register": {
+      "Register": "Register",
+      "SignUpToJoin": "sign up to join"
+    }
+  },
+  "mine": {
+    "addBank": {
+      "bankTitle": "The platform will encrypt information to ensure information security in real time",
+      "Save": "Save",
+      "bankName": "Please enter the Bank Name",
+      "bankCard": "Please enter the Bank Card",
+      "account": "Please enter the Account Holder",
+      "bankAddress": "Please enter the Bank address",
+      "bankCode": "Please enter the Bank International Code"
+    },
+    "addWallet": {
+      "ChoiceOfCurrency": "Choice of currency",
+      "AddAddress": "Add address",
+      "Save": "Save",
+      "addressHere": "Fill in your address here"
+    },
+    "certified": {
+      "UploadIDPhoto": "Upload ID photo",
+      "MakeSureTheBorderIsComplete": "Make sure the border is complete",
+      "cerTitle": "The platform will encrypt information to ensure information security in real time",
+      "Submit": "Submit",
+      "realName": "Please enter the Real name",
+      "idNumber": "Please enter the ID number"
+    },
+    "changePassword": {
+      "Submit": "Submit",
+      "inputNewPassWord": "Please enter the New password",
+      "reNewPassWord": "Please enter the Confirm password",
+      "oldPassword": "Please enter the Old password"
+    },
+    "option": {
+      "Buy": "Buy",
+      "amount": "amount",
+      "duration": "duration",
+      "HandlingFee": "Handling fee",
+      "OrderTime": "Order time",
+      "SettlementTime": "Settlement time",
+      "ProfitLoss": "Profit and loss"
+    },
+    "userInfo": {
+      "Submit": "Submit"
+    }
+  },
+  "position": {
+    "bill": {
+      "date": "date",
+      "all": "All",
+      "classification": "classification",
+      "money": "amount",
+      "option": "option",
+      "SettlementAmount": "Settlement amount",
+      "bill": "bill"
+    },
+    "chart": {
+      "Statistics": "Statistics",
+      "Open": "Open",
+      "Low": "Low",
+      "High": "Height",
+      "volume": "volume",
+      "Sell": "Sell",
+      "Buy": "Buy"
+    },
+    "deposit": {
+      "ChoiceCurrency": "Choice of currency",
+      "TokenAddress": "Transfer TOKEN to the following address"
+    },
+    "record": {
+      "pass": "pass"
+    },
+    "withDraw": {
+      "amount": "amount",
+      "HandlingCharge": "Handling charge",
+      "WalletAddress": "Wallet address",
+      "Submit": "Submit",
+      "inputAmount": "Please enter the amount",
+      "Purse": "Purse",
+      "BankCard": "Bank Card"
+    }
+  },
+  "components": {
+    "isEmpty": {
+      "LoadingPleaseWait": "Loading, please wait",
+      "ClickToRefresh": "Click to refresh",
+      "dataIsAvailable": "No relevant data is available"
+    }
   }
 }

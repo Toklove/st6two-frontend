@@ -4,8 +4,8 @@
     <layout class-name="IndexRouter">
         <view class="px-[50px]">
             <view class="mt-[84px] flex flex-col text-white">
-                <text class="text-[70px] font-bold">Retrieve</text>
-                <text class="text-[26px] mt-[18px]">Retrieve up to join</text>
+                <text class="text-[70px] font-bold">{{ t('common.forget.Retrieve') }}</text>
+                <text class="text-[26px] mt-[18px]">{{ t('common.forget.RetrieveUpToJoin') }}</text>
             </view>
             <view class="form-wrap mt-[79px]">
                 <view class="flex items-center p-[28px] bg-[#f5f7f9] rounded-[20px]">
@@ -33,7 +33,7 @@
                             type="text"
                         >
                         <view class="w-[100px] text-[22px] rounded-[20px] text-center bg-black text-white py-[8px]">
-                            Send
+                            {{ t('common.forget.Send') }}
                         </view>
                     </view>
                 </view>
@@ -41,13 +41,13 @@
             <view class="btn-wrap text-center">
                 <view class="bg-black py-[33px] rounded-[20px]">
                     <text class="text-[32px] font-bold text-white">
-                        Submit
+                        {{ t('common.forget.Submit') }}
                     </text>
                 </view>
                 <view class="mt-[39px] text-[28px] text-white">
-                    <text>Existing account&nbsp;</text>
+                    <text>{{ t('common.forget.ExistingAccount') }}&nbsp;</text>
                     <text class="font-bold" @click="toPage('/pages/common/login')">
-                        Log in
+                        {{ t('common.forget.Login') }}
                     </text>
                 </view>
             </view>
@@ -56,10 +56,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import { layoutDataKey } from '~/composables/provide'
 
 const isPassword = ref(true)
-
+const { t } = useI18n()
 const layoutData = ref({
     showTopBar: true,
     topBarBgColor: 'transparent',
@@ -91,6 +92,7 @@ uni-page-body {
     transform: translateX(-50%);
 }
 </style>
+
 <route lang="yaml">
 style:
 navigationStyle: custom

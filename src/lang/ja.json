@@ -1,0 +1,150 @@
+{
+  "tabBar": {
+    "home": {
+      "hot": "人気のある",
+      "news": "ニュース",
+      "seeMore": "続きを見る",
+      "market": "市場",
+      "home": "家"
+    },
+    "mine": {
+      "AccountDetails": "アカウントの詳細",
+      "OptionOrders": "オプション注文",
+      "Purse": "財布",
+      "Certified": "折り紙付き",
+      "Language": "言語",
+      "ChangePassword": "パスワード変更",
+      "HelpAndSupport": "ヘルプとサポート",
+      "MarketPattern": "市場パターン",
+      "CustomerService": "顧客サービス",
+      "InvitationLink": "招待リンク",
+      "ClickToCopy": "クリックしてコピー",
+      "AboutUs": "我々について",
+      "Logout": "ログアウトする",
+      "Cancel": "キャンセル",
+      "Confirm": "確認する"
+    },
+    "position": {
+      "RealAccount": "リアル口座",
+      "TotalAccountValue": "アカウントの合計値",
+      "FreezeFunds": "資金の凍結",
+      "Withdraw": "引き上げる",
+      "Deposit": "預金",
+      "Buy": "買う"
+    },
+    "quotes": {
+      "EnterTheContentHere": "ここに内容を入力します",
+      "Market": "市場",
+      "PleaseSelect": "選択してください"
+    }
+  },
+  "common": {
+    "forget": {
+      "Retrieve": "取り戻す",
+      "RetrieveUpToJoin": "Retrieve up to join (結合まで取得)",
+      "Send": "送信",
+      "Submit": "送信",
+      "ExistingAccount": "既存のアカウント",
+      "Login": "ログイン"
+    },
+    "login": {
+      "Login": "ログイン",
+      "LoginToContinue": "ログインして続行します",
+      "RememberPassword": "パスワードを記憶する",
+      "ForgotYourPassword": "パスワードをお忘れですか?",
+      "Retrieve": "取り戻す",
+      "haveAnAccount": "have'anアカウント?",
+      "Register": "登録する"
+    },
+    "register": {
+      "Register": "登録する",
+      "SignUpToJoin": "サインアップして参加"
+    }
+  },
+  "mine": {
+    "addBank": {
+      "bankTitle": "プラットフォームは情報を暗号化し、リアルタイムで情報セキュリティを確保します",
+      "Save": "セーブ",
+      "bankName": "銀行名を入力してください",
+      "bankCard": "銀行カードを入力してください",
+      "account": "口座名義人を入力してください",
+      "bankAddress": "銀行の住所を入力してください",
+      "bankCode": "銀行の国際コードを入力してください"
+    },
+    "addWallet": {
+      "ChoiceOfCurrency": "通貨の選択",
+      "AddAddress": "住所を追加",
+      "Save": "セーブ",
+      "addressHere": "ここに住所を入力してください"
+    },
+    "certified": {
+      "UploadIDPhoto": "証明写真をアップロードする",
+      "MakeSureTheBorderIsComplete": "罫線が完成していることを確認する",
+      "cerTitle": "プラットフォームは情報を暗号化し、リアルタイムで情報セキュリティを確保します",
+      "Submit": "送信",
+      "realName": "本名を入力してください",
+      "idNumber": "ID番号を入力してください"
+    },
+    "changePassword": {
+      "Submit": "送信",
+      "inputNewPassWord": "新しいパスワードを入力してください",
+      "reNewPassWord": "パスワードの確認を入力してください",
+      "oldPassword": "古いパスワードを入力してください"
+    },
+    "option": {
+      "Buy": "買う",
+      "amount": "量",
+      "duration": "期間",
+      "HandlingFee": "手数料",
+      "OrderTime": "注文時間",
+      "SettlementTime": "決済時間",
+      "ProfitLoss": "損益計算書"
+    },
+    "userInfo": {
+      "Submit": "送信"
+    }
+  },
+  "position": {
+    "bill": {
+      "date": "日付",
+      "all": "すべての",
+      "classification": "分類",
+      "money": "量",
+      "option": "オプション",
+      "SettlementAmount": "決済金額",
+      "bill": "請求書"
+    },
+    "chart": {
+      "Statistics": "統計学",
+      "Open": "開ける",
+      "Low": "低い",
+      "High": "高さ",
+      "volume": "容積",
+      "Sell": "売る",
+      "Buy": "買う"
+    },
+    "deposit": {
+      "ChoiceCurrency": "通貨の選択",
+      "TokenAddress": "TOKENを以下のアドレスに送金する"
+    },
+    "record": {
+      "pass": "通る"
+    },
+    "withDraw": {
+      "amount": "量",
+      "HandlingCharge": "手数料",
+      "WalletAddress": "ウォレットアドレス",
+      "Submit": "送信",
+      "inputAmount": "金額を入力してください",
+      "Purse": "財布",
+      "BankCard": "銀行カード"
+    }
+  },
+  "components": {
+    "isEmpty": {
+      "LoadingPleaseWait": "読み込み中、お待ちください",
+      "ClickToRefresh": "クリックして更新",
+      "dataIsAvailable": "関連データはありません"
+    }
+  }
+}

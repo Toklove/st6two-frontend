@@ -1,0 +1,150 @@
+{
+  "tabBar": {
+    "home": {
+      "hot": "Популярный",
+      "news": "Новости",
+      "seeMore": "Подробнее",
+      "market": "Рынок",
+      "home": "Дом"
+    },
+    "mine": {
+      "AccountDetails": "Реквизиты счета",
+      "OptionOrders": "Опционные ордера",
+      "Purse": "Кошелек",
+      "Certified": "Заверенный",
+      "Language": "Язык",
+      "ChangePassword": "Смена пароля",
+      "HelpAndSupport": "Помощь и поддержка",
+      "MarketPattern": "Рыночная модель",
+      "CustomerService": "Обслуживание клиентов",
+      "InvitationLink": "Ссылка-приглашение",
+      "ClickToCopy": "Нажмите, чтобы скопировать",
+      "AboutUs": "О нас",
+      "Logout": "Выходить",
+      "Cancel": "Отмена",
+      "Confirm": "Подтверждать"
+    },
+    "position": {
+      "RealAccount": "Реальный счет",
+      "TotalAccountValue": "Общая стоимость счета",
+      "FreezeFunds": "Заморозить средства",
+      "Withdraw": "Отводить",
+      "Deposit": "Задаток",
+      "Buy": "Покупать"
+    },
+    "quotes": {
+      "EnterTheContentHere": "Введите содержимое здесь",
+      "Market": "Рынок",
+      "PleaseSelect": "Пожалуйста, выберите"
+    }
+  },
+  "common": {
+    "forget": {
+      "Retrieve": "Восстанавливать",
+      "RetrieveUpToJoin": "Извлечение для присоединения",
+      "Send": "Отправить",
+      "Submit": "Отправить",
+      "ExistingAccount": "Существующая учетная запись",
+      "Login": "Войти"
+    },
+    "login": {
+      "Login": "Войти",
+      "LoginToContinue": "Войдите, чтобы продолжить",
+      "RememberPassword": "запомнить пароль",
+      "ForgotYourPassword": "Забыли пароль?",
+      "Retrieve": "Восстанавливать",
+      "haveAnAccount": "У вас есть учетная запись?",
+      "Register": "Регистрировать"
+    },
+    "register": {
+      "Register": "Регистрировать",
+      "SignUpToJoin": "Зарегистрируйтесь, чтобы присоединиться"
+    }
+  },
+  "mine": {
+    "addBank": {
+      "bankTitle": "Платформа будет шифровать информацию для обеспечения информационной безопасности в режиме реального времени",
+      "Save": "Спасать",
+      "bankName": "Пожалуйста, введите название банка",
+      "bankCard": "Пожалуйста, введите банковскую карту",
+      "account": "Пожалуйста, введите владельца счета",
+      "bankAddress": "Пожалуйста, введите адрес банка",
+      "bankCode": "Пожалуйста, введите международный код банка"
+    },
+    "addWallet": {
+      "ChoiceOfCurrency": "Выбор валюты",
+      "AddAddress": "Добавить адрес",
+      "Save": "Спасать",
+      "addressHere": "Введите свой адрес здесь"
+    },
+    "certified": {
+      "UploadIDPhoto": "Загрузить фотографию на удостоверение личности",
+      "MakeSureTheBorderIsComplete": "Убедитесь, что граница заполнена",
+      "cerTitle": "Платформа будет шифровать информацию для обеспечения информационной безопасности в режиме реального времени",
+      "Submit": "Отправить",
+      "realName": "Пожалуйста, введите настоящее имя",
+      "idNumber": "Пожалуйста, введите идентификационный номер"
+    },
+    "changePassword": {
+      "Submit": "Отправить",
+      "inputNewPassWord": "Пожалуйста, введите Новый пароль",
+      "reNewPassWord": "Пожалуйста, введите Подтвердите пароль",
+      "oldPassword": "Пожалуйста, введите старый пароль"
+    },
+    "option": {
+      "Buy": "Покупать",
+      "amount": "количество",
+      "duration": "длительность",
+      "HandlingFee": "Плата за обработку",
+      "OrderTime": "Время заказа",
+      "SettlementTime": "Расчетное время",
+      "ProfitLoss": "Прибыль и убытки"
+    },
+    "userInfo": {
+      "Submit": "Отправить"
+    }
+  },
+  "position": {
+    "bill": {
+      "date": "дата",
+      "all": "Все",
+      "classification": "классификация",
+      "money": "количество",
+      "option": "выбор",
+      "SettlementAmount": "Расчетная сумма",
+      "bill": "счет"
+    },
+    "chart": {
+      "Statistics": "Статистика",
+      "Open": "Открытый",
+      "Low": "Низкий",
+      "High": "Высота",
+      "volume": "том",
+      "Sell": "Продавать",
+      "Buy": "Покупать"
+    },
+    "deposit": {
+      "ChoiceCurrency": "Выбор валюты",
+      "TokenAddress": "Переведите TOKEN на следующий адрес"
+    },
+    "record": {
+      "pass": "проходить"
+    },
+    "withDraw": {
+      "amount": "количество",
+      "HandlingCharge": "Плата за обработку",
+      "WalletAddress": "Адрес кошелька",
+      "Submit": "Отправить",
+      "inputAmount": "Пожалуйста, введите сумму",
+      "Purse": "Кошелек",
+      "BankCard": "Банковская карта"
+    }
+  },
+  "components": {
+    "isEmpty": {
+      "LoadingPleaseWait": "Загрузка, пожалуйста, подождите",
+      "ClickToRefresh": "Нажмите, чтобы обновить",
+      "dataIsAvailable": "Соответствующие данные отсутствуют"
+    }
+  }
+}

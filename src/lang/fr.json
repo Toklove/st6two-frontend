@@ -1,0 +1,150 @@
+{
+  "tabBar": {
+    "home": {
+      "hot": "Populaire",
+      "news": "Nouvelles",
+      "seeMore": "Voir plus",
+      "market": "Marché",
+      "home": "Domicile"
+    },
+    "mine": {
+      "AccountDetails": "Détails du compte",
+      "OptionOrders": "Ordres d’options",
+      "Purse": "Porte-monnaie",
+      "Certified": "Certifié",
+      "Language": "Langue",
+      "ChangePassword": "Changer le mot de passe",
+      "HelpAndSupport": "Aide et support",
+      "MarketPattern": "Structure du marché",
+      "CustomerService": "Service client",
+      "InvitationLink": "Lien d’invitation",
+      "ClickToCopy": "Cliquez pour copier",
+      "AboutUs": "Qui sommes-nous",
+      "Logout": "Se déconnecter",
+      "Cancel": "Annuler",
+      "Confirm": "Confirmer"
+    },
+    "position": {
+      "RealAccount": "Compte réel",
+      "TotalAccountValue": "Valeur totale du compte",
+      "FreezeFunds": "Geler les fonds",
+      "Withdraw": "Retirer",
+      "Deposit": "Dépôt",
+      "Buy": "Acheter"
+    },
+    "quotes": {
+      "EnterTheContentHere": "Entrez le contenu ici",
+      "Market": "Marché",
+      "PleaseSelect": "S’il vous plaît sélectionner"
+    }
+  },
+  "common": {
+    "forget": {
+      "Retrieve": "Récupérer",
+      "RetrieveUpToJoin": "Récupérer jusqu’à rejoindre",
+      "Send": "Envoyer",
+      "Submit": "Envoyer",
+      "ExistingAccount": "Compte existant",
+      "Login": "S'identifier"
+    },
+    "login": {
+      "Login": "S'identifier",
+      "LoginToContinue": "Connectez-vous pour continuer",
+      "RememberPassword": "Mémoriser le mot de passe",
+      "ForgotYourPassword": "Mot de passe oublié ?",
+      "Retrieve": "Récupérer",
+      "haveAnAccount": "Vous avez un compte ?",
+      "Register": "Registre"
+    },
+    "register": {
+      "Register": "Registre",
+      "SignUpToJoin": "Inscrivez-vous pour vous inscrire"
+    }
+  },
+  "mine": {
+    "addBank": {
+      "bankTitle": "La plateforme cryptera les informations pour assurer la sécurité de l’information en temps réel",
+      "Save": "Sauvegarder",
+      "bankName": "Veuillez saisir le nom de la banque",
+      "bankCard": "Veuillez saisir la carte bancaire",
+      "account": "S’il vous plaît entrer le titulaire du compte",
+      "bankAddress": "S’il vous plaît entrer l’adresse de la banque",
+      "bankCode": "S’il vous plaît entrer le code international de la banque"
+    },
+    "addWallet": {
+      "ChoiceOfCurrency": "Choix de la devise",
+      "AddAddress": "Ajouter une adresse",
+      "Save": "Sauvegarder",
+      "addressHere": "Renseignez votre adresse ici"
+    },
+    "certified": {
+      "UploadIDPhoto": "Télécharger une photo d’identité",
+      "MakeSureTheBorderIsComplete": "Assurez-vous que la bordure est complète",
+      "cerTitle": "La plateforme cryptera les informations pour assurer la sécurité de l’information en temps réel",
+      "Submit": "Envoyer",
+      "realName": "S’il vous plaît entrer le vrai nom",
+      "idNumber": "Veuillez saisir le numéro d’identification"
+    },
+    "changePassword": {
+      "Submit": "Envoyer",
+      "inputNewPassWord": "Veuillez saisir le nouveau mot de passe",
+      "reNewPassWord": "Veuillez saisir le mot de passe Confirmer",
+      "oldPassword": "Veuillez saisir l’ancien mot de passe"
+    },
+    "option": {
+      "Buy": "Acheter",
+      "amount": "quantité",
+      "duration": "durée",
+      "HandlingFee": "Frais de dossier",
+      "OrderTime": "Temps de commande",
+      "SettlementTime": "Délai de règlement",
+      "ProfitLoss": "Profits et pertes"
+    },
+    "userInfo": {
+      "Submit": "Envoyer"
+    }
+  },
+  "position": {
+    "bill": {
+      "date": "date",
+      "all": "Tout",
+      "classification": "classification",
+      "money": "quantité",
+      "option": "option",
+      "SettlementAmount": "Montant du règlement",
+      "bill": "facture"
+    },
+    "chart": {
+      "Statistics": "Statistiques",
+      "Open": "Ouvrir",
+      "Low": "Bas",
+      "High": "Hauteur",
+      "volume": "volume",
+      "Sell": "Vendre",
+      "Buy": "Acheter"
+    },
+    "deposit": {
+      "ChoiceCurrency": "Choix de la devise",
+      "TokenAddress": "Transférez des TOKEN à l’adresse suivante"
+    },
+    "record": {
+      "pass": "passer"
+    },
+    "withDraw": {
+      "amount": "quantité",
+      "HandlingCharge": "Frais de manutention",
+      "WalletAddress": "Adresse du portefeuille",
+      "Submit": "Envoyer",
+      "inputAmount": "S’il vous plaît entrer le montant",
+      "Purse": "Porte-monnaie",
+      "BankCard": "Carte bancaire"
+    }
+  },
+  "components": {
+    "isEmpty": {
+      "LoadingPleaseWait": "Chargement, veuillez patienter",
+      "ClickToRefresh": "Cliquez pour rafraîchir",
+      "dataIsAvailable": "Aucune donnée pertinente n’est disponible"
+    }
+  }
+}

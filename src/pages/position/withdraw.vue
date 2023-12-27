@@ -9,22 +9,25 @@
                 </view>
                 <USubsection
                     v-model="current"
-                    :list="subList" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
+                    :list="subList()" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
                 ></USubsection>
             </view>
         </FuiNavBar>
         <view class="mt-[20px] mx-[34px]">
             <view class="p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <text class="text-[30px]">
-                    金额
+                    {{ t('position.withDraw.amount') }}
                 </text>
-                <input class="input mt-[29px] text-[50px] font-bold" placeholder="請輸入金额" type="number">
+                <input
+                    :placeholder="t('position.withDraw.inputAmount')" class="input mt-[29px] text-[50px] font-bold"
+                    type="number"
+                >
                 <view class="line mt-[29px] mb-[20px]"></view>
-                <view class="text-[22px] sub-title">手續費：0.000</view>
+                <view class="text-[22px] sub-title">{{ t('position.withDraw.HandlingCharge') }}：0.000</view>
             </view>
             <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <view class="flex items-center justify-between">
-                    <text class="sub-title text-[24px]">錢包地址</text>
+                    <text class="sub-title text-[24px]">{{ t('position.withDraw.WalletAddress') }}</text>
                     <image class="w-[16px] h-[8px]" src="/static/images/icon-dropdown-black.png"></image>
                 </view>
                 <div class="flex flex-col mt-[30px] p-[30px] text-[24px] bg-white rounded-[20px]">
@@ -32,12 +35,11 @@
                     <text class="sub-title">2321 ****** 2321</text>
                 </div>
             </view>
-
         </view>
         <view class="btn-wrap text-center">
             <view class="bg-black py-[33px] rounded-[20px]">
                 <text class="text-[32px] font-bold text-white">
-                    Submit
+                    {{ t('position.withDraw.Submit') }}
                 </text>
             </view>
         </view>
@@ -45,21 +47,25 @@
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
 
-const subList = [
-    {
-        name: 'Purse',
-    },
-    {
-        name: 'Bank Card',
-    },
-]
-const current = ref(0)
+const { t } = useI18n()
 
-const list = ref([1])
+function subList() {
+    return [
+        {
+            name: t('position.withDraw.Purse'),
+        },
+        {
+            name: t('position.withDraw.BankCard'),
+        },
+    ]
+}
+
+const current = ref(0)
 </script>
 
 <route lang="yaml">

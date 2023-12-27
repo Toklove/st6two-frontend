@@ -15,7 +15,7 @@
             </view>
         </view>
         <view class="mt-[18px]">
-            <view class="text-[45px] pl-[34px]">{{ t('index.title') }}</view>
+            <view class="text-[45px] pl-[34px]">{{ t('tabBar.home.hot') }}</view>
             <scroll-view class="mt-[20px]" scroll-x>
                 <view class="items-center flex">
                     <view v-for="item in 3" :key="item" class="flex flex-col rounded-[30px] chart-wrap">
@@ -41,9 +41,9 @@
         </view>
         <view class="mt-[40px] px-[34px]">
             <view class="flex items-center justify-between">
-                <text class="text-[45px]">News</text>
+                <text class="text-[45px]">{{ t('tabBar.home.news') }}</text>
                 <text class="text-[20px]">
-                    See more
+                    {{ t('tabBar.home.seeMore') }}
                 </text>
             </view>
             <view class="mt-[20px]">
@@ -78,9 +78,9 @@
         </view>
         <view class="mt-[40px] px-[34px]">
             <view class="flex items-center justify-between">
-                <text class="text-[45px]">Market</text>
+                <text class="text-[45px]">{{ t('tabBar.home.market') }}</text>
                 <text class="text-[20px]">
-                    See more
+                    {{ t('tabBar.home.seeMore') }}
                 </text>
             </view>
             <view class="mt-[20px]">
@@ -110,19 +110,18 @@
 </template>
 
 <script lang='ts' setup>
-import { onShow } from '@dcloudio/uni-app'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '~/pinia/useUserInfo'
 
 useHead({
-    title: '首页',
+    title: 'Home',
 })
 
 const { t } = useI18n()
 
 const userStore = useUserStore()
 
-onShow(() => {
+onReady(() => {
     console.log('onShow')
     // 获取新闻列表
     getNewsList()

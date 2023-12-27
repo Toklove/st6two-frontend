@@ -1,0 +1,150 @@
+{
+  "tabBar": {
+    "home": {
+      "hot": "热门",
+      "news": "新聞",
+      "seeMore": "查看更多",
+      "market": "市場",
+      "home": "家"
+    },
+    "mine": {
+      "AccountDetails": "帳戶詳細資訊",
+      "OptionOrders": "期權訂單",
+      "Purse": "錢包",
+      "Certified": "認證",
+      "Language": "語言",
+      "ChangePassword": "更改密碼",
+      "HelpAndSupport": "幫助和支援",
+      "MarketPattern": "市場格局",
+      "CustomerService": "顧客服務",
+      "InvitationLink": "邀請連結",
+      "ClickToCopy": "點擊複製",
+      "AboutUs": "關於我們",
+      "Logout": "登出",
+      "Cancel": "取消",
+      "Confirm": "確認"
+    },
+    "position": {
+      "RealAccount": "真實帳戶",
+      "TotalAccountValue": "帳戶總價值",
+      "FreezeFunds": "凍結資金",
+      "Withdraw": "出金",
+      "Deposit": "入金",
+      "Buy": "買"
+    },
+    "quotes": {
+      "EnterTheContentHere": "在此輸入內容",
+      "Market": "市場",
+      "PleaseSelect": "請選擇"
+    }
+  },
+  "common": {
+    "forget": {
+      "Retrieve": "取回",
+      "RetrieveUpToJoin": "檢索加入",
+      "Send": "發送",
+      "Submit": "提交",
+      "ExistingAccount": "現有帳戶",
+      "Login": "登錄"
+    },
+    "login": {
+      "Login": "登錄",
+      "LoginToContinue": "登錄以繼續",
+      "RememberPassword": "記住密碼",
+      "ForgotYourPassword": "忘記密碼？",
+      "Retrieve": "取回",
+      "haveAnAccount": "有帳戶嗎？",
+      "Register": "註冊"
+    },
+    "register": {
+      "Register": "註冊",
+      "SignUpToJoin": "註冊加入"
+    }
+  },
+  "mine": {
+    "addBank": {
+      "bankTitle": "平臺將對資訊進行加密，即時保障資訊安全",
+      "Save": "救",
+      "bankName": "請輸入銀行名稱",
+      "bankCard": "請輸入銀行卡",
+      "account": "請輸入帳戶持有人",
+      "bankAddress": "請輸入銀行位址",
+      "bankCode": "請輸入銀行國際代碼"
+    },
+    "addWallet": {
+      "ChoiceOfCurrency": "貨幣選擇",
+      "AddAddress": "添加位址",
+      "Save": "救",
+      "addressHere": "在這裡填寫您的位址"
+    },
+    "certified": {
+      "UploadIDPhoto": "上傳證件照",
+      "MakeSureTheBorderIsComplete": "確保邊框完整",
+      "cerTitle": "平臺將對資訊進行加密，即時保障資訊安全",
+      "Submit": "提交",
+      "realName": "請輸入真實姓名",
+      "idNumber": "請輸入身份證號碼"
+    },
+    "changePassword": {
+      "Submit": "提交",
+      "inputNewPassWord": "請輸入新密碼",
+      "reNewPassWord": "請輸入確認密碼",
+      "oldPassword": "請輸入舊密碼"
+    },
+    "option": {
+      "Buy": "買",
+      "amount": "量",
+      "duration": "期間",
+      "HandlingFee": "手續費",
+      "OrderTime": "訂購時間",
+      "SettlementTime": "結算時間",
+      "ProfitLoss": "損益"
+    },
+    "userInfo": {
+      "Submit": "提交"
+    }
+  },
+  "position": {
+    "bill": {
+      "date": "日期",
+      "all": "都",
+      "classification": "分類",
+      "money": "量",
+      "option": "選擇",
+      "SettlementAmount": "結算金額",
+      "bill": "法案"
+    },
+    "chart": {
+      "Statistics": "統計學",
+      "Open": "打開",
+      "Low": "低",
+      "High": "高度",
+      "volume": "卷",
+      "Sell": "賣",
+      "Buy": "買"
+    },
+    "deposit": {
+      "ChoiceCurrency": "貨幣選擇",
+      "TokenAddress": "將TOKEN轉帳至以下位址"
+    },
+    "record": {
+      "pass": "通過"
+    },
+    "withDraw": {
+      "amount": "量",
+      "HandlingCharge": "手續費",
+      "WalletAddress": "錢包位址",
+      "Submit": "提交",
+      "inputAmount": "請輸入金額",
+      "Purse": "錢包",
+      "BankCard": "銀行卡"
+    }
+  },
+  "components": {
+    "isEmpty": {
+      "LoadingPleaseWait": "載入中，請稍候",
+      "ClickToRefresh": "點擊刷新",
+      "dataIsAvailable": "暫無相關數據"
+    }
+  }
+}

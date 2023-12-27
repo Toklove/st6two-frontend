@@ -1,0 +1,150 @@
+{
+  "tabBar": {
+    "home": {
+      "hot": "Beliebt",
+      "news": "Nachrichten",
+      "seeMore": "Mehr anzeigen",
+      "market": "Markt",
+      "home": "Heim"
+    },
+    "mine": {
+      "AccountDetails": "Kontodaten",
+      "OptionOrders": "Optionsaufträge",
+      "Purse": "Geldbeutel",
+      "Certified": "Beglaubigt",
+      "Language": "Sprache",
+      "ChangePassword": "Passwort ändern",
+      "HelpAndSupport": "Hilfe und Support",
+      "MarketPattern": "Marktmuster",
+      "CustomerService": "Kundendienst",
+      "InvitationLink": "Einladungs-Link",
+      "ClickToCopy": "Zum Kopieren anklicken",
+      "AboutUs": "Über uns",
+      "Logout": "Ausloggen",
+      "Cancel": "Abbrechen",
+      "Confirm": "Bestätigen"
+    },
+    "position": {
+      "RealAccount": "Echtgeldkonto",
+      "TotalAccountValue": "Gesamtwert des Kontos",
+      "FreezeFunds": "Gelder einfrieren",
+      "Withdraw": "Zurückziehen",
+      "Deposit": "Deponieren",
+      "Buy": "Kaufen"
+    },
+    "quotes": {
+      "EnterTheContentHere": "Geben Sie hier den Inhalt ein",
+      "Market": "Markt",
+      "PleaseSelect": "Bitte auswählen"
+    }
+  },
+  "common": {
+    "forget": {
+      "Retrieve": "Wiedergewinnen",
+      "RetrieveUpToJoin": "Abrufen bis zum Beitreten",
+      "Send": "Senden",
+      "Submit": "Senden",
+      "ExistingAccount": "Bestehendes Konto",
+      "Login": "Anmelden"
+    },
+    "login": {
+      "Login": "Anmelden",
+      "LoginToContinue": "Melden Sie sich an, um fortzufahren",
+      "RememberPassword": "Passwort merken",
+      "ForgotYourPassword": "Passwort vergessen?",
+      "Retrieve": "Wiedergewinnen",
+      "haveAnAccount": "Haben Sie ein Konto?",
+      "Register": "Registrieren"
+    },
+    "register": {
+      "Register": "Registrieren",
+      "SignUpToJoin": "Melden Sie sich an, um mitzumachen"
+    }
+  },
+  "mine": {
+    "addBank": {
+      "bankTitle": "Die Plattform verschlüsselt Informationen, um die Informationssicherheit in Echtzeit zu gewährleisten",
+      "Save": "Retten",
+      "bankName": "Bitte geben Sie den Namen der Bank ein",
+      "bankCard": "Bitte geben Sie die Bankkarte ein",
+      "account": "Bitte geben Sie den Kontoinhaber ein",
+      "bankAddress": "Bitte geben Sie die Bankadresse ein",
+      "bankCode": "Bitte geben Sie die internationale Bankleitzahl ein"
+    },
+    "addWallet": {
+      "ChoiceOfCurrency": "Wahl der Währung",
+      "AddAddress": "Adresse hinzufügen",
+      "Save": "Retten",
+      "addressHere": "Geben Sie hier Ihre Adresse ein"
+    },
+    "certified": {
+      "UploadIDPhoto": "Ausweisfoto hochladen",
+      "MakeSureTheBorderIsComplete": "Stellen Sie sicher, dass der Rahmen vollständig ist",
+      "cerTitle": "Die Plattform verschlüsselt Informationen, um die Informationssicherheit in Echtzeit zu gewährleisten",
+      "Submit": "Senden",
+      "realName": "Bitte geben Sie den echten Namen ein",
+      "idNumber": "Bitte geben Sie die ID-Nummer ein"
+    },
+    "changePassword": {
+      "Submit": "Senden",
+      "inputNewPassWord": "Bitte geben Sie das neue Passwort ein",
+      "reNewPassWord": "Bitte geben Sie das Passwort bestätigen ein",
+      "oldPassword": "Bitte geben Sie das alte Passwort ein"
+    },
+    "option": {
+      "Buy": "Kaufen",
+      "amount": "Menge",
+      "duration": "Dauer",
+      "HandlingFee": "Bearbeitungsgebühr",
+      "OrderTime": "Bestellzeit",
+      "SettlementTime": "Abwicklungszeit",
+      "ProfitLoss": "Gewinn und Verlust"
+    },
+    "userInfo": {
+      "Submit": "Senden"
+    }
+  },
+  "position": {
+    "bill": {
+      "date": "Datum",
+      "all": "Alle",
+      "classification": "Klassifikation",
+      "money": "Menge",
+      "option": "Option",
+      "SettlementAmount": "Abrechnungsbetrag",
+      "bill": "Rechnung"
+    },
+    "chart": {
+      "Statistics": "Statistik",
+      "Open": "Offen",
+      "Low": "Niedrig",
+      "High": "Höhe",
+      "volume": "Volumen",
+      "Sell": "Verkaufen",
+      "Buy": "Kaufen"
+    },
+    "deposit": {
+      "ChoiceCurrency": "Wahl der Währung",
+      "TokenAddress": "Überweisen Sie TOKEN an die folgende Adresse"
+    },
+    "record": {
+      "pass": "bestehen"
+    },
+    "withDraw": {
+      "amount": "Menge",
+      "HandlingCharge": "Bearbeitungsgebühr",
+      "WalletAddress": "Wallet-Adresse",
+      "Submit": "Senden",
+      "inputAmount": "Bitte geben Sie den Betrag ein",
+      "Purse": "Geldbeutel",
+      "BankCard": "Bankkarte"
+    }
+  },
+  "components": {
+    "isEmpty": {
+      "LoadingPleaseWait": "Lädt, bitte warten",
+      "ClickToRefresh": "Zum Aktualisieren anklicken",
+      "dataIsAvailable": "Es liegen keine relevanten Daten vor"
+    }
+  }
+}

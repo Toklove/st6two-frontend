@@ -1,39 +1,45 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='mt-[20px] mx-[34px]'>
-            <view class='relative'>
-                <view class='flex items-center justify-between'>
-                    <text class='text-[35px]'>Choice of currency</text>
-                    <view class='flex items-center justify-between bg-black dropdown'
-                          @click='showDropdown = !showDropdown'>
-                        <text class='text-[26px] text-white px-[10px]'>{{ form.currency_name }}</text>
-                        <image :src='showDropdown?"/static/images/icon-dropup.png":"/static/images/icon-dropdown.png"'
-                               class='w-[18px] h-[18px]'></image>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="mt-[20px] mx-[34px]">
+            <view class="relative">
+                <view class="flex items-center justify-between">
+                    <text class="text-[35px]">{{ t('position.deposit.ChoiceCurrency') }}</text>
+                    <view
+                        class="flex items-center justify-between bg-black dropdown"
+                        @click="showDropdown = !showDropdown"
+                    >
+                        <text class="text-[26px] text-white px-[10px]">{{ form.currency_name }}</text>
+                        <image
+                            :src="showDropdown ? &quot;/static/images/icon-dropup.png&quot; : &quot;/static/images/icon-dropdown.png&quot;"
+                            class="w-[18px] h-[18px]"
+                        ></image>
                     </view>
                 </view>
-                <view :class='showDropdown?"h-auto":"h-0"' class='dropdown-item bg-black text-white'>
-                    <view v-for='(item,index) in CurrencyList' :key='index' class='item' @click='changeCurrency(item)'>
-                        <text class='text-[26px]'>{{ item.name }}</text>
+                <view :class="showDropdown ? &quot;h-auto&quot; : &quot;h-0&quot;" class="dropdown-item bg-black text-white">
+                    <view v-for="(item, index) in CurrencyList" :key="index" class="item" @click="changeCurrency(item)">
+                        <text class="text-[26px]">{{ item.name }}</text>
                     </view>
                 </view>
             </view>
-            <view class='p-[30px] mt-[40px] bg-[#f5f7f9] rounded-[20px]'>
-                <text class='text-24px] sub-title'>
-                    將TOKEN转账到以下地址
+            <view class="p-[30px] mt-[40px] bg-[#f5f7f9] rounded-[20px]">
+                <text class="text-24px] sub-title">
+                    {{ t('position.deposit.TokenAddress') }}
                 </text>
-                <view class='grid place-items-center p-[36px]'>
-                    <view class='qrcode'>
-                        <fui-qrcode :value='form.address' height='222' width='222' />
+                <view class="grid place-items-center p-[36px]">
+                    <view class="qrcode">
+                        <FuiQrcode :value="form.address" height="222" width="222" />
                     </view>
                 </view>
-                <view class='flex items-center justify-center py-[4px] px-[16px] text-center bg-white rounded-[25px]'
-                      @click='CopyAddress'>
+                <view
+                    class="flex items-center justify-center py-[4px] px-[16px] text-center bg-white rounded-[25px]"
+                    @click="CopyAddress"
+                >
                     <view>
-                        <image class='w-[22px] h-[22px]' src='/static/images/icon-copy-deposit.png'></image>
+                        <image class="w-[22px] h-[22px]" src="/static/images/icon-copy-deposit.png"></image>
                     </view>
-                    <text class='ml-[10px] text-[24px]'>
+                    <text class="ml-[10px] text-[24px]">
                         {{ form.address }}
                     </text>
                 </view>
@@ -43,6 +49,7 @@
 </template>
 
 <script lang='ts' setup>
+import { useI18n } from 'vue-i18n'
 import { layoutDataKey } from '~/composables/provide'
 import FuiQrcode from '~/components/firstui/fui-qrcode/fui-qrcode.vue'
 
@@ -52,6 +59,8 @@ const form = ref({
     currency_name: '',
     address: '',
 })
+
+const { t } = useI18n()
 
 function changeCurrency(item) {
     form.value.currency_id = item.id
@@ -73,7 +82,7 @@ onShow(() => {
 function CopyAddress() {
     uni.setClipboardData({
         data: form.value.address,
-        success: function() {
+        success() {
             uni.showToast({
                 title: 'Copy success',
                 icon: 'none',

@@ -1,117 +1,120 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
         <FuiNavBar custom>
-            <view class='flex justify-center relative items-center flex-1'>
-                <view class='absolute left-0'>
-                    <FuiIcon name='arrowleft'></FuiIcon>
+            <view class="flex justify-center relative items-center flex-1">
+                <view class="absolute left-0">
+                    <FuiIcon name="arrowleft"></FuiIcon>
                 </view>
-                <view class='absolute right-[16px]'>
-                    <image class='w-[40px] h-[40px]' src='/static/images/icon-un-star.png'></image>
+                <view class="absolute right-[16px]">
+                    <image class="w-[40px] h-[40px]" src="/static/images/icon-un-star.png"></image>
                 </view>
                 <USubsection
-                    v-model='current'
-                    :list='subList' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
+                    v-model="current"
+                    :list="subList" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
                 ></USubsection>
             </view>
         </FuiNavBar>
-        <view class='px-[34px] mt-[20px]'>
-            <view class='flex items-center justify-between py-[25px] px-[20px] rounded-[30px] bg-[#f5f7f9]'>
-                <view class='flex items-center'>
+        <view class="px-[34px] mt-[20px]">
+            <view class="flex items-center justify-between py-[25px] px-[20px] rounded-[30px] bg-[#f5f7f9]">
+                <view class="flex items-center">
                     <image
-                        class='w-[72px] h-[72px] rounded-full'
-                        src='https://api.gomarketes.com/storage/products/COZnoXQg30lxdD8eoICmCOoyAHsXvWFTxONjjEcv.png'
+                        class="w-[72px] h-[72px] rounded-full"
+                        src="https://api.gomarketes.com/storage/products/COZnoXQg30lxdD8eoICmCOoyAHsXvWFTxONjjEcv.png"
                     ></image>
-                    <view class='flex flex-col ml-[15px] text-[30px]'>
+                    <view class="flex flex-col ml-[15px] text-[30px]">
                         <text>ETHUSD</text>
                         <text>2218.11</text>
                     </view>
                 </view>
                 <text
-                    class='rate-wrap py-[14px] text-[26px] text-center text-white rounded-[28px] px-[28px] green-block'
+                    class="rate-wrap py-[14px] text-[26px] text-center text-white rounded-[28px] px-[28px] green-block"
                 >
                     -0.06
                 </text>
             </view>
-            <view class='mt-[40px]'>
-                <view class='flex items-center justify-between'>
+            <view class="mt-[40px]">
+                <view class="flex items-center justify-between">
                     <text
-                        v-for='(item, index) in timeList' :key='index'
+                        v-for="(item, index) in timeList" :key="index"
                         :class="index === activeTime ? 'text-white bg-black' : ''"
-                        class='flex items-center justify-center w-[80px] h-[42px] text-[24px] bg-[#f5f7f9] rounded-[20px]'
-                        @click='changeTime(index)'
+                        class="flex items-center justify-center w-[80px] h-[42px] text-[24px] bg-[#f5f7f9] rounded-[20px]"
+                        @click="changeTime(index)"
                     >
                         {{ item.name }}
                     </text>
                 </view>
             </view>
 
-            <view id='chart' class='mt-[40px]'>
-                <view id='renderKlineChart' class='h-[40vh]'></view>
+            <view id="chart" class="mt-[40px]">
+                <view id="renderKlineChart" class="h-[40vh]"></view>
             </view>
 
-            <view class='statistics mt-[29px] mx-[34px]'>
-                <text class='text-[30px]'>
-                    Statistics
+            <view class="statistics mt-[29px] mx-[34px]">
+                <text class="text-[30px]">
+                    {{ t('position.chart.Statistics') }}
                 </text>
                 <view
-                    class='flex items-center justify-between mt-[29px] px-[34px] py-[38px] bg-[#f5f7f9] rounded-[30px]'
+                    class="flex items-center justify-between mt-[29px] px-[34px] py-[38px] bg-[#f5f7f9] rounded-[30px]"
                 >
-                    <view class='flex-1'>
+                    <view class="flex-1">
                         <view>
-                            <view class='flex items-center'>
-                                <image class='w-[20px] h-[20px] mr-[10px]' src='/static/images/icon-dollar.png'></image>
-                                <text class='text-[26px] sub-title'>Open</text>
+                            <view class="flex items-center">
+                                <image class="w-[20px] h-[20px] mr-[10px]" src="/static/images/icon-dollar.png"></image>
+                                <text class="text-[26px] sub-title">{{ t('position.chart.Open') }}</text>
                             </view>
-                            <text class='text-[30px] leading-[52px]'>2218.39</text>
+                            <text class="text-[30px] leading-[52px]">2218.39</text>
                         </view>
-                        <view class='mt-[20px]'>
-                            <view class='flex items-center'>
+                        <view class="mt-[20px]">
+                            <view class="flex items-center">
                                 <image
-                                    class='w-[20px] h-[20px] mr-[10px]'
-                                    src='/static/images/icon-arrow-down.png'
+                                    class="w-[20px] h-[20px] mr-[10px]"
+                                    src="/static/images/icon-arrow-down.png"
                                 ></image>
-                                <text class='text-[26px] sub-title'>Low</text>
+                                <text class="text-[26px] sub-title">{{ t('position.chart.Low') }}</text>
                             </view>
-                            <text class='text-[30px] leading-[52px]'>2218.39</text>
+                            <text class="text-[30px] leading-[52px]">2218.39</text>
                         </view>
                     </view>
-                    <view class='flex-1'>
+                    <view class="flex-1">
                         <view>
-                            <view class='flex items-center'>
-                                <image class='w-[20px] h-[20px] mr-[10px]'
-                                       src='/static/images/icon-arrow-up.png'></image>
-                                <text class='text-[26px] sub-title'>High</text>
-                            </view>
-                            <text class='text-[30px] leading-[52px]'>2218.39</text>
-                        </view>
-                        <view class='mt-[20px]'>
-                            <view class='flex items-center'>
+                            <view class="flex items-center">
                                 <image
-                                    class='w-[20px] h-[20px] mr-[10px]'
-                                    src='/static/images/icon-foldline.png'
+                                    class="w-[20px] h-[20px] mr-[10px]"
+                                    src="/static/images/icon-arrow-up.png"
                                 ></image>
-                                <text class='text-[26px] sub-title'>Vol</text>
+                                <text class="text-[26px] sub-title">{{ t('position.chart.High') }}</text>
                             </view>
-                            <text class='text-[30px] leading-[52px]'>2218.39</text>
+                            <text class="text-[30px] leading-[52px]">2218.39</text>
+                        </view>
+                        <view class="mt-[20px]">
+                            <view class="flex items-center">
+                                <image
+                                    class="w-[20px] h-[20px] mr-[10px]"
+                                    src="/static/images/icon-foldline.png"
+                                ></image>
+                                <text class="text-[26px] sub-title">{{ t('position.chart.volume') }}</text>
+                            </view>
+                            <text class="text-[30px] leading-[52px]">2218.39</text>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
-        <view class='btn-wrap flex items-center justify-around font-bold py-[20px] bg-white'>
-            <view class='btn font-bold btn-0'>Sell</view>
-            <view class='btn font-bold btn-1'>Buy</view>
+        <view class="btn-wrap flex items-center justify-around font-bold py-[20px] bg-white">
+            <view class="btn font-bold btn-0">{{ t('position.chart.Sell') }}</view>
+            <view class="btn font-bold btn-1">{{ t('position.chart.Buy') }}</view>
         </view>
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
+import { dispose, init } from 'klinecharts'
+import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
-import { dispose, init } from 'klinecharts'
 
 const subList = [
     {
@@ -121,6 +124,8 @@ const subList = [
         name: 'Option',
     },
 ]
+
+const { t } = useI18n()
 
 const timeList = [
     {
@@ -135,8 +140,6 @@ function changeTime(i) {
 }
 
 const current = ref(0)
-
-const renderKlineChart = ref()
 
 onMounted(() => {
     // 初始化图表
@@ -163,7 +166,6 @@ onUnmounted(() => {
     // 销毁图表
     dispose('renderKlineChart')
 })
-
 </script>
 
 <route lang='yaml'>

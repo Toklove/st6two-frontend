@@ -1,65 +1,66 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
         <FuiNavBar custom>
-            <view class='flex justify-center relative items-center flex-1'>
-                <view class='absolute left-0'>
-                    <FuiIcon name='arrowleft' @click='clickBack'></FuiIcon>
+            <view class="flex justify-center relative items-center flex-1">
+                <view class="absolute left-0">
+                    <FuiIcon name="arrowleft" @click="clickBack"></FuiIcon>
                 </view>
                 <USubsection
-                    v-model='current'
-                    :list='subList' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
+                    v-model="current"
+                    :list="subList" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
                 ></USubsection>
             </view>
         </FuiNavBar>
-        <view class='mt-[20px] mx-[34px]'>
-            <view v-if='list.length > 0'>
-                <view class='order-row px-[30px] py-[40px] text-[22px]'>
-                    <view class='flex items-center justify-between text-[30px]'>
+        <view class="mt-[20px] mx-[34px]">
+            <view v-if="list.length > 0">
+                <view class="order-row px-[30px] py-[40px] text-[22px]">
+                    <view class="flex items-center justify-between text-[30px]">
                         <text>ETHUSD</text>
                         <text>2248.35</text>
                     </view>
-                    <view class='font-bold text-right buy-1 mt-[14px]'>
-                        Buy
+                    <view class="font-bold text-right buy-1 mt-[14px]">
+                        {{ t('mine.option.Buy') }}
                     </view>
-                    <view class='line mt-[30px]'></view>
-                    <view class='flex items-center justify-between mt-[20px]'>
-                        <view class='flex flex-1 items-center justify-between'>
-                            <text class='sub-title'>amount</text>
+                    <view class="line mt-[30px]"></view>
+                    <view class="flex items-center justify-between mt-[20px]">
+                        <view class="flex flex-1 items-center justify-between">
+                            <text class="sub-title">{{ t('mine.option.amount') }}</text>
                             <text>0.0000</text>
                         </view>
-                        <view class='flex flex-1 items-center justify-between ml-[50px]'>
-                            <text class='sub-title'>duration</text>
+                        <view class="flex flex-1 items-center justify-between ml-[50px]">
+                            <text class="sub-title">{{ t('mine.option.duration') }}</text>
                             <text>0.0000</text>
                         </view>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px]'>
-                        <text class='sub-title'>Handling fee</text>
+                    <view class="flex items-center justify-between mt-[20px]">
+                        <text class="sub-title">{{ t('mine.option.HandlingFee') }}</text>
                         <text>0.1</text>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px] sub-title'>
-                        <text>Order time</text>
+                    <view class="flex items-center justify-between mt-[20px] sub-title">
+                        <text>{{ t('mine.option.OrderTime') }}</text>
                         <text>2023-12-16 12:01:06</text>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px] sub-title'>
-                        <text>Settlement time</text>
+                    <view class="flex items-center justify-between mt-[20px] sub-title">
+                        <text>{{ t('mine.option.SettlementTime') }}</text>
                         <text>2023-12-16 12:01:36</text>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px] sub-title'>
-                        <text>Profit and loss</text>
-                        <text class='win'>0.0000</text>
+                    <view class="flex items-center justify-between mt-[20px] sub-title">
+                        <text>{{ t('mine.option.ProfitLoss') }}</text>
+                        <text class="win">0.0000</text>
                     </view>
                 </view>
             </view>
-            <view v-else class='nodata'>
-                <image class='w-[340px] h-[340px]' src='/static/images/option.png'></image>
+            <view v-else class="nodata">
+                <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
             </view>
         </view>
     </layout>
 </template>
 
 <script lang='ts' setup>
+import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
@@ -67,6 +68,8 @@ import USubsection from '~/components/toklove/sub-section/sub-section.vue'
 function clickBack() {
     uni.navigateBack()
 }
+
+const { t } = useI18n()
 
 const subList = [
     {
