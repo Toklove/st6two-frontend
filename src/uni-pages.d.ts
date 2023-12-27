@@ -5,11 +5,6 @@
 
 interface NavigateToOptions {
   url: "pages/tabbar/home" |
-       "pages/history" |
-       "pages/home" |
-       "pages/mine" |
-       "pages/position" |
-       "pages/quotes" |
        "pages/common/forget" |
        "pages/common/login" |
        "pages/common/register" |

@@ -83,6 +83,8 @@ declare interface ApiType {
     RESTful<T>(url: string, method: Methods, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
 
     $RESTful<T>(url: string, method: Methods, data?: Obj, header?: Obj): Promise<ResponseData<T>>
+
+    staticUrl(url: string): string
 }
 
 declare interface Window {

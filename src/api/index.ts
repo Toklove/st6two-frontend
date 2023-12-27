@@ -62,9 +62,11 @@ function checkCodeFn(data: ResponseData<any>) {
                 uni.navigateTo({ url: '/pages/common/login' })
             },
         })
-    } else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
+    }
+    else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
         showToast(data.message)
-    } else {
+    }
+    else {
         data.code = 1
         data.status = 1
     }
@@ -97,7 +99,10 @@ export const $api: ApiType = {
     delete(url: string, data: Obj = {}, header: Obj = {}, checkCode = true) {
         return this.RESTful(url, 'delete', data, header, checkCode)
     },
-    //封装上传文件函数
+    staticUrl(url: string) {
+        return `${import.meta.env.VITE_APP_API_DOMAIN}/storage/${url}`
+    },
+    // 封装上传文件函数
     async uploadFile(url, filePath = '', name = 'files', header = {}) {
         const token = ls.get('token') || ''
         return new Promise((resolve, reject) => {
@@ -107,13 +112,13 @@ export const $api: ApiType = {
                 filePath,
                 header: {
                     ...header,
-                    'Authorization': `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
-                success: res => {
-                    //返回的是字符串，需要转换成对象
+                success: (res) => {
+                    // 返回的是字符串，需要转换成对象
                     resolve(JSON.parse(res.data))
                 },
-                fail: err => {
+                fail: (err) => {
                     reject(err)
                 },
             })
@@ -154,7 +159,7 @@ export const $api: ApiType = {
             headers: {
                 ...baseConfig.headers,
                 ...header,
-                'Authorization': `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
             method,
             url,
