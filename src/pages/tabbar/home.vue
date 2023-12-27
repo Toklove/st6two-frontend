@@ -9,13 +9,13 @@
             <view class="flex items-center">
                 <image class="w-[41px] h-[40px]" src="/static/images/msg.png"></image>
                 <image
-                    :src="userStore.userInfo.avatar ? userStore.userInfo.avatar : &quot;/static/images/no-login.png&quot;"
+                    :src="userStore.userInfo.avatar ? userStore.userInfo.avatar : '/static/images/no-login.png'"
                     class="ml-[25px] rounded-full w-[92px] h-[92px]"
                 ></image>
             </view>
         </view>
         <view class="mt-[18px]">
-            <view class="text-[45px] pl-[34px]">Noteworthy</view>
+            <view class="text-[45px] pl-[34px]">{{ t('index.title') }}</view>
             <scroll-view class="mt-[20px]" scroll-x>
                 <view class="items-center flex">
                     <view v-for="item in 3" :key="item" class="flex flex-col rounded-[30px] chart-wrap">
@@ -111,11 +111,14 @@
 
 <script lang='ts' setup>
 import { onShow } from '@dcloudio/uni-app'
+import { useI18n } from 'vue-i18n'
 import { useUserStore } from '~/pinia/useUserInfo'
 
 useHead({
     title: '首页',
 })
+
+const { t } = useI18n()
 
 const userStore = useUserStore()
 

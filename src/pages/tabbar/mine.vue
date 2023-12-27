@@ -1,135 +1,138 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='card mx-auto'>
-            <view class='flex'>
-                <image :src='userStore.userInfo.avatar?userStore.userInfo.avatar:"/static/images/avatar.png"'
-                       class='w-[132px] h-[132px] rounded-full'></image>
-                <view class='flex-1 ml-[19px]'>
-                    <view class='flex items-center justify-between text-white'>
-                        <text class='text-[38px] font-bold'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="card mx-auto">
+            <view class="flex">
+                <image
+                    :src="userStore.userInfo.avatar ? userStore.userInfo.avatar : &quot;/static/images/avatar.png&quot;"
+                    class="w-[132px] h-[132px] rounded-full"
+                ></image>
+                <view class="flex-1 ml-[19px]">
+                    <view class="flex items-center justify-between text-white">
+                        <text class="text-[38px] font-bold">
                             {{ userStore.userInfo.nickname }}
                         </text>
                         <image
-                            class='w-[54px] h-[54px]' src='/static/images/icon-edit.png'
+                            class="w-[54px] h-[54px]" src="/static/images/icon-edit.png"
                             @click="toPage('/pages/mine/userInfo')"
                         ></image>
                     </view>
-                    <view class='text-[25px] text-white'>
+                    <view class="text-[25px] text-white">
                         <text>ID:&nbsp;{{ userStore.userInfo.id }}</text>
                     </view>
                     <view
-                        class='copy-wrap flex items-center text-center h-[40px] mt-[24px] px-[24px] bg-white rounded-[20px]'
-                        @click='copyInviteCode'
+                        class="copy-wrap flex items-center text-center h-[40px] mt-[24px] px-[24px] bg-white rounded-[20px]"
+                        @click="copyInviteCode"
                     >
-                        <view class='mr-[14px] grid place-items-center'>
-                            <image class='w-[24px] h-[24px]' src='/static/images/icon-small-invite.png'></image>
+                        <view class="mr-[14px] grid place-items-center">
+                            <image class="w-[24px] h-[24px]" src="/static/images/icon-small-invite.png"></image>
                         </view>
-                        <text class='text-[24px]'>{{ userStore.userInfo.invite_code }}</text>
+                        <text class="text-[24px]">{{ userStore.userInfo.invite_code }}</text>
                     </view>
                 </view>
             </view>
         </view>
-        <view class='mt-[40px] px-[34px]'>
-            <text class='text-[45px]'>Account Details</text>
-            <view class='mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]'>
-                <view class='flex items-center justify-between' @click="toPage('/pages/mine/option')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-option.png'></image>
-                        <text class='text-[28px]'>Option Orders</text>
+        <view class="mt-[40px] px-[34px]">
+            <text class="text-[45px]">Account Details</text>
+            <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
+                <view class="flex items-center justify-between" @click="toPage('/pages/mine/option')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-option.png"></image>
+                        <text class="text-[28px]">Option Orders</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/wallet')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-wallet.png'></image>
-                        <text class='text-[28px]'>Purse</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/wallet')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-wallet.png"></image>
+                        <text class="text-[28px]">Purse</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/certified')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-real.png'></image>
-                        <text class='text-[28px]'>Certified</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/certified')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-real.png"></image>
+                        <text class="text-[28px]">Certified</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-small-language.png'></image>
-                        <text class='text-[28px]'>Language</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="showChangeLang = true">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-language.png"></image>
+                        <text class="text-[28px]">Language</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/changePassword')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-small-password.png'></image>
-                        <text class='text-[28px]'>Change password</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/changePassword')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-password.png"></image>
+                        <text class="text-[28px]">Change password</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
-                </view>
-            </view>
-        </view>
-        <view class='mt-[40px] px-[34px]'>
-            <text class='text-[45px]'>Help and support</text>
-            <view class='mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]'>
-                <view class='flex items-center justify-between'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-market.png'></image>
-                        <text class='text-[28px]'>Market pattern</text>
-                    </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
-                </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/service')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-service.png'></image>
-                        <text class='text-[28px]'>Customer service</text>
-                    </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
-                </view>
-                <view class='flex items-center justify-between mt-[35px]'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-invite.png'></image>
-                        <text class='text-[28px]'>Invitation Link</text>
-                    </view>
-                    <text class='text-[28px] sub-title' @click='copyInviteCode'>Click to copy</text>
-                </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/about')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-about.png'></image>
-                        <text class='text-[28px]'>About us</text>
-                    </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
-                </view>
-                <view class='flex items-center justify-between mt-[35px]' @click='logout'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-logout.png'></image>
-                        <text class='text-[28px]'>Log out</text>
-                    </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
             </view>
         </view>
-        <view class='transition hidden'>
-            <view class='popup-wrap'>
-                <view class='container'>
-                    <view class='text-center'>
-                        <image class='icon' src='/static/images/icon-popup-language.png'></image>
+        <view class="mt-[40px] px-[34px]">
+            <text class="text-[45px]">Help and support</text>
+            <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
+                <view class="flex items-center justify-between">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-market.png"></image>
+                        <text class="text-[28px]">Market pattern</text>
                     </view>
-                    <view class='slot-wrap text-center'>
-                        <view class='mt-[120px]'>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/service')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-service.png"></image>
+                        <text class="text-[28px]">Customer service</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-invite.png"></image>
+                        <text class="text-[28px]">Invitation Link</text>
+                    </view>
+                    <text class="text-[28px] sub-title" @click="copyInviteCode">Click to copy</text>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/about')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-about.png"></image>
+                        <text class="text-[28px]">About us</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="logout">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-logout.png"></image>
+                        <text class="text-[28px]">Log out</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="transition" :class="showChangeLang ? '' : 'hidden'">
+            <view class="popup-wrap">
+                <view class="container">
+                    <view class="text-center">
+                        <image class="icon" src="/static/images/icon-popup-language.png"></image>
+                    </view>
+                    <view class="slot-wrap text-center">
+                        <view class="mt-[120px]">
                             <view
-                                v-for='(item, index) in LangList' :key='index' :class="index === 0 ? 'active' : ''"
-                                class='p-[15px] text-[26px] sub-title'
+                                v-for="(item) in LangList" :key="item.code" :class="item.value === activeCode ? 'active' : ''"
+                                class="p-[15px] text-[26px] sub-title"
+                                @click="changeLang(item.value)"
                             >
                                 <text>{{ item.title }}</text>
                             </view>
                         </view>
                     </view>
-                    <view class='btn-wrap flex justify-around items-center font-bold'>
-                        <text class='btn sub-title bg-[#f5f7f9]'>Cancel</text>
-                        <text class='btn text-white bg-black'>Confirm</text>
+                    <view class="btn-wrap flex justify-around items-center font-bold">
+                        <text class="btn sub-title bg-[#f5f7f9]" @click="showChangeLang = false">Cancel</text>
+                        <text class="btn text-white bg-black" @click="showChangeLang = false">Confirm</text>
                     </view>
                 </view>
             </view>
@@ -142,22 +145,35 @@ import { useUserStore } from '~/pinia/useUserInfo'
 
 const userStore = useUserStore()
 
+const showChangeLang = ref(false)
+
+const activeCode = ref(uni.getLocale())
+
+function changeLang(code) {
+    console.log(activeCode.value)
+    console.log(code)
+    uni.setStorageSync('lang', code)
+    uni.setLocale(code)
+    showChangeLang.value = false
+}
+
 async function logout() {
-    //请求登录接口并清除本来缓存数据
+    // 请求登录接口并清除本来缓存数据
     uni.showModal({
         title: 'Log out',
         content: 'Are you sure you want to log out?',
-        success: async function(res) {
+        async success(res) {
             if (res.confirm) {
                 console.log('用户点击确定')
-                //发送请求退出登录
+                // 发送请求退出登录
                 const { code } = await $api.get('/user/logout')
                 if (code === 1) {
                     uni.clearStorageSync()
                     uni.reLaunch({
                         url: '/pages/common/login',
                     })
-                } else {
+                }
+                else {
                     uni.showToast({
                         title: 'Log out failed',
                         icon: 'none',
@@ -175,7 +191,7 @@ function toPage(url) {
 function copyInviteCode() {
     uni.setClipboardData({
         data: userStore.userInfo.invite_code,
-        success: function() {
+        success() {
             uni.showToast({
                 title: 'Copy success',
                 icon: 'none',
@@ -195,7 +211,7 @@ const LangList = [
     },
     {
         title: '한국어',
-        value: 'ko',
+        value: 'kr',
     },
     {
         title: '繁体中文',
@@ -224,11 +240,9 @@ const LangList = [
 ]
 
 onShow(async () => {
-    if (!userStore.userInfo.id) {
+    if (!userStore.userInfo.id)
         await userStore.getUserInfo()
-    }
 })
-
 </script>
 
 <route lang='yaml'>
