@@ -42,7 +42,7 @@
                     <text
                         v-for="(item, index) in timeList" :key="index"
                         :class="index === activeTime ? 'text-white bg-black' : ''"
-                        class="flex items-center justify-center w-[80px] h-[42px] text-[24px] bg-[#f5f7f9] rounded-[20px]"
+                        class="flex items-center justify-center w-[80px] h-[42px] text-[24px] bg-[#f5f7f9] rounded-[20px] transition-all"
                         @click="changeTime(index)"
                     >
                         {{ item.name }}
