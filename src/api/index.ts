@@ -62,11 +62,9 @@ function checkCodeFn(data: ResponseData<any>) {
                 uni.navigateTo({ url: '/pages/common/login' })
             },
         })
-    }
-    else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
+    } else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
         showToast(data.message)
-    }
-    else {
+    } else {
         data.code = 1
         data.status = 1
     }
@@ -101,6 +99,29 @@ export const $api: ApiType = {
     },
     staticUrl(url: string) {
         return `${import.meta.env.VITE_APP_API_DOMAIN}/storage/${url}`
+    },
+    back(defaultBackUrl) {
+        if (getCurrentPages().length > 1) {
+            uni.navigateBack()
+        } else {
+            // #ifdef H5
+            history.back()
+            // #endif
+            // #ifndef H5
+            if (defaultBackUrl) {
+                uni.redirectTo({
+                    url: defaultBackUrl,
+                })
+            } else {
+                if (backTabbarUrl) {
+                    uni.reLaunch({
+                        url: backTabbarUrl,
+                    })
+                }
+
+            }
+            // #endif
+        }
     },
     // 封装上传文件函数
     async uploadFile(url, filePath = '', name = 'files', header = {}) {

@@ -61,7 +61,7 @@ import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 const loading = ref(false)
 
 function clickBack() {
-    uni.navigateBack()
+    $api.back()
 }
 
 function changeType() {

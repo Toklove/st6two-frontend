@@ -73,7 +73,7 @@ watch(layoutData, (val) => {
 })
 
 function clickBack() {
-    uni.navigateBack()
+    $api.back()
 }
 </script>
 

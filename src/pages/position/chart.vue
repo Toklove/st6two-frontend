@@ -293,6 +293,7 @@ const showOption = ref(false)
 
 function createOrder(type) {
     if (current.value === 0) {
+        contractFrom.value.order_type = type
         showContract.value = true
     } else {
         showOption.value = true
@@ -301,13 +302,14 @@ function createOrder(type) {
 
 const contractFrom = ref({
     type: 0,
-    order_price: null,
-    stop_surplus: null,
+    order_price: 0,
+    stop_surplus: 0,
     disabled_stop_surplus: true,
-    stop_loss: null,
+    stop_loss: 0,
     disabled_stop_loss: true,
     quantity: 0,
     lever: 100,
+    order_type: 0,
 })
 
 function changeOrderPrice(val) {
@@ -345,7 +347,7 @@ function placeContractOrder() {
     console.log(contractFrom.value)
     $api.post('/market/contract_order', {
         symbol: symbol.value,
-        type: contractFrom.value.type,
+        order_type: contractFrom.value.order_type,
         order_price: contractFrom.value.order_price,
         stop_surplus: contractFrom.value.stop_surplus,
         stop_loss: contractFrom.value.stop_loss,
@@ -449,7 +451,7 @@ const subList = [
 ]
 
 function clickBack() {
-    uni.navigateBack()
+    $api.back()
 }
 
 // 从路由pair参数获取symbol

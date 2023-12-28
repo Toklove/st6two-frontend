@@ -75,7 +75,7 @@ function submit() {
                 title: 'Add success',
                 icon: 'none',
             })
-            uni.navigateBack()
+            $api.back()
         }
         else {
             uni.showToast({

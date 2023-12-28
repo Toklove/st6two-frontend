@@ -1,43 +1,43 @@
 <template>
     <page-meta />
-    <div class="init-top" />
-    <layout class-name="IndexRouter">
-        <view class="px-[34px]">
-            <view class="text-center">
-                <image class="w-[140px] h-[140px]" src="/static/images/icon-big-password.png"></image>
+    <div class='init-top' />
+    <layout class-name='IndexRouter'>
+        <view class='px-[34px]'>
+            <view class='text-center'>
+                <image class='w-[140px] h-[140px]' src='/static/images/icon-big-password.png'></image>
             </view>
-            <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
-                <image class="w-[44px] h-[44px]" src="/static/images/icon-password.png"></image>
-                <view class="flex items-center justify-between flex-1">
+            <view class='flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                <image class='w-[44px] h-[44px]' src='/static/images/icon-password.png'></image>
+                <view class='flex items-center justify-between flex-1'>
                     <input
-                        v-model="form.password" class="flex-1 ml-[19px] input"
-                        :placeholder="t('mine.changePassword.inputNewPassWord')" type="password"
+                        v-model='form.password' :placeholder="t('mine.changePassword.inputNewPassWord')"
+                        class='flex-1 ml-[19px] input' type='password'
                     >
                 </view>
             </view>
-            <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
-                <image class="w-[44px] h-[44px]" src="/static/images/icon-password.png"></image>
-                <view class="flex items-center justify-between flex-1">
+            <view class='flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                <image class='w-[44px] h-[44px]' src='/static/images/icon-password.png'></image>
+                <view class='flex items-center justify-between flex-1'>
                     <input
-                        v-model="form.password_confirmation" class="flex-1 ml-[19px] input"
-                        :placeholder="t('mine.changePassword.reNewPassWord')" type="password"
+                        v-model='form.password_confirmation' :placeholder="t('mine.changePassword.reNewPassWord')"
+                        class='flex-1 ml-[19px] input' type='password'
                     >
                 </view>
             </view>
-            <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
-                <image class="w-[44px] h-[44px]" src="/static/images/icon-password.png"></image>
-                <view class="flex items-center justify-between flex-1">
+            <view class='flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                <image class='w-[44px] h-[44px]' src='/static/images/icon-password.png'></image>
+                <view class='flex items-center justify-between flex-1'>
                     <input
-                        v-model="form.old_password" class="flex-1 ml-[19px] input"
-                        :placeholder="t('mine.changePassword.oldPassword')"
-                        type="password"
+                        v-model='form.old_password' :placeholder="t('mine.changePassword.oldPassword')"
+                        class='flex-1 ml-[19px] input'
+                        type='password'
                     >
                 </view>
             </view>
         </view>
-        <view class="btn-wrap text-center">
-            <view class="bg-black py-[33px] rounded-[20px]" @click="submit">
-                <text class="text-[32px] font-bold text-white">
+        <view class='btn-wrap text-center'>
+            <view class='bg-black py-[33px] rounded-[20px]' @click='submit'>
+                <text class='text-[32px] font-bold text-white'>
                     {{ t('mine.changePassword.Submit') }}
                 </text>
             </view>
@@ -86,7 +86,7 @@ function submit() {
                 icon: 'none',
             })
             setTimeout(() => {
-                uni.navigateBack()
+                $api.back()
             }, 1000)
         }
     })
