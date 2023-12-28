@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@8.7.4",
-  "author": "lincenying <lincenying@qq.com>",
+  "author": "TokLove <superz2586@gmail.com>",
   "scripts": {
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
@@ -47,6 +47,7 @@
     "axios": "^1.6.2",
     "fant-axios-adapter": "^0.0.6",
     "klinecharts": "^9.7.1",
+    "pako": "^2.1.0",
     "pinia": "2.0.36",
     "unhead": "^1.8.9",
     "vue": "^3.3.11",

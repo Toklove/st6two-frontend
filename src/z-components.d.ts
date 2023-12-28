@@ -9,6 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Chart: typeof import('./components/chart/index.vue')['default']
+    ChartBak: typeof import('./components/chart/bak.vue')['default']
     EmptyComponents: typeof import('./components/empty-components.vue')['default']
     EmptyPopup: typeof import('./components/empty-popup.vue')['default']
     FirstuiFuiActionsheetFuiActionsheet: typeof import('./components/firstui/fui-actionsheet/fui-actionsheet.vue')['default']

@@ -9,6 +9,11 @@ const config: { server: ServerOptions; build: BuildOptions } = {
                 changeOrigin: true,
                 rewrite: (path: string) => path.replace(/^\/api/, '/api'),
             },
+            '/ws': {
+                target: 'wss://coinlim.cc/', // 这里是后台ws访问地址
+                changeOrigin: true, // 允许跨域设置
+                ws: true, // websocket代理设置
+            },
         },
     },
     build: {

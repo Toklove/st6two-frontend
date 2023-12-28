@@ -21,6 +21,18 @@ const messages = {
     de,
 }
 
+let locale = uni.getStorageSync('lang')
+if (!locale) {
+    const sysInfo = uni.getSystemInfoSync()
+    locale = sysInfo.language
+    if (locale === 'zh_CN') {
+        locale = 'zhHant'
+    } else {
+        locale = 'en'
+    }
+    uni.setStorageSync('lang', locale)
+}
+
 const i18nConfig = {
     legacy: false, // you must set `false`, to use Compostion API
     locale: uni.getStorageSync('lang') ?? 'en', // 获取已设置的语言

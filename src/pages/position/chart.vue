@@ -1,123 +1,357 @@
 <template>
     <page-meta />
-    <div class="init-top" />
-    <layout class-name="IndexRouter">
+    <div class='init-top' />
+    <layout class-name='IndexRouter'>
         <FuiNavBar custom>
-            <view class="flex justify-center relative items-center flex-1">
-                <view class="absolute left-0">
-                    <FuiIcon name="arrowleft"></FuiIcon>
+            <view class='flex justify-center relative items-center flex-1'>
+                <view class='absolute left-0'>
+                    <FuiIcon name='arrowleft' @click='clickBack'></FuiIcon>
                 </view>
-                <view class="absolute right-[16px]" @click="like">
+                <view class='absolute right-[16px]' @click='like'>
                     <image
                         :src="info.is_like ? '/static/images/icon-star.png' : '/static/images/icon-un-star.png'"
-                        class="w-[40px] h-[40px]"
+                        class='w-[40px] h-[40px]'
                     ></image>
                 </view>
                 <USubsection
-                    v-model="current"
-                    :list="subList" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
+                    v-model='current'
+                    :list='subList' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
                 ></USubsection>
             </view>
         </FuiNavBar>
-        <view class="px-[34px] mt-[20px]">
-            <view class="flex items-center justify-between py-[25px] px-[20px] rounded-[30px] bg-[#f5f7f9]">
-                <view class="flex items-center">
+        <view class='px-[34px] mt-[20px]'>
+            <view class='flex items-center justify-between py-[25px] px-[20px] rounded-[30px] bg-[#f5f7f9]'>
+                <view class='flex items-center'>
                     <image
-                        class="w-[72px] h-[72px] rounded-full"
-                        :src="info.logo"
+                        :src='info.logo'
+                        class='w-[72px] h-[72px] rounded-full'
                     ></image>
-                    <view class="flex flex-col ml-[15px] text-[30px]">
+                    <view class='flex flex-col ml-[15px] text-[30px]'>
                         <text>{{ info.full_name }}</text>
-                        <text>2218.11</text>
+                        <text>{{ nowData.lastPrice.toFixed(2) }}</text>
                     </view>
                 </view>
                 <text
-                    class="rate-wrap py-[14px] text-[26px] text-center text-white rounded-[28px] px-[28px] green-block"
+                    :class='diffAmount > 0? "green-block" : "red-block"'
+                    class='rate-wrap py-[14px] text-[26px] text-center text-white rounded-[28px] px-[28px] green-block'
                 >
-                    -0.06
+                    {{ diffAmount > 0 ? '+' : '' }}{{ diffAmount }}
                 </text>
             </view>
-            <view class="mt-[40px]">
-                <view class="flex items-center justify-between">
-                    <text
-                        v-for="(item, index) in timeList" :key="index"
-                        :class="index === activeTime ? 'text-white bg-black' : ''"
-                        class="flex items-center justify-center w-[80px] h-[42px] text-[24px] bg-[#f5f7f9] rounded-[20px] transition-all"
-                        @click="changeTime(index)"
-                    >
-                        {{ item.name }}
-                    </text>
-                </view>
-            </view>
 
-            <view id="chart" class="mt-[40px]">
-                <view id="renderKlineChart" class="h-[40vh]"></view>
-            </view>
+            <!--TODO APP中使用webview实现-->
+            <KLineChart :symbol='chartPair' />
 
-            <view class="statistics mt-[29px] mx-[34px]">
-                <text class="text-[30px]">
+            <view class='statistics mt-[29px] mx-[34px]'>
+                <text class='text-[30px]'>
                     {{ t('position.chart.Statistics') }}
                 </text>
                 <view
-                    class="flex items-center justify-between mt-[29px] px-[34px] py-[38px] bg-[#f5f7f9] rounded-[30px]"
+                    class='flex items-center justify-between mt-[29px] px-[34px] py-[38px] bg-[#f5f7f9] rounded-[30px]'
                 >
-                    <view class="flex-1">
+                    <view class='flex-1'>
                         <view>
-                            <view class="flex items-center">
-                                <image class="w-[20px] h-[20px] mr-[10px]" src="/static/images/icon-dollar.png"></image>
-                                <text class="text-[26px] sub-title">{{ t('position.chart.Open') }}</text>
+                            <view class='flex items-center'>
+                                <image class='w-[20px] h-[20px] mr-[10px]' src='/static/images/icon-dollar.png'></image>
+                                <text class='text-[26px] sub-title'>{{ t('position.chart.Open') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">2218.39</text>
+                            <text class='text-[30px] leading-[52px]'>{{ nowData.open.toFixed(2) }}</text>
                         </view>
-                        <view class="mt-[20px]">
-                            <view class="flex items-center">
+                        <view class='mt-[20px]'>
+                            <view class='flex items-center'>
                                 <image
-                                    class="w-[20px] h-[20px] mr-[10px]"
-                                    src="/static/images/icon-arrow-down.png"
+                                    class='w-[20px] h-[20px] mr-[10px]'
+                                    src='/static/images/icon-arrow-down.png'
                                 ></image>
-                                <text class="text-[26px] sub-title">{{ t('position.chart.Low') }}</text>
+                                <text class='text-[26px] sub-title'>{{ t('position.chart.Low') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">2218.39</text>
+                            <text class='text-[30px] leading-[52px]'>{{ nowData.low.toFixed(2) }}</text>
                         </view>
                     </view>
-                    <view class="flex-1">
+                    <view class='flex-1'>
                         <view>
-                            <view class="flex items-center">
+                            <view class='flex items-center'>
                                 <image
-                                    class="w-[20px] h-[20px] mr-[10px]"
-                                    src="/static/images/icon-arrow-up.png"
+                                    class='w-[20px] h-[20px] mr-[10px]'
+                                    src='/static/images/icon-arrow-up.png'
                                 ></image>
-                                <text class="text-[26px] sub-title">{{ t('position.chart.High') }}</text>
+                                <text class='text-[26px] sub-title'>{{ t('position.chart.High') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">2218.39</text>
+                            <text class='text-[30px] leading-[52px]'>{{ nowData.high.toFixed(2) }}</text>
                         </view>
-                        <view class="mt-[20px]">
-                            <view class="flex items-center">
+                        <view class='mt-[20px]'>
+                            <view class='flex items-center'>
                                 <image
-                                    class="w-[20px] h-[20px] mr-[10px]"
-                                    src="/static/images/icon-foldline.png"
+                                    class='w-[20px] h-[20px] mr-[10px]'
+                                    src='/static/images/icon-foldline.png'
                                 ></image>
-                                <text class="text-[26px] sub-title">{{ t('position.chart.volume') }}</text>
+                                <text class='text-[26px] sub-title'>{{ t('position.chart.volume') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">2218.39</text>
+                            <text class='text-[30px] leading-[52px]'>{{ nowData.vol.toFixed(2) }}</text>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
-        <view class="btn-wrap flex items-center justify-around font-bold py-[20px] bg-white">
-            <view class="btn font-bold btn-0">{{ t('position.chart.Sell') }}</view>
-            <view class="btn font-bold btn-1">{{ t('position.chart.Buy') }}</view>
+        <view class='btn-wrap flex items-center justify-around font-bold py-[20px] bg-white'>
+            <view class='btn font-bold btn-0' @click='createOrder(0)'>{{ t('position.chart.Sell') }}</view>
+            <view class='btn font-bold btn-1' @click='createOrder(1)'>{{ t('position.chart.Buy') }}</view>
+        </view>
+        <view v-show='showContract' class='order-wrap'>
+            <view class='place'>
+                <view class='order-type flex justify-between font-bold'>
+                    <view class='flex items-center justify-between'>
+                        <view class='item grid place-items-center active'>Market Price</view>
+                        <view class='item grid place-items-center'>Order</view>
+                    </view>
+                    <image class='w-[48px] h-[48px]' src='/static/images/icon-close.png'
+                           @click='showContract = false'></image>
+                </view>
+                <view class='now-price grid place-items-center bg-[#f5f7f9]'>
+                    <text :class='diffAmount > 0? "green-text" : "red-text"' class='text-[76px] font-bold'>
+                        {{ nowData.lastPrice.toFixed(2) }}
+                    </text>
+                </view>
+                <view class='mx-[24px] px-[24px] bg-[#f5f7f9] rounded-[20px]'>
+                    <view class='row py-[20px]'>
+                        <view class='col'>
+                            <text class='text-[28px]'>Order Price</text>
+                            <view>
+                                <fui-input-number @change='change'></fui-input-number>
+                            </view>
+                        </view>
+                        <text class='text-[24px] sub-title'>Price limit => {{ nowData.lastPrice.toFixed(2) }}</text>
+                    </view>
+                    <view class='row py-[20px]'>
+                        <view class='col'>
+                            <text class='text-[28px]'>Stop surplus</text>
+                            <view>
+                                <fui-input-number @change='change'></fui-input-number>
+                            </view>
+                            <view class='mr-[34px] flex items-center justify-end'>
+                                <fui-switch></fui-switch>
+                            </view>
+                        </view>
+                        <text class='text-[24px] sub-title'>Price limit => {{ nowData.lastPrice.toFixed(2) }}</text>
+                    </view>
+                    <view class='row py-[20px]'>
+                        <view class='col'>
+                            <text class='text-[28px]'>Stop loss</text>
+                            <view>
+                                <fui-input-number @change='change'></fui-input-number>
+                            </view>
+                            <view class='mr-[34px] flex items-center justify-end'>
+                                <fui-switch></fui-switch>
+                            </view>
+                        </view>
+                        <text class='text-[24px] sub-title'>Price limit => {{ nowData.lastPrice.toFixed(2) }}</text>
+                    </view>
+                    <view class='row py-[20px]'>
+                        <view class='col'>
+                            <view class='flex items-center'>
+                                <text class='text-[28px]'>Quantity</text>
+                                <view class='hands text-[22px] sub-title'>
+                                    (0.01~10000)
+                                </view>
+                            </view>
+                            <view>
+                                <fui-input-number @change='change'></fui-input-number>
+                            </view>
+                        </view>
+                    </view>
+                    <view class='py-[20px]'>
+                        <text class='text-[28px]'>Lever</text>
+                        <view class='flex flex-wrap text-[22px]'>
+                            <text
+                                class='flex items-center justify-center w-[80px] h-[43px] mt-[15px] mx-[24px] bg-[#f5f7f9] rounded-[20px] text-white bg-black'>
+                                100
+                            </text>
+                        </view>
+                    </view>
+                </view>
+                <view class='flex flex-col mx-[34px] mt-[10px] text-[24px] sub-title'>
+                    <text>Handling fee: 0.1</text>
+                    <text>Cash deposit: 10.00000</text>
+                </view>
+                <view class='submit text-center'>
+                    <view class='py-[22px] text-center bg-black rounded-[40px]'>
+                        <text class='text-[28px] font-bold text-white'>
+                            Place an order
+                        </text>
+                    </view>
+                    <view class='mt-[20px] text-[26px]'>
+                        <text>Available balance：</text>
+                        <text>1799991512504.651</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view v-show='showOption' class='order-wrap'>
+            <view class='second-contract'>
+                <view>
+                    <view class='now-price grid place-items-center bg-[#f5f7f9]'>
+                        <text :class='diffAmount > 0? "green-text" : "red-text"' class='text-[76px] font-bold'>
+                            {{ nowData.lastPrice.toFixed(2) }}
+                        </text>
+                    </view>
+                    <view class='time-wrap mx-[24px] rounded-[20px]'>
+                        <view class='p-[24px] bg-[#f5f7f9] rounded-[20px]'>
+                            <view class='trade-symbol flex items-center justify-between py-[15px]'>
+                                <text>交易对</text>
+                                <text>ETH</text>
+                            </view>
+                            <view class='flex items-center justify-between py-[15px]'>
+                                <text>方向</text>
+                                <text class='red-text'>買少</text>
+                            </view>
+                        </view>
+                        <view class='py-[15px]'>
+                            <text class='mx-[24px]'>選擇到期時間</text>
+                            <view class='grid grid-cols-5 text-[22px]'>
+                                <text v-for='item in 10'
+                                      class='flex items-center justify-center w-[80px] h-[43px] mt-[15px] mx-[24px] bg-[#f5f7f9] rounded-[20px]'>
+                                    30s
+                                </text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class='flex items-center justify-between mt-[20px] mx-[48px] text-[22px] sub-title'>
+                        <text>預計收益率</text>
+                        <text>15%</text>
+                    </view>
+                    <view class='buy-amount mt-[20px] mx-[24px] px-[24px] py-[10px] rounded-[20px]'>
+                        <text class='text-[26px]'>
+                            交易數量(>=10)
+                        </text>
+                        <input class='text-[50px] font-bold' type='number'>
+                        <view class='flex items-center justify-between text-[22px] sub-title'>
+                            <text>預期收益</text>
+                            <text>1.5</text>
+                        </view>
+                    </view>
+                    <view class='flex justify-between items-center mt-[20px] mx-[48px] text-[22px] sub-title'>
+                        <text>手續費</text>
+                        <text>0</text>
+                    </view>
+                    <view class='submit text-center'>
+                        <view class='py-[22px] text-center bg-black rounded-[40px]'>
+                            <text class='text-[28px] font-bold text-white'>
+                                Place an order
+                            </text>
+                        </view>
+                        <view class='mt-[20px] text-[26px]'>
+                            <text>Available balance：</text>
+                            <text>1799991512504.651</text>
+                        </view>
+                    </view>
+                </view>
+                <image class='w-[88px] h-[88px] second-close' src='/static/images/icon-close-contract.png'
+                       @click='showOption = false'></image>
+            </view>
         </view>
     </layout>
 </template>
 
 <script setup>
-import { dispose, init } from 'klinecharts'
 import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
+import KLineChart from '~/components/chart/index.vue'
+import pako from 'pako/dist/pako_inflate'
+import FuiInputNumber from '~/components/firstui/fui-input-number/fui-input-number.vue'
+import FuiSwitch from '~/components/firstui/fui-switch/fui-switch.vue'
+
+
+const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
+
+let socket = new WebSocket(wsUrl)
+
+const showContract = ref(false)
+const showOption = ref(false)
+
+function createOrder(type) {
+    if (current.value === 0) {
+        showContract.value = true
+    } else {
+        showOption.value = true
+    }
+}
+
+const createSubTickerRequest = () => ({
+    sub: `market.${chartPair.value}.ticker`,
+})
+
+const nowData = ref({
+    open: 51732,
+    high: 52785.64,
+    low: 51000,
+    close: 52735.63,
+    amount: 13259.24137056181,
+    vol: 687640987.4125315,
+    count: 448737,
+    bid: 52732.88,
+    bidSize: 0.036,
+    ask: 52732.89,
+    askSize: 0.583653,
+    lastPrice: 52735.63,
+    lastSize: 0.03,
+})
+
+const prevData = ref({
+    open: 51732,
+    high: 52785.64,
+    low: 51000,
+    close: 52735.63,
+    amount: 13259.24137056181,
+    vol: 687640987.4125315,
+    count: 448737,
+    bid: 52732.88,
+    bidSize: 0.036,
+    ask: 52732.89,
+    askSize: 0.583653,
+    lastPrice: 52735.63,
+    lastSize: 0.03,
+})
+
+const handlerData = (msg) => {
+    const data = JSON.parse(msg)
+    if (data.ping) {
+        socket.send(JSON.stringify({ pong: data.ping }))
+    } else if (data.tick) {
+        prevData.value = nowData.value
+        nowData.value = data.tick
+    }
+}
+
+const diff = computed(() => {
+    return ((nowData.value.close - nowData.value.open) / nowData.value.open * 100).toFixed(2)
+})
+
+const diffAmount = computed(() => {
+    return (nowData.value.open - nowData.value.close).toFixed(2)
+})
+
+const upOrDown = computed(() => {
+    return (nowData.value.close > prevData.value.close)
+})
+
+const subscribeData = () => {
+    socket.send(JSON.stringify(createSubTickerRequest()))
+}
+socket.onmessage = (event) => {
+    const blob = event.data
+    const fileReader = new FileReader()
+    fileReader.onload = (e) => {
+        const payloadData = new Uint8Array(e.target.result)
+        const msg = pako.inflate(payloadData, { to: 'string' })
+        handlerData(msg)
+    }
+    fileReader.readAsArrayBuffer(blob)
+}
+socket.onopen = () => {
+    subscribeData()
+}
 
 const subList = [
     {
@@ -127,6 +361,10 @@ const subList = [
         name: 'Option',
     },
 ]
+
+function clickBack() {
+    uni.navigateBack()
+}
 
 // 从路由pair参数获取symbol
 const symbol = ref('')
@@ -139,6 +377,10 @@ function like() {
     }).then((res) => {
         res.data.logo = $api.staticUrl(res.data.logo)
         info.value = res.data
+        uni.showToast({
+            title: res.message,
+            icon: 'none',
+        })
     })
 }
 
@@ -158,47 +400,16 @@ onLoad((option) => {
     getInfo()
 })
 
+const chartPair = computed(() => {
+    let val = symbol.value.toLocaleLowerCase()
+    val = val.replace('-', '')
+    return `${val}t`
+})
+
 const { t } = useI18n()
-
-const timeList = [
-    {
-        name: '1M',
-    }, { name: '5M' }, { name: '15M' }, { name: '30M' }, { name: '1H' }, { name: '1D' },
-]
-
-const activeTime = ref(0)
-
-function changeTime(i) {
-    activeTime.value = i
-}
 
 const current = ref(0)
 
-onMounted(() => {
-    // 初始化图表
-    const chart = init('renderKlineChart')
-
-    console.log(chart)
-
-    // 为图表添加数据
-    chart.applyNewData([
-        { close: 4976.16, high: 4977.99, low: 4970.12, open: 4972.89, timestamp: 1587660000000, volume: 204 },
-        { close: 4977.33, high: 4979.94, low: 4971.34, open: 4973.20, timestamp: 1587660060000, volume: 194 },
-        { close: 4977.93, high: 4977.93, low: 4974.20, open: 4976.53, timestamp: 1587660120000, volume: 197 },
-        { close: 4966.77, high: 4968.53, low: 4962.20, open: 4963.88, timestamp: 1587660180000, volume: 28 },
-        { close: 4961.56, high: 4972.61, low: 4961.28, open: 4961.28, timestamp: 1587660240000, volume: 184 },
-        { close: 4964.19, high: 4964.74, low: 4961.42, open: 4961.64, timestamp: 1587660300000, volume: 191 },
-        { close: 4968.93, high: 4972.70, low: 4964.55, open: 4966.96, timestamp: 1587660360000, volume: 105 },
-        { close: 4979.31, high: 4979.61, low: 4973.99, open: 4977.06, timestamp: 1587660420000, volume: 35 },
-        { close: 4977.02, high: 4981.66, low: 4975.14, open: 4981.66, timestamp: 1587660480000, volume: 135 },
-        { close: 4985.09, high: 4988.62, low: 4980.30, open: 4986.72, timestamp: 1587660540000, volume: 76 },
-    ])
-})
-
-onUnmounted(() => {
-    // 销毁图表
-    dispose('renderKlineChart')
-})
 </script>
 
 <route lang='yaml'>
@@ -238,5 +449,107 @@ navigationStyle: custom
         font-size: 30px;
     }
 
+}
+
+.order-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .6);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+
+    .submit {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        width: 532px;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+
+    .second-contract {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 724px;
+        height: 1084px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: url(/static/images/bg-contract.png) no-repeat;
+        background-size: cover;
+
+        .time-wrap {
+            background: #dcdfe6;
+
+            .trade-symbol {
+                border-bottom: 1px solid #f0f2fe;
+            }
+        }
+
+        .second-close {
+            position: absolute;
+            left: 50%;
+            bottom: -124px;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+    }
+
+    .now-price {
+        width: 624px;
+        height: 160px;
+        margin: 30px auto;
+        border-radius: 30px;
+    }
+
+    .place {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 724px;
+        height: 1084px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: url(/static/images/bg-order.png) no-repeat;
+        background-size: cover;
+
+        .active {
+            color: #fff !important;
+            background: #3640f0 !important;
+        }
+
+        .order-type {
+            margin: -72px 24px 0;
+            height: 72px;
+
+            .item {
+                width: 220px;
+                height: 72px;
+                color: #545454;
+                background: #d4d4d4;
+                border-radius: 20px 20px 0px 0px;
+            }
+        }
+
+        .row {
+            border-bottom: 1px solid #f0f2fe;
+
+            .col {
+                display: grid;
+                grid-template-columns: 290px auto 156px;
+                align-items: center;
+
+                .hands {
+                    margin-left: -26px;
+                    -webkit-transform: scale(.6);
+                    transform: scale(.6);
+                }
+            }
+        }
+    }
 }
 </style>
