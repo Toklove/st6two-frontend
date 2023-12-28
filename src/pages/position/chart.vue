@@ -101,8 +101,15 @@
             <view class='place'>
                 <view class='order-type flex justify-between font-bold'>
                     <view class='flex items-center justify-between'>
-                        <view class='item grid place-items-center active'>Market Price</view>
-                        <view class='item grid place-items-center'>Order</view>
+                        <view :class='contractFrom.type === 0?"active":""'
+                              class='item grid place-items-center transition-all'
+                              @click='contractFrom.type = 0'>Market
+                            Price
+                        </view>
+                        <view :class='contractFrom.type === 1?"active":""'
+                              class='item grid place-items-center transition-all'
+                              @click='contractFrom.type = 1'>Order
+                        </view>
                     </view>
                     <image class='w-[48px] h-[48px]' src='/static/images/icon-close.png'
                            @click='showContract = false'></image>
@@ -113,11 +120,12 @@
                     </text>
                 </view>
                 <view class='mx-[24px] px-[24px] bg-[#f5f7f9] rounded-[20px]'>
-                    <view class='row py-[20px]'>
+                    <view v-show='contractFrom.type === 1' class='row py-[20px]'>
                         <view class='col'>
                             <text class='text-[28px]'>Order Price</text>
                             <view>
-                                <fui-input-number @change='change'></fui-input-number>
+                                <fui-input-number v-model:modelValue='contractFrom.order_price'
+                                                  @change='changeOrderPrice'></fui-input-number>
                             </view>
                         </view>
                         <text class='text-[24px] sub-title'>Price limit => {{ nowData.lastPrice.toFixed(2) }}</text>
@@ -126,10 +134,15 @@
                         <view class='col'>
                             <text class='text-[28px]'>Stop surplus</text>
                             <view>
-                                <fui-input-number @change='change'></fui-input-number>
+                                <fui-input-number v-model:modelValue='contractFrom.stop_surplus'
+                                                  :disabled='contractFrom.disabled_stop_surplus'
+                                                  :max='999999999'
+                                                  :min='0'
+                                                  width='160'
+                                                  @change='changeStopSurplus'></fui-input-number>
                             </view>
                             <view class='mr-[34px] flex items-center justify-end'>
-                                <fui-switch></fui-switch>
+                                <fui-switch @change='changeStopSurplusStatus'></fui-switch>
                             </view>
                         </view>
                         <text class='text-[24px] sub-title'>Price limit => {{ nowData.lastPrice.toFixed(2) }}</text>
@@ -138,10 +151,15 @@
                         <view class='col'>
                             <text class='text-[28px]'>Stop loss</text>
                             <view>
-                                <fui-input-number @change='change'></fui-input-number>
+                                <fui-input-number v-model:modelValue='contractFrom.stop_loss'
+                                                  :disabled='contractFrom.disabled_stop_loss'
+                                                  :max='999999999'
+                                                  :min='0'
+                                                  width='160'
+                                                  @change='changeStopLoss'></fui-input-number>
                             </view>
                             <view class='mr-[34px] flex items-center justify-end'>
-                                <fui-switch></fui-switch>
+                                <fui-switch @change='changeStopLossStatus'></fui-switch>
                             </view>
                         </view>
                         <text class='text-[24px] sub-title'>Price limit => {{ nowData.lastPrice.toFixed(2) }}</text>
@@ -155,7 +173,9 @@
                                 </view>
                             </view>
                             <view>
-                                <fui-input-number @change='change'></fui-input-number>
+                                <fui-input-number v-model:value='contractFrom.quantity'
+                                                  width='160'
+                                                  @change='changeQuantity'></fui-input-number>
                             </view>
                         </view>
                     </view>
@@ -171,17 +191,17 @@
                 </view>
                 <view class='flex flex-col mx-[34px] mt-[10px] text-[24px] sub-title'>
                     <text>Handling fee: 0.1</text>
-                    <text>Cash deposit: 10.00000</text>
+                    <text class='mt-[10px]'>Cash deposit: 10.00000</text>
                 </view>
                 <view class='submit text-center'>
-                    <view class='py-[22px] text-center bg-black rounded-[40px]'>
+                    <view class='py-[22px] text-center bg-black rounded-[40px]' @click='placeContractOrder'>
                         <text class='text-[28px] font-bold text-white'>
                             Place an order
                         </text>
                     </view>
                     <view class='mt-[20px] text-[26px]'>
                         <text>Available balance：</text>
-                        <text>1799991512504.651</text>
+                        <text>{{ userStore.userInfo.balance }}</text>
                     </view>
                 </view>
             </view>
@@ -241,7 +261,7 @@
                         </view>
                         <view class='mt-[20px] text-[26px]'>
                             <text>Available balance：</text>
-                            <text>1799991512504.651</text>
+                            <text>{{ userStore.userInfo.balance }}</text>
                         </view>
                     </view>
                 </view>
@@ -262,6 +282,7 @@ import pako from 'pako/dist/pako_inflate'
 import FuiInputNumber from '~/components/firstui/fui-input-number/fui-input-number.vue'
 import FuiSwitch from '~/components/firstui/fui-switch/fui-switch.vue'
 
+const userStore = useUserStore()
 
 const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
 
@@ -276,6 +297,71 @@ function createOrder(type) {
     } else {
         showOption.value = true
     }
+}
+
+const contractFrom = ref({
+    type: 0,
+    order_price: null,
+    stop_surplus: null,
+    disabled_stop_surplus: true,
+    stop_loss: null,
+    disabled_stop_loss: true,
+    quantity: 0,
+    lever: 100,
+})
+
+function changeOrderPrice(val) {
+    console.log(val)
+    contractFrom.value.order_price = val.value
+}
+
+function changeStopSurplus(val) {
+    console.log(val)
+    contractFrom.value.stop_surplus = val.value
+}
+
+function changeStopSurplusStatus(val) {
+    console.log(val)
+    contractFrom.value.stop_surplus = nowData.value.lastPrice
+    contractFrom.value.disabled_stop_surplus = !val.detail.value
+}
+
+function changeStopLoss(val) {
+    console.log(val)
+    contractFrom.value.stop_loss = val.value
+}
+
+function changeStopLossStatus(val) {
+    contractFrom.value.stop_loss = nowData.value.lastPrice
+    contractFrom.value.disabled_stop_loss = !val.detail.value
+}
+
+function changeQuantity(val) {
+    console.log(val)
+    contractFrom.value.quantity = val.value
+}
+
+function placeContractOrder() {
+    console.log(contractFrom.value)
+    $api.post('/market/contract_order', {
+        symbol: symbol.value,
+        type: contractFrom.value.type,
+        order_price: contractFrom.value.order_price,
+        stop_surplus: contractFrom.value.stop_surplus,
+        stop_loss: contractFrom.value.stop_loss,
+        quantity: contractFrom.value.quantity,
+        lever: contractFrom.value.lever,
+    }).then((res) => {
+        uni.showToast({
+            title: res.message,
+            icon: 'none',
+        })
+        if (res.code === 1) {
+            setTimeout(() => {
+                uni.switchTab({ url: '/pages/tabbar/history' })
+            }, 1000)
+        }
+    })
 }
 
 const createSubTickerRequest = () => ({
@@ -540,7 +626,7 @@ navigationStyle: custom
 
             .col {
                 display: grid;
-                grid-template-columns: 290px auto 156px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
                 align-items: center;
 
                 .hands {
