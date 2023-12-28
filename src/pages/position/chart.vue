@@ -7,8 +7,11 @@
                 <view class="absolute left-0">
                     <FuiIcon name="arrowleft"></FuiIcon>
                 </view>
-                <view class="absolute right-[16px]">
-                    <image class="w-[40px] h-[40px]" src="/static/images/icon-un-star.png"></image>
+                <view class="absolute right-[16px]" @click="like">
+                    <image
+                        :src="info.is_like ? '/static/images/icon-star.png' : '/static/images/icon-un-star.png'"
+                        class="w-[40px] h-[40px]"
+                    ></image>
                 </view>
                 <USubsection
                     v-model="current"
@@ -21,10 +24,10 @@
                 <view class="flex items-center">
                     <image
                         class="w-[72px] h-[72px] rounded-full"
-                        src="https://api.gomarketes.com/storage/products/COZnoXQg30lxdD8eoICmCOoyAHsXvWFTxONjjEcv.png"
+                        :src="info.logo"
                     ></image>
                     <view class="flex flex-col ml-[15px] text-[30px]">
-                        <text>ETHUSD</text>
+                        <text>{{ info.full_name }}</text>
                         <text>2218.11</text>
                     </view>
                 </view>
@@ -124,6 +127,36 @@ const subList = [
         name: 'Option',
     },
 ]
+
+// 从路由pair参数获取symbol
+const symbol = ref('')
+
+const info = ref({})
+
+function like() {
+    $api.post('/market/like', {
+        id: info.value.id,
+    }).then((res) => {
+        res.data.logo = $api.staticUrl(res.data.logo)
+        info.value = res.data
+    })
+}
+
+function getInfo() {
+    $api.get(`/market/info?symbol=${symbol.value}`).then((res) => {
+        res.data.logo = $api.staticUrl(res.data.logo)
+        info.value = res.data
+    })
+}
+
+onLoad((option) => {
+    console.log(option)
+    // 获取路由参数
+    const { pair } = option
+    symbol.value = pair
+    // 获取币种信息
+    getInfo()
+})
 
 const { t } = useI18n()
 

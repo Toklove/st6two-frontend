@@ -18,9 +18,12 @@
             <view class="text-[45px] pl-[34px]">{{ t('tabBar.home.hot') }}</view>
             <scroll-view class="mt-[20px]" scroll-x>
                 <view class="items-center flex">
-                    <view v-for="item in 3" :key="item" class="flex flex-col rounded-[30px] chart-wrap">
+                    <view
+                        v-for="item in marketList" :key="item.id" class="flex flex-col rounded-[30px] chart-wrap"
+                        @click="toPair(item.symbol)"
+                    >
                         <text class="text-[28px] font-bold">
-                            GBPUSD
+                            {{ item.full_name }}
                         </text>
                         <text class="text-[40px] font-bold">
                             1.27461
@@ -65,10 +68,10 @@
                             </view>
                             <div class="desc mt-[21px] text-[20px] sub-title flex items-center justify-between">
                                 <text>
-                                    2023-12-15 14:09:00
+                                    {{ item.created_at }}
                                 </text>
                                 <text>
-                                    TSLA/us
+                                    {{ item.author }}
                                 </text>
                             </div>
                         </view>
@@ -84,7 +87,10 @@
                 </text>
             </view>
             <view class="mt-[20px]">
-                <view v-for="item in marketList" :key="item.id" class="stock-row items-center">
+                <view
+                    v-for="item in marketList" :key="item.id" class="stock-row items-center"
+                    @click="toPair(item.symbol)"
+                >
                     <view class="flex">
                         <image
                             class="rounded-full w-[72px] h-[72px]"
@@ -109,7 +115,7 @@
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '~/pinia/useUserInfo'
 
@@ -129,10 +135,14 @@ onReady(() => {
     getMarketList()
 })
 
+function toPair(pair) {
+    uni.navigateTo({ url: `/pages/position/chart?pair=${pair}` })
+}
+
 const newsList = reactive([])
 
 function getNewsList() {
-    $api.get('/index/news').then((res: any) => {
+    $api.get('/index/news').then((res) => {
         console.log(res)
         res.data.forEach((item) => {
             item.image = $api.staticUrl(item.image)
@@ -145,7 +155,7 @@ function getNewsList() {
 const marketList = ref([])
 
 function getMarketList() {
-    $api.get('/index/market').then((res: any) => {
+    $api.get('/index/market').then((res) => {
         console.log(res)
         res.data.forEach((item) => {
             item.logo = $api.staticUrl(item.logo)
