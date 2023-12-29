@@ -1,73 +1,73 @@
 <template>
     <page-meta />
-    <view class="init-top" />
-    <layout class-name="IndexRouter">
-        <view class="px-[50px]">
-            <view class="mt-[84px] flex flex-col text-white">
-                <text class="text-[70px] font-bold">{{ t('common.register.Register') }}</text>
-                <text class="text-[26px] mt-[18px]">{{ t('common.register.SignUpToJoin') }}</text>
+    <view class='init-top' />
+    <layout class-name='IndexRouter'>
+        <view class='px-[50px]'>
+            <view class='mt-[84px] flex flex-col text-white'>
+                <text class='text-[70px] font-bold'>{{ t('common.register.Register') }}</text>
+                <text class='text-[26px] mt-[18px]'>{{ t('common.register.SignUpToJoin') }}</text>
             </view>
-            <view class="form-wrap mt-[79px]">
-                <view class="flex items-center p-[28px] bg-[#f5f7f9] rounded-[20px]">
-                    <image class="w-[44px] h-[44px]" src="/static/images/icon-email.png"></image>
-                    <input v-model="form.email" class="flex-1 ml-[19px] input" placeholder="Email" type="text">
+            <view class='form-wrap mt-[79px]'>
+                <view class='flex items-center p-[28px] bg-[#f5f7f9] rounded-[20px]'>
+                    <image class='w-[44px] h-[44px]' src='/static/images/icon-email.png'></image>
+                    <input v-model='form.email' class='flex-1 ml-[19px] input' placeholder='Email' type='text'>
                 </view>
-                <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
-                    <image class="w-[44px] h-[44px]" src="/static/images/icon-password.png"></image>
-                    <view class="flex items-center justify-between flex-1">
+                <view class='flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                    <image class='w-[44px] h-[44px]' src='/static/images/icon-password.png'></image>
+                    <view class='flex items-center justify-between flex-1'>
                         <input
-                            v-model="form.password" :type="isPassword ? 'password' : 'text'"
-                            class="flex-1 ml-[19px] input"
-                            placeholder="Password"
+                            v-model='form.password' :type="isPassword ? 'password' : 'text'"
+                            class='flex-1 ml-[19px] input'
+                            placeholder='Password'
                         >
                         <image
                             :src="isPassword ? '/static/images/icon-off.png' : '/static/images/icon-on.png'"
-                            class="w-[36px] h-[36px]" @click="isPassword = !isPassword"
+                            class='w-[36px] h-[36px]' @click='isPassword = !isPassword'
                         ></image>
                     </view>
                 </view>
-                <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
-                    <image class="w-[44px] h-[44px]" src="/static/images/icon-password.png"></image>
-                    <view class="flex items-center justify-between flex-1">
+                <view class='flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                    <image class='w-[44px] h-[44px]' src='/static/images/icon-password.png'></image>
+                    <view class='flex items-center justify-between flex-1'>
                         <input
-                            v-model="form.password_confirmation" :type="isAgentPassword ? 'password' : 'text'"
-                            class="flex-1 ml-[19px] input"
-                            placeholder="Confirm Password"
+                            v-model='form.password_confirmation' :type="isAgentPassword ? 'password' : 'text'"
+                            class='flex-1 ml-[19px] input'
+                            placeholder='Confirm Password'
                         >
                         <image
                             :src="isAgentPassword ? '/static/images/icon-off.png' : '/static/images/icon-on.png'"
-                            class="w-[36px] h-[36px]" @click="isAgentPassword = !isAgentPassword"
+                            class='w-[36px] h-[36px]' @click='isAgentPassword = !isAgentPassword'
                         ></image>
                     </view>
                 </view>
-                <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
-                    <image class="w-[44px] h-[44px]" src="/static/images/icon-code.png"></image>
-                    <view class="flex items-center justify-between flex-1">
+                <view class='flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                    <image class='w-[44px] h-[44px]' src='/static/images/icon-code.png'></image>
+                    <view class='flex items-center justify-between flex-1'>
                         <input
-                            v-model="form.code" class="flex-1 ml-[19px] input"
-                            placeholder="Verification code"
-                            type="text"
+                            v-model='form.code' class='flex-1 ml-[19px] input'
+                            placeholder='Verification code'
+                            type='text'
                         >
                         <view
-                            class="w-[100px] text-[22px] rounded-[20px] text-center bg-black text-white py-[8px]"
-                            @click="send"
+                            class='w-[100px] text-[22px] rounded-[20px] text-center bg-black text-white py-[8px]'
+                            @click='send'
                         >
-                            {{ timer ?? 'Send' }}
+                            {{ timer ?? t('common.forget.Send') }}
                         </view>
                     </view>
                 </view>
-                <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
-                    <image class="w-[44px] h-[44px]" src="/static/images/icon-invite.png"></image>
+                <view class='flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]'>
+                    <image class='w-[44px] h-[44px]' src='/static/images/icon-invite.png'></image>
                     <input
-                        v-model="form.invite_code" class="flex-1 ml-[19px] input"
-                        placeholder="Invitation Code (optional)"
-                        type="text"
+                        v-model='form.invite_code' class='flex-1 ml-[19px] input'
+                        placeholder='Invitation Code (optional)'
+                        type='text'
                     >
                 </view>
             </view>
-            <view class="btn-wrap text-center">
-                <view class="bg-black py-[33px] rounded-[20px]" @click="submit">
-                    <text class="text-[32px] font-bold text-white">
+            <view class='btn-wrap text-center'>
+                <view class='bg-black py-[33px] rounded-[20px]' @click='submit'>
+                    <text class='text-[32px] font-bold text-white'>
                         {{ t('common.register.Register') }}
                     </text>
                 </view>
@@ -133,12 +133,12 @@ async function submit() {
         return
     }
 
-    const { code, data } = await $api.post('/auth/register', form.value)
+    const { code, data, message } = await $api.post('/auth/register', form.value)
     console.log(data)
 
     if (code !== 1) {
         await uni.showToast({
-            title: data,
+            title: message,
             icon: 'none',
         })
         return
@@ -174,6 +174,14 @@ async function send() {
         email: form.value.email,
     })
 
+    if (data.code !== 1) {
+        uni.showToast({
+            title: data.message,
+            icon: 'none',
+        })
+        return
+    }
+
     timer.value = 60
     decTimer()
 
@@ -185,8 +193,7 @@ function decTimer() {
         if (timer.value > 0) {
             timer.value--
             decTimer()
-        }
-        else {
+        } else {
             timer.value = null
         }
     }, 1000)
