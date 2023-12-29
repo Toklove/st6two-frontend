@@ -30,7 +30,8 @@
       "FreezeFunds": "congelare i fondi",
       "Withdraw": "Ritirare",
       "Deposit": "Depositare",
-      "Buy": "Comprare"
+      "Buy": "Comprare",
+      "Sell": "Vendere"
     },
     "quotes": {
       "EnterTheContentHere": "Inserisci qui il contenuto",

@@ -30,7 +30,8 @@
       "FreezeFunds": "資金の凍結",
       "Withdraw": "引き上げる",
       "Deposit": "預金",
-      "Buy": "買う"
+      "Buy": "買う",
+      "Sell": "売る"
     },
     "quotes": {
       "EnterTheContentHere": "ここに内容を入力します",

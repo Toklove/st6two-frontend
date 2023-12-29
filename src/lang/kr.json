@@ -30,7 +30,8 @@
       "FreezeFunds": "자금 동결",
       "Withdraw": "물러서다",
       "Deposit": "보증금",
-      "Buy": "사다"
+      "Buy": "사다",
+      "Sell": "팔다"
     },
     "quotes": {
       "EnterTheContentHere": "여기에 내용을 입력합니다.",

@@ -30,7 +30,8 @@
       "FreezeFunds": "freeze funds",
       "Withdraw": "Withdraw",
       "Deposit": "Deposit",
-      "Buy": "Buy"
+      "Buy": "Buy",
+      "Sell": "Sell"
     },
     "quotes": {
       "EnterTheContentHere": "Enter the content here",

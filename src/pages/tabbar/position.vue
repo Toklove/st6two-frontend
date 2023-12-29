@@ -56,33 +56,36 @@
 
         <view v-if='!loading' class='px-[34px] pt-[20px]'>
             <scroll-view v-if='list.length > 0' scroll-x>
-                <view class='h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]'>
+                <view v-for='item in list' :key='item.id'
+                      class='h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]' @click='showOrderDetail = true'>
                     <view class='flex flex-row'>
                         <image
+                            :src='item.market.logo'
                             class='rounded-full w-[72px] h-[72px]'
-                            src='https://api.gomarketes.com/storage/products/MTQYoOCxnMQtPiXtP7Yx2yL9wikyYL1K5gc04VMD.png'
                         ></image>
                         <view class='flex-1 ml-[12px]'>
                             <view class='grid items-center col'>
                                 <view class='flex items-center'>
                                     <text class='text-[30px]'>
-                                        USDAUD
+                                        {{ item.market.full_name }}
                                     </text>
                                     <text class='lever ml-[14px] text-[20px]'>
-                                        x100
+                                        x{{ item.lever }}
                                     </text>
                                 </view>
                                 <text class='hands text-[22px] h-[32px] grid place-items-center text-center'>
-                                    0.01
+                                    {{ item.quantity }}
                                 </text>
                                 <text class='text-[28px] text-right text-red'>-6.61</text>
                             </view>
                             <view class='flex mt-[20px] items-center justify-between'>
                                 <view class='flex items-center text-[22px]'>
-                                    <text>1.49611 -</text>
+                                    <text>{{ item.paid_price }} -</text>
                                     <text class='red-text'>> 1.4896</text>
                                 </view>
-                                <view class='font-bold text-[22px]'>{{ t('tabBar.position.Buy') }}</view>
+                                <view class='font-bold text-[22px]'>
+                                    {{ item.type === 1 ? t('tabBar.position.Buy') : t('tabBar.position.Sell') }}
+                                </view>
                             </view>
                         </view>
                     </view>
@@ -92,6 +95,63 @@
                 <image class='w-[340px] h-[340px]' src='/static/images/position.png'></image>
             </view>
         </view>
+        <view v-show='showOrderDetail' class='order-wrap'>
+            <view class='detail pt-[28px]'>
+                <view class='income-wrap flex flex-col items-center justify-center bg-[#f5f7f9]'>
+                    <text class='detail-lever px-[30px] text-[22px]'>x100</text>
+                    <text class='text-[76px] font-bold green-text my-[20px]'>
+                        1730
+                    </text>
+                    <text class='text-[22px]'>
+                        市價
+                    </text>
+                </view>
+                <view class='stop-wrap p-[30px] bg-[#f5f7f9]'>
+                    <view class='row'>
+                        <view class='flex items-center'>
+                            <text>1.27343 -</text>
+                            <text class='green-text'>> 1.27532</text>
+                        </view>
+                        <text class='hands text-[22px]'>10</text>
+                        <text class='font-bold text-[22px] text-right'>
+                            買入
+                        </text>
+                    </view>
+                    <view class='flex items-center justify-between mt-[18px]'>
+                        <text>止盈</text>
+                        <view class='flex items-center'>
+                            <text class='mr-[20px]'>0</text>
+                            <image class='w-[36px] h-[36px]' src='/static/images/icon-edit.png'></image>
+                        </view>
+                    </view>
+                    <view class='flex items-center justify-between mt-[18px]'>
+                        <text>止損</text>
+                        <view class='flex items-center'>
+                            <text class='mr-[20px]'>0</text>
+                            <image class='w-[36px] h-[36px]' src='/static/images/icon-edit.png'></image>
+                        </view>
+                    </view>
+                </view>
+                <view class='group sub-title'>
+                    <view class='flex items-center justify-between text-[26px]'>
+                        <text>保證金</text>
+                        <text>10000</text>
+                    </view>
+                    <view class='flex items-center justify-between text-[22px] mt-[15px]'>
+                        <text>保證金</text>
+                        <text>10000</text>
+                    </view>
+                    <view class='mt-[120px] flex items-center justify-between text-[22px] text-black'>
+                        <text>下單時間</text>
+                        <text>2023-12-29 16:36:14</text>
+                    </view>
+                </view>
+                <view class='btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]'>
+                    <text class='font-bold text-white'>平 倉</text>
+                </view>
+            </view>
+
+        </view>
     </layout>
 </template>
 
@@ -100,8 +160,9 @@ import { useI18n } from 'vue-i18n'
 import FuiTabs from '~/components/firstui/fui-tabs/fui-tabs.vue'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 
-const list = ref([1])
 const loading = ref(false)
+
+const showOrderDetail = ref(false)
 
 const { t } = useI18n()
 
@@ -116,13 +177,67 @@ function toPage(url) {
     uni.navigateTo({ url })
 }
 
+
+const list = ref([])
+
+// 分页参数
+const page = ref({
+    page: 1,
+    max: 1,
+    status: 1,
+})
+
 function change(e) {
     console.log(e)
     loading.value = true
-    setTimeout(() => {
-        loading.value = false
-    }, 1500)
+    if (e.index === 0)
+        page.value.status = 1
+    else
+        page.value.status = 0
+    page.value.page = 1
+    getHistory()
 }
+
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
+// 上拉加载更多数据
+function loadMore() {
+    if (page.value.page >= page.value.max) {
+        showToast('沒有更多數據了')
+        return
+    }
+    page.value.page++
+    getHistory()
+}
+
+onReachBottom(() => {
+    loadMore()
+})
+
+function getHistory() {
+    $api.get('/market/contract_order_history', page.value).then((res) => {
+        page.value.max = res.data.last_page
+        const data = res.data.data.map((item) => {
+            item.show_detail = false
+            item.market.logo = $api.staticUrl(item.market.logo)
+            return item
+        })
+        if (page.value.page === 1)
+            list.value = data
+        else
+            list.value = list.value.concat(data)
+        loading.value = false
+    })
+}
+
+onLoad(() => {
+    getHistory()
+})
 </script>
 
 <route lang='yaml'>
@@ -161,11 +276,79 @@ navigationStyle: custom
         color: #3a7ff6;
     }
 
-    .hands {
-        width: 120px;
-        text-align: center;
-        background: #c3e6ff;
-        border-radius: 14px;
+}
+
+.sub-title {
+    color: #8c8c8c !important;
+}
+
+.hands {
+    width: 120px;
+    text-align: center;
+    background: #c3e6ff;
+    border-radius: 14px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+}
+
+.order-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+
+    .detail {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 724px;
+        height: 958px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: url(/static/images/bg-position.png) no-repeat;
+        background-size: cover;
+
+        .btn {
+            width: 534px;
+            margin: 50px auto 0;
+        }
+
+        .group {
+            width: 676px;
+            margin: 0 auto;
+        }
+
+        .income-wrap {
+            width: 624px;
+            height: 212px;
+            margin: 0 auto;
+            border-radius: 30px;
+
+            .detail-lever {
+                border: 2px solid #3980ff;
+                border-radius: 30px;
+            }
+        }
+
+        .stop-wrap {
+            width: 676px;
+            height: 280px;
+            margin: 30px auto;
+            border-radius: 30px;
+
+            .row {
+                display: grid;
+                align-items: center;
+                grid-template-columns: 364px 156px auto;
+            }
+        }
     }
 }
+
 </style>

@@ -30,7 +30,8 @@
       "FreezeFunds": "凍結資金",
       "Withdraw": "出金",
       "Deposit": "入金",
-      "Buy": "買"
+      "Buy": "買",
+      "Sell": "賣"
     },
     "quotes": {
       "EnterTheContentHere": "在此輸入內容",
@@ -115,17 +116,17 @@
       "bill": "法案"
     },
     "chart": {
-      "Statistics": "統計學",
-      "Open": "打開",
+      "Statistics": "統計",
+      "Open": "開",
       "Low": "低",
-      "High": "高度",
-      "volume": "卷",
+      "High": "高",
+      "volume": "總量",
       "Sell": "賣",
       "Buy": "買"
     },
     "deposit": {
       "ChoiceCurrency": "貨幣選擇",
-      "TokenAddress": "將TOKEN轉帳至以下位址"
+      "TokenAddress": "將TOKEN轉帳至以下地址"
     },
     "record": {
       "pass": "通過"

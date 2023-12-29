@@ -181,6 +181,7 @@ export const $api: ApiType = {
                 ...baseConfig.headers,
                 ...header,
                 Authorization: `Bearer ${token}`,
+                lang: ls.get('lang') || 'en',
             },
             method,
             url,
