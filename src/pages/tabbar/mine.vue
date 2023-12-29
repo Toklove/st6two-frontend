@@ -62,7 +62,7 @@
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-language.png"></image>
                         <text class="text-[28px]">{{ t('tabBar.mine.Language') }}</text>
                     </view>
-                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                    <text class="sub-title">{{ nowLocale.title }}</text>
                 </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/changePassword')">
                     <view class="flex items-center">
@@ -157,11 +157,7 @@ const { t, locale } = useI18n()
 
 const showChangeLang = ref(false)
 
-const activeCode = ref(locale.value)
-
 function changeLang(code) {
-    console.log(activeCode.value)
-    console.log(code)
     uni.setStorageSync('lang', code)
     uni.setLocale(code)
     locale.value = code
@@ -170,29 +166,28 @@ function changeLang(code) {
 }
 
 async function logout() {
-    // 请求登录接口并清除本来缓存数据
+    const modalSuccess = async (res) => {
+        if (res.confirm) {
+            const { code } = await $api.get('/user/logout')
+            if (code === 1) {
+                uni.clearStorageSync()
+                uni.reLaunch({
+                    url: '/pages/common/login',
+                })
+            }
+            else {
+                uni.showToast({
+                    title: 'Log out failed',
+                    icon: 'none',
+                })
+            }
+        }
+    }
+
     uni.showModal({
         title: 'Log out',
         content: 'Are you sure you want to log out?',
-        async success(res) {
-            if (res.confirm) {
-                console.log('用户点击确定')
-                // 发送请求退出登录
-                const { code } = await $api.get('/user/logout')
-                if (code === 1) {
-                    uni.clearStorageSync()
-                    uni.reLaunch({
-                        url: '/pages/common/login',
-                    })
-                }
-                else {
-                    uni.showToast({
-                        title: 'Log out failed',
-                        icon: 'none',
-                    })
-                }
-            }
-        },
+        success: modalSuccess,
     })
 }
 
@@ -250,6 +245,10 @@ const LangList = [
         value: 'it',
     },
 ]
+
+const nowLocale = computed(() => {
+    return LangList.find(item => item.value === locale.value)
+})
 
 onShow(async () => {
     if (!userStore.userInfo.id)

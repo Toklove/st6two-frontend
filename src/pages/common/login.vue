@@ -77,40 +77,35 @@ const form = ref({
     password: '',
 })
 
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
 async function submit() {
-    if (!form.value.email) {
-        uni.showToast({
-            title: 'Please enter your email',
-            icon: 'none',
-        })
-        return
-    }
-    if (!form.value.password) {
-        uni.showToast({
-            title: 'Please enter your password',
-            icon: 'none',
-        })
-        return
+    const fields = ['email', 'password']
+    const messages = [
+        'Please enter your email',
+        'Please enter your password',
+    ]
+
+    for (let i = 0; i < fields.length; i++) {
+        if (!form.value[fields[i]]) {
+            showToast(messages[i])
+            return
+        }
     }
 
     const { code, data, message } = await $api.post('/auth/login', form.value)
-    console.log(data)
-    console.log(code)
     if (code !== 1) {
-        uni.showToast({
-            title: message,
-            icon: 'none',
-        })
+        showToast(message)
         return
     }
 
     ls.set('token', data.access_token)
-
-    uni.showToast({
-        title: 'Login successfully',
-        icon: 'none',
-    })
-
+    showToast('Login successfully')
     uni.switchTab({
         url: '/pages/tabbar/home',
     })

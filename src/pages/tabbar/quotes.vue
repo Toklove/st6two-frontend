@@ -1,64 +1,69 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='px-[34px]'>
-            <view class='flex items-center bg-[#f5f7f9] py-[31px] px-[30px] rounded-[50px]'>
-                <image class='w-[35px] h-[38px] mr-[21px]' src='/static/images/icon-search.png'></image>
-                <text class='text-[#525252] text-[28px]'>{{ t('tabBar.quotes.EnterTheContentHere') }}</text>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="px-[34px]">
+            <view class="flex items-center bg-[#f5f7f9] py-[31px] px-[30px] rounded-[50px]">
+                <image class="w-[35px] h-[38px] mr-[21px]" src="/static/images/icon-search.png"></image>
+                <text class="text-[#525252] text-[28px]">{{ t('tabBar.quotes.EnterTheContentHere') }}</text>
             </view>
-            <view class='mt-[59px] relative'>
-                <view class='flex items-center justify-between'>
-                    <text class='text-[45px]'>{{ t('tabBar.quotes.Market') }}</text>
+            <view class="mt-[59px] relative">
+                <view class="flex items-center justify-between">
+                    <text class="text-[45px]">{{ t('tabBar.quotes.Market') }}</text>
                     <view
-                        class='flex items-center justify-between bg-black dropdown'
-                        @click='showDropdown = !showDropdown'
+                        class="flex items-center justify-between bg-black dropdown"
+                        @click="showDropdown = !showDropdown"
                     >
-                        <text class='text-[26px] text-white px-[10px]'>{{ form.category }}</text>
+                        <text class="text-[26px] text-white px-[10px]">{{ form.category }}</text>
                         <image
-                            :src="showDropdown ? '/static/images/icon-dropup.png' :'/static/images/icon-dropdown.png'"
-                            class='w-[18px] h-[18px]'
+                            :src="showDropdown ? '/static/images/icon-dropup.png' : '/static/images/icon-dropdown.png'"
+                            class="w-[18px] h-[18px]"
                         ></image>
                     </view>
                 </view>
-                <view :class="showDropdown ?'h-auto' :'h-0'" class='dropdown-item bg-black text-white'>
-                    <view v-for='(item, index) in categoryList' :key='index' class='item' @click='changeList(item)'>
-                        <text class='text-[26px]'>{{ item.name }}</text>
+                <view :class="showDropdown ? 'h-auto' : 'h-0'" class="dropdown-item bg-black text-white">
+                    <view v-for="(item, index) in categoryList" :key="index" class="item" @click="changeList(item)">
+                        <text class="text-[26px]">{{ item.name }}</text>
                     </view>
                 </view>
 
-                <view v-if='loading' class='mt-[20px]'>
-                    <FuiLoading :is-fixed='false' :loading='loading' type='row' />
+                <view v-if="loading" class="mt-[20px]">
+                    <FuiLoading :is-fixed="false" :loading="loading" type="row" />
                 </view>
 
-                <view v-else class='mt-[20px]'>
-                    <view v-if='marketList.length > 0'>
+                <view v-else class="mt-[20px]">
+                    <view v-if="marketList.length > 0">
                         <view
-                            v-for='(item, index) in marketList' :key='index' class='stock-row items-center'
-                            @click='toPage(`/pages/position/chart?pair=${item.symbol}`)'
+                            v-for="(item, index) in marketList" :key="index" class="stock-row items-center"
+                            @click="toPage(`/pages/position/chart?pair=${item.symbol}`)"
                         >
-                            <view class='flex'>
+                            <view class="flex">
                                 <image
-                                    :src='item.logo'
-                                    class='rounded-full w-[72px] h-[72px]'
+                                    :src="item.logo"
+                                    class="rounded-full w-[72px] h-[72px]"
                                 ></image>
-                                <view class='flex flex-col justify-between ml-[20px]'>
-                                    <text class='text-[30px]'>{{ item.name }}</text>
-                                    <text class='sub-title text-[22px]'>
+                                <view class="flex flex-col justify-between ml-[20px]">
+                                    <text class="text-[30px]">{{ item.name }}</text>
+                                    <text class="sub-title text-[22px]">
                                         17:28:16
                                     </text>
                                 </view>
                             </view>
-                            <text class='text-[28px] text-right'>
-                                1.27669
+                            <text class="text-[28px] text-right">
+                                {{ item.nowData.lastPrice.toFixed(2) }}
                             </text>
-                            <view class='h-[68px] ml-[20px] rounded-[10px] grid place-items-center green-block'>
-                                <text class='text-[22px] text-white'>-0.045</text>
+                            <view
+                                :class="item.diff > 0 ? 'green-block' : 'red-block'"
+                                class="h-[68px] ml-[20px] rounded-[10px] grid place-items-center green-block"
+                            >
+                                <text class="text-[22px] text-white">
+                                    {{ item.diff > 0 ? '+' : '' }}{{ item.diff }}
+                                </text>
                             </view>
                         </view>
                     </view>
-                    <view v-else class='nodata'>
-                        <fui-empty src='/static/images/option.png' title='暂无数据'></fui-empty>
+                    <view v-else class="nodata">
+                        <FuiEmpty src="/static/images/option.png" title="暂无数据"></FuiEmpty>
                     </view>
                 </view>
             </view>
@@ -66,14 +71,19 @@
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
 import { useI18n } from 'vue-i18n'
+import pako from 'pako/dist/pako_inflate'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 import FuiEmpty from '~/components/firstui/fui-empty/fui-empty.vue'
 
 function toPage(url) {
     uni.navigateTo({ url })
 }
+
+const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
+
+let socket = null
 
 const loading = ref(false)
 
@@ -89,15 +99,15 @@ const categoryList = ref([])
 const showDropdown = ref(false)
 const marketList = ref([])
 
-function getMarketByCategory() {
+async function getMarketByCategory() {
     loading.value = true
-    $api.get(`/market/list?category_id=${form.value.category_id}`).then((res) => {
-        marketList.value = res.data
-        marketList.value.forEach(item => {
-            item.logo = $api.staticUrl(item.logo)
-        })
-        loading.value = false
+    const res = await $api.get(`/market/list?category_id=${form.value.category_id}`)
+    marketList.value = res.data.map((item) => {
+        item.logo = $api.staticUrl(item.logo)
+        return item
     })
+    await changeToSubscribe()
+    loading.value = false
 }
 
 function changeList(item) {
@@ -107,16 +117,98 @@ function changeList(item) {
     getMarketByCategory()
 }
 
+async function getMarketCategory() {
+    const res = await $api.get('/market/category')
+    categoryList.value = res.data
+    form.value.category_id = categoryList.value[0].id
+    form.value.category = categoryList.value[0].name
+    await getMarketByCategory()
+}
 
-onLoad(() => {
-    $api.get('/market/category').then((res) => {
-        categoryList.value = res.data
-        form.value.category_id = categoryList.value[0].id
-        form.value.category = categoryList.value[0].name
-        getMarketByCategory()
-    })
+function handlerData(msg) {
+    const data = JSON.parse(msg)
+    if (data.ping) {
+        socket.send(JSON.stringify({ pong: data.ping }))
+    }
+    else if (data.tick) {
+        const flag = data.ch.split('.')[1]
+        marketList.value.forEach((item) => {
+            console.log(item.dataFlag)
+            if (flag === item.dataFlag) {
+                item.prevData = item.nowData
+                item.nowData = data.tick
+                item.upOrDown = item.nowData.close > item.prevData.close
+                item.diff = (item.nowData.open - item.nowData.close).toFixed(2)
+            }
+        })
+    }
+}
+
+function createSubTickerRequest(SYMBOL) {
+    return {
+        sub: `market.${SYMBOL}.ticker`,
+    }
+}
+
+function subscribeData(SYMBOL) {
+    socket.send(JSON.stringify(createSubTickerRequest(SYMBOL)))
+}
+
+onUnload(() => {
+    socket.close()
 })
 
+function changeToSubscribe() {
+    console.log('切换1111')
+    marketList.value.forEach((item) => {
+        console.log(item)
+        item.nowData = {
+            open: 51732,
+            high: 52785.64,
+            low: 51000,
+            close: 52735.63,
+            amount: 13259.24137056181,
+            vol: 687640987.4125315,
+            count: 448737,
+            bid: 52732.88,
+            bidSize: 0.036,
+            ask: 52732.89,
+            askSize: 0.583653,
+            lastPrice: 52735.63,
+            lastSize: 0.03,
+        }
+        item.prevData = item.nowData
+        item.upOrDown = true
+        item.diff = 1
+
+        item.dataFlag = item.symbol.replace('-', '')
+        item.dataFlag = `${item.dataFlag.toLowerCase()}t`
+        subscribeData(item.dataFlag)
+    })
+    loading.value = false
+}
+
+onLoad(async () => {
+    loading.value = true
+    await getMarketCategory()
+    if (socket === null || socket.readyState === WebSocket.CLOSED) {
+        socket = new WebSocket(wsUrl)
+        socket.onopen = () => {
+            changeToSubscribe()
+        }
+
+        socket.onmessage = (event) => {
+            const blob = event.data
+            const fileReader = new FileReader()
+            fileReader.onload = (e) => {
+                const payloadData = new Uint8Array(e.target.result)
+                const msg = pako.inflate(payloadData, { to: 'string' })
+                handlerData(msg)
+            }
+            fileReader.readAsArrayBuffer(blob)
+        }
+    }
+})
 </script>
 
 <route lang='yaml'>

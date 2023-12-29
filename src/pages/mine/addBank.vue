@@ -1,44 +1,44 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='px-[34px]'>
-            <view class='p-[30px] bg-[#f5f7f9] rounded-[20px]'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="px-[34px]">
+            <view class="p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <input
-                    v-model='form.bank_name' :placeholder="t('mine.addBank.bankName')"
-                    class='input text-[14px]' type='text'
+                    v-model="form.bank_name" :placeholder="t('mine.addBank.bankName')"
+                    class="input text-[14px]" type="text"
                 >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <input
-                    v-model='form.account' :placeholder="t('mine.addBank.bankCard')"
-                    class='input text-[14px]' type='text'
+                    v-model="form.account" :placeholder="t('mine.addBank.bankCard')"
+                    class="input text-[14px]" type="text"
                 >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <input
-                    v-model='form.account_user' :placeholder="t('mine.addBank.account')"
-                    class='input text-[14px]' type='text'
+                    v-model="form.account_user" :placeholder="t('mine.addBank.account')"
+                    class="input text-[14px]" type="text"
                 >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <input
-                    v-model='form.bank_address' :placeholder="t('mine.addBank.bankAddress')"
-                    class='input text-[14px]' type='text'
+                    v-model="form.bank_address" :placeholder="t('mine.addBank.bankAddress')"
+                    class="input text-[14px]" type="text"
                 >
             </view>
-            <view class='mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]'>
+            <view class="mt-[30px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <input
-                    v-model='form.bank_code' :placeholder="t('mine.addBank.bankCode')"
-                    class='input text-[14px]' type='text'
+                    v-model="form.bank_code" :placeholder="t('mine.addBank.bankCode')"
+                    class="input text-[14px]" type="text"
                 >
             </view>
-            <view class='btn-wrap text-center'>
-                <text class='text-[22px] sub-title'>
+            <view class="btn-wrap text-center">
+                <text class="text-[22px] sub-title">
                     {{ t('mine.addBank.bankTitle') }}
                 </text>
-                <view class='bg-black py-[33px] rounded-[20px] mt-[20px]' @click='submit'>
-                    <text class='text-[32px] font-bold text-white'>
+                <view class="bg-black py-[33px] rounded-[20px] mt-[20px]" @click="submit">
+                    <text class="text-[32px] font-bold text-white">
                         {{ t('mine.addBank.Save') }}
                     </text>
                 </view>
@@ -61,54 +61,37 @@ const form = ref({
 
 const { t } = useI18n()
 
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
 function submit() {
-    if (!form.value.bank_name) {
-        uni.showToast({
-            title: 'Please enter the Bank Name',
-            icon: 'none',
-        })
-        return
+    const fields = ['bank_name', 'account', 'account_user', 'bank_address', 'bank_code']
+    const messages = [
+        'Please enter the Bank Name',
+        'Please enter the Bank Card',
+        'Please enter the Account Holder',
+        'Please enter the Bank address',
+        'Please enter the Bank International Code',
+    ]
+
+    for (let i = 0; i < fields.length; i++) {
+        if (!form.value[fields[i]]) {
+            showToast(messages[i])
+            return
+        }
     }
-    if (!form.value.account) {
-        uni.showToast({
-            title: 'Please enter the Bank Card',
-            icon: 'none',
-        })
-        return
-    }
-    if (!form.value.account_user) {
-        uni.showToast({
-            title: 'Please enter the Account Holder',
-            icon: 'none',
-        })
-        return
-    }
-    if (!form.value.bank_address) {
-        uni.showToast({
-            title: 'Please enter the Bank address',
-            icon: 'none',
-        })
-        return
-    }
-    if (!form.value.bank_code) {
-        uni.showToast({
-            title: 'Please enter the Bank International Code',
-            icon: 'none',
-        })
-        return
-    }
+
     $api.post('/user/addBank', form.value).then((res) => {
         if (res.code === 1) {
-            uni.showToast({
-                title: 'Add success',
-                icon: 'none',
-            })
+            showToast('Add success')
             $api.back()
-        } else {
-            uni.showToast({
-                title: 'Add failed',
-                icon: 'none',
-            })
+        }
+        else {
+            showToast('Add failed')
         }
     })
 }
