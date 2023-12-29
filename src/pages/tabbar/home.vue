@@ -43,6 +43,7 @@
                 </view>
             </scroll-view>
         </view>
+
         <view class='mt-[40px] px-[34px]'>
             <view class='flex items-center justify-between'>
                 <text class='text-[45px]'>{{ t('tabBar.home.news') }}</text>
