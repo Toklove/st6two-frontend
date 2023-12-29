@@ -86,7 +86,7 @@ declare interface ApiType {
 
     staticUrl(url: string): string
 
-    back(back: string): void
+    back(back: string = null): void
 }
 
 declare interface Window {

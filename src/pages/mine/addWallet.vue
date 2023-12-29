@@ -12,12 +12,12 @@
                     >
                         <text class="text-[26px] text-white px-[10px]">{{ form.currency_name }}</text>
                         <image
-                            :src="showDropdown ? &quot;/static/images/icon-dropup.png&quot; : &quot;/static/images/icon-dropdown.png&quot;"
+                            :src="showDropdown ? '/static/images/icon-dropup.png' : '/static/images/icon-dropdown.png'"
                             class="w-[18px] h-[18px]"
                         ></image>
                     </view>
                 </view>
-                <view :class="showDropdown ? &quot;h-auto&quot; : &quot;h-0&quot;" class="dropdown-item bg-black text-white">
+                <view :class="showDropdown ? 'h-auto' : 'h-0'" class="dropdown-item bg-black text-white">
                     <view v-for="(item, index) in CurrencyList" :key="index" class="item" @click="changeCurrency(item)">
                         <text class="text-[26px]">{{ item.name }}</text>
                     </view>
@@ -54,34 +54,34 @@ const form = ref({
 
 const { t } = useI18n()
 
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
 function submit() {
-    if (!form.value.currency_id) {
-        uni.showToast({
-            title: 'Please select currency',
-            icon: 'none',
-        })
-        return
+    const fields = ['currency_id', 'address']
+    const messages = [
+        'Please select currency',
+        'Please enter address',
+    ]
+
+    for (let i = 0; i < fields.length; i++) {
+        if (!form.value[fields[i]]) {
+            showToast(messages[i])
+            return
+        }
     }
-    if (!form.value.address) {
-        uni.showToast({
-            title: 'Please enter address',
-            icon: 'none',
-        })
-        return
-    }
+
     $api.post('/user/addWallet', form.value).then((res) => {
         if (res.code === 1) {
-            uni.showToast({
-                title: 'Add success',
-                icon: 'none',
-            })
+            showToast('Add success')
             $api.back()
         }
         else {
-            uni.showToast({
-                title: 'Add failed',
-                icon: 'none',
-            })
+            showToast('Add failed')
         }
     })
 }

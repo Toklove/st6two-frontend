@@ -1,58 +1,62 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
         <FuiNavBar custom>
-            <view class='flex justify-center relative items-center flex-1'>
-                <view class='absolute left-0'>
-                    <FuiIcon name='arrowleft' @click='clickBack'></FuiIcon>
+            <view class="flex justify-center relative items-center flex-1">
+                <view class="absolute left-0">
+                    <FuiIcon name="arrowleft" @click="clickBack"></FuiIcon>
                 </view>
-                <view class='absolute right-[16px]' @click='toAdd'>
-                    <image class='w-[27px] h-[27px]' src='/static/images/icon-edit-avator.png'></image>
+                <view class="absolute right-[16px]" @click="toAdd">
+                    <image class="w-[27px] h-[27px]" src="/static/images/icon-edit-avator.png"></image>
                 </view>
                 <USubsection
-                    v-model='current'
-                    :list='subList' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
-                    @change='changeType'
+                    v-model="current"
+                    :list="subList" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
+                    @change="changeType"
                 ></USubsection>
             </view>
         </FuiNavBar>
-        <view v-if='loading' class='mt-[20px] mx-[34px]'>
-            <FuiLoading :is-fixed='false' :loading='loading' type='row' />
+        <view v-if="loading" class="mt-[20px] mx-[34px]">
+            <FuiLoading :is-fixed="false" :loading="loading" type="row" />
         </view>
-        <view v-else class='mt-[20px] mx-[34px]'>
-            <view v-if='CryptoList.length > 0 && current === 0' class='wallet-list'>
-                <view v-for='item in CryptoList' :key='item.id'
-                      class='flex items-center justify-between mb-[20px] px-[39px] wallet-item'>
-                    <view class='flex flex-col text-white'>
-                        <text class='text-[34px]'>{{ item.currency.name }}</text>
-                        <text class='mt-[10px] text-[40px] font-bold'>
+        <view v-else class="mt-[20px] mx-[34px]">
+            <view v-if="CryptoList.length > 0 && current === 0" class="wallet-list">
+                <view
+                    v-for="item in CryptoList" :key="item.id"
+                    class="flex items-center justify-between mb-[20px] px-[39px] wallet-item"
+                >
+                    <view class="flex flex-col text-white">
+                        <text class="text-[34px]">{{ item.currency.name }}</text>
+                        <text class="mt-[10px] text-[40px] font-bold">
                             {{ item.address }}
                         </text>
                     </view>
-                    <image class='w-[45px] h-[45px]' src='/static/images/icon-del.png' @click='del(item.id)'></image>
+                    <image class="w-[45px] h-[45px]" src="/static/images/icon-del.png" @click="del(item.id)"></image>
                 </view>
             </view>
-            <view v-else-if='BankList.length > 0 && current === 1' class='wallet-list'>
-                <view v-for='item in BankList' :key='item.id'
-                      class='flex items-center justify-between mb-[20px] px-[39px] wallet-item'>
-                    <view class='flex flex-col text-white'>
-                        <text class='text-[34px]'>{{ item.bank_name }}</text>
-                        <text class='mt-[10px] text-[40px] font-bold'>
+            <view v-else-if="BankList.length > 0 && current === 1" class="wallet-list">
+                <view
+                    v-for="item in BankList" :key="item.id"
+                    class="flex items-center justify-between mb-[20px] px-[39px] wallet-item"
+                >
+                    <view class="flex flex-col text-white">
+                        <text class="text-[34px]">{{ item.bank_name }}</text>
+                        <text class="mt-[10px] text-[40px] font-bold">
                             {{ crypto_number(item.account) }}
                         </text>
                     </view>
-                    <image class='w-[45px] h-[45px]' src='/static/images/icon-del.png' @click='del(item.id)'></image>
+                    <image class="w-[45px] h-[45px]" src="/static/images/icon-del.png" @click="del(item.id)"></image>
                 </view>
             </view>
-            <view v-else class='nodata'>
-                <image class='w-[340px] h-[340px]' src='/static/images/option.png'></image>
+            <view v-else class="nodata">
+                <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
             </view>
         </view>
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
@@ -60,110 +64,89 @@ import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 
 const loading = ref(false)
 
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
 function clickBack() {
     $api.back()
 }
 
-function changeType() {
-    console.log(111)
+const current = ref(0)
+
+const CryptoList = ref([])
+const BankList = ref([])
+
+async function changeType() {
     loading.value = true
     if (current.value === 0) {
-        //获取钱包列表
-        $api.get('/user/cryptoList').then((res) => {
-            if (res.code === 1) {
-                CryptoList.value = res.data
-            }
-        })
-    } else {
-        //获取银行卡列表
-        $api.get('/user/bankList').then((res) => {
-            if (res.code === 1) {
-                BankList.value = res.data
-            }
-        })
+        const res = await $api.get('/user/cryptoList')
+        if (res.code === 1)
+            CryptoList.value = res.data
+    }
+    else {
+        const res = await $api.get('/user/bankList')
+        if (res.code === 1)
+            BankList.value = res.data
     }
     loading.value = false
 }
 
-
 function del(id) {
     if (!id) {
-        uni.showToast({
-            title: 'Delete failed',
-            icon: 'none',
-        })
+        showToast('Delete failed')
         return
     }
-    if (current.value === 0) {
+    if (current.value === 0)
         delCrypto(id)
-    } else {
+    else
         delBank(id)
-    }
 }
 
-//加密银行卡号只显示前四和后四
 function crypto_number(str) {
-    if (str.length < 8) {
+    if (str.length < 8)
         return str
-    }
-    var start = str.slice(0, 4)
-    var end = str.slice(-4)
-    var masked = '*'.repeat(str.length - 8)
+
+    const start = str.slice(0, 4)
+    const end = str.slice(-4)
+    const masked = '*'.repeat(str.length - 8)
     return start + masked + end
 }
 
 function toAdd() {
-    if (current.value === 0) {
+    if (current.value === 0)
         toPage('/pages/mine/addWallet')
-    } else {
+    else
         toPage('/pages/mine/addBank')
+}
+
+async function delCrypto(id) {
+    const res = await $api.post('/user/delCrypto', { id })
+    if (res.code === 1) {
+        showToast('Delete success')
+        const res = await $api.get('/user/cryptoList')
+        if (res.code === 1)
+            CryptoList.value = res.data
+    }
+    else {
+        showToast('Delete failed')
     }
 }
 
-function delCrypto(id) {
-    //删除钱包信息
-    $api.post('/user/delCrypto', { id }).then((res) => {
-        if (res.code === 1) {
-            uni.showToast({
-                title: 'Delete success',
-                icon: 'none',
-            })
-            //获取钱包列表
-            $api.get('/user/cryptoList').then((res) => {
-                if (res.code === 1) {
-                    CryptoList.value = res.data
-                }
-            })
-        } else {
-            uni.showToast({
-                title: 'Delete failed',
-                icon: 'none',
-            })
-        }
-    })
-}
-
-function delBank(id) {
-    //删除银行卡信息
-    $api.post('/user/delBank', { id }).then((res) => {
-        if (res.code === 1) {
-            uni.showToast({
-                title: 'Delete success',
-                icon: 'none',
-            })
-            //获取银行卡列表
-            $api.get('/user/bankList').then((res) => {
-                if (res.code === 1) {
-                    BankList.value = res.data
-                }
-            })
-        } else {
-            uni.showToast({
-                title: 'Delete failed',
-                icon: 'none',
-            })
-        }
-    })
+async function delBank(id) {
+    const res = await $api.post('/user/delBank', { id })
+    if (res.code === 1) {
+        showToast('Delete success')
+        const res = await $api.get('/user/bankList')
+        if (res.code === 1)
+            BankList.value = res.data
+    }
+    else {
+        showToast('Delete failed')
+    }
 }
 
 const subList = [
@@ -174,35 +157,23 @@ const subList = [
         name: 'Bank Card',
     },
 ]
-const current = ref(0)
-
 
 function toPage(url) {
     uni.navigateTo({ url })
 }
 
-const CryptoList = ref([])
-const BankList = ref([])
-
-onShow(() => {
+onShow(async () => {
     loading.value = true
-    //获取钱包列表
-    $api.get('/user/cryptoList').then((res) => {
-        console.log(res)
-        if (res.code === 1) {
-            console.log(res.data)
-            CryptoList.value = res.data
-        }
-    })
-    //获取银行卡列表
-    $api.get('/user/bankList').then((res) => {
-        if (res.code === 1) {
-            BankList.value = res.data
-        }
-    })
+    const resCrypto = await $api.get('/user/cryptoList')
+    if (resCrypto.code === 1)
+        CryptoList.value = resCrypto.data
+
+    const resBank = await $api.get('/user/bankList')
+    if (resBank.code === 1)
+        BankList.value = resBank.data
+
     loading.value = false
 })
-
 </script>
 
 <route lang='yaml'>

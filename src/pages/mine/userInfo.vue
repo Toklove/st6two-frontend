@@ -42,21 +42,21 @@ const { t } = useI18n()
 
 const userStore = useUserStore()
 
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
 function saveInfo() {
     userStore.saveUserInfo()
     $api.post('/user/update', userStore.userInfo).then((res) => {
-        if (res.code === 1) {
-            uni.showToast({
-                title: 'Save success',
-                icon: 'none',
-            })
-        }
-        else {
-            uni.showToast({
-                title: 'Save failed',
-                icon: 'none',
-            })
-        }
+        if (res.code === 1)
+            showToast('Save success')
+
+        else
+            showToast('Save failed')
     })
 }
 
@@ -67,19 +67,13 @@ function upload() {
         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album'], // 从相册选择
         async success(res) {
-            console.log(res.tempFilePaths)
             // 上传图片
             const { data, code } = await $api.uploadFile('/common/upload', res.tempFilePaths[0])
-            console.log(data)
-            if (code === 1) {
+            if (code === 1)
                 userStore.userInfo.avatar = data.url
-            }
-            else {
-                uni.showToast({
-                    title: 'Upload failed',
-                    icon: 'none',
-                })
-            }
+
+            else
+                showToast('Upload failed')
         },
     })
 }

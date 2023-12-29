@@ -95,41 +95,31 @@ const form = ref({
     invite_code: '',
 })
 
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
 async function submit() {
-    console.log(form)
-    if (!form.value.email) {
-        uni.showToast({
-            title: 'Please enter your email',
-            icon: 'none',
-        })
-        return
+    const fields = ['email', 'password', 'password_confirmation', 'code']
+    const messages = [
+        'Please enter your email',
+        'Please enter your password',
+        'Please enter your confirm password',
+        'Please enter your verification code',
+    ]
+
+    for (let i = 0; i < fields.length; i++) {
+        if (!form.value[fields[i]]) {
+            showToast(messages[i])
+            return
+        }
     }
-    if (!form.value.password) {
-        uni.showToast({
-            title: 'Please enter your password',
-            icon: 'none',
-        })
-        return
-    }
-    if (!form.value.password_confirmation) {
-        uni.showToast({
-            title: 'Please enter your confirm password',
-            icon: 'none',
-        })
-        return
-    }
-    if (!form.value.code) {
-        uni.showToast({
-            title: 'Please enter your verification code',
-            icon: 'none',
-        })
-        return
-    }
+
     if (form.value.password !== form.value.password_confirmation) {
-        uni.showToast({
-            title: 'The two passwords are inconsistent',
-            icon: 'none',
-        })
+        showToast('The two passwords are inconsistent')
         return
     }
 
@@ -145,12 +135,7 @@ async function submit() {
     }
 
     ls.set('token', data.access_token)
-
-    await uni.showToast({
-        title: 'Register successfully',
-        icon: 'none',
-    })
-
+    showToast('Register successfully')
     uni.switchTab({
         url: '/pages/tabbar/home',
     })
@@ -160,10 +145,7 @@ const timer = ref(null)
 
 async function send() {
     if (!form.value.email) {
-        uni.showToast({
-            title: 'Please enter your email',
-            icon: 'none',
-        })
+        showToast('Please enter your email')
         return
     }
 

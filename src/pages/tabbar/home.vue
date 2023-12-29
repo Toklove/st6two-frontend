@@ -82,7 +82,7 @@
         <view class="mt-[40px] px-[34px]">
             <view class="flex items-center justify-between">
                 <text class="text-[45px]">{{ t('tabBar.home.market') }}</text>
-                <text class="text-[20px]">
+                <text class="text-[20px]" @click="switchQuotes">
                     {{ t('tabBar.home.seeMore') }}
                 </text>
             </view>
@@ -128,7 +128,6 @@ const { t } = useI18n()
 const userStore = useUserStore()
 
 onReady(() => {
-    console.log('onShow')
     // 获取新闻列表
     getNewsList()
     // 获取热门币种
@@ -139,28 +138,27 @@ function toPair(pair) {
     uni.navigateTo({ url: `/pages/position/chart?pair=${pair}` })
 }
 
+function switchQuotes() {
+    uni.switchTab({ url: '/pages/tabbar/quotes' })
+}
+
 const newsList = reactive([])
 
-function getNewsList() {
-    $api.get('/index/news').then((res) => {
-        console.log(res)
-        res.data.forEach((item) => {
-            item.image = $api.staticUrl(item.image)
-            console.log(item.image)
-            newsList.push(item)
-        })
+async function getNewsList() {
+    const res = await $api.get('/index/news')
+    res.data.forEach((item) => {
+        item.image = $api.staticUrl(item.image)
+        newsList.push(item)
     })
 }
 
 const marketList = ref([])
 
-function getMarketList() {
-    $api.get('/index/market').then((res) => {
-        console.log(res)
-        res.data.forEach((item) => {
-            item.logo = $api.staticUrl(item.logo)
-            marketList.value.push(item)
-        })
+async function getMarketList() {
+    const res = await $api.get('/index/market')
+    res.data.forEach((item) => {
+        item.logo = $api.staticUrl(item.logo)
+        marketList.value.push(item)
     })
 }
 </script>
