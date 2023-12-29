@@ -157,10 +157,7 @@ async function send() {
     })
 
     if (data.code !== 1) {
-        uni.showToast({
-            title: data.message,
-            icon: 'none',
-        })
+        showToast(data.message)
         return
     }
 

@@ -1,81 +1,81 @@
 <template>
     <page-meta />
-    <div class="init-top" />
-    <layout class-name="IndexRouter">
-        <view class="px-[34px]">
-            <view class="text-[45px] font-bold">歷史訂單</view>
-            <view class="relative mt-[56px]">
+    <div class='init-top' />
+    <layout class-name='IndexRouter'>
+        <view class='px-[34px]'>
+            <view class='text-[45px] font-bold'>歷史訂單</view>
+            <view class='relative mt-[56px]'>
                 <view
-                    v-for="(item, index) in list"
-                    :key="index"
+                    v-for='(item, index) in list'
+                    :key='index'
                     :class="item.show_detail ? 'active-h' : 'active-l'"
-                    class="relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]"
-                    @click="item.show_detail = !item.show_detail"
+                    class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'
+                    @click='item.show_detail = !item.show_detail'
                 >
-                    <view class="flex flex-row">
+                    <view class='flex flex-row'>
                         <image
-                            class="rounded-full w-[72px] h-[72px]"
-                            src="https://api.gomarketes.com/storage/products/MTQYoOCxnMQtPiXtP7Yx2yL9wikyYL1K5gc04VMD.png"
+                            :src='item.market.logo'
+                            class='rounded-full w-[72px] h-[72px]'
                         ></image>
-                        <view class="flex-1 ml-[12px]">
-                            <view class="grid items-center col">
-                                <view class="flex items-center">
-                                    <text class="text-[30px]">
+                        <view class='flex-1 ml-[12px]'>
+                            <view class='grid items-center col'>
+                                <view class='flex items-center'>
+                                    <text class='text-[30px]'>
                                         {{ item.market.name }}
                                     </text>
-                                    <text class="lever ml-[14px] text-[20px]">
+                                    <text class='lever ml-[14px] text-[20px]'>
                                         x100
                                     </text>
                                 </view>
-                                <text class="hands text-[22px] h-[32px] grid place-items-center text-center">
+                                <text class='hands text-[22px] h-[32px] grid place-items-center text-center'>
                                     0.01
                                 </text>
-                                <text class="text-[28px] text-right text-red">-6.61</text>
+                                <text class='text-[28px] text-right text-red'>-6.61</text>
                             </view>
-                            <view class="flex mt-[20px] items-center justify-between">
-                                <view class="flex items-center text-[22px]">
+                            <view class='flex mt-[20px] items-center justify-between'>
+                                <view class='flex items-center text-[22px]'>
                                     <text>1.49611 -</text>
-                                    <text class="red-text">> 1.4896</text>
+                                    <text class='red-text'>> 1.4896</text>
                                 </view>
-                                <view class="font-bold text-[22px]">买入</view>
+                                <view class='font-bold text-[22px]'>买入</view>
                             </view>
                         </view>
                     </view>
-                    <view class="stock-data mt-[40px] border-[#dadada] text-[#8c8c8c] pt-[26px] text-[22px]">
-                        <view class="flex items-center justify-between">
-                            <view class="flex items-center justify-between flex-1">
+                    <view class='stock-data mt-[40px] border-[#dadada] text-[#8c8c8c] pt-[26px] text-[22px]'>
+                        <view class='flex items-center justify-between'>
+                            <view class='flex items-center justify-between flex-1'>
                                 <text>止盈</text>
-                                <text class="text-black">5.49627</text>
+                                <text class='text-black'>5.49627</text>
                             </view>
-                            <view class="flex items-center justify-between ml-[50px] flex-1">
+                            <view class='flex items-center justify-between ml-[50px] flex-1'>
                                 <text>手續費</text>
-                                <text class="text-black">0.1</text>
+                                <text class='text-black'>0.1</text>
                             </view>
                         </view>
-                        <view class="flex items-center justify-between mt-[12px]">
-                            <view class="flex items-center justify-between flex-1">
+                        <view class='flex items-center justify-between mt-[12px]'>
+                            <view class='flex items-center justify-between flex-1'>
                                 <text>止损</text>
-                                <text class="text-black">5.49627</text>
+                                <text class='text-black'>5.49627</text>
                             </view>
-                            <view class="flex items-center justify-between ml-[50px] flex-1">
+                            <view class='flex items-center justify-between ml-[50px] flex-1'>
                                 <text>保证金</text>
-                                <text class="text-black">0.1</text>
+                                <text class='text-black'>0.1</text>
                             </view>
                         </view>
-                        <view class="flex flex-col mt-[24px]">
-                            <view class="flex items-center justify-between">
+                        <view class='flex flex-col mt-[24px]'>
+                            <view class='flex items-center justify-between'>
                                 <text>訂單號</text>
                                 <text>20231228120045680012ETH267680</text>
                             </view>
-                            <view class="flex items-center justify-between mt-[12px]">
+                            <view class='flex items-center justify-between mt-[12px]'>
                                 <text>下單時間</text>
                                 <text>20231228120045680012ETH267680</text>
                             </view>
-                            <view class="flex items-center justify-between mt-[12px]">
+                            <view class='flex items-center justify-between mt-[12px]'>
                                 <text>關閉時間</text>
                                 <text>20231228120045680012ETH267680</text>
                             </view>
-                            <view class="flex items-center justify-between mt-[12px]">
+                            <view class='flex items-center justify-between mt-[12px]'>
                                 <text>平倉類型</text>
                                 <text>手動</text>
                             </view>
@@ -83,8 +83,8 @@
                     </view>
                     <image
                         :src="item.show_detail ? '/static/images/icon-shangla.png' : '/static/images/icon-xiala.png'"
-                        class="absolute left-[50%] bottom-[16px] cursor-pointer w-[18px] h-[18px]"
-                        style="transform: translateX(-50%);"
+                        class='absolute left-[50%] bottom-[16px] cursor-pointer w-[18px] h-[18px]'
+                        style='transform: translateX(-50%);'
                     ></image>
                 </view>
             </view>
@@ -127,6 +127,7 @@ function getHistory() {
         page.value.max = res.data.last_page
         const data = res.data.data.map((item) => {
             item.show_detail = false
+            item.market.logo = $api.staticUrl(item.market.logo)
             return item
         })
         if (page.value.page === 1)
