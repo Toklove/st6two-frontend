@@ -136,6 +136,7 @@
                                     v-model:modelValue='contractFrom.order_price'
                                     :max='999999999'
                                     :min='0'
+                                    width='160'
                                     @change='changeOrderPrice'
                                 ></FuiInputNumber>
                             </view>
@@ -205,7 +206,7 @@
                             <text
                                 class='flex items-center justify-center w-[80px] h-[43px] mt-[15px] mx-[24px] bg-[#f5f7f9] rounded-[20px] text-white bg-black'
                             >
-                                100
+                                {{ contractFrom.lever }}
                             </text>
                         </view>
                     </view>
@@ -239,38 +240,42 @@
                         <view class='p-[24px] bg-[#f5f7f9] rounded-[20px]'>
                             <view class='trade-symbol flex items-center justify-between py-[15px]'>
                                 <text>交易对</text>
-                                <text>ETH</text>
+                                <text>{{ symbol }}</text>
                             </view>
                             <view class='flex items-center justify-between py-[15px]'>
                                 <text>方向</text>
-                                <text class='red-text'>買少</text>
+                                <text :class='optionForm.type === 0?"red-text":"green-text"'>
+                                    {{ optionForm.type === 0 ? '買少' : '買多' }}
+                                </text>
                             </view>
                         </view>
                         <view class='py-[15px]'>
                             <text class='mx-[24px]'>選擇到期時間</text>
                             <view class='grid grid-cols-5 text-[22px]'>
                                 <text
-                                    v-for='item in 10'
-                                    :key='item'
-                                    class='flex items-center justify-center w-[80px] h-[43px] mt-[15px] mx-[24px] bg-[#f5f7f9] rounded-[20px]'
+                                    v-for='item in optionSetting'
+                                    :key='item.id'
+                                    :class="optionForm.time_id === item.id ? 'bg-black text-white' : ''"
+                                    class='flex items-center justify-center w-[80px] h-[43px] mt-[15px] mx-[24px] bg-[#f5f7f9] rounded-[20px] transition-all'
+                                    @click='changOptionTime(item)'
                                 >
-                                    30s
+                                    {{ item.time }}s
                                 </text>
                             </view>
                         </view>
                     </view>
                     <view class='flex items-center justify-between mt-[20px] mx-[48px] text-[22px] sub-title'>
                         <text>預計收益率</text>
-                        <text>15%</text>
+                        <text>{{ optionForm.time.rate * 100 }}%</text>
                     </view>
                     <view class='buy-amount mt-[20px] mx-[24px] px-[24px] py-[10px] rounded-[20px]'>
                         <text class='text-[26px]'>
-                            交易數量(>=10)
+                            交易數量(>={{ optionForm.time.min_amount }})
                         </text>
-                        <input class='text-[50px] font-bold' type='number'>
+                        <input v-model='optionForm.quantity' class='text-[50px] font-bold my-[20px]' type='number'>
                         <view class='flex items-center justify-between text-[22px] sub-title'>
                             <text>預期收益</text>
-                            <text>1.5</text>
+                            <text>{{ optionForm.quantity * optionForm.time.rate }}</text>
                         </view>
                     </view>
                     <view class='flex justify-between items-center mt-[20px] mx-[48px] text-[22px] sub-title'>
@@ -279,7 +284,7 @@
                     </view>
                     <view class='submit text-center'>
                         <view class='py-[22px] text-center bg-black rounded-[40px]'>
-                            <text class='text-[28px] font-bold text-white'>
+                            <text class='text-[28px] font-bold text-white' @click='placeOptionOrder'>
                                 Place an order
                             </text>
                         </view>
@@ -391,6 +396,7 @@ function createOrder(type) {
         contractFrom.value.order_type = type
         showContract.value = true
     } else {
+        optionForm.value.type = type
         showOption.value = true
     }
 }
@@ -443,7 +449,7 @@ function placeContractOrder() {
         })
         if (res.code === 1) {
             setTimeout(() => {
-                uni.switchTab({ url: '/pages/tabbar/history' })
+                uni.switchTab({ url: '/pages/tabbar/position' })
             }, 1000)
         }
     })
@@ -465,17 +471,9 @@ function handlerData(msg) {
     }
 }
 
-// const diff = computed(() => {
-//     return ((nowData.value.close - nowData.value.open) / nowData.value.open * 100).toFixed(2)
-// })
-
 const diffAmount = computed(() => {
     return (nowData.value.open - nowData.value.close).toFixed(2)
 })
-
-// const upOrDown = computed(() => {
-//     return (nowData.value.close > prevData.value.close)
-// })
 
 function subscribeData() {
     socket.send(JSON.stringify(createSubTickerRequest()))
@@ -508,10 +506,53 @@ function like() {
     })
 }
 
+const optionSetting = ref([])
+
+const optionForm = ref({
+    symbol: '',
+    type: 0,
+    time_id: 0,
+    time: {},
+    quantity: 0,
+})
+
+function changOptionTime(option) {
+    optionForm.value.time_id = option.id
+    optionForm.value.time = option
+    optionForm.value.quantity = option.min_amount
+
+}
+
+function placeOptionOrder() {
+    $api.post('/market/option_order', {
+        symbol: symbol.value,
+        type: optionForm.value.type,
+        time_id: optionForm.value.time_id,
+        quantity: optionForm.value.quantity,
+    }).then((res) => {
+        uni.showToast({
+            title: res.message,
+            icon: 'none',
+        })
+        if (res.code === 1) {
+            setTimeout(() => {
+                uni.switchTab({ url: '/pages/tabbar/position' })
+            }, 1000)
+        }
+    })
+}
+
 function getInfo() {
     $api.get(`/market/info?symbol=${symbol.value}`).then((res) => {
         res.data.logo = $api.staticUrl(res.data.logo)
         info.value = res.data
+    })
+    $api.get('/market/option/setting').then((res) => {
+        console.log(res)
+        optionSetting.value = res.data
+        optionForm.value.time_id = res.data[0].id
+        optionForm.value.time = res.data[0]
+        optionForm.value.quantity = res.data[0].min_amount
     })
 }
 

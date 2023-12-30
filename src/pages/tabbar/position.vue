@@ -57,7 +57,7 @@
         <view v-if='!loading' class='px-[34px] pt-[20px]'>
             <scroll-view v-if='list.length > 0' scroll-x>
                 <view v-for='item in list' :key='item.id'
-                      class='h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]' @click='showOrderDetail = true'>
+                      class='h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]' @click='showOrder(item)'>
                     <view class='flex flex-row'>
                         <image
                             :src='item.market.logo'
@@ -98,7 +98,7 @@
         <view v-show='showOrderDetail' class='order-wrap'>
             <view class='detail pt-[28px]'>
                 <view class='income-wrap flex flex-col items-center justify-center bg-[#f5f7f9]'>
-                    <text class='detail-lever px-[30px] text-[22px]'>x100</text>
+                    <text class='detail-lever px-[30px] text-[22px]'>x{{ editInfo.lever }}</text>
                     <text class='text-[76px] font-bold green-text my-[20px]'>
                         1730
                     </text>
@@ -109,25 +109,25 @@
                 <view class='stop-wrap p-[30px] bg-[#f5f7f9]'>
                     <view class='row'>
                         <view class='flex items-center'>
-                            <text>1.27343 -</text>
+                            <text>{{ editInfo.paid_price }} -</text>
                             <text class='green-text'>> 1.27532</text>
                         </view>
-                        <text class='hands text-[22px]'>10</text>
+                        <text class='hands text-[22px]'>{{ editInfo.quantity }}</text>
                         <text class='font-bold text-[22px] text-right'>
-                            買入
+                            {{ editInfo.type === 1 ? t('tabBar.position.Buy') : t('tabBar.position.Sell') }}
                         </text>
                     </view>
                     <view class='flex items-center justify-between mt-[18px]'>
                         <text>止盈</text>
                         <view class='flex items-center'>
-                            <text class='mr-[20px]'>0</text>
+                            <text class='mr-[20px]'>{{ editInfo.stop_surplus }}</text>
                             <image class='w-[36px] h-[36px]' src='/static/images/icon-edit.png'></image>
                         </view>
                     </view>
                     <view class='flex items-center justify-between mt-[18px]'>
                         <text>止損</text>
                         <view class='flex items-center'>
-                            <text class='mr-[20px]'>0</text>
+                            <text class='mr-[20px]'>{{ editInfo.stop_loss }}</text>
                             <image class='w-[36px] h-[36px]' src='/static/images/icon-edit.png'></image>
                         </view>
                     </view>
@@ -135,22 +135,30 @@
                 <view class='group sub-title'>
                     <view class='flex items-center justify-between text-[26px]'>
                         <text>保證金</text>
-                        <text>10000</text>
+                        <text>{{ editInfo.assure }}</text>
                     </view>
                     <view class='flex items-center justify-between text-[22px] mt-[15px]'>
-                        <text>保證金</text>
-                        <text>10000</text>
+                        <text>订单号</text>
+                        <text>{{ editInfo.order_num }}</text>
                     </view>
                     <view class='mt-[120px] flex items-center justify-between text-[22px] text-black'>
                         <text>下單時間</text>
-                        <text>2023-12-29 16:36:14</text>
+                        <text>{{ editInfo.created_at }}</text>
                     </view>
                 </view>
-                <view class='btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]'>
+                <view v-if='editInfo.status === 1'
+                      class='btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]'
+                      @click='handClose'>
                     <text class='font-bold text-white'>平 倉</text>
                 </view>
+                <view v-else class='btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]'
+                      @click='handCancel'>取 消 挂 单
+                </view>
+                <image
+                    class='w-[88px] h-[88px] close-btn' src='/static/images/icon-close-contract.png'
+                    @click='showOrderDetail = false'
+                ></image>
             </view>
-
         </view>
     </layout>
 </template>
@@ -161,6 +169,16 @@ import FuiTabs from '~/components/firstui/fui-tabs/fui-tabs.vue'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 
 const loading = ref(false)
+
+const editInfo = ref({
+    stop_surplus: 0,
+    stop_loss: 0,
+})
+
+function showOrder(info) {
+    editInfo.value = info
+    showOrderDetail.value = true
+}
 
 const showOrderDetail = ref(false)
 
@@ -238,6 +256,42 @@ function getHistory() {
 onLoad(() => {
     getHistory()
 })
+
+function handClose() {
+    uni.showModal({
+        title: '提示',
+        content: '是否確認平倉？',
+        success: (res) => {
+            if (res.confirm) {
+                $api.post('/market/hand_close_contract', {
+                    id: editInfo.value.id,
+                }).then((res) => {
+                    showToast('平倉成功')
+                    showOrderDetail.value = false
+                    getHistory()
+                })
+            }
+        },
+    })
+}
+
+function handCancel() {
+    uni.showModal({
+        title: '提示',
+        content: '是否確認取消挂單？',
+        success: (res) => {
+            if (res.confirm) {
+                $api.post('/market/hand_cancel_contract', {
+                    id: editInfo.value.id,
+                }).then((res) => {
+                    showToast('取消挂單成功')
+                    showOrderDetail.value = false
+                    getHistory()
+                })
+            }
+        },
+    })
+}
 </script>
 
 <route lang='yaml'>
@@ -246,6 +300,14 @@ navigationStyle: custom
 </route>
 
 <style lang='scss' scoped>
+.close-btn {
+    position: absolute;
+    left: 50%;
+    bottom: -124px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
 .card-wrap {
     width: 708px;
     height: 358px;
@@ -283,7 +345,6 @@ navigationStyle: custom
 }
 
 .hands {
-    width: 120px;
     text-align: center;
     background: #c3e6ff;
     border-radius: 14px;
@@ -305,7 +366,7 @@ navigationStyle: custom
 
     .detail {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         width: 724px;
         height: 958px;

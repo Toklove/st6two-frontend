@@ -24,7 +24,7 @@
                                         {{ item.market.name }}
                                     </text>
                                     <text class='lever ml-[14px] text-[20px]'>
-                                        x100
+                                        x{{ item.lever }}
                                     </text>
                                 </view>
                                 <text class='hands text-[22px] h-[32px] grid place-items-center text-center'>
@@ -34,8 +34,8 @@
                             </view>
                             <view class='flex mt-[20px] items-center justify-between'>
                                 <view class='flex items-center text-[22px]'>
-                                    <text>1.49611 -</text>
-                                    <text class='red-text'>> 1.4896</text>
+                                    <text>{{ item.paid_price }} -</text>
+                                    <text class='red-text'>> {{ item.close_price }}</text>
                                 </view>
                                 <view class='font-bold text-[22px]'>买入</view>
                             </view>
@@ -45,31 +45,31 @@
                         <view class='flex items-center justify-between'>
                             <view class='flex items-center justify-between flex-1'>
                                 <text>止盈</text>
-                                <text class='text-black'>5.49627</text>
+                                <text class='text-black'>{{ item.stop_surplus }}</text>
                             </view>
                             <view class='flex items-center justify-between ml-[50px] flex-1'>
                                 <text>手續費</text>
-                                <text class='text-black'>0.1</text>
+                                <text class='text-black'>{{ item.all_fee }}</text>
                             </view>
                         </view>
                         <view class='flex items-center justify-between mt-[12px]'>
                             <view class='flex items-center justify-between flex-1'>
                                 <text>止损</text>
-                                <text class='text-black'>5.49627</text>
+                                <text class='text-black'>{{ item.stop_loss }}</text>
                             </view>
                             <view class='flex items-center justify-between ml-[50px] flex-1'>
                                 <text>保证金</text>
-                                <text class='text-black'>0.1</text>
+                                <text class='text-black'>{{ item.assure }}</text>
                             </view>
                         </view>
                         <view class='flex flex-col mt-[24px]'>
                             <view class='flex items-center justify-between'>
                                 <text>訂單號</text>
-                                <text>20231228120045680012ETH267680</text>
+                                <text>{{ item.order_num }}</text>
                             </view>
                             <view class='flex items-center justify-between mt-[12px]'>
                                 <text>下單時間</text>
-                                <text>20231228120045680012ETH267680</text>
+                                <text>{{ item.created_at }}</text>
                             </view>
                             <view class='flex items-center justify-between mt-[12px]'>
                                 <text>關閉時間</text>
