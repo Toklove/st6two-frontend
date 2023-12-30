@@ -73,7 +73,7 @@ function setClipboardData(data) {
     uni.setClipboardData({
         data,
         success() {
-            showToast('Copy success')
+            showToast(t('position.deposit.CopySuccess'))
         },
     })
 }
@@ -103,7 +103,7 @@ const layoutData = ref({
     showTopBar: true,
     topBarBgColor: 'white',
     showTopBarBackBtn: true,
-    topBarTitle: '入金',
+    topBarTitle: t('position.deposit.deposit'),
 })
 
 provide(layoutDataKey, layoutData)

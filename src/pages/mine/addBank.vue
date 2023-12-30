@@ -71,11 +71,11 @@ function showToast(message) {
 function submit() {
     const fields = ['bank_name', 'account', 'account_user', 'bank_address', 'bank_code']
     const messages = [
-        'Please enter the Bank Name',
-        'Please enter the Bank Card',
-        'Please enter the Account Holder',
-        'Please enter the Bank address',
-        'Please enter the Bank International Code',
+        t('mine.addBank.bankName'),
+        t('mine.addBank.bankCard'),
+        t('mine.addBank.account'),
+        t('mine.addBank.bankAddress'),
+        t('mine.addBank.bankCode'),
     ]
 
     for (let i = 0; i < fields.length; i++) {
@@ -87,11 +87,11 @@ function submit() {
 
     $api.post('/user/addBank', form.value).then((res) => {
         if (res.code === 1) {
-            showToast('Add success')
+            showToast(t('mine.addBank.AddSuccess'))
             $api.back()
         }
         else {
-            showToast('Add failed')
+            showToast(t('mine.addBank.AddFailed'))
         }
     })
 }
@@ -100,7 +100,7 @@ const layoutData = ref({
     showTopBar: true,
     topBarBgColor: 'white',
     showTopBarBackBtn: true,
-    topBarTitle: 'Add Bank Card',
+    topBarTitle: t('mine.addBank.AddBankCard'),
 })
 
 provide(layoutDataKey, layoutData)

@@ -12,7 +12,7 @@
                 </view>
                 <USubsection
                     v-model="current"
-                    :list="subList" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
+                    :list="subList()" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
                     @change="changeType"
                 ></USubsection>
             </view>
@@ -57,10 +57,13 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 
@@ -97,7 +100,7 @@ async function changeType() {
 
 function del(id) {
     if (!id) {
-        showToast('Delete failed')
+        showToast(t('mine.wallet.DeleteFailed'))
         return
     }
     if (current.value === 0)
@@ -132,31 +135,33 @@ async function delCrypto(id) {
             CryptoList.value = res.data
     }
     else {
-        showToast('Delete failed')
+        showToast(t('mine.wallet.DeleteFailed'))
     }
 }
 
 async function delBank(id) {
     const res = await $api.post('/user/delBank', { id })
     if (res.code === 1) {
-        showToast('Delete success')
+        showToast(t('mine.wallet.DeleteSuccess'))
         const res = await $api.get('/user/bankList')
         if (res.code === 1)
             BankList.value = res.data
     }
     else {
-        showToast('Delete failed')
+        showToast(t('mine.wallet.DeleteFailed'))
     }
 }
 
-const subList = [
-    {
-        name: 'Purse',
-    },
-    {
-        name: 'Bank Card',
-    },
-]
+function subList() {
+    return [
+        {
+            name: t('mine.wallet.Purse'),
+        },
+        {
+            name: t('mine.wallet.BankCard'),
+        },
+    ]
+}
 
 function toPage(url) {
     uni.navigateTo({ url })

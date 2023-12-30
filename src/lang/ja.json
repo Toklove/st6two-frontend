@@ -1,5 +1,19 @@
 {
   "tabBar": {
+    "history": {
+      "HistoricalOrders": "注文履歴",
+      "buy": "買う",
+      "StopSurplus": "余剰を止める",
+      "HandlingFees": "手数料",
+      "StopLoss": "ストップロス",
+      "SecurityDeposit": "敷金",
+      "OrderNumber": "注文番号",
+      "OrderTime": "注文時間",
+      "ClosingTime": "閉館時間",
+      "ClosingType": "クロージングタイプ",
+      "ManualOperation": "手動操作",
+      "NoMoreData": "これ以上のデータはありません"
+    },
     "home": {
       "hot": "人気のある",
       "news": "ニュース",
@@ -22,7 +36,11 @@
       "AboutUs": "我々について",
       "Logout": "ログアウトする",
       "Cancel": "キャンセル",
-      "Confirm": "確認する"
+      "Confirm": "確認する",
+      "LogOutFailed": "ログアウトに失敗しました",
+      "LogOut": "ログアウト",
+      "ConfigLout": "本当にログアウトしますか。",
+      "CopySuccess": "コピー成功"
     },
     "position": {
       "RealAccount": "リアル口座",
@@ -31,12 +49,30 @@
       "Withdraw": "引き上げる",
       "Deposit": "預金",
       "Buy": "買う",
-      "Sell": "売る"
+      "Sell": "売る",
+      "marketPrice": "相場",
+      "StopSurplus": "余剰を止める",
+      "StopLoss": "ストップロス",
+      "SecurityDeposit": "敷金",
+      "OrderNumber": "注文番号",
+      "OrderTime": "注文時間",
+      "ClosePsition": "ポジションを決済する",
+      "TakeTheCancellationOrder": "キャンセル注文を受ける",
+      "Position": "立場",
+      "Entrust": "預ける",
+      "NoMoreData": "これ以上のデータはありません",
+      "prompt": "プロンプト",
+      "closingThePosition": "ポジションの決済を確認しますか?",
+      "ClosedPositionSuccessfully": "ポジションが正常にクローズされました",
+      "cancelThePendingOrder": "指値注文のキャンセルを確認しますか?",
+      "orderSucceededProcedure": "指値注文のキャンセルに成功しました。プロシージャ"
     },
     "quotes": {
       "EnterTheContentHere": "ここに内容を入力します",
       "Market": "市場",
-      "PleaseSelect": "選択してください"
+      "PleaseSelect": "選択してください",
+      "NoDataAvailable": "データがありません",
+      "foreignExchange": "外国為替"
     }
   },
   "common": {
@@ -46,7 +82,13 @@
       "Send": "送信",
       "Submit": "送信",
       "ExistingAccount": "既存のアカウント",
-      "Login": "ログイン"
+      "Login": "ログイン",
+      "PleaseEnterYourEmail": "メールアドレスを入力してください",
+      "PleaseEnterYourPassword": "パスワードを入力してください",
+      "PleaseEnterYourVerificationCode": "認証コードを入力してください",
+      "ResetPasswordSuccessfully": "パスワードのリセットに成功しました",
+      "VerificationCodeSentSuccessfully": "確認コードが正常に送信されました",
+      "Back": "戻る"
     },
     "login": {
       "Login": "ログイン",
@@ -55,14 +97,32 @@
       "ForgotYourPassword": "パスワードをお忘れですか?",
       "Retrieve": "取り戻す",
       "haveAnAccount": "have'anアカウント?",
-      "Register": "登録する"
+      "Register": "登録する",
+      "PleaseEnterYourEmail": "メールアドレスを入力してください",
+      "PleaseEnterYourPassword": "パスワードを入力してください",
+      "LoginSuccessfully": "ログインに成功しました"
     },
     "register": {
       "Register": "登録する",
-      "SignUpToJoin": "サインアップして参加"
+      "SignUpToJoin": "サインアップして参加",
+      "Email": "電子メール",
+      "Password": "パスワード",
+      "ConfirmPassword": "パスワードの確認",
+      "VerificationCode": "確認コード",
+      "InvitationCode": "招待コード(オプション)",
+      "PleaseEnterYourEmail": "メールアドレスを入力してください",
+      "PleaseEnterYourPassword": "パスワードを入力してください",
+      "PleaseEnterYourConfirmPassword": "確認用のパスワードを入力してください",
+      "PleaseEnterYourVerificationCode": "認証コードを入力してください",
+      "TheTwoPasswordsAreInconsistent": "2 つのパスワードに一貫性がありません",
+      "RegisterSuccessfully": "登録に成功しました",
+      "Back": "戻る"
     }
   },
   "mine": {
+    "about": {
+      "AboutUs": "我々について"
+    },
     "addBank": {
       "bankTitle": "プラットフォームは情報を暗号化し、リアルタイムで情報セキュリティを確保します",
       "Save": "セーブ",
@@ -70,13 +130,19 @@
       "bankCard": "銀行カードを入力してください",
       "account": "口座名義人を入力してください",
       "bankAddress": "銀行の住所を入力してください",
-      "bankCode": "銀行の国際コードを入力してください"
+      "bankCode": "銀行の国際コードを入力してください",
+      "AddSuccess": "成功を追加",
+      "AddFailed": "追加に失敗しました",
+      "AddBankCard": "銀行カードを追加"
     },
     "addWallet": {
       "ChoiceOfCurrency": "通貨の選択",
       "AddAddress": "住所を追加",
       "Save": "セーブ",
-      "addressHere": "ここに住所を入力してください"
+      "addressHere": "ここに住所を入力してください",
+      "PleaseSelectCurrency": "通貨を選択してください",
+      "PleaseEnterAddress": "住所を入力してください",
+      "AddWallet": "ウォレットを追加"
     },
     "certified": {
       "UploadIDPhoto": "証明写真をアップロードする",
@@ -84,25 +150,43 @@
       "cerTitle": "プラットフォームは情報を暗号化し、リアルタイムで情報セキュリティを確保します",
       "Submit": "送信",
       "realName": "本名を入力してください",
-      "idNumber": "ID番号を入力してください"
+      "idNumber": "ID番号を入力してください",
+      "Certified": "折り紙付き",
+      "UploadFailed": "アップロードに失敗しました"
     },
     "changePassword": {
       "Submit": "送信",
       "inputNewPassWord": "新しいパスワードを入力してください",
       "reNewPassWord": "パスワードの確認を入力してください",
-      "oldPassword": "古いパスワードを入力してください"
+      "oldPassword": "古いパスワードを入力してください",
+      "ChangeSuccess": "変更の成功",
+      "ChangePassword": "パスワード変更"
     },
     "option": {
       "Buy": "買う",
+      "Sell": "売る",
       "amount": "量",
       "duration": "期間",
       "HandlingFee": "手数料",
       "OrderTime": "注文時間",
       "SettlementTime": "決済時間",
-      "ProfitLoss": "損益計算書"
+      "ProfitLoss": "損益計算書",
+      "position": "立場",
+      "history": "歴史",
+      "NoMoreData": "これ以上のデータはありません"
+    },
+    "service": {
+      "CustomerService": "顧客サービス"
     },
     "userInfo": {
-      "Submit": "送信"
+      "Submit": "送信",
+      "userInfo": "ユーザー情報"
+    },
+    "wallet": {
+      "DeleteFailed": "削除に失敗しました",
+      "DeleteSuccess": "削除に成功しました",
+      "Purse": "財布",
+      "BankCard": "銀行カード"
     }
   },
   "position": {
@@ -122,14 +206,41 @@
       "High": "高さ",
       "volume": "容積",
       "Sell": "売る",
-      "Buy": "買う"
+      "Buy": "買う",
+      "Order": "命令",
+      "MarketPrice": "相場",
+      "OrderPrice": "注文価格",
+      "StopSurplus": "余剰を止める",
+      "PriceLimit": "制限値幅",
+      "StopLoss": "ストップロス",
+      "Quantity": "量",
+      "Lever": "梃",
+      "HandlingFee": "手数料",
+      "CashDeposit": "現金保証金",
+      "PlaceAnOrder": "注文する",
+      "AvailableBalance": "利用可能残高",
+      "TransactionPairs": "トランザクション・ペア",
+      "direction": "方向",
+      "BuyLess": "購入を減らす",
+      "BuyMore": "買い足す",
+      "SelectExpirationDate": "有効期限を選択",
+      "RateOfReturn": "期待収益率",
+      "TransactionQuantity": "取引数量",
+      "ExpectedReturns": "期待リターン",
+      "HandlingFees": "手数料",
+      "Contract": "契約",
+      "Option": "オプション"
     },
     "deposit": {
       "ChoiceCurrency": "通貨の選択",
-      "TokenAddress": "TOKENを以下のアドレスに送金する"
+      "TokenAddress": "TOKENを以下のアドレスに送金する",
+      "CopySuccess": "コピー成功",
+      "deposit": "預金"
     },
     "record": {
-      "pass": "通る"
+      "pass": "通る",
+      "deposit": "預金",
+      "withdraw": "引き上げる"
     },
     "withDraw": {
       "amount": "量",

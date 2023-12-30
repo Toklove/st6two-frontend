@@ -1,5 +1,19 @@
 {
   "tabBar": {
+    "history": {
+      "HistoricalOrders": "Исторические заказы",
+      "buy": "покупать",
+      "StopSurplus": "Остановите профицит",
+      "HandlingFees": "Сборы за обработку",
+      "StopLoss": "Стоп-лосс",
+      "SecurityDeposit": "Залог за сохранность имущества",
+      "OrderNumber": "Номер для заказа",
+      "OrderTime": "Время заказа",
+      "ClosingTime": "Время замыкания",
+      "ClosingType": "Тип закрытия",
+      "ManualOperation": "Ручное управление",
+      "NoMoreData": "Больше никаких данных"
+    },
     "home": {
       "hot": "Популярный",
       "news": "Новости",
@@ -22,7 +36,11 @@
       "AboutUs": "О нас",
       "Logout": "Выходить",
       "Cancel": "Отмена",
-      "Confirm": "Подтверждать"
+      "Confirm": "Подтверждать",
+      "LogOutFailed": "Ошибка отмены",
+      "LogOut": "Списание",
+      "ConfigLout": "Вы уверены, что хотите его списать?",
+      "CopySuccess": "Копировать успешно"
     },
     "position": {
       "RealAccount": "Реальный счет",
@@ -31,12 +49,30 @@
       "Withdraw": "Отводить",
       "Deposit": "Задаток",
       "Buy": "Покупать",
-      "Sell": "Продавать"
+      "Sell": "Продавать",
+      "marketPrice": "рыночная цена",
+      "StopSurplus": "Остановите профицит",
+      "StopLoss": "Стоп-лосс",
+      "SecurityDeposit": "Залог за сохранность имущества",
+      "OrderNumber": "Номер для заказа",
+      "OrderTime": "Время заказа",
+      "ClosePsition": "Закрытие позиции",
+      "TakeTheCancellationOrder": "Принять заказ на отмену",
+      "Position": "Позиция",
+      "Entrust": "Вверять",
+      "NoMoreData": "Больше никаких данных",
+      "prompt": "подсказывать",
+      "closingThePosition": "Вы подтверждаете закрытие позиции?",
+      "ClosedPositionSuccessfully": "Успешное закрытие позиции",
+      "cancelThePendingOrder": "Подтверждаете ли вы отмену отложенного ордера?",
+      "orderSucceededProcedure": "Отмена отложенного ордера прошла успешно. Процедура"
     },
     "quotes": {
       "EnterTheContentHere": "Введите содержимое здесь",
       "Market": "Рынок",
-      "PleaseSelect": "Пожалуйста, выберите"
+      "PleaseSelect": "Пожалуйста, выберите",
+      "NoDataAvailable": "Данные отсутствуют",
+      "foreignExchange": "Валютном"
     }
   },
   "common": {
@@ -46,7 +82,13 @@
       "Send": "Отправить",
       "Submit": "Отправить",
       "ExistingAccount": "Существующая учетная запись",
-      "Login": "Войти"
+      "Login": "Войти",
+      "PleaseEnterYourEmail": "Пожалуйста, введите свой адрес электронной почты",
+      "PleaseEnterYourPassword": "Пожалуйста, введите свой пароль",
+      "PleaseEnterYourVerificationCode": "Пожалуйста, введите код подтверждения",
+      "ResetPasswordSuccessfully": "Успешный сброс пароля",
+      "VerificationCodeSentSuccessfully": "Проверочный код успешно отправлен",
+      "Back": "Назад"
     },
     "login": {
       "Login": "Войти",
@@ -55,14 +97,32 @@
       "ForgotYourPassword": "Забыли пароль?",
       "Retrieve": "Восстанавливать",
       "haveAnAccount": "У вас есть учетная запись?",
-      "Register": "Регистрировать"
+      "Register": "Регистрировать",
+      "PleaseEnterYourEmail": "Пожалуйста, введите свой адрес электронной почты",
+      "PleaseEnterYourPassword": "Пожалуйста, введите свой пароль",
+      "LoginSuccessfully": "Успешный вход"
     },
     "register": {
       "Register": "Регистрировать",
-      "SignUpToJoin": "Зарегистрируйтесь, чтобы присоединиться"
+      "SignUpToJoin": "Зарегистрируйтесь, чтобы присоединиться",
+      "Email": "Отправить по электронной почте",
+      "Password": "Пароль",
+      "ConfirmPassword": "Подтвердите пароль",
+      "VerificationCode": "Проверочный код",
+      "InvitationCode": "Пригласительный код (необязательно)",
+      "PleaseEnterYourEmail": "Пожалуйста, введите свой адрес электронной почты",
+      "PleaseEnterYourPassword": "Пожалуйста, введите свой пароль",
+      "PleaseEnterYourConfirmPassword": "Пожалуйста, введите свой пароль для подтверждения",
+      "PleaseEnterYourVerificationCode": "Пожалуйста, введите код подтверждения",
+      "TheTwoPasswordsAreInconsistent": "Два пароля не согласуются друг с другом",
+      "RegisterSuccessfully": "Успешная регистрация",
+      "Back": "Назад"
     }
   },
   "mine": {
+    "about": {
+      "AboutUs": "О нас"
+    },
     "addBank": {
       "bankTitle": "Платформа будет шифровать информацию для обеспечения информационной безопасности в режиме реального времени",
       "Save": "Спасать",
@@ -70,13 +130,19 @@
       "bankCard": "Пожалуйста, введите банковскую карту",
       "account": "Пожалуйста, введите владельца счета",
       "bankAddress": "Пожалуйста, введите адрес банка",
-      "bankCode": "Пожалуйста, введите международный код банка"
+      "bankCode": "Пожалуйста, введите международный код банка",
+      "AddSuccess": "Добавьте успеха",
+      "AddFailed": "Добавление неудачного",
+      "AddBankCard": "Добавить банковскую карту"
     },
     "addWallet": {
       "ChoiceOfCurrency": "Выбор валюты",
       "AddAddress": "Добавить адрес",
       "Save": "Спасать",
-      "addressHere": "Введите свой адрес здесь"
+      "addressHere": "Введите свой адрес здесь",
+      "PleaseSelectCurrency": "Пожалуйста, выберите валюту",
+      "PleaseEnterAddress": "Пожалуйста, введите адрес",
+      "AddWallet": "Добавить кошелек"
     },
     "certified": {
       "UploadIDPhoto": "Загрузить фотографию на удостоверение личности",
@@ -84,25 +150,43 @@
       "cerTitle": "Платформа будет шифровать информацию для обеспечения информационной безопасности в режиме реального времени",
       "Submit": "Отправить",
       "realName": "Пожалуйста, введите настоящее имя",
-      "idNumber": "Пожалуйста, введите идентификационный номер"
+      "idNumber": "Пожалуйста, введите идентификационный номер",
+      "Certified": "Заверенный",
+      "UploadFailed": "Ошибка загрузки"
     },
     "changePassword": {
       "Submit": "Отправить",
       "inputNewPassWord": "Пожалуйста, введите Новый пароль",
       "reNewPassWord": "Пожалуйста, введите Подтвердите пароль",
-      "oldPassword": "Пожалуйста, введите старый пароль"
+      "oldPassword": "Пожалуйста, введите старый пароль",
+      "ChangeSuccess": "Успешное изменение",
+      "ChangePassword": "Смена пароля"
     },
     "option": {
       "Buy": "Покупать",
+      "Sell": "Продавать",
       "amount": "количество",
       "duration": "длительность",
       "HandlingFee": "Плата за обработку",
       "OrderTime": "Время заказа",
       "SettlementTime": "Расчетное время",
-      "ProfitLoss": "Прибыль и убытки"
+      "ProfitLoss": "Прибыль и убытки",
+      "position": "позиция",
+      "history": "история",
+      "NoMoreData": "Больше никаких данных"
+    },
+    "service": {
+      "CustomerService": "Обслуживание клиентов"
     },
     "userInfo": {
-      "Submit": "Отправить"
+      "Submit": "Отправить",
+      "userInfo": "userInfo (информация о пользователе)"
+    },
+    "wallet": {
+      "DeleteFailed": "Удалить не удалось",
+      "DeleteSuccess": "Успешное удаление",
+      "Purse": "Кошелек",
+      "BankCard": "Банковская карта"
     }
   },
   "position": {
@@ -120,16 +204,43 @@
       "Open": "Открытый",
       "Low": "Низкий",
       "High": "Высота",
-      "volume": "том",
+      "volume": "Том",
       "Sell": "Продавать",
-      "Buy": "Покупать"
+      "Buy": "Покупать",
+      "Order": "Порядок",
+      "MarketPrice": "Рыночная цена",
+      "OrderPrice": "Цена заказа",
+      "StopSurplus": "Остановите профицит",
+      "PriceLimit": "Ограничение цены",
+      "StopLoss": "Стоп-лосс",
+      "Quantity": "Количество",
+      "Lever": "Рычаг",
+      "HandlingFee": "Плата за обработку",
+      "CashDeposit": "Внесение наличных денег",
+      "PlaceAnOrder": "Оформить заказ",
+      "AvailableBalance": "Доступный баланс",
+      "TransactionPairs": "Транзакционные пары",
+      "direction": "направление",
+      "BuyLess": "Купить меньше",
+      "BuyMore": "Купить больше",
+      "SelectExpirationDate": "Выберите дату истечения срока действия",
+      "RateOfReturn": "Ожидаемая норма доходности",
+      "TransactionQuantity": "Количество транзакций",
+      "ExpectedReturns": "Ожидаемая доходность",
+      "HandlingFees": "Сборы за обработку",
+      "Contract": "Контракт",
+      "Option": "Выбор"
     },
     "deposit": {
       "ChoiceCurrency": "Выбор валюты",
-      "TokenAddress": "Переведите TOKEN на следующий адрес"
+      "TokenAddress": "Переведите TOKEN на следующий адрес",
+      "CopySuccess": "Успешное копирование",
+      "deposit": "задаток"
     },
     "record": {
-      "pass": "проходить"
+      "pass": "проходить",
+      "deposit": "задаток",
+      "withdraw": "отводить"
     },
     "withDraw": {
       "amount": "количество",

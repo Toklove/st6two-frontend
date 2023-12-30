@@ -1,38 +1,38 @@
 <template>
     <page-meta />
-    <view class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='flex flex-row justify-between items-center px-[34px]'>
-            <text class='text-[40px] font-bold'>
+    <view class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="flex flex-row justify-between items-center px-[34px]">
+            <text class="text-[40px] font-bold">
                 {{ userStore.userInfo ? userStore.userInfo.nickname : 'Log in' }}
             </text>
-            <view class='flex items-center'>
-                <image class='w-[41px] h-[40px]' src='/static/images/msg.png'></image>
+            <view class="flex items-center">
+                <image class="w-[41px] h-[40px]" src="/static/images/msg.png"></image>
                 <image
                     :src="userStore.userInfo.avatar ? userStore.userInfo.avatar : '/static/images/no-login.png'"
-                    class='ml-[25px] rounded-full w-[92px] h-[92px]'
+                    class="ml-[25px] rounded-full w-[92px] h-[92px]"
                 ></image>
             </view>
         </view>
-        <view class='mt-[18px]'>
-            <view class='text-[45px] pl-[34px]'>{{ t('tabBar.home.hot') }}</view>
-            <scroll-view class='mt-[20px]' scroll-x>
-                <view class='items-center flex'>
+        <view class="mt-[18px]">
+            <view class="text-[45px] pl-[34px]">{{ t('tabBar.home.hot') }}</view>
+            <scroll-view class="mt-[20px]" scroll-x>
+                <view class="items-center flex">
                     <view
-                        v-for='item in marketList.slice(0,3)' :key='item.id'
-                        class='flex flex-col rounded-[30px] chart-wrap'
-                        @click='toPair(item.symbol)'
+                        v-for="item in marketList.slice(0, 3)" :key="item.id"
+                        class="flex flex-col rounded-[30px] chart-wrap"
+                        @click="toPair(item.symbol)"
                     >
-                        <text class='text-[28px] font-bold'>
+                        <text class="text-[28px] font-bold">
                             {{ item.full_name }}
                         </text>
-                        <text class='text-[40px] font-bold'>
+                        <text class="text-[40px] font-bold">
                             {{ item.nowData.lastPrice.toFixed(2) }}
                         </text>
-                        <view class='mb-[54px] mt-[30px] h-[28px] chart'>
+                        <view class="mb-[54px] mt-[30px] h-[28px] chart">
                         </view>
-                        <view class='flex items-center justify-between'>
-                            <view class='increase text-[26px] text-center'>
+                        <view class="flex items-center justify-between">
+                            <view class="increase text-[26px] text-center">
                                 {{ item.diff > 0 ? '+' : '' }}{{ item.diff }}
                             </view>
                             <text>
@@ -44,31 +44,31 @@
             </scroll-view>
         </view>
 
-        <view class='mt-[40px] px-[34px]'>
-            <view class='flex items-center justify-between'>
-                <text class='text-[45px]'>{{ t('tabBar.home.news') }}</text>
-                <text class='text-[20px]'>
+        <view class="mt-[40px] px-[34px]">
+            <view class="flex items-center justify-between">
+                <text class="text-[45px]">{{ t('tabBar.home.news') }}</text>
+                <text class="text-[20px]">
                     {{ t('tabBar.home.seeMore') }}
                 </text>
             </view>
-            <view class='mt-[20px]'>
+            <view class="mt-[20px]">
                 <swiper
-                    :autoplay='true' :indicator-dots='true'
-                    circular class='h-[234px] bg-[#f5f7f9] rounded-[15px]'
+                    :autoplay="true" :indicator-dots="true"
+                    circular class="h-[234px] bg-[#f5f7f9] rounded-[15px]"
                     vertical
                 >
-                    <swiper-item v-for='item in newsList' :key='item.id'>
-                        <view class='news mr-[56px]'>
-                            <view class='teletext flex justify-between'>
-                                <view class='news-title text-[24px] line-clamp-3'>
+                    <swiper-item v-for="item in newsList" :key="item.id">
+                        <view class="news mr-[56px]">
+                            <view class="teletext flex justify-between">
+                                <view class="news-title text-[24px] line-clamp-3">
                                     {{ item.title }}
                                 </view>
                                 <image
-                                    :src='item.image'
-                                    class='news-image rounded-[10px]'
+                                    :src="item.image"
+                                    class="news-image rounded-[10px]"
                                 ></image>
                             </view>
-                            <div class='desc mt-[21px] text-[20px] sub-title flex items-center justify-between'>
+                            <div class="desc mt-[21px] text-[20px] sub-title flex items-center justify-between">
                                 <text>
                                     {{ item.created_at }}
                                 </text>
@@ -81,36 +81,39 @@
                 </swiper>
             </view>
         </view>
-        <view class='mt-[40px] px-[34px]'>
-            <view class='flex items-center justify-between'>
-                <text class='text-[45px]'>{{ t('tabBar.home.market') }}</text>
-                <text class='text-[20px]' @click='switchQuotes'>
+        <view class="mt-[40px] px-[34px]">
+            <view class="flex items-center justify-between">
+                <text class="text-[45px]">{{ t('tabBar.home.market') }}</text>
+                <text class="text-[20px]" @click="switchQuotes">
                     {{ t('tabBar.home.seeMore') }}
                 </text>
             </view>
-            <view class='mt-[20px]'>
+            <view class="mt-[20px]">
                 <view
-                    v-for='item in marketList' :key='item.id' class='stock-row items-center'
-                    @click='toPair(item.symbol)'
+                    v-for="item in marketList" :key="item.id" class="stock-row items-center"
+                    @click="toPair(item.symbol)"
                 >
-                    <view class='flex'>
+                    <view class="flex">
                         <image
-                            :src='item.logo'
-                            class='rounded-full w-[72px] h-[72px]'
+                            :src="item.logo"
+                            class="rounded-full w-[72px] h-[72px]"
                         ></image>
-                        <view class='flex flex-col justify-between ml-[20px]'>
-                            <text class='text-[30px]'>{{ item.full_name }}</text>
-                            <text class='sub-title text-[22px]'>
+                        <view class="flex flex-col justify-between ml-[20px]">
+                            <text class="text-[30px]">{{ item.full_name }}</text>
+                            <text class="sub-title text-[22px]">
                                 17:28:16
                             </text>
                         </view>
                     </view>
-                    <text class='text-[28px] text-right'>
+                    <text class="text-[28px] text-right">
                         {{ item.nowData.lastPrice.toFixed(2) }}
                     </text>
-                    <view :class="item.diff > 0 ? 'green-block' : 'red-block'"
-                          class='h-[68px] ml-[20px] rounded-[10px] grid place-items-center'>
-                        <text class='text-[22px] text-white'> {{ item.diff > 0 ? '+' : '' }}{{ item.diff }}
+                    <view
+                        :class="item.diff > 0 ? 'green-block' : 'red-block'"
+                        class="h-[68px] ml-[20px] rounded-[10px] grid place-items-center"
+                    >
+                        <text class="text-[22px] text-white">
+                            {{ item.diff > 0 ? '+' : '' }}{{ item.diff }}
                         </text>
                     </view>
                 </view>
@@ -121,22 +124,19 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { useUserStore } from '~/pinia/useUserInfo'
 import pako from 'pako/dist/pako_inflate.js'
+import { useUserStore } from '~/pinia/useUserInfo'
 
+const { t } = useI18n()
 useHead({
-    title: 'Home',
+    title: t('tabBar.home.home'),
 })
 
 const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
 
-const filters = ref('')
-
 let socket = null
 
 const loading = ref(false)
-
-const { t } = useI18n()
 
 const userStore = useUserStore()
 
@@ -190,7 +190,8 @@ function handlerData(msg) {
     const data = JSON.parse(msg)
     if (data.ping) {
         socket.send(JSON.stringify({ pong: data.ping }))
-    } else if (data.tick) {
+    }
+    else if (data.tick) {
         const flag = data.ch.split('.')[1]
         marketList.value.forEach((item) => {
             if (flag === item.dataFlag) {

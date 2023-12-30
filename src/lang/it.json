@@ -1,5 +1,19 @@
 {
   "tabBar": {
+    "history": {
+      "HistoricalOrders": "Ordini storici",
+      "buy": "comprare",
+      "StopSurplus": "Stop alle eccedenze",
+      "HandlingFees": "Spese di gestione",
+      "StopLoss": "Stop loss (stop loss)",
+      "SecurityDeposit": "Cauzione",
+      "OrderNumber": "Numero d'ordine",
+      "OrderTime": "Tempo di ordinazione",
+      "ClosingTime": "Cessazione del lavoro",
+      "ClosingType": "Tipo di chiusura",
+      "ManualOperation": "Funzionamento manuale",
+      "NoMoreData": "Niente più dati"
+    },
     "home": {
       "hot": "Popolare",
       "news": "Notizie",
@@ -22,7 +36,11 @@
       "AboutUs": "Chi Siamo",
       "Logout": "Esci",
       "Cancel": "Annulla",
-      "Confirm": "Confermare"
+      "Confirm": "Confermare",
+      "LogOutFailed": "Esci non riuscito",
+      "LogOut": "Esci",
+      "ConfigLout": "Sei sicuro di voler disconnetterti?",
+      "CopySuccess": "Copia riuscita"
     },
     "position": {
       "RealAccount": "Conto reale",
@@ -31,12 +49,30 @@
       "Withdraw": "Ritirare",
       "Deposit": "Depositare",
       "Buy": "Comprare",
-      "Sell": "Vendere"
+      "Sell": "Vendere",
+      "marketPrice": "prezzo di mercato",
+      "StopSurplus": "Stop alle eccedenze",
+      "StopLoss": "Stop loss (stop loss)",
+      "SecurityDeposit": "Cauzione",
+      "OrderNumber": "Numero d'ordine",
+      "OrderTime": "Tempo di ordinazione",
+      "ClosePsition": "Chiudere una posizione",
+      "TakeTheCancellationOrder": "Prendi l'ordine di cancellazione",
+      "Position": "Posizione",
+      "Entrust": "Affidare",
+      "NoMoreData": "Niente più dati",
+      "prompt": "sollecito",
+      "closingThePosition": "Confermate la chiusura della posizione?",
+      "ClosedPositionSuccessfully": "Posizione chiusa con successo",
+      "cancelThePendingOrder": "Confermate di annullare l'ordine in sospeso?",
+      "orderSucceededProcedure": "L'annullamento dell'ordine in sospeso è riuscito. Procedimento"
     },
     "quotes": {
       "EnterTheContentHere": "Inserisci qui il contenuto",
       "Market": "Mercato",
-      "PleaseSelect": "Si prega di selezionare"
+      "PleaseSelect": "Si prega di selezionare",
+      "NoDataAvailable": "Nessun dato disponibile",
+      "foreignExchange": "cambio estero"
     }
   },
   "common": {
@@ -46,7 +82,13 @@
       "Send": "Invia",
       "Submit": "Invia",
       "ExistingAccount": "Account esistente",
-      "Login": "Accedi"
+      "Login": "Accedi",
+      "PleaseEnterYourEmail": "Inserisci la tua email",
+      "PleaseEnterYourPassword": "Inserisci la tua password",
+      "PleaseEnterYourVerificationCode": "Inserisci il tuo codice di verifica",
+      "ResetPasswordSuccessfully": "Reimpostare la password con successo",
+      "VerificationCodeSentSuccessfully": "Codice di verifica inviato correttamente",
+      "Back": "Indietro"
     },
     "login": {
       "Login": "Accedi",
@@ -55,14 +97,32 @@
       "ForgotYourPassword": "Hai dimenticato la password?",
       "Retrieve": "Recuperare",
       "haveAnAccount": "Hai un account?",
-      "Register": "Registro"
+      "Register": "Registro",
+      "PleaseEnterYourEmail": "Inserisci la tua email",
+      "PleaseEnterYourPassword": "Inserisci la tua password",
+      "LoginSuccessfully": "Accedi con successo"
     },
     "register": {
       "Register": "Registro",
-      "SignUpToJoin": "Iscriviti per partecipare"
+      "SignUpToJoin": "Iscriviti per partecipare",
+      "Email": "E-mail",
+      "Password": "Parola d’ordine",
+      "ConfirmPassword": "Conferma password",
+      "VerificationCode": "Codice di verifica",
+      "InvitationCode": "Codice invito (facoltativo)",
+      "PleaseEnterYourEmail": "Inserisci la tua email",
+      "PleaseEnterYourPassword": "Inserisci la tua password",
+      "PleaseEnterYourConfirmPassword": "Inserisci la tua password di conferma",
+      "PleaseEnterYourVerificationCode": "Inserisci il tuo codice di verifica",
+      "TheTwoPasswordsAreInconsistent": "Le due password sono incoerenti",
+      "RegisterSuccessfully": "Registrati con successo",
+      "Back": "Indietro"
     }
   },
   "mine": {
+    "about": {
+      "AboutUs": "Chi Siamo"
+    },
     "addBank": {
       "bankTitle": "La piattaforma crittograferà le informazioni per garantire la sicurezza delle informazioni in tempo reale",
       "Save": "Salvare",
@@ -70,13 +130,19 @@
       "bankCard": "Si prega di inserire la carta di credito",
       "account": "Si prega di inserire il titolare del conto",
       "bankAddress": "Inserisci l'indirizzo della banca",
-      "bankCode": "Si prega di inserire il codice internazionale della banca"
+      "bankCode": "Si prega di inserire il codice internazionale della banca",
+      "AddSuccess": "Aggiungi successo",
+      "AddFailed": "Aggiunta non riuscita",
+      "AddBankCard": "Aggiungi carta di credito"
     },
     "addWallet": {
       "ChoiceOfCurrency": "Scelta della valuta",
       "AddAddress": "Aggiungi indirizzo",
       "Save": "Salvare",
-      "addressHere": "Inserisci qui il tuo indirizzo"
+      "addressHere": "Inserisci qui il tuo indirizzo",
+      "PleaseSelectCurrency": "Si prega di selezionare la valuta",
+      "PleaseEnterAddress": "Si prega di inserire l'indirizzo",
+      "AddWallet": "Aggiungi portafoglio"
     },
     "certified": {
       "UploadIDPhoto": "Carica fototessera",
@@ -84,25 +150,43 @@
       "cerTitle": "La piattaforma crittograferà le informazioni per garantire la sicurezza delle informazioni in tempo reale",
       "Submit": "Invia",
       "realName": "Si prega di inserire il nome reale",
-      "idNumber": "Si prega di inserire il numero ID"
+      "idNumber": "Si prega di inserire il numero ID",
+      "Certified": "Certificato",
+      "UploadFailed": "Caricamento non riuscito"
     },
     "changePassword": {
       "Submit": "Invia",
       "inputNewPassWord": "Inserisci la nuova password",
       "reNewPassWord": "Inserisci il pulsante Conferma password",
-      "oldPassword": "Si prega di inserire la vecchia password"
+      "oldPassword": "Si prega di inserire la vecchia password",
+      "ChangeSuccess": "Successo del cambiamento",
+      "ChangePassword": "Cambia password"
     },
     "option": {
       "Buy": "Comprare",
+      "Sell": "Vendere",
       "amount": "importo",
       "duration": "durata",
       "HandlingFee": "Spese di gestione",
       "OrderTime": "Tempo di ordinazione",
       "SettlementTime": "Tempo di regolamento",
-      "ProfitLoss": "Profitti e perdite"
+      "ProfitLoss": "Profitti e perdite",
+      "position": "posizione",
+      "history": "storia",
+      "NoMoreData": "Niente più dati"
+    },
+    "service": {
+      "CustomerService": "Servizio clienti"
     },
     "userInfo": {
-      "Submit": "Invia"
+      "Submit": "Invia",
+      "userInfo": "userInfo"
+    },
+    "wallet": {
+      "DeleteFailed": "Eliminazione non riuscita",
+      "DeleteSuccess": "Eliminazione riuscita",
+      "Purse": "Borsa",
+      "BankCard": "Carta di credito"
     }
   },
   "position": {
@@ -120,16 +204,43 @@
       "Open": "Aperto",
       "Low": "Basso",
       "High": "Altezza",
-      "volume": "volume",
+      "volume": "Volume",
       "Sell": "Vendere",
-      "Buy": "Comprare"
+      "Buy": "Comprare",
+      "Order": "Ordine",
+      "MarketPrice": "Prezzo di mercato",
+      "OrderPrice": "Prezzo dell'ordine",
+      "StopSurplus": "Stop alle eccedenze",
+      "PriceLimit": "Limite di prezzo",
+      "StopLoss": "Stop loss (stop loss)",
+      "Quantity": "Quantità",
+      "Lever": "Leva",
+      "HandlingFee": "Spese di gestione",
+      "CashDeposit": "Deposito in contanti",
+      "PlaceAnOrder": "Effettua un ordine",
+      "AvailableBalance": "Saldo disponibile",
+      "TransactionPairs": "Coppie di transazioni",
+      "direction": "direzione",
+      "BuyLess": "Compra meno",
+      "BuyMore": "Acquista di più",
+      "SelectExpirationDate": "Seleziona la data di scadenza",
+      "RateOfReturn": "Tasso di rendimento atteso",
+      "TransactionQuantity": "Quantità della transazione",
+      "ExpectedReturns": "Rendimenti attesi",
+      "HandlingFees": "Spese di gestione",
+      "Contract": "Contratto",
+      "Option": "Opzione"
     },
     "deposit": {
       "ChoiceCurrency": "Scelta della valuta",
-      "TokenAddress": "Trasferisci TOKEN al seguente indirizzo"
+      "TokenAddress": "Trasferisci TOKEN al seguente indirizzo",
+      "CopySuccess": "Copia riuscita",
+      "deposit": "depositare"
     },
     "record": {
-      "pass": "passare"
+      "pass": "passare",
+      "deposit": "depositare",
+      "withdraw": "ritirare"
     },
     "withDraw": {
       "amount": "importo",

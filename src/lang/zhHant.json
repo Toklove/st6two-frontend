@@ -1,5 +1,19 @@
 {
   "tabBar": {
+    "history": {
+      "HistoricalOrders": "歷史訂單",
+      "buy": "買",
+      "StopSurplus": "停止盈餘",
+      "HandlingFees": "手續費",
+      "StopLoss": "止損",
+      "SecurityDeposit": "保證金",
+      "OrderNumber": "訂單號",
+      "OrderTime": "訂購時間",
+      "ClosingTime": "閉館時間",
+      "ClosingType": "閉合管道",
+      "ManualOperation": "手動操作",
+      "NoMoreData": "沒有更多數據"
+    },
     "home": {
       "hot": "热门",
       "news": "新聞",
@@ -22,7 +36,11 @@
       "AboutUs": "關於我們",
       "Logout": "登出",
       "Cancel": "取消",
-      "Confirm": "確認"
+      "Confirm": "確認",
+      "LogOutFailed": "註銷失敗",
+      "LogOut": "註銷",
+      "ConfigLout": "你確定要註銷嗎？",
+      "CopySuccess": "複製成功"
     },
     "position": {
       "RealAccount": "真實帳戶",
@@ -31,12 +49,30 @@
       "Withdraw": "出金",
       "Deposit": "入金",
       "Buy": "買",
-      "Sell": "賣"
+      "Sell": "賣",
+      "marketPrice": "市場價",
+      "StopSurplus": "停止盈餘",
+      "StopLoss": "止損",
+      "SecurityDeposit": "保證金",
+      "OrderNumber": "訂單號",
+      "OrderTime": "訂購時間",
+      "ClosePsition": "平倉",
+      "TakeTheCancellationOrder": "接受取消訂單",
+      "Position": "位置",
+      "Entrust": "委託",
+      "NoMoreData": "沒有更多數據",
+      "prompt": "提示",
+      "closingThePosition": "您確認平倉嗎？",
+      "ClosedPositionSuccessfully": "成功平倉",
+      "cancelThePendingOrder": "您是否確認取消掛單？",
+      "orderSucceededProcedure": "取消掛單成功"
     },
     "quotes": {
       "EnterTheContentHere": "在此輸入內容",
       "Market": "市場",
-      "PleaseSelect": "請選擇"
+      "PleaseSelect": "請選擇",
+      "NoDataAvailable": "無可用數據",
+      "foreignExchange": "外匯"
     }
   },
   "common": {
@@ -46,7 +82,13 @@
       "Send": "發送",
       "Submit": "提交",
       "ExistingAccount": "現有帳戶",
-      "Login": "登錄"
+      "Login": "登錄",
+      "PleaseEnterYourEmail": "請輸入您的電子郵件",
+      "PleaseEnterYourPassword": "請輸入您的密碼",
+      "PleaseEnterYourVerificationCode": "請輸入您的驗證碼",
+      "ResetPasswordSuccessfully": "成功重置密碼",
+      "VerificationCodeSentSuccessfully": "驗證碼發送成功",
+      "Back": "返回"
     },
     "login": {
       "Login": "登錄",
@@ -55,28 +97,52 @@
       "ForgotYourPassword": "忘記密碼？",
       "Retrieve": "取回",
       "haveAnAccount": "有帳戶嗎？",
-      "Register": "註冊"
+      "Register": "註冊",
+      "PleaseEnterYourEmail": "請輸入您的電子郵件",
+      "PleaseEnterYourPassword": "請輸入您的密碼",
+      "LoginSuccessfully": "登入成功"
     },
     "register": {
       "Register": "註冊",
-      "SignUpToJoin": "註冊加入"
+      "SignUpToJoin": "註冊加入",
+      "Email": "電子郵件",
+      "Password": "密碼",
+      "ConfirmPassword": "確認密碼",
+      "VerificationCode": "驗證碼",
+      "InvitationCode": "邀請碼（可選）",
+      "PleaseEnterYourEmail": "請輸入您的電子郵件",
+      "PleaseEnterYourPassword": "請輸入您的密碼",
+      "PleaseEnterYourConfirmPassword": "請輸入您的確認密碼",
+      "PleaseEnterYourVerificationCode": "請輸入您的驗證碼",
+      "TheTwoPasswordsAreInconsistent": "兩個密碼不一致",
+      "RegisterSuccessfully": "注册成功",
+      "Back": "返回"
     }
   },
   "mine": {
+    "about": {
+      "AboutUs": "關於我們"
+    },
     "addBank": {
       "bankTitle": "平臺將對資訊進行加密，即時保障資訊安全",
-      "Save": "救",
+      "Save": "保存",
       "bankName": "請輸入銀行名稱",
       "bankCard": "請輸入銀行卡",
       "account": "請輸入帳戶持有人",
       "bankAddress": "請輸入銀行位址",
-      "bankCode": "請輸入銀行國際代碼"
+      "bankCode": "請輸入銀行國際代碼",
+      "AddSuccess": "添加成功",
+      "AddFailed": "添加失敗",
+      "AddBankCard": "添加銀行卡"
     },
     "addWallet": {
       "ChoiceOfCurrency": "貨幣選擇",
       "AddAddress": "添加位址",
-      "Save": "救",
-      "addressHere": "在這裡填寫您的位址"
+      "Save": "保存",
+      "addressHere": "在這裡填寫您的位址",
+      "PleaseSelectCurrency": "請選擇貨幣",
+      "PleaseEnterAddress": "請輸入地址",
+      "AddWallet": "添加錢包"
     },
     "certified": {
       "UploadIDPhoto": "上傳證件照",
@@ -84,31 +150,49 @@
       "cerTitle": "平臺將對資訊進行加密，即時保障資訊安全",
       "Submit": "提交",
       "realName": "請輸入真實姓名",
-      "idNumber": "請輸入身份證號碼"
+      "idNumber": "請輸入身份證號碼",
+      "Certified": "認證",
+      "UploadFailed": "上傳失敗"
     },
     "changePassword": {
       "Submit": "提交",
       "inputNewPassWord": "請輸入新密碼",
       "reNewPassWord": "請輸入確認密碼",
-      "oldPassword": "請輸入舊密碼"
+      "oldPassword": "請輸入舊密碼",
+      "ChangeSuccess": "變更成功",
+      "ChangePassword": "更改密碼"
     },
     "option": {
       "Buy": "買",
+      "Sell": "賣",
       "amount": "量",
       "duration": "期間",
       "HandlingFee": "手續費",
       "OrderTime": "訂購時間",
       "SettlementTime": "結算時間",
-      "ProfitLoss": "損益"
+      "ProfitLoss": "損益",
+      "position": "位置",
+      "history": "歷史",
+      "NoMoreData": "沒有更多數據"
+    },
+    "service": {
+      "CustomerService": "顧客服務"
     },
     "userInfo": {
-      "Submit": "提交"
+      "Submit": "提交",
+      "userInfo": "用戶資訊"
+    },
+    "wallet": {
+      "DeleteFailed": "删除失敗",
+      "DeleteSuccess": "删除成功",
+      "Purse": "錢包",
+      "BankCard": "銀行卡"
     }
   },
   "position": {
     "bill": {
       "date": "日期",
-      "all": "都",
+      "all": "全部",
       "classification": "分類",
       "money": "量",
       "option": "選擇",
@@ -122,14 +206,41 @@
       "High": "高",
       "volume": "總量",
       "Sell": "賣",
-      "Buy": "買"
+      "Buy": "買",
+      "Order": "次序",
+      "MarketPrice": "市場價",
+      "OrderPrice": "訂單價格",
+      "StopSurplus": "停止盈餘",
+      "PriceLimit": "價格限制",
+      "StopLoss": "止損",
+      "Quantity": "數量",
+      "Lever": "杠杆",
+      "HandlingFee": "手續費",
+      "CashDeposit": "現金存款",
+      "PlaceAnOrder": "下訂單",
+      "AvailableBalance": "可用餘額",
+      "TransactionPairs": "交易對",
+      "direction": "方向",
+      "BuyLess": "購買更少",
+      "BuyMore": "購買更多",
+      "SelectExpirationDate": "選擇到期日期",
+      "RateOfReturn": "預期回報率",
+      "TransactionQuantity": "交易數量",
+      "ExpectedReturns": "預期回報",
+      "HandlingFees": "手續費",
+      "Contract": "契约",
+      "Option": "選擇"
     },
     "deposit": {
       "ChoiceCurrency": "貨幣選擇",
-      "TokenAddress": "將TOKEN轉帳至以下地址"
+      "TokenAddress": "將TOKEN轉帳至以下地址",
+      "CopySuccess": "複製成功",
+      "deposit": "存款"
     },
     "record": {
-      "pass": "通過"
+      "pass": "通過",
+      "deposit": "存款",
+      "withdraw": "撤回"
     },
     "withDraw": {
       "amount": "量",

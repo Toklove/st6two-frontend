@@ -10,13 +10,16 @@
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import { layoutDataKey } from '~/composables/provide'
+
+const { t } = useI18n()
 
 const layoutData = ref({
     showTopBar: true,
     topBarBgColor: 'white',
     showTopBarBackBtn: true,
-    topBarTitle: 'Customer service',
+    topBarTitle: t('mine.service.CustomerService'),
 })
 
 provide(layoutDataKey, layoutData)

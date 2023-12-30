@@ -1,90 +1,90 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='px-[34px]'>
-            <view class='text-[45px] font-bold'>歷史訂單</view>
-            <view class='relative mt-[56px]'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="px-[34px]">
+            <view class="text-[45px] font-bold">{{ t('tabBar.history.HistoricalOrders') }}</view>
+            <view class="relative mt-[56px]">
                 <view
-                    v-for='(item, index) in list'
-                    :key='index'
+                    v-for="(item, index) in list"
+                    :key="index"
                     :class="item.show_detail ? 'active-h' : 'active-l'"
-                    class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'
-                    @click='item.show_detail = !item.show_detail'
+                    class="relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]"
+                    @click="item.show_detail = !item.show_detail"
                 >
-                    <view class='flex flex-row'>
+                    <view class="flex flex-row">
                         <image
-                            :src='item.market.logo'
-                            class='rounded-full w-[72px] h-[72px]'
+                            :src="item.market.logo"
+                            class="rounded-full w-[72px] h-[72px]"
                         ></image>
-                        <view class='flex-1 ml-[12px]'>
-                            <view class='grid items-center col'>
-                                <view class='flex items-center'>
-                                    <text class='text-[30px]'>
+                        <view class="flex-1 ml-[12px]">
+                            <view class="grid items-center col">
+                                <view class="flex items-center">
+                                    <text class="text-[30px]">
                                         {{ item.market.name }}
                                     </text>
-                                    <text class='lever ml-[14px] text-[20px]'>
+                                    <text class="lever ml-[14px] text-[20px]">
                                         x{{ item.lever }}
                                     </text>
                                 </view>
-                                <text class='hands text-[22px] h-[32px] grid place-items-center text-center'>
+                                <text class="hands text-[22px] h-[32px] grid place-items-center text-center">
                                     0.01
                                 </text>
-                                <text class='text-[28px] text-right text-red'>-6.61</text>
+                                <text class="text-[28px] text-right text-red">-6.61</text>
                             </view>
-                            <view class='flex mt-[20px] items-center justify-between'>
-                                <view class='flex items-center text-[22px]'>
+                            <view class="flex mt-[20px] items-center justify-between">
+                                <view class="flex items-center text-[22px]">
                                     <text>{{ item.paid_price }} -</text>
-                                    <text class='red-text'>> {{ item.close_price }}</text>
+                                    <text class="red-text">> {{ item.close_price }}</text>
                                 </view>
-                                <view class='font-bold text-[22px]'>买入</view>
+                                <view class="font-bold text-[22px]">{{ t('tabBar.history.buy') }}</view>
                             </view>
                         </view>
                     </view>
-                    <view class='stock-data mt-[40px] border-[#dadada] text-[#8c8c8c] pt-[26px] text-[22px]'>
-                        <view class='flex items-center justify-between'>
-                            <view class='flex items-center justify-between flex-1'>
-                                <text>止盈</text>
-                                <text class='text-black'>{{ item.stop_surplus }}</text>
+                    <view class="stock-data mt-[40px] border-[#dadada] text-[#8c8c8c] pt-[26px] text-[22px]">
+                        <view class="flex items-center justify-between">
+                            <view class="flex items-center justify-between flex-1">
+                                <text>{{ t('tabBar.history.StopSurplus') }}</text>
+                                <text class="text-black">{{ item.stop_surplus }}</text>
                             </view>
-                            <view class='flex items-center justify-between ml-[50px] flex-1'>
-                                <text>手續費</text>
-                                <text class='text-black'>{{ item.all_fee }}</text>
-                            </view>
-                        </view>
-                        <view class='flex items-center justify-between mt-[12px]'>
-                            <view class='flex items-center justify-between flex-1'>
-                                <text>止损</text>
-                                <text class='text-black'>{{ item.stop_loss }}</text>
-                            </view>
-                            <view class='flex items-center justify-between ml-[50px] flex-1'>
-                                <text>保证金</text>
-                                <text class='text-black'>{{ item.assure }}</text>
+                            <view class="flex items-center justify-between ml-[50px] flex-1">
+                                <text>{{ t('tabBar.history.HandlingFees') }}</text>
+                                <text class="text-black">{{ item.all_fee }}</text>
                             </view>
                         </view>
-                        <view class='flex flex-col mt-[24px]'>
-                            <view class='flex items-center justify-between'>
-                                <text>訂單號</text>
+                        <view class="flex items-center justify-between mt-[12px]">
+                            <view class="flex items-center justify-between flex-1">
+                                <text>{{ t('tabBar.history.StopLoss') }}</text>
+                                <text class="text-black">{{ item.stop_loss }}</text>
+                            </view>
+                            <view class="flex items-center justify-between ml-[50px] flex-1">
+                                <text>{{ t('tabBar.history.SecurityDeposit') }}</text>
+                                <text class="text-black">{{ item.assure }}</text>
+                            </view>
+                        </view>
+                        <view class="flex flex-col mt-[24px]">
+                            <view class="flex items-center justify-between">
+                                <text>{{ t('tabBar.history.OrderNumber') }}</text>
                                 <text>{{ item.order_num }}</text>
                             </view>
-                            <view class='flex items-center justify-between mt-[12px]'>
-                                <text>下單時間</text>
+                            <view class="flex items-center justify-between mt-[12px]">
+                                <text>{{ t('tabBar.history.OrderTime') }}</text>
                                 <text>{{ item.created_at }}</text>
                             </view>
-                            <view class='flex items-center justify-between mt-[12px]'>
-                                <text>關閉時間</text>
+                            <view class="flex items-center justify-between mt-[12px]">
+                                <text>{{ t('tabBar.history.ClosingTime') }}</text>
                                 <text>20231228120045680012ETH267680</text>
                             </view>
-                            <view class='flex items-center justify-between mt-[12px]'>
-                                <text>平倉類型</text>
-                                <text>手動</text>
+                            <view class="flex items-center justify-between mt-[12px]">
+                                <text>{{ t('tabBar.history.ClosingType') }}</text>
+                                <text>{{ t('tabBar.history.ManualOperation') }}</text>
                             </view>
                         </view>
                     </view>
                     <image
                         :src="item.show_detail ? '/static/images/icon-shangla.png' : '/static/images/icon-xiala.png'"
-                        class='absolute left-[50%] bottom-[16px] cursor-pointer w-[18px] h-[18px]'
-                        style='transform: translateX(-50%);'
+                        class="absolute left-[50%] bottom-[16px] cursor-pointer w-[18px] h-[18px]"
+                        style="transform: translateX(-50%);"
                     ></image>
                 </view>
             </view>
@@ -93,8 +93,10 @@
 </template>
 
 <script setup>
-const list = ref([])
+import { useI18n } from 'vue-i18n'
 
+const list = ref([])
+const { t } = useI18n()
 // 分页参数
 const page = ref({
     page: 1,
@@ -111,7 +113,7 @@ function showToast(message) {
 // 上拉加载更多数据
 function loadMore() {
     if (page.value.page >= page.value.max) {
-        showToast('沒有更多數據了')
+        showToast(t('tabBar.history.NoMoreData'))
         return
     }
     page.value.page++

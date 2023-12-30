@@ -1,5 +1,19 @@
 {
   "tabBar": {
+    "history": {
+      "HistoricalOrders": "Historical orders",
+      "buy": "buy",
+      "StopSurplus": "Stop surplus",
+      "HandlingFees": "Handling fees",
+      "StopLoss": "Stop loss",
+      "SecurityDeposit": "Security deposit",
+      "OrderNumber": "Order number",
+      "OrderTime": "Order time",
+      "ClosingTime": "Closing time",
+      "ClosingType": "Closing type",
+      "ManualOperation": "Manual operation",
+      "NoMoreData": "No more data"
+    },
     "home": {
       "hot": "Popular",
       "news": "News",
@@ -22,7 +36,11 @@
       "AboutUs": "About us",
       "Logout": "Log out",
       "Cancel": "Cancel",
-      "Confirm": "Confirm"
+      "Confirm": "Confirm",
+      "LogOutFailed": "Log out failed",
+      "LogOut": "Log out",
+      "ConfigLout": "Are you sure you want to log out?",
+      "CopySuccess": "Copy success"
     },
     "position": {
       "RealAccount": "Real account",
@@ -31,12 +49,30 @@
       "Withdraw": "Withdraw",
       "Deposit": "Deposit",
       "Buy": "Buy",
-      "Sell": "Sell"
+      "Sell": "Sell",
+      "marketPrice": "market price",
+      "StopSurplus": "Stop surplus",
+      "StopLoss": "Stop loss",
+      "SecurityDeposit": "Security deposit",
+      "OrderNumber": "Order number",
+      "OrderTime": "Order time",
+      "ClosePsition": "Close a position",
+      "TakeTheCancellationOrder": "Take the cancellation order",
+      "Position": "Position",
+      "Entrust": "Entrust",
+      "NoMoreData": "No more data",
+      "prompt": "prompt",
+      "closingThePosition": "Do you confirm closing the position?",
+      "ClosedPositionSuccessfully": "Closed position successfully",
+      "cancelThePendingOrder": "Do you confirm to cancel the pending order?",
+      "orderSucceededProcedure": "Canceling the pending order succeeded. Procedure"
     },
     "quotes": {
       "EnterTheContentHere": "Enter the content here",
       "Market": "Market",
-      "PleaseSelect": "Please select"
+      "PleaseSelect": "Please select",
+      "NoDataAvailable": "No data available",
+      "foreignExchange": "foreign exchange"
     }
   },
   "common": {
@@ -46,7 +82,13 @@
       "Send": "Send",
       "Submit": "Submit",
       "ExistingAccount": "Existing account",
-      "Login": "Log in"
+      "Login": "Log in",
+      "PleaseEnterYourEmail": "Please enter your email",
+      "PleaseEnterYourPassword": "Please enter your password",
+      "PleaseEnterYourVerificationCode": "Please enter your verification code",
+      "ResetPasswordSuccessfully": "Reset Password successfully",
+      "VerificationCodeSentSuccessfully": "Verification code sent successfully",
+      "Back": "Back"
     },
     "login": {
       "Login": "Log in",
@@ -55,14 +97,32 @@
       "ForgotYourPassword": "Forgot your password？",
       "Retrieve": "Retrieve",
       "haveAnAccount": "have`an account?",
-      "Register": "Register"
+      "Register": "Register",
+      "PleaseEnterYourEmail": "Please enter your email",
+      "PleaseEnterYourPassword": "Please enter your password",
+      "LoginSuccessfully": "Login successfully"
     },
     "register": {
       "Register": "Register",
-      "SignUpToJoin": "sign up to join"
+      "SignUpToJoin": "sign up to join",
+      "Email": "Email",
+      "Password": "Password",
+      "ConfirmPassword": "Confirm Password",
+      "VerificationCode": "Verification code",
+      "InvitationCode": "Invitation Code (optional)",
+      "PleaseEnterYourEmail": "Please enter your email",
+      "PleaseEnterYourPassword": "Please enter your password",
+      "PleaseEnterYourConfirmPassword": "Please enter your confirm password",
+      "PleaseEnterYourVerificationCode": "Please enter your verification code",
+      "TheTwoPasswordsAreInconsistent": "The two passwords are inconsistent",
+      "RegisterSuccessfully": "Register successfully",
+      "Back": "Back"
     }
   },
   "mine": {
+    "about": {
+      "AboutUs": "About us"
+    },
     "addBank": {
       "bankTitle": "The platform will encrypt information to ensure information security in real time",
       "Save": "Save",
@@ -70,13 +130,19 @@
       "bankCard": "Please enter the Bank Card",
       "account": "Please enter the Account Holder",
       "bankAddress": "Please enter the Bank address",
-      "bankCode": "Please enter the Bank International Code"
+      "bankCode": "Please enter the Bank International Code",
+      "AddSuccess": "Add success",
+      "AddFailed": "Add failed",
+      "AddBankCard": "Add Bank Card"
     },
     "addWallet": {
       "ChoiceOfCurrency": "Choice of currency",
       "AddAddress": "Add address",
       "Save": "Save",
-      "addressHere": "Fill in your address here"
+      "addressHere": "Fill in your address here",
+      "PleaseSelectCurrency": "Please select currency",
+      "PleaseEnterAddress": "Please enter address",
+      "AddWallet": "Add Wallet"
     },
     "certified": {
       "UploadIDPhoto": "Upload ID photo",
@@ -84,13 +150,17 @@
       "cerTitle": "The platform will encrypt information to ensure information security in real time",
       "Submit": "Submit",
       "realName": "Please enter the Real name",
-      "idNumber": "Please enter the ID number"
+      "idNumber": "Please enter the ID number",
+      "Certified": "Certified",
+      "UploadFailed": "Upload failed"
     },
     "changePassword": {
       "Submit": "Submit",
       "inputNewPassWord": "Please enter the New password",
       "reNewPassWord": "Please enter the Confirm password",
-      "oldPassword": "Please enter the Old password"
+      "oldPassword": "Please enter the Old password",
+      "ChangeSuccess": "Change success",
+      "ChangePassword": "Change Password"
     },
     "option": {
       "Buy": "Buy",
@@ -100,10 +170,23 @@
       "HandlingFee": "Handling fee",
       "OrderTime": "Order time",
       "SettlementTime": "Settlement time",
-      "ProfitLoss": "Profit and loss"
+      "ProfitLoss": "Profit and loss",
+      "position": "position",
+      "history": "history",
+      "NoMoreData": "No more data"
+    },
+    "service": {
+      "CustomerService": "Customer service"
     },
     "userInfo": {
-      "Submit": "Submit"
+      "Submit": "Submit",
+      "userInfo": "userInfo"
+    },
+    "wallet": {
+      "DeleteFailed": "Delete failed",
+      "DeleteSuccess": "Delete success",
+      "Purse": "Purse",
+      "BankCard": "Bank Card"
     }
   },
   "position": {
@@ -123,14 +206,41 @@
       "High": "Height",
       "volume": "Volume",
       "Sell": "Sell",
-      "Buy": "Buy"
+      "Buy": "Buy",
+      "Order": "Order",
+      "MarketPrice": "Market Price",
+      "OrderPrice": "Order Price",
+      "StopSurplus": "Stop surplus",
+      "PriceLimit": "Price limit",
+      "StopLoss": "Stop loss",
+      "Quantity": "Quantity",
+      "Lever": "Lever",
+      "HandlingFee": "Handling fee",
+      "CashDeposit": "Cash deposit",
+      "PlaceAnOrder": "Place an order",
+      "AvailableBalance": "Available balance",
+      "TransactionPairs": "Transaction pairs",
+      "direction": "direction",
+      "BuyLess": "Buy less",
+      "BuyMore": "Buy more",
+      "SelectExpirationDate": "Select expiration date",
+      "RateOfReturn": "Expected rate of return",
+      "TransactionQuantity": "Transaction quantity",
+      "ExpectedReturns": "Expected returns",
+      "HandlingFees": "Handling fees",
+      "Contract": "Contract",
+      "Option": "Option"
     },
     "deposit": {
       "ChoiceCurrency": "Choice of currency",
-      "TokenAddress": "Transfer TOKEN to the following address"
+      "TokenAddress": "Transfer TOKEN to the following address",
+      "CopySuccess": "Copy success",
+      "deposit": "deposit"
     },
     "record": {
-      "pass": "pass"
+      "pass": "pass",
+      "deposit": "deposit",
+      "withdraw": "withdraw"
     },
     "withDraw": {
       "amount": "amount",

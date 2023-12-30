@@ -67,9 +67,9 @@ function showToast(message) {
 function submit() {
     const fields = ['old_password', 'password', 'password_confirmation']
     const messages = [
-        'Please enter the Old password',
-        'Please enter the New password',
-        'Please enter the Confirm password',
+        t('mine.changePassword.oldPassword'),
+        t('mine.changePassword.inputNewPassWord'),
+        t('mine.changePassword.reNewPassWord'),
     ]
 
     for (let i = 0; i < fields.length; i++) {
@@ -81,7 +81,7 @@ function submit() {
 
     $api.post('/user/changePassword', form.value).then((res) => {
         if (res.code === 1) {
-            showToast('Change success')
+            showToast(t('mine.changePassword.ChangeSuccess'))
             setTimeout(() => {
                 $api.back()
             }, 1000)
@@ -93,7 +93,7 @@ const layoutData = ref({
     showTopBar: true,
     topBarBgColor: 'white',
     showTopBarBackBtn: true,
-    topBarTitle: 'Change Password',
+    topBarTitle: t('mine.changePassword.ChangePassword'),
 })
 
 provide(layoutDataKey, layoutData)

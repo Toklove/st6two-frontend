@@ -1,32 +1,32 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
         <FuiNavBar custom>
-            <view class='flex justify-center relative items-center flex-1'>
-                <view class='absolute left-0'>
-                    <FuiIcon name='arrowleft' @click='clickBack'></FuiIcon>
+            <view class="flex justify-center relative items-center flex-1">
+                <view class="absolute left-0">
+                    <FuiIcon name="arrowleft" @click="clickBack"></FuiIcon>
                 </view>
                 <USubsection
-                    v-model='current'
-                    :list='subList' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
+                    v-model="current"
+                    :list="subList()" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
                 ></USubsection>
             </view>
         </FuiNavBar>
-        <view class='mt-[20px] mx-[34px]'>
-            <view v-if='list.length > 0'>
-                <view class='card flex items-center justify-between bg-[#f5f7f9]'>
-                    <view class='text-[28px]'>
-                        <view class=''>$1000.00</view>
-                        <view class='text-[22px] mt-[20px]'>2023-12-19 13:42:20</view>
+        <view class="mt-[20px] mx-[34px]">
+            <view v-if="list.length > 0">
+                <view class="card flex items-center justify-between bg-[#f5f7f9]">
+                    <view class="text-[28px]">
+                        <view class="">$1000.00</view>
+                        <view class="text-[22px] mt-[20px]">2023-12-19 13:42:20</view>
                     </view>
                     <view>
-                        <text class='text-[28px] green-text'>{{ t('position.record.pass') }}</text>
+                        <text class="text-[28px] green-text">{{ t('position.record.pass') }}</text>
                     </view>
                 </view>
             </view>
-            <view v-else class='nodata'>
-                <image class='w-[340px] h-[340px]' src='/static/images/option.png'></image>
+            <view v-else class="nodata">
+                <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
             </view>
         </view>
     </layout>
@@ -44,14 +44,16 @@ function clickBack() {
 
 const { t } = useI18n()
 
-const subList = [
-    {
-        name: '入金',
-    },
-    {
-        name: '出金',
-    },
-]
+function subList() {
+    return [
+        {
+            name: t('position.record.deposit'),
+        },
+        {
+            name: t('position.record.withdraw'),
+        },
+    ]
+}
 const current = ref(0)
 
 const list = ref([1])

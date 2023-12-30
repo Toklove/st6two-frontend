@@ -1,60 +1,60 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
         <FuiNavBar custom>
-            <view class='flex justify-center relative items-center flex-1'>
-                <view class='absolute left-0'>
-                    <FuiIcon name='arrowleft' @click='clickBack'></FuiIcon>
+            <view class="flex justify-center relative items-center flex-1">
+                <view class="absolute left-0">
+                    <FuiIcon name="arrowleft" @click="clickBack"></FuiIcon>
                 </view>
                 <USubsection
-                    v-model='current'
-                    :list='subList' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
-                    @change='change'
+                    v-model="current"
+                    :list="subList" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
+                    @change="change"
                 ></USubsection>
             </view>
         </FuiNavBar>
-        <view class='mt-[20px] mx-[34px]'>
-            <view v-if='list.length > 0'>
-                <view v-for='item in list' :key='item.id' class='order-row px-[30px] py-[40px] text-[22px]'>
-                    <view class='flex items-center justify-between text-[30px]'>
+        <view class="mt-[20px] mx-[34px]">
+            <view v-if="list.length > 0">
+                <view v-for="item in list" :key="item.id" class="order-row px-[30px] py-[40px] text-[22px]">
+                    <view class="flex items-center justify-between text-[30px]">
                         <text>{{ item.market.full_name }}</text>
                         <text>{{ item.buy_price }}</text>
                     </view>
-                    <view :class='item.type === 1?"buy-2":"buy-1"' class='font-bold text-right mt-[14px]'>
+                    <view :class="item.type === 1 ? &quot;buy-2&quot; : &quot;buy-1&quot;" class="font-bold text-right mt-[14px]">
                         {{ item.type === 1 ? t('mine.option.Sell') : t('mine.option.Buy') }}
                     </view>
-                    <view class='line mt-[30px]'></view>
-                    <view class='flex items-center justify-between mt-[20px]'>
-                        <view class='flex flex-1 items-center justify-between'>
-                            <text class='sub-title'>{{ t('mine.option.amount') }}</text>
+                    <view class="line mt-[30px]"></view>
+                    <view class="flex items-center justify-between mt-[20px]">
+                        <view class="flex flex-1 items-center justify-between">
+                            <text class="sub-title">{{ t('mine.option.amount') }}</text>
                             <text>{{ item.quantity }}</text>
                         </view>
-                        <view class='flex flex-1 items-center justify-between ml-[50px]'>
-                            <text class='sub-title'>{{ t('mine.option.duration') }}</text>
+                        <view class="flex flex-1 items-center justify-between ml-[50px]">
+                            <text class="sub-title">{{ t('mine.option.duration') }}</text>
                             <text>{{ item.hold_time }}</text>
                         </view>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px]'>
-                        <text class='sub-title'>{{ t('mine.option.HandlingFee') }}</text>
+                    <view class="flex items-center justify-between mt-[20px]">
+                        <text class="sub-title">{{ t('mine.option.HandlingFee') }}</text>
                         <text>{{ item.all_fee }}</text>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px] sub-title'>
+                    <view class="flex items-center justify-between mt-[20px] sub-title">
                         <text>{{ t('mine.option.OrderTime') }}</text>
                         <text>{{ item.created_at }}</text>
                     </view>
-                    <view v-if='item.status === 1' class='flex items-center justify-between mt-[20px] sub-title'>
+                    <view v-if="item.status === 1" class="flex items-center justify-between mt-[20px] sub-title">
                         <text>{{ t('mine.option.SettlementTime') }}</text>
                         <text>{{ item.sell_time }}</text>
                     </view>
-                    <view v-if='item.status === 1' class='flex items-center justify-between mt-[20px] sub-title'>
+                    <view v-if="item.status === 1" class="flex items-center justify-between mt-[20px] sub-title">
                         <text>{{ t('mine.option.ProfitLoss') }}</text>
-                        <text class='win'>{{ item.profit }}</text>
+                        <text class="win">{{ item.profit }}</text>
                     </view>
                 </view>
             </view>
-            <view v-else class='nodata'>
-                <image class='w-[340px] h-[340px]' src='/static/images/option.png'></image>
+            <view v-else class="nodata">
+                <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
             </view>
         </view>
     </layout>
@@ -74,14 +74,16 @@ const { t } = useI18n()
 
 const loading = ref(false)
 
-const subList = [
-    {
-        name: 'position',
-    },
-    {
-        name: 'history',
-    },
-]
+function subList() {
+    return [
+        {
+            name: t('mine.option.position'),
+        },
+        {
+            name: t('mine.option.history'),
+        },
+    ]
+}
 const current = ref(0)
 
 const list = ref([])
@@ -110,7 +112,7 @@ function showToast(message) {
 // 上拉加载更多数据
 function loadMore() {
     if (page.value.page >= page.value.max) {
-        showToast('沒有更多數據了')
+        showToast(t('mine.option.NoMoreData'))
         return
     }
     page.value.page++

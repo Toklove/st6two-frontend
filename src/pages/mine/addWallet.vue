@@ -64,8 +64,8 @@ function showToast(message) {
 function submit() {
     const fields = ['currency_id', 'address']
     const messages = [
-        'Please select currency',
-        'Please enter address',
+        t('mine.addWallet.PleaseSelectCurrency'),
+        t('mine.addWallet.PleaseEnterAddress'),
     ]
 
     for (let i = 0; i < fields.length; i++) {
@@ -77,11 +77,11 @@ function submit() {
 
     $api.post('/user/addWallet', form.value).then((res) => {
         if (res.code === 1) {
-            showToast('Add success')
+            showToast(t('mine.addBank.AddSuccess'))
             $api.back()
         }
         else {
-            showToast('Add failed')
+            showToast(t('mine.addBank.AddFailed'))
         }
     })
 }
@@ -105,7 +105,7 @@ const layoutData = ref({
     showTopBar: true,
     topBarBgColor: 'white',
     showTopBarBackBtn: true,
-    topBarTitle: 'Add Wallet',
+    topBarTitle: t('mine.addBank.AddWallet'),
 })
 
 provide(layoutDataKey, layoutData)

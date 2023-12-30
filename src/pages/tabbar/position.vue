@@ -1,89 +1,91 @@
 <template>
     <page-meta />
-    <view class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='card-wrap text-white'>
-            <view class='flex justify-end'>
-                <view class='btn-account flex items-center justify-center'>
-                    <image class='w-[23px] h-[21px]' src='/static/images/icon-switch.png'></image>
-                    <text class='text-[24px] scale-90'>{{ t('tabBar.position.RealAccount') }}</text>
+    <view class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="card-wrap text-white">
+            <view class="flex justify-end">
+                <view class="btn-account flex items-center justify-center">
+                    <image class="w-[23px] h-[21px]" src="/static/images/icon-switch.png"></image>
+                    <text class="text-[24px] scale-90">{{ t('tabBar.position.RealAccount') }}</text>
                 </view>
             </view>
-            <view class='flex flex-col px-[40px] pt-[18px]'>
-                <text class='text-[34px] leading-[48px]'>{{ t('tabBar.position.TotalAccountValue') }}</text>
-                <text class='text-[68px] font-bold leading-[98px]'>{{ userStore.userInfo.balance }}</text>
-                <text class='text-[22px] font-bold leading-[32px]'>
+            <view class="flex flex-col px-[40px] pt-[18px]">
+                <text class="text-[34px] leading-[48px]">{{ t('tabBar.position.TotalAccountValue') }}</text>
+                <text class="text-[68px] font-bold leading-[98px]">{{ userStore.userInfo.balance }}</text>
+                <text class="text-[22px] font-bold leading-[32px]">
                     {{ t('tabBar.position.FreezeFunds') }} : 0
                 </text>
-                <view class='flex items-center justify-between mt-[20px]'>
-                    <view class='flex items-center'>
+                <view class="flex items-center justify-between mt-[20px]">
+                    <view class="flex items-center">
                         <view
-                            class='flex items-center justify-center h-[52px] btn-amount'
+                            class="flex items-center justify-center h-[52px] btn-amount"
                             @click="toPage('/pages/position/withdraw')"
                         >
-                            <image class='w-[52px] h-[52px]' src='/static/images/icon-withdraw.png'></image>
-                            <text class='ml-[19px] text-[26px] font-bold'>
+                            <image class="w-[52px] h-[52px]" src="/static/images/icon-withdraw.png"></image>
+                            <text class="ml-[19px] text-[26px] font-bold">
                                 {{ t('tabBar.position.Withdraw') }}
                             </text>
                         </view>
                         <view
-                            class='flex items-center justify-center h-[52px] btn-amount ml-[20px]'
+                            class="flex items-center justify-center h-[52px] btn-amount ml-[20px]"
                             @click="toPage('/pages/position/deposit')"
                         >
-                            <image class='w-[52px] h-[52px]' src='/static/images/icon-deposit.png'></image>
-                            <text class='ml-[19px] text-[26px] font-bold'>
+                            <image class="w-[52px] h-[52px]" src="/static/images/icon-deposit.png"></image>
+                            <text class="ml-[19px] text-[26px] font-bold">
                                 {{ t('tabBar.position.Deposit') }}
                             </text>
                         </view>
                     </view>
                     <image
-                        class='w-[28px] h-[31px]' src='/static/images/icon-order.png'
+                        class="w-[28px] h-[31px]" src="/static/images/icon-order.png"
                         @click="toPage('/pages/position/record')"
                     ></image>
                 </view>
             </view>
         </view>
-        <view class='mt-[40px] px-[34px]'>
+        <view class="mt-[40px] px-[34px]">
             <FuiTabs
-                :short='false' :tabs='tabs' color='#8C8C8C' selected-color='#000' slider-background='#000'
-                @change='change'
+                :short="false" :tabs="tabs()" color="#8C8C8C" selected-color="#000" slider-background="#000"
+                @change="change"
             />
         </view>
 
-        <view v-if='loading' class='mt-[36px]'>
-            <FuiLoading :is-fixed='false' :loading='loading' type='row' />
+        <view v-if="loading" class="mt-[36px]">
+            <FuiLoading :is-fixed="false" :loading="loading" type="row" />
         </view>
 
-        <view v-if='!loading' class='px-[34px] pt-[20px]'>
-            <scroll-view v-if='list.length > 0' scroll-x>
-                <view v-for='item in list' :key='item.id'
-                      class='h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]' @click='showOrder(item)'>
-                    <view class='flex flex-row'>
+        <view v-if="!loading" class="px-[34px] pt-[20px]">
+            <scroll-view v-if="list.length > 0" scroll-x>
+                <view
+                    v-for="item in list" :key="item.id"
+                    class="h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]" @click="showOrder(item)"
+                >
+                    <view class="flex flex-row">
                         <image
-                            :src='item.market.logo'
-                            class='rounded-full w-[72px] h-[72px]'
+                            :src="item.market.logo"
+                            class="rounded-full w-[72px] h-[72px]"
                         ></image>
-                        <view class='flex-1 ml-[12px]'>
-                            <view class='grid items-center col'>
-                                <view class='flex items-center'>
-                                    <text class='text-[30px]'>
+                        <view class="flex-1 ml-[12px]">
+                            <view class="grid items-center col">
+                                <view class="flex items-center">
+                                    <text class="text-[30px]">
                                         {{ item.market.full_name }}
                                     </text>
-                                    <text class='lever ml-[14px] text-[20px]'>
+                                    <text class="lever ml-[14px] text-[20px]">
                                         x{{ item.lever }}
                                     </text>
                                 </view>
-                                <text class='hands text-[22px] h-[32px] grid place-items-center text-center'>
+                                <text class="hands text-[22px] h-[32px] grid place-items-center text-center">
                                     {{ item.quantity }}
                                 </text>
-                                <text class='text-[28px] text-right text-red'>-6.61</text>
+                                <text class="text-[28px] text-right text-red">-6.61</text>
                             </view>
-                            <view class='flex mt-[20px] items-center justify-between'>
-                                <view class='flex items-center text-[22px]'>
+                            <view class="flex mt-[20px] items-center justify-between">
+                                <view class="flex items-center text-[22px]">
                                     <text>{{ item.paid_price }} -</text>
-                                    <text class='red-text'>> 1.4896</text>
+                                    <text class="red-text">> 1.4896</text>
                                 </view>
-                                <view class='font-bold text-[22px]'>
+                                <view class="font-bold text-[22px]">
                                     {{ item.type === 1 ? t('tabBar.position.Buy') : t('tabBar.position.Sell') }}
                                 </view>
                             </view>
@@ -91,72 +93,77 @@
                     </view>
                 </view>
             </scroll-view>
-            <view v-else class='grid place-items-center text-center mt-[40px]'>
-                <image class='w-[340px] h-[340px]' src='/static/images/position.png'></image>
+            <view v-else class="grid place-items-center text-center mt-[40px]">
+                <image class="w-[340px] h-[340px]" src="/static/images/position.png"></image>
             </view>
         </view>
-        <view v-show='showOrderDetail' class='order-wrap'>
-            <view class='detail pt-[28px]'>
-                <view class='income-wrap flex flex-col items-center justify-center bg-[#f5f7f9]'>
-                    <text class='detail-lever px-[30px] text-[22px]'>x{{ editInfo.lever }}</text>
-                    <text class='text-[76px] font-bold green-text my-[20px]'>
+        <view v-show="showOrderDetail" class="order-wrap">
+            <view class="detail pt-[28px]">
+                <view class="income-wrap flex flex-col items-center justify-center bg-[#f5f7f9]">
+                    <text class="detail-lever px-[30px] text-[22px]">x{{ editInfo.lever }}</text>
+                    <text class="text-[76px] font-bold green-text my-[20px]">
                         1730
                     </text>
-                    <text class='text-[22px]'>
-                        市價
+                    <text class="text-[22px]">
+                        {{ t('tabBar.position.marketPrice') }}
                     </text>
                 </view>
-                <view class='stop-wrap p-[30px] bg-[#f5f7f9]'>
-                    <view class='row'>
-                        <view class='flex items-center'>
+                <view class="stop-wrap p-[30px] bg-[#f5f7f9]">
+                    <view class="row">
+                        <view class="flex items-center">
                             <text>{{ editInfo.paid_price }} -</text>
-                            <text class='green-text'>> 1.27532</text>
+                            <text class="green-text">> 1.27532</text>
                         </view>
-                        <text class='hands text-[22px]'>{{ editInfo.quantity }}</text>
-                        <text class='font-bold text-[22px] text-right'>
+                        <text class="hands text-[22px]">{{ editInfo.quantity }}</text>
+                        <text class="font-bold text-[22px] text-right">
                             {{ editInfo.type === 1 ? t('tabBar.position.Buy') : t('tabBar.position.Sell') }}
                         </text>
                     </view>
-                    <view class='flex items-center justify-between mt-[18px]'>
-                        <text>止盈</text>
-                        <view class='flex items-center'>
-                            <text class='mr-[20px]'>{{ editInfo.stop_surplus }}</text>
-                            <image class='w-[36px] h-[36px]' src='/static/images/icon-edit.png'></image>
+                    <view class="flex items-center justify-between mt-[18px]">
+                        <text>{{ t('tabBar.position.StopSurplus') }}</text>
+                        <view class="flex items-center">
+                            <text class="mr-[20px]">{{ editInfo.stop_surplus }}</text>
+                            <image class="w-[36px] h-[36px]" src="/static/images/icon-edit.png"></image>
                         </view>
                     </view>
-                    <view class='flex items-center justify-between mt-[18px]'>
-                        <text>止損</text>
-                        <view class='flex items-center'>
-                            <text class='mr-[20px]'>{{ editInfo.stop_loss }}</text>
-                            <image class='w-[36px] h-[36px]' src='/static/images/icon-edit.png'></image>
+                    <view class="flex items-center justify-between mt-[18px]">
+                        <text>{{ t('tabBar.position.StopLoss') }}</text>
+                        <view class="flex items-center">
+                            <text class="mr-[20px]">{{ editInfo.stop_loss }}</text>
+                            <image class="w-[36px] h-[36px]" src="/static/images/icon-edit.png"></image>
                         </view>
                     </view>
                 </view>
-                <view class='group sub-title'>
-                    <view class='flex items-center justify-between text-[26px]'>
-                        <text>保證金</text>
+                <view class="group sub-title">
+                    <view class="flex items-center justify-between text-[26px]">
+                        <text>{{ t('tabBar.position.SecurityDeposit') }}</text>
                         <text>{{ editInfo.assure }}</text>
                     </view>
-                    <view class='flex items-center justify-between text-[22px] mt-[15px]'>
-                        <text>订单号</text>
+                    <view class="flex items-center justify-between text-[22px] mt-[15px]">
+                        <text>{{ t('tabBar.position.OrderNumber') }}</text>
                         <text>{{ editInfo.order_num }}</text>
                     </view>
-                    <view class='mt-[120px] flex items-center justify-between text-[22px] text-black'>
-                        <text>下單時間</text>
+                    <view class="mt-[120px] flex items-center justify-between text-[22px] text-black">
+                        <text>{{ t('tabBar.position.OrderTime') }}</text>
                         <text>{{ editInfo.created_at }}</text>
                     </view>
                 </view>
-                <view v-if='editInfo.status === 1'
-                      class='btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]'
-                      @click='handClose'>
-                    <text class='font-bold text-white'>平 倉</text>
+                <view
+                    v-if="editInfo.status === 1"
+                    class="btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]"
+                    @click="handClose"
+                >
+                    <text class="font-bold text-white">{{ t('tabBar.position.ClosePsition') }}</text>
                 </view>
-                <view v-else class='btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]'
-                      @click='handCancel'>取 消 挂 单
+                <view
+                    v-else class="btn flex items-center justify-center text-[30px] h-[85px] bg-black rounded-[40px]"
+                    @click="handCancel"
+                >
+                    {{ t('tabBar.position.TakeTheCancellationOrder') }}
                 </view>
                 <image
-                    class='w-[88px] h-[88px] close-btn' src='/static/images/icon-close-contract.png'
-                    @click='showOrderDetail = false'
+                    class="w-[88px] h-[88px] close-btn" src="/static/images/icon-close-contract.png"
+                    @click="showOrderDetail = false"
                 ></image>
             </view>
         </view>
@@ -173,28 +180,29 @@ const loading = ref(false)
 const editInfo = ref({
     stop_surplus: 0,
     stop_loss: 0,
+    id: null,
 })
+const showOrderDetail = ref(false)
 
 function showOrder(info) {
     editInfo.value = info
     showOrderDetail.value = true
 }
 
-const showOrderDetail = ref(false)
-
 const { t } = useI18n()
 
-const tabs = [
-    'Position',
-    'Entrust',
-]
+function tabs() {
+    return [
+        t('tabBar.position.Position'),
+        t('tabBar.position.Entrust'),
+    ]
+}
 
 const userStore = useUserStore()
 
 function toPage(url) {
     uni.navigateTo({ url })
 }
-
 
 const list = ref([])
 
@@ -226,7 +234,7 @@ function showToast(message) {
 // 上拉加载更多数据
 function loadMore() {
     if (page.value.page >= page.value.max) {
-        showToast('沒有更多數據了')
+        showToast(t('tabBar.position.NoMoreData'))
         return
     }
     page.value.page++
@@ -259,14 +267,14 @@ onLoad(() => {
 
 function handClose() {
     uni.showModal({
-        title: '提示',
-        content: '是否確認平倉？',
+        title: t('tabBar.position.prompt'),
+        content: t('tabBar.position.closingThePosition'),
         success: (res) => {
             if (res.confirm) {
                 $api.post('/market/hand_close_contract', {
                     id: editInfo.value.id,
-                }).then((res) => {
-                    showToast('平倉成功')
+                }).then(() => {
+                    showToast(t('tabBar.position.ClosedPositionSuccessfully'))
                     showOrderDetail.value = false
                     getHistory()
                 })
@@ -277,14 +285,14 @@ function handClose() {
 
 function handCancel() {
     uni.showModal({
-        title: '提示',
-        content: '是否確認取消挂單？',
+        title: t('tabBar.position.prompt'),
+        content: t('tabBar.position.cancelThePendingOrder'),
         success: (res) => {
             if (res.confirm) {
                 $api.post('/market/hand_cancel_contract', {
                     id: editInfo.value.id,
-                }).then((res) => {
-                    showToast('取消挂單成功')
+                }).then(() => {
+                    showToast(t('tabBar.position.orderSucceededProcedure'))
                     showOrderDetail.value = false
                     getHistory()
                 })
@@ -411,5 +419,4 @@ navigationStyle: custom
         }
     }
 }
-
 </style>

@@ -1,5 +1,19 @@
 {
   "tabBar": {
+    "history": {
+      "HistoricalOrders": "과거 주문",
+      "buy": "사다",
+      "StopSurplus": "흑자를 멈춰라",
+      "HandlingFees": "취급 수수료",
+      "StopLoss": "손절매",
+      "SecurityDeposit": "보증금",
+      "OrderNumber": "주문 번호",
+      "OrderTime": "주문 시간",
+      "ClosingTime": "폐관 시간",
+      "ClosingType": "닫는 유형",
+      "ManualOperation": "수동 조작",
+      "NoMoreData": "더 이상 데이터가 없습니다."
+    },
     "home": {
       "hot": "인기 있는",
       "news": "소식",
@@ -22,7 +36,11 @@
       "AboutUs": "우리에 관해서",
       "Logout": "로그아웃",
       "Cancel": "취소",
-      "Confirm": "확인하다"
+      "Confirm": "확인하다",
+      "LogOutFailed": "로그아웃 실패",
+      "LogOut": "로그아웃",
+      "ConfigLout": "로그아웃하시겠습니까?",
+      "CopySuccess": "복제 성공"
     },
     "position": {
       "RealAccount": "실제 계정",
@@ -31,12 +49,30 @@
       "Withdraw": "물러서다",
       "Deposit": "보증금",
       "Buy": "사다",
-      "Sell": "팔다"
+      "Sell": "팔다",
+      "marketPrice": "시가",
+      "StopSurplus": "흑자를 멈춰라",
+      "StopLoss": "손절매",
+      "SecurityDeposit": "보증금",
+      "OrderNumber": "주문 번호",
+      "OrderTime": "주문 시간",
+      "ClosePsition": "포지션 청산",
+      "TakeTheCancellationOrder": "취소 주문 받기",
+      "Position": "위치",
+      "Entrust": "위탁",
+      "NoMoreData": "더 이상 데이터가 없습니다.",
+      "prompt": "프롬프트",
+      "closingThePosition": "포지션 청산을 확인합니까?",
+      "ClosedPositionSuccessfully": "성공적으로 포지션을 마감했습니다.",
+      "cancelThePendingOrder": "지정가 주문 취소를 확인하시겠습니까?",
+      "orderSucceededProcedure": "보류 중인 주문을 취소하는 데 성공했습니다. 절차"
     },
     "quotes": {
       "EnterTheContentHere": "여기에 내용을 입력합니다.",
       "Market": "시장",
-      "PleaseSelect": "선택해 주세요"
+      "PleaseSelect": "선택해 주세요",
+      "NoDataAvailable": "사용 가능한 데이터가 없습니다.",
+      "foreignExchange": "외환"
     }
   },
   "common": {
@@ -46,7 +82,13 @@
       "Send": "보내기",
       "Submit": "전송",
       "ExistingAccount": "기존 계정",
-      "Login": "로그인"
+      "Login": "로그인",
+      "PleaseEnterYourEmail": "이메일 주소를 입력해 주세요",
+      "PleaseEnterYourPassword": "비밀번호를 입력해 주세요",
+      "PleaseEnterYourVerificationCode": "인증 코드를 입력해 주세요",
+      "ResetPasswordSuccessfully": "비밀번호 재설정에 성공했습니다.",
+      "VerificationCodeSentSuccessfully": "인증 코드가 성공적으로 전송되었습니다.",
+      "Back": "뒤로"
     },
     "login": {
       "Login": "로그인",
@@ -55,14 +97,32 @@
       "ForgotYourPassword": "비밀번호를 잊으셨나요?",
       "Retrieve": "되찾다",
       "haveAnAccount": "계정이 있으신가요?",
-      "Register": "등록기"
+      "Register": "등록기",
+      "PleaseEnterYourEmail": "이메일 주소를 입력해 주세요",
+      "PleaseEnterYourPassword": "비밀번호를 입력해 주세요",
+      "LoginSuccessfully": "로그인에 성공했습니다."
     },
     "register": {
       "Register": "등록기",
-      "SignUpToJoin": "가입하기"
+      "SignUpToJoin": "가입하기",
+      "Email": "이메일",
+      "Password": "암호",
+      "ConfirmPassword": "비밀번호 확인",
+      "VerificationCode": "인증 코드",
+      "InvitationCode": "초대 코드(선택 사항)",
+      "PleaseEnterYourEmail": "이메일 주소를 입력해 주세요",
+      "PleaseEnterYourPassword": "비밀번호를 입력해 주세요",
+      "PleaseEnterYourConfirmPassword": "확인 비밀번호를 입력해 주세요",
+      "PleaseEnterYourVerificationCode": "인증 코드를 입력해 주세요",
+      "TheTwoPasswordsAreInconsistent": "두 암호가 일치하지 않습니다.",
+      "RegisterSuccessfully": "성공적으로 등록하십시오.",
+      "Back": "뒤로"
     }
   },
   "mine": {
+    "about": {
+      "AboutUs": "우리에 관해서"
+    },
     "addBank": {
       "bankTitle": "플랫폼은 실시간으로 정보 보안을 보장하기 위해 정보를 암호화합니다",
       "Save": "구해내다",
@@ -70,13 +130,19 @@
       "bankCard": "은행 카드를 입력해 주세요",
       "account": "계정 소유자를 입력하십시오.",
       "bankAddress": "은행 주소를 입력해 주세요",
-      "bankCode": "은행 국제 코드를 입력하십시오."
+      "bankCode": "은행 국제 코드를 입력하십시오.",
+      "AddSuccess": "성공 추가",
+      "AddFailed": "추가 실패",
+      "AddBankCard": "은행 카드 추가"
     },
     "addWallet": {
       "ChoiceOfCurrency": "통화 선택",
       "AddAddress": "주소 추가",
       "Save": "구해내다",
-      "addressHere": "여기에 주소를 입력하십시오."
+      "addressHere": "여기에 주소를 입력하십시오.",
+      "PleaseSelectCurrency": "통화를 선택하십시오.",
+      "PleaseEnterAddress": "주소를 입력해 주세요",
+      "AddWallet": "지갑 추가"
     },
     "certified": {
       "UploadIDPhoto": "증명사진 업로드",
@@ -84,25 +150,43 @@
       "cerTitle": "플랫폼은 실시간으로 정보 보안을 보장하기 위해 정보를 암호화합니다",
       "Submit": "전송",
       "realName": "실명을 입력해 주세요",
-      "idNumber": "ID 번호를 입력해 주세요"
+      "idNumber": "ID 번호를 입력해 주세요",
+      "Certified": "인증",
+      "UploadFailed": "업로드 실패"
     },
     "changePassword": {
       "Submit": "전송",
       "inputNewPassWord": "새 비밀번호를 입력하십시오.",
       "reNewPassWord": "비밀번호 확인을 입력해 주세요",
-      "oldPassword": "이전 비밀번호를 입력하십시오."
+      "oldPassword": "이전 비밀번호를 입력하십시오.",
+      "ChangeSuccess": "성공 변경",
+      "ChangePassword": "비밀번호 변경"
     },
     "option": {
       "Buy": "사다",
+      "Sell": "팔다",
       "amount": "분량",
       "duration": "기간",
       "HandlingFee": "수수료",
       "OrderTime": "주문 시간",
       "SettlementTime": "정산 시간",
-      "ProfitLoss": "이익과 손실"
+      "ProfitLoss": "이익과 손실",
+      "position": "위치",
+      "history": "역사",
+      "NoMoreData": "더 이상 데이터가 없습니다."
+    },
+    "service": {
+      "CustomerService": "고객 서비스"
     },
     "userInfo": {
-      "Submit": "전송"
+      "Submit": "전송",
+      "userInfo": "사용자 정보"
+    },
+    "wallet": {
+      "DeleteFailed": "삭제 실패",
+      "DeleteSuccess": "삭제 성공",
+      "Purse": "지갑",
+      "BankCard": "은행 카드"
     }
   },
   "position": {
@@ -122,14 +206,41 @@
       "High": "높이",
       "volume": "음량",
       "Sell": "팔다",
-      "Buy": "사다"
+      "Buy": "사다",
+      "Order": "주문",
+      "MarketPrice": "시가",
+      "OrderPrice": "주문 가격",
+      "StopSurplus": "흑자를 멈춰라",
+      "PriceLimit": "가격 제한",
+      "StopLoss": "손절매",
+      "Quantity": "양",
+      "Lever": "지레",
+      "HandlingFee": "수수료",
+      "CashDeposit": "현금 입금",
+      "PlaceAnOrder": "주문하기",
+      "AvailableBalance": "사용 가능한 잔액",
+      "TransactionPairs": "트랜잭션 쌍",
+      "direction": "방향",
+      "BuyLess": "적게 구매하기",
+      "BuyMore": "더 구매하기",
+      "SelectExpirationDate": "만료일 선택",
+      "RateOfReturn": "기대 수익률",
+      "TransactionQuantity": "거래 수량",
+      "ExpectedReturns": "예상 수익",
+      "HandlingFees": "취급 수수료",
+      "Contract": "계약",
+      "Option": "선택"
     },
     "deposit": {
       "ChoiceCurrency": "통화 선택",
-      "TokenAddress": "TOKEN을 다음 주소로 이체"
+      "TokenAddress": "TOKEN을 다음 주소로 이체",
+      "CopySuccess": "복사 성공",
+      "deposit": "보증금"
     },
     "record": {
-      "pass": "합격"
+      "pass": "합격",
+      "deposit": "보증금",
+      "withdraw": "물러서다"
     },
     "withDraw": {
       "amount": "분량",

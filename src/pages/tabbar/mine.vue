@@ -177,7 +177,7 @@ async function logout() {
             }
             else {
                 uni.showToast({
-                    title: 'Log out failed',
+                    title: t('tabBar.mine.LogOutFailed'),
                     icon: 'none',
                 })
             }
@@ -185,8 +185,8 @@ async function logout() {
     }
 
     uni.showModal({
-        title: 'Log out',
-        content: 'Are you sure you want to log out?',
+        title: t('tabBar.mine.LogOut'),
+        content: t('tabBar.mine.ConfigLout'),
         success: modalSuccess,
     })
 }
@@ -200,7 +200,7 @@ function copyInviteCode() {
         data: userStore.userInfo.invite_code,
         success() {
             uni.showToast({
-                title: 'Copy success',
+                title: t('tabBar.mine.CopySuccess'),
                 icon: 'none',
             })
         },
