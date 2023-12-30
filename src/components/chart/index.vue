@@ -26,7 +26,7 @@
 <script lang='ts' setup>
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 import { useI18n } from 'vue-i18n'
-import { defineProps, getCurrentInstance, reactive, ref } from 'vue'
+import { getCurrentInstance, reactive, ref } from 'vue'
 import { init } from 'klinecharts'
 import pakoInflate from 'pako/dist/pako_inflate'
 

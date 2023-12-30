@@ -94,6 +94,7 @@
     },
     "option": {
       "Buy": "Buy",
+      "Sell": "Sell",
       "amount": "amount",
       "duration": "duration",
       "HandlingFee": "Handling fee",

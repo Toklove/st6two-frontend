@@ -10,45 +10,46 @@
                 <USubsection
                     v-model='current'
                     :list='subList' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
+                    @change='change'
                 ></USubsection>
             </view>
         </FuiNavBar>
         <view class='mt-[20px] mx-[34px]'>
             <view v-if='list.length > 0'>
-                <view class='order-row px-[30px] py-[40px] text-[22px]'>
+                <view v-for='item in list' :key='item.id' class='order-row px-[30px] py-[40px] text-[22px]'>
                     <view class='flex items-center justify-between text-[30px]'>
-                        <text>ETHUSD</text>
-                        <text>2248.35</text>
+                        <text>{{ item.market.full_name }}</text>
+                        <text>{{ item.buy_price }}</text>
                     </view>
-                    <view class='font-bold text-right buy-1 mt-[14px]'>
-                        {{ t('mine.option.Buy') }}
+                    <view :class='item.type === 1?"buy-2":"buy-1"' class='font-bold text-right mt-[14px]'>
+                        {{ item.type === 1 ? t('mine.option.Sell') : t('mine.option.Buy') }}
                     </view>
                     <view class='line mt-[30px]'></view>
                     <view class='flex items-center justify-between mt-[20px]'>
                         <view class='flex flex-1 items-center justify-between'>
                             <text class='sub-title'>{{ t('mine.option.amount') }}</text>
-                            <text>0.0000</text>
+                            <text>{{ item.quantity }}</text>
                         </view>
                         <view class='flex flex-1 items-center justify-between ml-[50px]'>
                             <text class='sub-title'>{{ t('mine.option.duration') }}</text>
-                            <text>0.0000</text>
+                            <text>{{ item.hold_time }}</text>
                         </view>
                     </view>
                     <view class='flex items-center justify-between mt-[20px]'>
                         <text class='sub-title'>{{ t('mine.option.HandlingFee') }}</text>
-                        <text>0.1</text>
+                        <text>{{ item.all_fee }}</text>
                     </view>
                     <view class='flex items-center justify-between mt-[20px] sub-title'>
                         <text>{{ t('mine.option.OrderTime') }}</text>
-                        <text>2023-12-16 12:01:06</text>
+                        <text>{{ item.created_at }}</text>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px] sub-title'>
+                    <view v-if='item.status === 1' class='flex items-center justify-between mt-[20px] sub-title'>
                         <text>{{ t('mine.option.SettlementTime') }}</text>
-                        <text>2023-12-16 12:01:36</text>
+                        <text>{{ item.sell_time }}</text>
                     </view>
-                    <view class='flex items-center justify-between mt-[20px] sub-title'>
+                    <view v-if='item.status === 1' class='flex items-center justify-between mt-[20px] sub-title'>
                         <text>{{ t('mine.option.ProfitLoss') }}</text>
-                        <text class='win'>0.0000</text>
+                        <text class='win'>{{ item.profit }}</text>
                     </view>
                 </view>
             </view>
@@ -71,6 +72,8 @@ function clickBack() {
 
 const { t } = useI18n()
 
+const loading = ref(false)
+
 const subList = [
     {
         name: 'position',
@@ -82,6 +85,61 @@ const subList = [
 const current = ref(0)
 
 const list = ref([])
+
+// 分页参数
+const page = ref({
+    page: 1,
+    max: 1,
+    status: 0,
+})
+
+function change(e) {
+    loading.value = true
+    page.value.status = e
+    page.value.page = 1
+    getHistory()
+}
+
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
+// 上拉加载更多数据
+function loadMore() {
+    if (page.value.page >= page.value.max) {
+        showToast('沒有更多數據了')
+        return
+    }
+    page.value.page++
+    getHistory()
+}
+
+onReachBottom(() => {
+    loadMore()
+})
+
+function getHistory() {
+    $api.get('/market/option_order_history', page.value).then((res) => {
+        page.value.max = res.data.last_page
+        const data = res.data.data.map((item) => {
+            item.show_detail = false
+            item.market.logo = $api.staticUrl(item.market.logo)
+            return item
+        })
+        if (page.value.page === 1)
+            list.value = data
+        else
+            list.value = list.value.concat(data)
+        loading.value = false
+    })
+}
+
+onLoad(() => {
+    getHistory()
+})
 </script>
 
 <route lang='yaml'>

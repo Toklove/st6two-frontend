@@ -18,7 +18,8 @@
                        class='flex-1 ml-[19px] input' type='text'>
             </view>
             <view class='mt-[30px] text-center' @click='uploadFrontend'>
-                <image :src='formData.front??"/static/images/real-upload.png"' class='mt-[22px] icon-upload'></image>
+                <image :src='formData.front !==null?formData.front:"/static/images/real-upload.png"'
+                       class='mt-[22px] icon-upload'></image>
             </view>
             <view class='mt-[30px] text-center' @click='uploadBackend'>
                 <image :src='formData.back??"/static/images/real-upload.png"' class='mt-[22px] icon-upload'></image>
@@ -64,9 +65,11 @@ function uploadFrontend() {
         async success(res) {
             // 上传图片
             const { data, code } = await $api.uploadFile('/common/upload', res.tempFilePaths[0])
-            if (code === 1)
+            console.log(data, code)
+            if (code === 1) {
                 formData.front = data.url
-            else
+                console.log(formData.front)
+            } else
                 showToast('Upload failed')
         },
     })
