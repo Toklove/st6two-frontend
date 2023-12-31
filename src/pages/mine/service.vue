@@ -2,10 +2,6 @@
     <page-meta />
     <div class="init-top" />
     <layout class-name="IndexRouter">
-        <iframe
-            class="chat"
-            src="https://secure.livechatinc.com/customer/action/open_chat?license_id=16828284&group=0&embedded=1&widget_version=3&unique_groups=0"
-        ></iframe>
     </layout>
 </template>
 

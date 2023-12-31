@@ -2,9 +2,9 @@
     <page-meta />
     <view class="init-top" />
     <layout class-name="IndexRouter">
-        <view class="flex flex-row justify-between items-center px-[34px]">
+        <view class="flex flex-row justify-between items-center px-[34px]" @click="toLogin">
             <text class="text-[40px] font-bold">
-                {{ userStore.userInfo ? userStore.userInfo.nickname : 'Log in' }}
+                {{ userStore.userInfo.nickname ? userStore.userInfo.nickname : 'Log in' }}
             </text>
             <view class="flex items-center">
                 <image class="w-[41px] h-[40px]" src="/static/images/msg.png"></image>
@@ -139,6 +139,13 @@ let socket = null
 const loading = ref(false)
 
 const userStore = useUserStore()
+
+function toLogin() {
+    if (userStore.userInfo.email)
+        uni.navigateTo({ url: '/pages/tabbar/mine' })
+    else
+        uni.navigateTo({ url: '/pages/common/login' })
+}
 
 function toPair(pair) {
     uni.navigateTo({ url: `/pages/position/chart?pair=${pair}` })

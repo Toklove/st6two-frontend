@@ -8,20 +8,26 @@
                     <FuiIcon name="arrowleft" @click="clickBack"></FuiIcon>
                 </view>
                 <USubsection
-                    v-model="current"
-                    :list="subList()" active-color="white" button-color="#3640f0" class="w-[350px]" rounded
+                    v-model="current" :list="subList()"
+                    active-color="white" button-color="#3640f0" class="w-[350px]" rounded @change="change"
                 ></USubsection>
             </view>
         </FuiNavBar>
         <view class="mt-[20px] mx-[34px]">
             <view v-if="list.length > 0">
-                <view class="card flex items-center justify-between bg-[#f5f7f9]">
+                <view v-for="item in list" :key="item.id" class="card flex items-center justify-between bg-[#f5f7f9]">
                     <view class="text-[28px]">
-                        <view class="">$1000.00</view>
-                        <view class="text-[22px] mt-[20px]">2023-12-19 13:42:20</view>
+                        <view class="">${{ item.amount }}</view>
+                        <view class="text-[22px] mt-[20px]">{{ item.created_at }}</view>
                     </view>
                     <view>
-                        <text class="text-[28px] green-text">{{ t('position.record.pass') }}</text>
+                        <text
+                            :class="item.status === 0 ? '' : (item.status === 1 ? 'green-text' : 'red-text')"
+                            class="text-[28px]"
+                        >
+                            {{ item.status === 0 ? t('position.record.wait') : (item.status === 1 ? t('position.record.pass') : t('position.record.fail'))
+                            }}
+                        </text>
                     </view>
                 </view>
             </view>
@@ -54,9 +60,65 @@ function subList() {
         },
     ]
 }
-const current = ref(0)
 
-const list = ref([1])
+const list = ref([])
+const loading = ref(false)
+
+// 分页参数
+const page = ref({
+    page: 1,
+    max: 1,
+    type: 0,
+})
+
+function change(e) {
+    console.log(e)
+    loading.value = true
+    page.value.type = e
+    page.value.page = 1
+    getHistory()
+}
+
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
+
+// 上拉加载更多数据
+function loadMore() {
+    if (page.value.page >= page.value.max) {
+        showToast(t('tabBar.position.NoMoreData'))
+        return
+    }
+    page.value.page++
+    getHistory()
+}
+
+onReachBottom(() => {
+    loadMore()
+})
+
+function getHistory() {
+    $api.get('/wallet/record', page.value).then((res) => {
+        page.value.max = res.data.last_page
+        const data = res.data.data.map((item) => {
+            return item
+        })
+        if (page.value.page === 1)
+            list.value = data
+        else
+            list.value = list.value.concat(data)
+        loading.value = false
+    })
+}
+
+onLoad(() => {
+    getHistory()
+})
+
+const current = ref(0)
 </script>
 
 <route lang='yaml'>

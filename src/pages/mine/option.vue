@@ -74,7 +74,18 @@ const { t } = useI18n()
 
 const loading = ref(false)
 
-function subList() {
+// function subList() {
+//     return [
+//         {
+//             name: t('mine.option.position'),
+//         },
+//         {
+//             name: t('mine.option.history'),
+//         },
+//     ]
+// }
+
+const subList = computed(() => {
     return [
         {
             name: t('mine.option.position'),
@@ -83,7 +94,8 @@ function subList() {
             name: t('mine.option.history'),
         },
     ]
-}
+})
+
 const current = ref(0)
 
 const list = ref([])

@@ -245,6 +245,7 @@
     "withDraw": {
       "amount": "amount",
       "HandlingCharge": "Handling charge",
+      "SelectBank": "Select bank card",
       "WalletAddress": "Wallet address",
       "Submit": "Submit",
       "inputAmount": "Please enter the amount",

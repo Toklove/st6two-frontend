@@ -58,7 +58,7 @@
       "OrderTime": "訂購時間",
       "ClosePsition": "平倉",
       "TakeTheCancellationOrder": "接受取消訂單",
-      "Position": "位置",
+      "Position": "合约",
       "Entrust": "委託",
       "NoMoreData": "沒有更多數據",
       "prompt": "提示",
@@ -171,7 +171,7 @@
       "OrderTime": "訂購時間",
       "SettlementTime": "結算時間",
       "ProfitLoss": "損益",
-      "position": "位置",
+      "position": "合约",
       "history": "歷史",
       "NoMoreData": "沒有更多數據"
     },
@@ -239,13 +239,16 @@
     },
     "record": {
       "pass": "通過",
+      "wait": "待审核",
+      "fail": "失敗",
       "deposit": "存款",
-      "withdraw": "撤回"
+      "withdraw": "取款"
     },
     "withDraw": {
-      "amount": "量",
+      "amount": "金額",
       "HandlingCharge": "手續費",
-      "WalletAddress": "錢包位址",
+      "WalletAddress": "錢包地址",
+      "SelectBank": "選擇銀行卡",
       "Submit": "提交",
       "inputAmount": "請輸入金額",
       "Purse": "錢包",
