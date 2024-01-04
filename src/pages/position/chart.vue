@@ -28,7 +28,7 @@
                     ></image>
                     <view class="flex flex-col ml-[15px] text-[30px]">
                         <text>{{ info.full_name }}</text>
-                        <text>{{ nowData.lastPrice.toFixed(2) }}</text>
+                        <text>{{ nowData.close }}</text>
                     </view>
                 </view>
                 <text
@@ -40,7 +40,7 @@
             </view>
 
             <!-- TODO APP中使用webview实现 -->
-            <KLineChart :symbol="chartPair" />
+            <KLineChart :symbol="symbol" />
 
             <view class="statistics mt-[29px] mx-[34px]">
                 <text class="text-[30px]">
@@ -55,7 +55,7 @@
                                 <image class="w-[20px] h-[20px] mr-[10px]" src="/static/images/icon-dollar.png"></image>
                                 <text class="text-[26px] sub-title">{{ t('position.chart.Open') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">{{ nowData.open.toFixed(2) }}</text>
+                            <text class="text-[30px] leading-[52px]">{{ nowData.open }}</text>
                         </view>
                         <view class="mt-[20px]">
                             <view class="flex items-center">
@@ -65,7 +65,7 @@
                                 ></image>
                                 <text class="text-[26px] sub-title">{{ t('position.chart.Low') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">{{ nowData.low.toFixed(2) }}</text>
+                            <text class="text-[30px] leading-[52px]">{{ nowData.low }}</text>
                         </view>
                     </view>
                     <view class="flex-1">
@@ -77,7 +77,7 @@
                                 ></image>
                                 <text class="text-[26px] sub-title">{{ t('position.chart.High') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">{{ nowData.high.toFixed(2) }}</text>
+                            <text class="text-[30px] leading-[52px]">{{ nowData.high }}</text>
                         </view>
                         <view class="mt-[20px]">
                             <view class="flex items-center">
@@ -87,7 +87,7 @@
                                 ></image>
                                 <text class="text-[26px] sub-title">{{ t('position.chart.volume') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">{{ nowData.vol.toFixed(2) }}</text>
+                            <text class="text-[30px] leading-[52px]">{{ nowData.volume }}</text>
                         </view>
                     </view>
                 </view>
@@ -123,7 +123,7 @@
                 </view>
                 <view class="now-price grid place-items-center bg-[#f5f7f9]">
                     <text :class="diffAmount > 0 ? 'green-text' : 'red-text'" class="text-[76px] font-bold">
-                        {{ nowData.lastPrice.toFixed(2) }}
+                        {{ nowData.close }}
                     </text>
                 </view>
                 <view class="mx-[24px] px-[24px] bg-[#f5f7f9] rounded-[20px]">
@@ -142,7 +142,7 @@
                         </view>
                         <text class="text-[24px] sub-title">
                             {{ t('position.chart.PriceLimit') }} =>
-                            {{ nowData.lastPrice.toFixed(2) }}
+                            {{ nowData.close }}
                         </text>
                     </view>
                     <view class="row py-[20px]">
@@ -164,7 +164,7 @@
                         </view>
                         <text class="text-[24px] sub-title">
                             {{ t('position.chart.PriceLimit') }} =>
-                            {{ nowData.lastPrice.toFixed(2) }}
+                            {{ nowData.close }}
                         </text>
                     </view>
                     <view class="row py-[20px]">
@@ -186,7 +186,7 @@
                         </view>
                         <text class="text-[24px] sub-title">
                             {{ t('position.chart.PriceLimit') }} =>
-                            {{ nowData.lastPrice.toFixed(2) }}
+                            {{ nowData.close }}
                         </text>
                     </view>
                     <view class="row py-[20px]">
@@ -241,7 +241,7 @@
                 <view>
                     <view class="now-price grid place-items-center bg-[#f5f7f9]">
                         <text :class="diffAmount > 0 ? 'green-text' : 'red-text'" class="text-[76px] font-bold">
-                            {{ nowData.lastPrice.toFixed(2) }}
+                            {{ nowData.close }}
                         </text>
                     </view>
                     <view class="time-wrap mx-[24px] rounded-[20px]">
@@ -314,7 +314,6 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-import pako from 'pako/dist/pako_inflate'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
@@ -329,12 +328,6 @@ const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
 
 // 从路由pair参数获取symbol
 const symbol = ref('')
-
-const chartPair = computed(() => {
-    let val = symbol.value.toLocaleLowerCase()
-    val = val.replace('-', '')
-    return `${val}t`
-})
 
 const current = ref(0)
 
@@ -372,35 +365,23 @@ const contractFrom = ref({
 })
 
 const nowData = ref({
-    open: 51732,
-    high: 52785.64,
-    low: 51000,
-    close: 52735.63,
-    amount: 13259.24137056181,
-    vol: 687640987.4125315,
-    count: 448737,
-    bid: 52732.88,
-    bidSize: 0.036,
-    ask: 52732.89,
-    askSize: 0.583653,
-    lastPrice: 52735.63,
-    lastSize: 0.03,
+    close: 1,
+    high: 1,
+    low: 11,
+    open: 11,
+    symbol: 'USD/AUD',
+    timestamp: 1704270547000,
+    volume: 4,
 })
 
 const prevData = ref({
-    open: 51732,
-    high: 52785.64,
-    low: 51000,
-    close: 52735.63,
-    amount: 13259.24137056181,
-    vol: 687640987.4125315,
-    count: 448737,
-    bid: 52732.88,
-    bidSize: 0.036,
-    ask: 52732.89,
-    askSize: 0.583653,
-    lastPrice: 52735.63,
-    lastSize: 0.03,
+    close: 1,
+    high: 1,
+    low: 11,
+    open: 11,
+    symbol: 'USD/AUD',
+    timestamp: 1704270547000,
+    volume: 4,
 })
 
 function changeOrderPrice(val) {
@@ -415,7 +396,7 @@ function changeStopSurplus(val) {
 
 function changeStopSurplusStatus(val) {
     console.log(val)
-    contractFrom.value.stop_surplus = nowData.value.lastPrice
+    contractFrom.value.stop_surplus = nowData.value.close
     contractFrom.value.disabled_stop_surplus = !val.detail.value
 }
 
@@ -425,7 +406,7 @@ function changeStopLoss(val) {
 }
 
 function changeStopLossStatus(val) {
-    contractFrom.value.stop_loss = nowData.value.lastPrice
+    contractFrom.value.stop_loss = nowData.value.close
     contractFrom.value.disabled_stop_loss = !val.detail.value
 }
 
@@ -459,7 +440,8 @@ function placeContractOrder() {
 
 function createSubTickerRequest() {
     return {
-        sub: `market.${chartPair.value}.ticker`,
+        type: 'subscribe',
+        market: symbol.value,
     }
 }
 
@@ -468,14 +450,14 @@ function handlerData(msg) {
     if (data.ping) {
         socket.send(JSON.stringify({ pong: data.ping }))
     }
-    else if (data.tick) {
+    else {
         prevData.value = nowData.value
-        nowData.value = data.tick
+        nowData.value = data
     }
 }
 
 const diffAmount = computed(() => {
-    return (nowData.value.open - nowData.value.close).toFixed(2)
+    return (nowData.value.open - nowData.value.close).toFixed(6)
 })
 
 function subscribeData() {
@@ -484,13 +466,7 @@ function subscribeData() {
 
 socket.onmessage = (event) => {
     const blob = event.data
-    const fileReader = new FileReader()
-    fileReader.onload = (e) => {
-        const payloadData = new Uint8Array(e.target.result)
-        const msg = pako.inflate(payloadData, { to: 'string' })
-        handlerData(msg)
-    }
-    fileReader.readAsArrayBuffer(blob)
+    handlerData(blob)
 }
 socket.onopen = () => {
     subscribeData()

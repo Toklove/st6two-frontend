@@ -10,7 +10,7 @@ const config: { server: ServerOptions; build: BuildOptions } = {
                 rewrite: (path: string) => path.replace(/^\/api/, '/api'),
             },
             '/ws': {
-                target: 'wss://coinlim.cc/', // 这里是后台ws访问地址
+                target: 'ws://127.0.0.1:3000/', // 这里是后台ws访问地址
                 changeOrigin: true, // 允许跨域设置
                 ws: true, // websocket代理设置
             },

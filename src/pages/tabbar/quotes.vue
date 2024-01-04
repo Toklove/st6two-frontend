@@ -6,7 +6,7 @@
             <view class="flex items-center bg-[#f5f7f9] py-[31px] px-[30px] rounded-[50px]">
                 <image class="w-[35px] h-[38px] mr-[21px]" src="/static/images/icon-search.png"></image>
                 <input
-                    v-model="filters" :placeholder="t(&quot;tabBar.quotes.EnterTheContentHere&quot;)"
+                    v-model="filters" :placeholder="t('tabBar.quotes.EnterTheContentHere')"
                     class="text-[#525252] text-[28px]"
                     type="text"
                 >
@@ -54,7 +54,7 @@
                                 </view>
                             </view>
                             <text class="text-[28px] text-right">
-                                {{ item.nowData.lastPrice.toFixed(2) }}
+                                {{ item.nowData.close.toFixed(2) }}
                             </text>
                             <view
                                 :class="item.diff > 0 ? 'green-block' : 'red-block'"
@@ -80,7 +80,6 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-import pako from 'pako/dist/pako_inflate'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 import FuiEmpty from '~/components/firstui/fui-empty/fui-empty.vue'
 
@@ -127,20 +126,36 @@ async function getMarketByCategory() {
     const res = await $api.get(`/market/list?category_id=${form.value.category_id}`)
     marketList.value = res.data.map((item) => {
         item.logo = $api.staticUrl(item.logo)
+        item.nowData = {
+            close: 1,
+            high: 1,
+            low: 11,
+            open: 11,
+            symbol: 'USD/AUD',
+            timestamp: 1704270547000,
+            volume: 4,
+        }
+        item.prevData = item.nowData
+        item.upOrDown = true
+        item.diff = 1
         return item
     })
-    await changeToSubscribe()
+    // await changeToSubscribe()
     loading.value = false
 }
 
-function changeList(item) {
+async function changeList(item) {
     form.value.category_id = item.id
     form.value.category = item.name
     showDropdown.value = false
-    getMarketByCategory()
+    await changeToUnSubscribe()
+    await getMarketByCategory()
+    await changeToSubscribe()
 }
 
 async function getMarketCategory() {
+    if (categoryList.value.length > 0)
+        return
     const res = await $api.get('/market/category')
     categoryList.value = res.data
     form.value.category_id = categoryList.value[0].id
@@ -153,14 +168,13 @@ function handlerData(msg) {
     if (data.ping) {
         socket.send(JSON.stringify({ pong: data.ping }))
     }
-    else if (data.tick) {
-        const flag = data.ch.split('.')[1]
+    else {
         marketList.value.forEach((item) => {
-            if (flag === item.dataFlag) {
+            if (data.symbol === item.symbol) {
                 item.prevData = item.nowData
-                item.nowData = data.tick
+                item.nowData = data
                 item.upOrDown = item.nowData.close > item.prevData.close
-                item.diff = (item.nowData.open - item.nowData.close).toFixed(2)
+                item.diff = (item.nowData.high - item.nowData.close).toFixed(4)
             }
         })
     }
@@ -168,12 +182,24 @@ function handlerData(msg) {
 
 function createSubTickerRequest(SYMBOL) {
     return {
-        sub: `market.${SYMBOL}.ticker`,
+        type: 'subscribe',
+        market: SYMBOL,
+    }
+}
+
+function createUnSubTickerRequest(SYMBOL) {
+    return {
+        type: 'unsubscribe',
+        market: SYMBOL,
     }
 }
 
 function subscribeData(SYMBOL) {
     socket.send(JSON.stringify(createSubTickerRequest(SYMBOL)))
+}
+
+function unsubscribeData(SYMBOL) {
+    socket.send(JSON.stringify(createUnSubTickerRequest(SYMBOL)))
 }
 
 onUnload(() => {
@@ -183,29 +209,15 @@ onUnload(() => {
 function changeToSubscribe() {
     console.log('切换1111')
     marketList.value.forEach((item) => {
-        console.log(item)
-        item.nowData = {
-            open: 51732,
-            high: 52785.64,
-            low: 51000,
-            close: 52735.63,
-            amount: 13259.24137056181,
-            vol: 687640987.4125315,
-            count: 448737,
-            bid: 52732.88,
-            bidSize: 0.036,
-            ask: 52732.89,
-            askSize: 0.583653,
-            lastPrice: 52735.63,
-            lastSize: 0.03,
-        }
-        item.prevData = item.nowData
-        item.upOrDown = true
-        item.diff = 1
+        subscribeData(item.symbol)
+    })
+    loading.value = false
+}
 
-        item.dataFlag = item.symbol.replace('-', '')
-        item.dataFlag = `${item.dataFlag.toLowerCase()}t`
-        subscribeData(item.dataFlag)
+async function changeToUnSubscribe() {
+    console.log('切换1111')
+    await marketList.value.forEach((item) => {
+        unsubscribeData(item.symbol)
     })
     loading.value = false
 }
@@ -221,20 +233,12 @@ async function loadData() {
 
         socket.onmessage = (event) => {
             const blob = event.data
-            const fileReader = new FileReader()
-            fileReader.onload = (e) => {
-                const payloadData = new Uint8Array(e.target.result)
-                const msg = pako.inflate(payloadData, { to: 'string' })
-                handlerData(msg)
-            }
-            fileReader.readAsArrayBuffer(blob)
+            handlerData(blob)
         }
     }
+    loading.value = false
 }
 
-onLoad(async () => {
-    await loadData()
-})
 onHide(() => {
     socket.close()
 })

@@ -19,7 +19,7 @@
       "news": "新聞",
       "seeMore": "查看更多",
       "market": "市場",
-      "home": "家"
+      "home": "首页"
     },
     "mine": {
       "AccountDetails": "帳戶詳細資訊",
@@ -195,9 +195,9 @@
       "all": "全部",
       "classification": "分類",
       "money": "量",
-      "option": "選擇",
+      "option": "期权",
       "SettlementAmount": "結算金額",
-      "bill": "法案"
+      "bill": "账单"
     },
     "chart": {
       "Statistics": "統計",
@@ -228,8 +228,8 @@
       "TransactionQuantity": "交易數量",
       "ExpectedReturns": "預期回報",
       "HandlingFees": "手續費",
-      "Contract": "契约",
-      "Option": "選擇"
+      "Contract": "合约",
+      "Option": "期权"
     },
     "deposit": {
       "ChoiceCurrency": "貨幣選擇",

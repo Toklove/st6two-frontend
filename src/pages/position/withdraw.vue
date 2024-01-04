@@ -20,7 +20,8 @@
                     {{ t('position.withDraw.amount') }}
                 </text>
                 <input
-                    :placeholder="t('position.withDraw.inputAmount')" class="input mt-[29px] text-[50px] font-bold"
+                    v-model="amount" :placeholder="t('position.withDraw.inputAmount')"
+                    class="input mt-[29px] text-[50px] font-bold"
                     type="number"
                 >
                 <view class="line mt-[29px] mb-[20px]"></view>
@@ -49,7 +50,7 @@
         </view>
         <view class="btn-wrap text-center">
             <view class="bg-black py-[33px] rounded-[20px]">
-                <text class="text-[32px] font-bold text-white">
+                <text class="text-[32px] font-bold text-white" @click="submitWithdraw">
                     {{ t('position.withDraw.Submit') }}
                 </text>
             </view>
@@ -114,6 +115,8 @@ const { t } = useI18n()
 const showWallet = ref(false)
 const showBank = ref(false)
 
+const amount = ref(null)
+
 const currentWallet = ref({
     id: 0,
     address: '',
@@ -127,6 +130,13 @@ const currentBank = ref({
     bank_name: '',
     account: '',
 })
+
+function showToast(message) {
+    uni.showToast({
+        title: message,
+        icon: 'none',
+    })
+}
 
 function changeWallet(data) {
     currentWallet.value = data
@@ -186,7 +196,6 @@ function showPopup() {
 }
 
 async function change(e) {
-    console.log(e)
     if (e === 1) {
         const res = await $api.get('/user/bankList')
         if (res.data.length === 0) {
@@ -213,6 +222,33 @@ async function change(e) {
             currentWallet.value = CryptoList.value[0]
         }
     }
+}
+
+function submitWithdraw() {
+    if (amount.value === null) {
+        showToast(t('position.withDraw.inputAmount'))
+        return
+    }
+
+    let id = 0
+    if (current.value === 0)
+        id = currentWallet.value.id
+    else
+        id = currentBank.value.id
+
+    $api.post('/wallet/withdraw', {
+        amount: amount.value,
+        type: current.value,
+        id,
+    }).then((res) => {
+        if (res.code === 1) {
+            showToast(t('position.withDraw.SubmitSuccess'))
+            $api.back()
+        }
+        else {
+            showToast(t('position.withDraw.SubmitFailed'))
+        }
+    })
 }
 </script>
 

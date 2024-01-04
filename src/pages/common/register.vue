@@ -79,7 +79,7 @@
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
 import { useI18n } from 'vue-i18n'
 import { layoutDataKey } from '~/composables/provide'
 import { $api } from '~/api'
@@ -181,6 +181,12 @@ function decTimer() {
         }
     }, 1000)
 }
+
+onLoad((e) => {
+    console.log(e)
+    if (e.invite_code)
+        form.value.invite_code = e.invite_code
+})
 
 const layoutData = ref({
     showTopBar: true,

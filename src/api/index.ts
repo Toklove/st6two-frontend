@@ -53,7 +53,7 @@ function checkCodeFn(data: ResponseData<any>) {
     console.log('checkCodeFn', data)
     if (data.status === 401 || data.code === 401) {
         uni.showModal({
-            title: '提示',
+            title: 'Tips',
             content: '当前未登录或者登录超时, 请重新登陆',
             success: () => {
                 //
@@ -62,9 +62,11 @@ function checkCodeFn(data: ResponseData<any>) {
                 uni.navigateTo({ url: '/pages/common/login' })
             },
         })
-    } else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
+    }
+    else if (!code.includes(Number(data.status)) && !code.includes(Number(data.code))) {
         showToast(data.message)
-    } else {
+    }
+    else {
         data.code = 1
         data.status = 1
     }
@@ -103,7 +105,8 @@ export const $api: ApiType = {
     back(defaultBackUrl) {
         if (getCurrentPages().length > 1) {
             uni.navigateBack()
-        } else {
+        }
+        else {
             // #ifdef H5
             history.back()
             // #endif
@@ -112,13 +115,14 @@ export const $api: ApiType = {
                 uni.redirectTo({
                     url: defaultBackUrl,
                 })
-            } else {
+            }
+            else {
+                const backTabbarUrl = '/pages/tabbar/index'
                 if (backTabbarUrl) {
                     uni.reLaunch({
                         url: backTabbarUrl,
                     })
                 }
-
             }
             // #endif
         }

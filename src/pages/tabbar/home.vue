@@ -20,14 +20,14 @@
                 <view class="items-center flex">
                     <view
                         v-for="item in marketList.slice(0, 3)" :key="item.id"
-                        class="flex flex-col rounded-[30px] chart-wrap"
+                        class="flex flex-col justify-between rounded-[30px] chart-wrap"
                         @click="toPair(item.symbol)"
                     >
                         <text class="text-[28px] font-bold">
                             {{ item.full_name }}
                         </text>
                         <text class="text-[40px] font-bold">
-                            {{ item.nowData.lastPrice.toFixed(2) }}
+                            {{ item.nowData.close.toFixed(4) }}
                         </text>
                         <view class="mb-[54px] mt-[30px] h-[28px] chart">
                         </view>
@@ -54,8 +54,8 @@
             <view class="mt-[20px]">
                 <swiper
                     :autoplay="true" :indicator-dots="true"
-                    circular class="h-[234px] bg-[#f5f7f9] rounded-[15px]"
-                    vertical
+                    class="h-[234px] bg-[#f5f7f9] rounded-[15px]"
+                    vertical circular
                 >
                     <swiper-item v-for="item in newsList" :key="item.id">
                         <view class="news mr-[56px]">
@@ -106,7 +106,7 @@
                         </view>
                     </view>
                     <text class="text-[28px] text-right">
-                        {{ item.nowData.lastPrice.toFixed(2) }}
+                        {{ item.nowData.close.toFixed(4) }}
                     </text>
                     <view
                         :class="item.diff > 0 ? 'green-block' : 'red-block'"
@@ -124,7 +124,6 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-import pako from 'pako/dist/pako_inflate.js'
 import { useUserStore } from '~/pinia/useUserInfo'
 
 const { t } = useI18n()
@@ -142,7 +141,7 @@ const userStore = useUserStore()
 
 function toLogin() {
     if (userStore.userInfo.email)
-        uni.navigateTo({ url: '/pages/tabbar/mine' })
+        uni.switchTab({ url: '/pages/tabbar/mine' })
     else
         uni.navigateTo({ url: '/pages/common/login' })
 }
@@ -158,6 +157,8 @@ function switchQuotes() {
 const newsList = reactive([])
 
 async function getNewsList() {
+    if (newsList.length > 0)
+        return
     const res = await $api.get('/index/news')
     res.data.forEach((item) => {
         item.image = $api.staticUrl(item.image)
@@ -168,23 +169,19 @@ async function getNewsList() {
 const marketList = ref([])
 
 async function getMarketList() {
+    if (marketList.value.length > 0)
+        return
     const res = await $api.get('/index/market')
     res.data.forEach((item) => {
         item.logo = $api.staticUrl(item.logo)
         item.nowData = {
-            open: 51732,
-            high: 52785.64,
-            low: 51000,
-            close: 52735.63,
-            amount: 13259.24137056181,
-            vol: 687640987.4125315,
-            count: 448737,
-            bid: 52732.88,
-            bidSize: 0.036,
-            ask: 52732.89,
-            askSize: 0.583653,
-            lastPrice: 52735.63,
-            lastSize: 0.03,
+            close: 1,
+            high: 1,
+            low: 11,
+            open: 11,
+            symbol: 'USD/AUD',
+            timestamp: 1704270547000,
+            volume: 4,
         }
         item.prevData = item.nowData
         item.upOrDown = true
@@ -198,14 +195,13 @@ function handlerData(msg) {
     if (data.ping) {
         socket.send(JSON.stringify({ pong: data.ping }))
     }
-    else if (data.tick) {
-        const flag = data.ch.split('.')[1]
+    else {
         marketList.value.forEach((item) => {
-            if (flag === item.dataFlag) {
+            if (data.symbol === item.symbol) {
                 item.prevData = item.nowData
-                item.nowData = data.tick
+                item.nowData = data
                 item.upOrDown = item.nowData.close > item.prevData.close
-                item.diff = (item.nowData.open - item.nowData.close).toFixed(2)
+                item.diff = (item.nowData.high - item.nowData.close).toFixed(4)
             }
         })
     }
@@ -213,7 +209,8 @@ function handlerData(msg) {
 
 function createSubTickerRequest(SYMBOL) {
     return {
-        sub: `market.${SYMBOL}.ticker`,
+        type: 'subscribe',
+        market: SYMBOL,
     }
 }
 
@@ -224,9 +221,7 @@ function subscribeData(SYMBOL) {
 function changeToSubscribe() {
     console.log('切换1111')
     marketList.value.forEach((item) => {
-        item.dataFlag = item.symbol.replace('-', '')
-        item.dataFlag = `${item.dataFlag.toLowerCase()}t`
-        subscribeData(item.dataFlag)
+        subscribeData(item.symbol)
     })
     loading.value = false
 }
@@ -241,29 +236,20 @@ async function loadData() {
 
         socket.onmessage = (event) => {
             const blob = event.data
-            const fileReader = new FileReader()
-            fileReader.onload = (e) => {
-                const payloadData = new Uint8Array(e.target.result)
-                const msg = pako.inflate(payloadData, { to: 'string' })
-                handlerData(msg)
-            }
-            fileReader.readAsArrayBuffer(blob)
+            handlerData(blob)
         }
     }
     loading.value = false
 }
 
-onLoad(async () => {
-    // 获取新闻列表
-    await getNewsList()
-    // 获取热门币种
-    await getMarketList()
-    await loadData()
-})
 onHide(() => {
     socket.close()
 })
 onShow(async () => {
+    // 获取新闻列表
+    await getNewsList()
+    // 获取热门币种
+    await getMarketList()
     await loadData()
 })
 </script>
@@ -280,6 +266,7 @@ type: home
     padding: 36px 26px;
     background-color: #d8f0dd;
     min-width: 280px;
+    min-height: 326px;
 
     .increase {
         padding: 8px 20px;
