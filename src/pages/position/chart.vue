@@ -20,7 +20,7 @@
             </view>
         </FuiNavBar>
         <view class="px-[34px] mt-[20px]">
-            <view class="flex items-center justify-between py-[25px] px-[20px] rounded-[30px] bg-[#f5f7f9]">
+            <view v-if="info.full_name" class="flex items-center justify-between py-[25px] px-[20px] rounded-[30px] bg-[#f5f7f9]">
                 <view class="flex items-center">
                     <image
                         :src="info.logo"
@@ -38,15 +38,26 @@
                     {{ nowData.increase }}
                 </text>
             </view>
+            <view v-else >
+                <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='chart.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                
+            </view>
 
             <!-- TODO APP中使用webview实现 -->
-            <KLineChart :symbol="symbol" />
+           
+                <KLineChart :symbol="symbol"   />
+            
+            
 
             <view class="statistics mt-[29px] mx-[34px]">
                 <text class="text-[30px]">
                     {{ t('position.chart.Statistics') }}
                 </text>
                 <view
+                v-if="info.full_name"
                     class="flex items-center justify-between mt-[29px] px-[34px] py-[38px] bg-[#f5f7f9] rounded-[30px]"
                 >
                     <view class="flex-1">
@@ -91,6 +102,15 @@
                         </view>
                     </view>
                 </view>
+                <!-- 统计 -->
+                <view v-else >
+                <view class='market-skeleton relative h-[240px]'>
+                        <fui-skeleton :preloadList='chart.market2' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                
+            </view>
+
             </view>
         </view>
         <view class="btn-wrap flex items-center justify-around font-bold py-[20px] bg-white">
@@ -320,10 +340,11 @@ import USubsection from '~/components/toklove/sub-section/sub-section.vue'
 import KLineChart from '~/components/chart/index.vue'
 import FuiInputNumber from '~/components/firstui/fui-input-number/fui-input-number.vue'
 import FuiSwitch from '~/components/firstui/fui-switch/fui-switch.vue'
+import chart from '~/skeleton/position/chart.js'
 
 const { t } = useI18n()
 const userStore = useUserStore()
-
+const loading = ref(false)
 const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
 
 // 从路由pair参数获取symbol

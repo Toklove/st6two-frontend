@@ -103,6 +103,31 @@ $green-block: rgb(51, 205, 153);
     border-radius: 30px;
 }
 
+.market-skeleton {
+    display: grid;
+    grid-template-columns: auto 156px 156px;
+    margin-bottom: 14px;
+    padding: 26px 20px;
+    background-color: #f5f7f9;
+    border-radius: 30px;
+}
+
+.skeleton-enter-active {
+    transition: opacity .5s;
+}
+
+.skeleton-enter {
+    opacity: 0;
+}
+
+.skeleton-leave-active {
+    transition: opacity .5s;
+}
+
+.skeleton-leave-to {
+    opacity: 0;
+}
+
 .input {
     font-size: 28px;
     color: #242323;

@@ -5,18 +5,13 @@
         <view class="px-[34px]">
             <view class="text-[45px] font-bold">{{ t('tabBar.history.HistoricalOrders') }}</view>
             <view class="relative mt-[56px]">
-                <view
-                    v-for="(item, index) in list"
-                    :key="index"
-                    :class="item.show_detail ? 'active-h' : 'active-l'"
+                <!-- v-if="!loading" -->
+                <view v-if="!loading">
+                    <view v-if="list.length >0" v-for="(item, index) in list" :key="index" :class="item.show_detail ? 'active-h' : 'active-l'"
                     class="relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]"
-                    @click="item.show_detail = !item.show_detail"
-                >
+                    @click="item.show_detail = !item.show_detail">
                     <view class="flex flex-row">
-                        <image
-                            :src="item.market.logo"
-                            class="rounded-full w-[72px] h-[72px]"
-                        ></image>
+                        <image :src="item.market.logo" class="rounded-full w-[72px] h-[72px]"></image>
                         <view class="flex-1 ml-[12px]">
                             <view class="grid items-center col">
                                 <view class="flex items-center">
@@ -81,11 +76,41 @@
                             </view>
                         </view>
                     </view>
-                    <image
-                        :src="item.show_detail ? '/static/images/icon-shangla.png' : '/static/images/icon-xiala.png'"
+                    <image :src="item.show_detail ? '/static/images/icon-shangla.png' : '/static/images/icon-xiala.png'"
                         class="absolute left-[50%] bottom-[16px] cursor-pointer w-[18px] h-[18px]"
-                        style="transform: translateX(-50%);"
-                    ></image>
+                        style="transform: translateX(-50%);"></image>
+                </view>
+                <view v-else class="nodata">
+                    <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
+                </view>
+                </view>
+                <!-- v-else -->
+                <view v-else>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+                    <view class='relative flex flex-col rounded-[15px] row pt-[40px] px-[24px]'>
+                        <fui-skeleton :preloadList='history.market' outerClass='market-skeleton'></fui-skeleton>
+                    </view>
+
                 </view>
             </view>
         </view>
@@ -94,9 +119,10 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-
+import history from '~/skeleton/tabbar/history.js'
 const list = ref([])
 const { t } = useI18n()
+let loading = ref(true)
 // 分页参数
 const page = ref({
     page: 1,
@@ -126,16 +152,21 @@ onReachBottom(() => {
 
 function getHistory() {
     $api.get('/market/contract_order_history', page.value).then((res) => {
+
         page.value.max = res.data.last_page
         const data = res.data.data.map((item) => {
             item.show_detail = false
             item.market.logo = $api.staticUrl(item.market.logo)
             return item
         })
-        if (page.value.page === 1)
+        if (page.value.page === 1){
             list.value = data
+            loading.value = false
+        }
+            
         else
             list.value = list.value.concat(data)
+            loading.value = false
     })
 }
 
@@ -185,7 +216,5 @@ navigationStyle: custom
     transition: .5s linear;
 }
 
-.stock-data {
-
-}
+.stock-data {}
 </style>

@@ -1,38 +1,38 @@
 <template>
     <page-meta />
-    <view class="init-top" />
-    <layout class-name="IndexRouter">
-        <view class="flex flex-row justify-between items-center px-[34px]" @click="toLogin">
-            <text class="text-[40px] font-bold">
+    <view class='init-top' />
+    <layout class-name='IndexRouter'>
+        <view class='flex flex-row justify-between items-center px-[34px]' @click='toLogin'>
+            <text class='text-[40px] font-bold'>
                 {{ userStore.userInfo.nickname ? userStore.userInfo.nickname : 'Log in' }}
             </text>
-            <view class="flex items-center">
-                <image class="w-[41px] h-[40px]" src="/static/images/msg.png"></image>
+            <view class='flex items-center'>
+                <image class='w-[41px] h-[40px]' src='/static/images/msg.png'></image>
                 <image
                     :src="userStore.userInfo.avatar ? userStore.userInfo.avatar : '/static/images/no-login.png'"
-                    class="ml-[25px] rounded-full w-[92px] h-[92px]"
+                    class='ml-[25px] rounded-full w-[92px] h-[92px]'
                 ></image>
             </view>
         </view>
-        <view class="mt-[18px]">
-            <view class="text-[45px] pl-[34px]">{{ t('tabBar.home.hot') }}</view>
-            <scroll-view class="mt-[20px]" scroll-x>
-                <view class="items-center flex">
+        <view class='mt-[18px]'>
+            <view class='text-[45px] pl-[34px]'>{{ t('tabBar.home.hot') }}</view>
+            <scroll-view class='mt-[20px]' scroll-x>
+                <view v-if='!loading' class='items-center flex'>
                     <view
-                        v-for="item in marketList.slice(0, 3)" :key="item.id"
-                        class="flex flex-col justify-between rounded-[30px] chart-wrap"
-                        @click="toPair(item.symbol)"
+                        v-for='item in marketList.slice(0, 3)' :key='item.id'
+                        class='flex flex-col justify-between rounded-[30px] chart-wrap'
+                        @click='toPair(item.symbol)'
                     >
-                        <text class="text-[28px] font-bold">
+                        <text class='text-[28px] font-bold'>
                             {{ item.full_name }}
                         </text>
-                        <text class="text-[40px] font-bold">
+                        <text class='text-[40px] font-bold'>
                             {{ item.nowData.close.toFixed(4) }}
                         </text>
-                        <view class="mb-[54px] mt-[30px] h-[28px] chart">
+                        <view class='mb-[54px] mt-[30px] h-[28px] chart'>
                         </view>
-                        <view class="flex items-center justify-between">
-                            <view class="increase text-[26px] text-center">
+                        <view class='flex items-center justify-between'>
+                            <view class='increase text-[26px] text-center'>
                                 {{ item.nowData.increase }}
                             </view>
                             <text>
@@ -41,34 +41,49 @@
                         </view>
                     </view>
                 </view>
+                <view v-else class='flex items-center'>
+                    <view
+                        class='scroll-x-skeleton relative flex flex-col justify-between rounded-[30px] chart-wrap loading'>
+                        <fui-skeleton :preload-list='home.top' outer-class='scroll-x-skeleton'></fui-skeleton>
+                    </view>
+                    <view
+                        class='scroll-x-skeleton relative flex flex-col justify-between rounded-[30px] chart-wrap loading'>
+                        <fui-skeleton :preload-list='home.top' outer-class='scroll-x-skeleton'></fui-skeleton>
+                    </view>
+                    <view
+                        class='scroll-x-skeleton relative flex flex-col justify-between rounded-[30px] chart-wrap loading'>
+                        <fui-skeleton :preload-list='home.top' outer-class='scroll-x-skeleton'></fui-skeleton>
+                    </view>
+                </view>
             </scroll-view>
         </view>
 
-        <view class="mt-[40px] px-[34px]">
-            <view class="flex items-center justify-between">
-                <text class="text-[45px]">{{ t('tabBar.home.news') }}</text>
-                <text class="text-[20px]">
+        <view class='mt-[40px] px-[34px]'>
+            <view class='flex items-center justify-between'>
+                <text class='text-[45px]'>{{ t('tabBar.home.news') }}</text>
+                <text class='text-[20px]'>
                     {{ t('tabBar.home.seeMore') }}
                 </text>
             </view>
-            <view class="mt-[20px]">
+            <view class='mt-[20px]'>
                 <swiper
-                    :autoplay="true" :indicator-dots="true"
-                    class="h-[234px] bg-[#f5f7f9] rounded-[15px]"
-                    vertical circular
+                
+                    :autoplay='true' :indicator-dots='true'
+                    circular
+                    class='h-[234px] bg-[#f5f7f9] rounded-[15px]' vertical
                 >
-                    <swiper-item v-for="item in newsList" :key="item.id">
-                        <view class="news mr-[56px]">
-                            <view class="teletext flex justify-between">
-                                <view class="news-title text-[24px] line-clamp-3">
+                    <swiper-item v-if='!loading' v-for='item in newsList' :key='item.id'>
+                        <view class='news mr-[56px]'>
+                            <view class='teletext flex justify-between'>
+                                <view class='news-title text-[24px] line-clamp-3'>
                                     {{ item.title }}
                                 </view>
                                 <image
-                                    :src="item.image"
-                                    class="news-image rounded-[10px]"
+                                    :src='item.image'
+                                    class='news-image rounded-[10px]'
                                 ></image>
                             </view>
-                            <div class="desc mt-[21px] text-[20px] sub-title flex items-center justify-between">
+                            <div class='desc mt-[21px] text-[20px] sub-title flex items-center justify-between'>
                                 <text>
                                     {{ item.created_at }}
                                 </text>
@@ -78,44 +93,72 @@
                             </div>
                         </view>
                     </swiper-item>
+                    <view v-else class="scroll-x-skeleton relative">
+                    <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
+                    <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
+                    <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
+                    </view>
                 </swiper>
+                
             </view>
         </view>
-        <view class="mt-[40px] px-[34px]">
-            <view class="flex items-center justify-between">
-                <text class="text-[45px]">{{ t('tabBar.home.market') }}</text>
-                <text class="text-[20px]" @click="switchQuotes">
+        <view class='mt-[40px] px-[34px]'>
+            <view class='flex items-center justify-between'>
+                <text class='text-[45px]'>{{ t('tabBar.home.market') }}</text>
+                <text class='text-[20px]' @click='switchQuotes'>
                     {{ t('tabBar.home.seeMore') }}
                 </text>
             </view>
-            <view class="mt-[20px]">
+            <view class='mt-[20px]'>
                 <view
-                    v-for="item in marketList" :key="item.id" class="stock-row items-center"
-                    @click="toPair(item.symbol)"
+                    v-for='item in marketList'
+                    v-if='!loading'
+                    :key='item.id' class='stock-row items-center'
+                    @click='toPair(item.symbol)'
                 >
-                    <view class="flex">
+                    <view class='flex'>
                         <image
-                            :src="item.logo"
-                            class="rounded-full w-[72px] h-[72px]"
+                            :src='item.logo'
+                            class='rounded-full w-[72px] h-[72px]'
                         ></image>
-                        <view class="flex flex-col justify-between ml-[20px]">
-                            <text class="text-[30px]">{{ item.full_name }}</text>
-                            <text class="sub-title text-[22px]">
+                        <view class='flex flex-col justify-between ml-[20px]'>
+                            <text class='text-[30px]'>{{ item.full_name }}</text>
+                            <text class='sub-title text-[22px]'>
                                 {{ dayjs(item.nowData.timestamp).format('HH:mm:ss') }}
                             </text>
                         </view>
                     </view>
-                    <text class="text-[28px] text-right">
+                    <text class='text-[28px] text-right'>
                         {{ item.nowData.close.toFixed(4) }}
                     </text>
                     <view
                         :class="item.nowData.increase > 0 ? 'green-block' : 'red-block'"
-                        class="h-[68px] ml-[20px] rounded-[10px] grid place-items-center"
+                        class='h-[68px] ml-[20px] rounded-[10px] grid place-items-center'
                     >
-                        <text class="text-[22px] text-white">
+                        <text class='text-[22px] text-white'>
                             {{ item.nowData.increase }}
                         </text>
                     </view>
+                </view>
+
+                <view v-else>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='home.market' outerClass='market-skeleton'
+                                      @change='change'></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='home.market' outerClass='market-skeleton'
+                                      @change='change'></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='home.market' outerClass='market-skeleton'
+                                      @change='change'></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='home.market' outerClass='market-skeleton'
+                                      @change='change'></fui-skeleton>
+                    </view>
+
                 </view>
             </view>
         </view>
@@ -126,11 +169,18 @@
 import { useI18n } from 'vue-i18n'
 import dayjs from 'dayjs'
 import { useUserStore } from '~/pinia/useUserInfo'
+import FuiSkeleton from '~/components/firstui/fui-skeleton/fui-skeleton.vue'
+import home from '~/skeleton/tabbar/home.js'
 
 const { t } = useI18n()
 useHead({
     title: t('tabBar.home.home'),
 })
+
+function change(e) {
+    console.log('骨架切换')
+    console.log(e)
+}
 
 const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
 
@@ -192,11 +242,11 @@ async function getMarketList() {
 }
 
 function handlerData(msg) {
+    loading.value = false
     const data = JSON.parse(msg)
     if (data.ping) {
         socket.send(JSON.stringify({ pong: data.ping }))
-    }
-    else {
+    } else {
         marketList.value.forEach((item) => {
             data.forEach((item2) => {
                 if (item2.symbol === item.symbol) {
@@ -214,7 +264,7 @@ function createSubTickerRequest(symbol) {
 }
 
 function subscribeData(SYMBOL) {
-    socket.send(JSON.stringify(createSubTickerRequest(SYMBOL)))
+    socket.send({ data: JSON.stringify(createSubTickerRequest(SYMBOL)) })
 }
 
 function changeToSubscribe() {
@@ -230,11 +280,11 @@ function changeToSubscribe() {
 }
 
 function sendHeart() {
-    socket.send(JSON.stringify({ type: 'heartbeat', msg: 'ping' }))
+    socket.send({ data: JSON.stringify({ type: 'heartbeat', msg: 'ping' }) })
 }
 
 function timeHeart() {
-    if (socket.readyState === WebSocket.CLOSED)
+    if (socket === null)
         return
 
     setTimeout(() => {
@@ -244,27 +294,30 @@ function timeHeart() {
 }
 
 async function loadData() {
-    loading.value = true
-    if (socket === null || socket.readyState === WebSocket.CLOSED) {
-        socket = new WebSocket(wsUrl)
-        socket.onopen = () => {
+    if (socket === null) {
+        socket = uni.connectSocket({
+            url: wsUrl,
+            success() {
+                console.log('连接成功')
+            },
+        })
+        socket.onOpen(function() {
             changeToSubscribe()
             // 设置定时器，每隔3秒请求一次
             timeHeart()
-        }
-        socket.onmessage = (event) => {
-            loading.value = false
-
-            const blob = event.data
-            handlerData(blob)
-        }
+        })
+        socket.onMessage(function(e) {
+            handlerData(e.data)
+        })
     }
 }
 
 onHide(() => {
     socket.close()
+    socket = null
 })
 onShow(async () => {
+    loading.value = true
     // 获取新闻列表
     await getNewsList()
     // 获取热门币种
@@ -301,6 +354,10 @@ type: home
     .increase {
         background-color: #8581f6;
     }
+}
+
+.chart-wrap.loading {
+    background: #f5f7f9 !important;
 }
 
 .news {

@@ -31,12 +31,14 @@
                     </view>
                 </view>
 
-                <view v-if="loading" class="mt-[20px]">
+                <!-- <view v-if="loading" class="mt-[20px]">
                     <FuiLoading :is-fixed="false" :loading="loading" type="row" />
-                </view>
+                </view> -->
 
-                <view v-else class="mt-[20px]">
-                    <view v-if="filteredData.length > 0">
+                <view  class="mt-[20px]">
+                    
+                    <view v-if="!loading">
+                        <view v-if="filteredData.length > 0" >
                         <view
                             v-for="(item, index) in filteredData" :key="index" class="stock-row items-center"
                             @click="toPage(`/pages/position/chart?pair=${item.symbol}`)"
@@ -66,12 +68,58 @@
                             </view>
                         </view>
                     </view>
+                    
                     <view v-else class="nodata">
                         <FuiEmpty
                             :title="t('tabBar.quotes.NoDataAvailable')"
                             src="/static/images/option.png"
                         ></FuiEmpty>
                     </view>
+                    </view>
+
+                    <view v-else >
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+                    <view class='market-skeleton relative h-[124px]'>
+                        <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                    </view>
+
+                </view>
                 </view>
             </view>
         </view>
@@ -83,7 +131,7 @@ import dayjs from 'dayjs'
 import { useI18n } from 'vue-i18n'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 import FuiEmpty from '~/components/firstui/fui-empty/fui-empty.vue'
-
+import quotes from '~/skeleton/tabbar/quotes.js'
 function toPage(url) {
     uni.navigateTo({ url })
 }

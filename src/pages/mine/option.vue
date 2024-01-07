@@ -15,7 +15,8 @@
             </view>
         </FuiNavBar>
         <view class="mt-[20px] mx-[34px]">
-            <view v-if="list.length > 0">
+            <view v-if="!loading">
+                <view v-if="list.length > 0  ">
                 <view v-for="item in list" :key="item.id" class="order-row px-[30px] py-[40px] text-[22px]">
                     <view class="flex items-center justify-between text-[30px]">
                         <text>{{ item.market.full_name }}</text>
@@ -56,6 +57,24 @@
             <view v-else class="nodata">
                 <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
             </view>
+            </view>
+            <view v-else >
+                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
+                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                </view>
+                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
+                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                </view>
+                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
+                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                </view>
+                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
+                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                </view>
+                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
+                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                </view>
+            </view>
         </view>
     </layout>
 </template>
@@ -65,7 +84,7 @@ import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
-
+import option from '~/skeleton/mine/option.js'
 function clickBack() {
     $api.back()
 }

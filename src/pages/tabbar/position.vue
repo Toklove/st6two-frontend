@@ -50,12 +50,14 @@
             />
         </view>
 
-        <view v-if="loading" class="mt-[36px]">
+        <!-- <view v-if="loading" class="mt-[36px]">
             <FuiLoading :is-fixed="false" :loading="loading" type="row" />
-        </view>
+        </view> -->
 
-        <view v-if="!loading" class="px-[34px] pt-[20px]">
-            <scroll-view v-if="list.length > 0" scroll-x>
+        <view  class="px-[34px] pt-[20px]">
+            
+            <view v-if="!loading">
+                <scroll-view v-if="list.length > 0 " scroll-x>
                 <view
                     v-for="item in list" :key="item.id"
                     class="h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]" @click="showOrder(item)"
@@ -92,9 +94,40 @@
                         </view>
                     </view>
                 </view>
-            </scroll-view>
-            <view v-else class="grid place-items-center text-center mt-[40px]">
-                <image class="w-[340px] h-[340px]" src="/static/images/position.png"></image>
+                </scroll-view>
+                <view v-else class="nodata">
+                    <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
+                </view>
+            </view>
+            <view v-else >
+                <view class='market-skeleton mt-[20px] relative h-[124px]'>
+                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                </view>
+                <view class='market-skeleton mt-[20px] relative h-[124px]'>
+                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                </view>
+                <view class='market-skeleton mt-[20px] relative h-[124px]'>
+                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                </view>
+                <view class='market-skeleton mt-[20px] relative h-[124px]'>
+                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                </view>
+                <view class='market-skeleton mt-[20px] relative h-[124px]'>
+                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                </view>
+                <view class='market-skeleton mt-[20px] relative h-[124px]'>
+                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                </view>
+                <view class='market-skeleton mt-[20px] relative h-[124px]'>
+                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
+                                      ></fui-skeleton>
+                </view>
             </view>
         </view>
         <view v-show="showOrderDetail" class="order-wrap">
@@ -174,7 +207,7 @@
 import { useI18n } from 'vue-i18n'
 import FuiTabs from '~/components/firstui/fui-tabs/fui-tabs.vue'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
-
+import position from '~/skeleton/tabbar/position.js'
 const loading = ref(false)
 
 const editInfo = ref({
@@ -347,7 +380,12 @@ navigationStyle: custom
     }
 
 }
-
+.nodata {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .sub-title {
     color: #8c8c8c !important;
 }

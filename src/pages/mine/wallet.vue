@@ -49,8 +49,11 @@
                     <image class="w-[45px] h-[45px]" src="/static/images/icon-del.png" @click="del(item.id)"></image>
                 </view>
             </view>
-            <view v-else class="nodata">
-                <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
+            
+            <view v-else >
+                <view class='relative flex items-center justify-between mb-[20px] w-[682px] h-[210px] market-skeleton pt-[40px] px-[24px]'>
+                    <fui-skeleton :preloadList='wallet.market' outerClass='market-skeleton'></fui-skeleton>
+                </view>
             </view>
         </view>
     </layout>
@@ -62,7 +65,7 @@ import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
-
+import wallet from '~/skeleton/mine/wallet.js'
 const { t } = useI18n()
 
 const loading = ref(false)
