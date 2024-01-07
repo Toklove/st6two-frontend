@@ -44,8 +44,8 @@ const chartContainer = ref()
 const SYMBOL = ref(props.symbol)
 const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
 
-const socket = new WebSocket(wsUrl)
-const Interval = ref('5M')
+let socket = new WebSocket(wsUrl)
+const Interval = ref('1M')
 const chart = ref()
 const loading = ref(false)
 onUnmounted(() => {
@@ -54,92 +54,26 @@ onUnmounted(() => {
 
 function handlerData(msg) {
     const data = JSON.parse(msg)
-    // if (data.ping) {
-    //     socket.send(JSON.stringify({ pong: data.ping }))
-    // }
-    // else
-    if (Array.isArray(data)) {
-        // const dataList = data.map(({ id, open, close, high, low, vol }) => ({
-        //     timestamp: id * 1000,
-        //     open,
-        //     close,
-        //     high,
-        //     low,
-        //     volume: vol,
-        // }))
-        chart.value.applyNewData(data)
-        loading.value = false
+
+    const result = {
+        timestamp: data.id * 1000,
+        open: data.open,
+        close: data.close,
+        high: data.high,
+        low: data.low,
+        volume: data.vol,
+
     }
-    else if (data.unsubbed) {
-        subscribeData()
-    }
-    else {
-        chart.value.updateData(data)
-    }
+
+    chart.value.updateData(result)
 }
 
-// const TIME_UNIT_MAP = {
-//     m: 'min',
-//     h: 'hour',
-//     d: 'day',
-//     w: 'week',
-//     M: 'mon',
-// }
-
-// function formatPeriod(str) {
-//     const [, unit, number] = str.match(/([A-z]+)([0-9]+)/)
-//     return number + TIME_UNIT_MAP[unit]
-// }
-
-function createHistoryKRequest(interval) {
-    // const [, unit, number] = interval.match(/([A-z]+)([0-9]+)/)
-    // let shijian = number
-    // if (unit === 'h')
-    //     shijian *= 60
-    // else if (unit === 'd')
-    //     shijian *= 60 * 24
-    // else if (unit === 'w')
-    //     shijian *= 60 * 24 * 3.5
-    //
-    // const from = Math.trunc(Date.now() / 1000) - 60 * 900 * shijian
-    //
-    // return {
-    //     req: `market.${SYMBOL.value}.kline.${formatPeriod(interval)}`,
-    //     id: SYMBOL.value,
-    //     from,
-    //     to: Math.trunc(Date.now() / 1000),
-    // }
-    return {
-        type: 'ticker',
-        market: `${SYMBOL.value}_${interval}`,
-        time: interval,
-
-    }
-}
-
-function createSubKRequest(interval) {
-    // return {
-    //     sub: `market.${SYMBOL.value}.kline.${formatPeriod(interval)}`,
-    //     id: SYMBOL.value,
-    // }
-    return {
-        type: 'subscribe',
-        market: SYMBOL.value,
-        time: interval,
-    }
-}
-
-function createUnsubKRequest(interval) {
-    return {
-        type: 'unsubscribe',
-        market: SYMBOL.value,
-        time: interval,
-    }
+function createHistoryKRequest(time) {
+    return { type: 'kline', symbol: SYMBOL.value, time, language: 'en_US' }
 }
 
 function subscribeData() {
     socket.send(JSON.stringify(createHistoryKRequest(Interval.value)))
-    socket.send(JSON.stringify(createSubKRequest(Interval.value)))
 }
 
 socket.onopen = () => {
@@ -147,8 +81,23 @@ socket.onopen = () => {
 }
 
 socket.onmessage = (event) => {
+    loading.value = false
     const blob = event.data
     handlerData(blob)
+}
+
+function initTicker() {
+    $api.get('/market/kline', { symbol: SYMBOL.value, time: Interval.value, num: 300 }).then((res) => {
+        const result = res.data.map(item => ({
+            timestamp: item.id * 1000,
+            open: item.open,
+            close: item.close,
+            high: item.high,
+            low: item.low,
+            volume: item.volume,
+        }))
+        chart.value.applyNewData(result)
+    })
 }
 
 function initChart() {
@@ -161,11 +110,12 @@ function initChart() {
     })
 }
 
-onMounted(() => {
-    initChart()
+onMounted(async () => {
+    await initChart()
+    initTicker()
 })
 
-const activeNav = ref(1)
+const activeNav = ref(0)
 
 const timeList = reactive([
     {
@@ -185,12 +135,13 @@ const timeList = reactive([
         value: '1H',
     }, {
         name: '1D',
-        value: '1D',
+        value: 'D',
     },
 ])
 
 function changeInterval(val) {
-    socket.send(JSON.stringify(createUnsubKRequest(Interval.value)))
+    // 断开之前的连接
+    socket.close()
     loading.value = true
     const { name } = val
     timeList.forEach((item, i) => {
@@ -199,9 +150,19 @@ function changeInterval(val) {
             Interval.value = item.value
         }
     })
+
+    // 重新连接
+    socket = new WebSocket(wsUrl)
+    socket.onopen = () => {
+        subscribeData()
+    }
+    socket.onmessage = (event) => {
+        loading.value = false
+        const blob = event.data
+        handlerData(blob)
+    }
+    initTicker()
     socket.send(JSON.stringify(createHistoryKRequest(Interval.value)))
-    socket.send(JSON.stringify(createSubKRequest(Interval.value)))
-    // Interval.value = timeList[index].value
     console.log(Interval.value)
 }
 </script>

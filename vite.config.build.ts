@@ -10,9 +10,10 @@ const config: { server: ServerOptions; build: BuildOptions } = {
                 rewrite: (path: string) => path.replace(/^\/api/, '/api'),
             },
             '/ws': {
-                target: 'ws://127.0.0.1:3000/', // 这里是后台ws访问地址
+                target: 'wss://api.gomarketes.com:8282/', // 这里是后台ws访问地址
                 changeOrigin: true, // 允许跨域设置
                 ws: true, // websocket代理设置
+                rewrite: (path: string) => path.replace(/^\/api/, ''),
             },
         },
     },

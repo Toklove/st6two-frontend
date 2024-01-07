@@ -32,10 +32,10 @@
                     </view>
                 </view>
                 <text
-                    :class="diffAmount > 0 ? 'green-block' : 'red-block'"
+                    :class="nowData.increase > 0 ? 'green-block' : 'red-block'"
                     class="rate-wrap py-[14px] text-[26px] text-center text-white rounded-[28px] px-[28px] green-block"
                 >
-                    {{ diffAmount > 0 ? '+' : '' }}{{ diffAmount }}
+                    {{ nowData.increase }}
                 </text>
             </view>
 
@@ -55,7 +55,7 @@
                                 <image class="w-[20px] h-[20px] mr-[10px]" src="/static/images/icon-dollar.png"></image>
                                 <text class="text-[26px] sub-title">{{ t('position.chart.Open') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">{{ nowData.open }}</text>
+                            <text class="text-[30px] leading-[52px]">{{ nowData.buy }}</text>
                         </view>
                         <view class="mt-[20px]">
                             <view class="flex items-center">
@@ -87,7 +87,7 @@
                                 ></image>
                                 <text class="text-[26px] sub-title">{{ t('position.chart.volume') }}</text>
                             </view>
-                            <text class="text-[30px] leading-[52px]">{{ nowData.volume }}</text>
+                            <text class="text-[30px] leading-[52px]">{{ nowData.vol }}</text>
                         </view>
                     </view>
                 </view>
@@ -122,7 +122,7 @@
                     ></image>
                 </view>
                 <view class="now-price grid place-items-center bg-[#f5f7f9]">
-                    <text :class="diffAmount > 0 ? 'green-text' : 'red-text'" class="text-[76px] font-bold">
+                    <text :class="nowData.increase > 0 ? 'green-text' : 'red-text'" class="text-[76px] font-bold">
                         {{ nowData.close }}
                     </text>
                 </view>
@@ -240,7 +240,7 @@
             <view class="second-contract">
                 <view>
                     <view class="now-price grid place-items-center bg-[#f5f7f9]">
-                        <text :class="diffAmount > 0 ? 'green-text' : 'red-text'" class="text-[76px] font-bold">
+                        <text :class="nowData.increase > 0 ? 'green-text' : 'red-text'" class="text-[76px] font-bold">
                             {{ nowData.close }}
                         </text>
                     </view>
@@ -252,7 +252,7 @@
                             </view>
                             <view class="flex items-center justify-between py-[15px]">
                                 <text>{{ t('position.chart.direction') }}</text>
-                                <text :class="optionForm.type === 0 ? &quot;red-text&quot; : &quot;green-text&quot;">
+                                <text :class="optionForm.type === 0 ? 'red-text' : 'green-text'">
                                     {{ optionForm.type === 0 ? t('position.chart.BuyLess') : t('position.chart.BuyMore')
                                     }}
                                 </text>
@@ -365,23 +365,18 @@ const contractFrom = ref({
 })
 
 const nowData = ref({
-    close: 1,
-    high: 1,
-    low: 11,
-    open: 11,
-    symbol: 'USD/AUD',
-    timestamp: 1704270547000,
-    volume: 4,
-})
-
-const prevData = ref({
-    close: 1,
-    high: 1,
-    low: 11,
-    open: 11,
-    symbol: 'USD/AUD',
-    timestamp: 1704270547000,
-    volume: 4,
+    buy: 44161.7,
+    close: 44161.7,
+    high: 44729.58,
+    increase: 3.362,
+    low: 42591.09,
+    sell: 44161.71,
+    symbol: 'BTC',
+    vol: 47721.01,
+    logo: '/storage/products/YmyrGa7VLHM7JRNGge9txSjzYfrAxMBcddquuqu0.png',
+    name: 'BTCUSD',
+    open_status: true,
+    t: 1704408551,
 })
 
 function changeOrderPrice(val) {
@@ -438,30 +433,21 @@ function placeContractOrder() {
     })
 }
 
-function createSubTickerRequest() {
-    return {
-        type: 'subscribe',
-        market: symbol.value,
-    }
+function createSubTickerRequest(symbol) {
+    return { symbol, type: 'price', language: 'en_US' }
 }
 
 function handlerData(msg) {
     const data = JSON.parse(msg)
-    if (data.ping) {
+    if (data.ping)
         socket.send(JSON.stringify({ pong: data.ping }))
-    }
-    else {
-        prevData.value = nowData.value
-        nowData.value = data
-    }
+
+    else
+        nowData.value = data[0]
 }
 
-const diffAmount = computed(() => {
-    return (nowData.value.open - nowData.value.close).toFixed(6)
-})
-
 function subscribeData() {
-    socket.send(JSON.stringify(createSubTickerRequest()))
+    socket.send(JSON.stringify(createSubTickerRequest(symbol.value)))
 }
 
 socket.onmessage = (event) => {
@@ -545,13 +531,13 @@ function getInfo() {
     })
 }
 
-onLoad((option) => {
+onLoad(async (option) => {
     console.log(option)
     // 获取路由参数
     const { pair } = option
     symbol.value = pair
     // 获取币种信息
-    getInfo()
+    await getInfo()
 })
 </script>
 

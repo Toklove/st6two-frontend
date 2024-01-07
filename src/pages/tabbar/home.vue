@@ -33,7 +33,7 @@
                         </view>
                         <view class="flex items-center justify-between">
                             <view class="increase text-[26px] text-center">
-                                {{ item.diff > 0 ? '+' : '' }}{{ item.diff }}
+                                {{ item.nowData.increase }}
                             </view>
                             <text>
                                 →
@@ -101,7 +101,7 @@
                         <view class="flex flex-col justify-between ml-[20px]">
                             <text class="text-[30px]">{{ item.full_name }}</text>
                             <text class="sub-title text-[22px]">
-                                17:28:16
+                                {{ dayjs(item.nowData.timestamp).format('HH:mm:ss') }}
                             </text>
                         </view>
                     </view>
@@ -109,11 +109,11 @@
                         {{ item.nowData.close.toFixed(4) }}
                     </text>
                     <view
-                        :class="item.diff > 0 ? 'green-block' : 'red-block'"
+                        :class="item.nowData.increase > 0 ? 'green-block' : 'red-block'"
                         class="h-[68px] ml-[20px] rounded-[10px] grid place-items-center"
                     >
                         <text class="text-[22px] text-white">
-                            {{ item.diff > 0 ? '+' : '' }}{{ item.diff }}
+                            {{ item.nowData.increase }}
                         </text>
                     </view>
                 </view>
@@ -124,6 +124,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
+import dayjs from 'dayjs'
 import { useUserStore } from '~/pinia/useUserInfo'
 
 const { t } = useI18n()
@@ -197,21 +198,19 @@ function handlerData(msg) {
     }
     else {
         marketList.value.forEach((item) => {
-            if (data.symbol === item.symbol) {
-                item.prevData = item.nowData
-                item.nowData = data
-                item.upOrDown = item.nowData.close > item.prevData.close
-                item.diff = (item.nowData.high - item.nowData.close).toFixed(4)
-            }
+            data.forEach((item2) => {
+                if (item2.symbol === item.symbol) {
+                    item.prevData = item.nowData
+                    item.nowData = item2
+                    item.diff = (item.nowData.high - item.nowData.close).toFixed(4)
+                }
+            })
         })
     }
 }
 
-function createSubTickerRequest(SYMBOL) {
-    return {
-        type: 'subscribe',
-        market: SYMBOL,
-    }
+function createSubTickerRequest(symbol) {
+    return { symbol, type: 'price', language: 'en_US' }
 }
 
 function subscribeData(SYMBOL) {
@@ -219,11 +218,29 @@ function subscribeData(SYMBOL) {
 }
 
 function changeToSubscribe() {
-    console.log('切换1111')
+    let symbol = ''
     marketList.value.forEach((item) => {
-        subscribeData(item.symbol)
+        symbol += `${item.symbol}.`
     })
-    loading.value = false
+
+    // 去除最后一个点
+    symbol = symbol.substring(0, symbol.length - 1)
+
+    subscribeData(symbol)
+}
+
+function sendHeart() {
+    socket.send(JSON.stringify({ type: 'heartbeat', msg: 'ping' }))
+}
+
+function timeHeart() {
+    if (socket.readyState === WebSocket.CLOSED)
+        return
+
+    setTimeout(() => {
+        sendHeart()
+        timeHeart()
+    }, 3000)
 }
 
 async function loadData() {
@@ -232,14 +249,16 @@ async function loadData() {
         socket = new WebSocket(wsUrl)
         socket.onopen = () => {
             changeToSubscribe()
+            // 设置定时器，每隔3秒请求一次
+            timeHeart()
         }
-
         socket.onmessage = (event) => {
+            loading.value = false
+
             const blob = event.data
             handlerData(blob)
         }
     }
-    loading.value = false
 }
 
 onHide(() => {

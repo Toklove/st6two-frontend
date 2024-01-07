@@ -49,19 +49,19 @@
                                 <view class="flex flex-col justify-between ml-[20px]">
                                     <text class="text-[30px]">{{ item.name }}</text>
                                     <text class="sub-title text-[22px]">
-                                        17:28:16
+                                        {{ dayjs(item.nowData.timestamp).format('HH:mm:ss') }}
                                     </text>
                                 </view>
                             </view>
                             <text class="text-[28px] text-right">
-                                {{ item.nowData.close.toFixed(2) }}
+                                {{ item.nowData.close.toFixed(4) }}
                             </text>
                             <view
-                                :class="item.diff > 0 ? 'green-block' : 'red-block'"
+                                :class="item.nowData.increase > 0 ? 'green-block' : 'red-block'"
                                 class="h-[68px] ml-[20px] rounded-[10px] grid place-items-center green-block"
                             >
                                 <text class="text-[22px] text-white">
-                                    {{ item.diff > 0 ? '+' : '' }}{{ item.diff }}
+                                    {{ item.nowData.increase }}
                                 </text>
                             </view>
                         </view>
@@ -79,6 +79,7 @@
 </template>
 
 <script setup>
+import dayjs from 'dayjs'
 import { useI18n } from 'vue-i18n'
 import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 import FuiEmpty from '~/components/firstui/fui-empty/fui-empty.vue'
@@ -135,21 +136,29 @@ async function getMarketByCategory() {
             timestamp: 1704270547000,
             volume: 4,
         }
-        item.prevData = item.nowData
-        item.upOrDown = true
-        item.diff = 1
         return item
     })
-    // await changeToSubscribe()
-    loading.value = false
 }
 
 async function changeList(item) {
+    // 断开之前的连接
+    socket.close()
     form.value.category_id = item.id
     form.value.category = item.name
     showDropdown.value = false
-    await changeToUnSubscribe()
     await getMarketByCategory()
+
+    // 重新连接
+    socket = new WebSocket(wsUrl)
+    socket.onopen = () => {
+        changeToSubscribe()
+    }
+    socket.onmessage = (event) => {
+        loading.value = false
+        const blob = event.data
+        handlerData(blob)
+    }
+
     await changeToSubscribe()
 }
 
@@ -170,56 +179,36 @@ function handlerData(msg) {
     }
     else {
         marketList.value.forEach((item) => {
-            if (data.symbol === item.symbol) {
-                item.prevData = item.nowData
-                item.nowData = data
-                item.upOrDown = item.nowData.close > item.prevData.close
-                item.diff = (item.nowData.high - item.nowData.close).toFixed(4)
-            }
+            data.forEach((item2) => {
+                if (item2.symbol === item.symbol)
+                    item.nowData = item2
+            })
         })
     }
 }
 
-function createSubTickerRequest(SYMBOL) {
-    return {
-        type: 'subscribe',
-        market: SYMBOL,
-    }
-}
-
-function createUnSubTickerRequest(SYMBOL) {
-    return {
-        type: 'unsubscribe',
-        market: SYMBOL,
-    }
+function createSubTickerRequest(symbol) {
+    return { symbol, type: 'price', language: 'en_US' }
 }
 
 function subscribeData(SYMBOL) {
     socket.send(JSON.stringify(createSubTickerRequest(SYMBOL)))
 }
 
-function unsubscribeData(SYMBOL) {
-    socket.send(JSON.stringify(createUnSubTickerRequest(SYMBOL)))
-}
-
 onUnload(() => {
     socket.close()
 })
 
-function changeToSubscribe() {
-    console.log('切换1111')
+async function changeToSubscribe() {
+    let symbol = ''
     marketList.value.forEach((item) => {
-        subscribeData(item.symbol)
+        symbol += `${item.symbol}.`
     })
-    loading.value = false
-}
 
-async function changeToUnSubscribe() {
-    console.log('切换1111')
-    await marketList.value.forEach((item) => {
-        unsubscribeData(item.symbol)
-    })
-    loading.value = false
+    // 去除最后一个点
+    symbol = symbol.substring(0, symbol.length - 1)
+
+    subscribeData(symbol)
 }
 
 async function loadData() {
@@ -232,11 +221,11 @@ async function loadData() {
         }
 
         socket.onmessage = (event) => {
+            loading.value = false
             const blob = event.data
             handlerData(blob)
         }
     }
-    loading.value = false
 }
 
 onHide(() => {
