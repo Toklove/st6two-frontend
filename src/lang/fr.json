@@ -152,7 +152,10 @@
       "realName": "S’il vous plaît entrer le vrai nom",
       "idNumber": "Veuillez saisir le numéro d’identification",
       "Certified": "Certifié",
-      "UploadFailed": "Echec du téléchargement"
+      "UploadFailed": "Echec du téléchargement",
+      "InputAll": "Toutes les entrées n’ont pas encore été faites",
+      "SubmitSuccess": "Soumis avec succès",
+      "SubmitFailed": "Échec de la soumission"
     },
     "changePassword": {
       "Submit": "Envoyer",
@@ -249,7 +252,9 @@
       "Submit": "Envoyer",
       "inputAmount": "S’il vous plaît entrer le montant",
       "Purse": "Porte-monnaie",
-      "BankCard": "Carte bancaire"
+      "BankCard": "Carte bancaire",
+      "SubmitSuccess": "Soumis avec succès",
+  "SubmitFailed": "Échec de la soumission"
     }
   },
   "components": {

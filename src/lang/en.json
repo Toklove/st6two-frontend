@@ -152,7 +152,10 @@
       "realName": "Please enter the Real name",
       "idNumber": "Please enter the ID number",
       "Certified": "Certified",
-      "UploadFailed": "Upload failed"
+      "UploadFailed": "Upload failed",
+      "InputAll":"Not all inputs have been made yet",
+      "SubmitSuccess": "Submitted successfully",
+      "SubmitFailed": "Submission failed"
     },
     "changePassword": {
       "Submit": "Submit",
@@ -250,7 +253,9 @@
       "Submit": "Submit",
       "inputAmount": "Please enter the amount",
       "Purse": "Purse",
-      "BankCard": "Bank Card"
+      "BankCard": "Bank Card",
+      "SubmitSuccess": "Submitted successfully",
+      "SubmitFailed": "Submission failed"
     }
   },
   "components": {

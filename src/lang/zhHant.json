@@ -133,7 +133,8 @@
       "bankCode": "請輸入銀行國際代碼",
       "AddSuccess": "添加成功",
       "AddFailed": "添加失敗",
-      "AddBankCard": "添加銀行卡"
+      "AddBankCard": "添加銀行卡",
+      "AddWallet": "添加钱包"
     },
     "addWallet": {
       "ChoiceOfCurrency": "貨幣選擇",
@@ -152,7 +153,10 @@
       "realName": "請輸入真實姓名",
       "idNumber": "請輸入身份證號碼",
       "Certified": "認證",
-      "UploadFailed": "上傳失敗"
+      "UploadFailed": "上傳失敗",
+      "SubmitSuccess": "提交成功",
+      "SubmitFailed": "提交失敗",
+      "InputAll": "尚未進行所有輸入"
     },
     "changePassword": {
       "Submit": "提交",
@@ -252,7 +256,9 @@
       "Submit": "提交",
       "inputAmount": "請輸入金額",
       "Purse": "錢包",
-      "BankCard": "銀行卡"
+      "BankCard": "銀行卡",
+      "SubmitSuccess": "提交成功",
+      "SubmitFailed": "提交失敗"
     }
   },
   "components": {

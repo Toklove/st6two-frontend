@@ -152,7 +152,10 @@
       "realName": "Bitte geben Sie den echten Namen ein",
       "idNumber": "Bitte geben Sie die ID-Nummer ein",
       "Certified": "Beglaubigt",
-      "UploadFailed": "Upload fehlgeschlagen"
+      "UploadFailed": "Upload fehlgeschlagen",
+      "InputAll":"Es wurden noch nicht alle Eingaben gemacht",
+      "SubmitSuccess": "Erfolgreich eingereicht",
+      "SubmitFailed": "Übermittlung fehlgeschlagen"
     },
     "changePassword": {
       "Submit": "Senden",
@@ -249,7 +252,9 @@
       "Submit": "Senden",
       "inputAmount": "Bitte geben Sie den Betrag ein",
       "Purse": "Geldbeutel",
-      "BankCard": "Bankkarte"
+      "BankCard": "Bankkarte",
+      "SubmitSuccess": "Erfolgreich eingereicht",
+      "SubmitFailed": "Übermittlung fehlgeschlagen"
     }
   },
   "components": {

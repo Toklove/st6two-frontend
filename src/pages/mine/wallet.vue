@@ -18,7 +18,11 @@
             </view>
         </FuiNavBar>
         <view v-if="loading" class="mt-[20px] mx-[34px]">
-            <FuiLoading :is-fixed="false" :loading="loading" type="row" />
+            <view  >
+                <view class='relative flex items-center justify-between mb-[20px] w-[682px] h-[210px] market-skeleton pt-[40px] px-[24px]'>
+                    <fui-skeleton :preloadList='wallet.market' outerClass='market-skeleton'></fui-skeleton>
+                </view>
+            </view>
         </view>
         <view v-else class="mt-[20px] mx-[34px]">
             <view v-if="CryptoList.length > 0 && current === 0" class="wallet-list">
@@ -50,11 +54,7 @@
                 </view>
             </view>
             
-            <view v-else >
-                <view class='relative flex items-center justify-between mb-[20px] w-[682px] h-[210px] market-skeleton pt-[40px] px-[24px]'>
-                    <fui-skeleton :preloadList='wallet.market' outerClass='market-skeleton'></fui-skeleton>
-                </view>
-            </view>
+            
         </view>
     </layout>
 </template>

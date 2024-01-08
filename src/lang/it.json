@@ -152,7 +152,10 @@
       "realName": "Si prega di inserire il nome reale",
       "idNumber": "Si prega di inserire il numero ID",
       "Certified": "Certificato",
-      "UploadFailed": "Caricamento non riuscito"
+      "UploadFailed": "Caricamento non riuscito",
+      "InputAll": "Non tutti i dati sono stati ancora inseriti",
+      "SubmitSuccess": "Inviato con successo",
+      "SubmitFailed": "Invio non riuscito"
     },
     "changePassword": {
       "Submit": "Invia",
@@ -249,7 +252,9 @@
       "Submit": "Invia",
       "inputAmount": "Si prega di inserire l'importo",
       "Purse": "Borsa",
-      "BankCard": "Carta di credito"
+      "BankCard": "Carta di credito",
+      "SubmitSuccess": "Inviato con successo",
+      "SubmitFailed": "Invio non riuscito"
     }
   },
   "components": {

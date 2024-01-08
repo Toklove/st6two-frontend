@@ -1,26 +1,26 @@
 <template>
     <page-meta />
-    <div class="init-top" />
-    <layout class-name="IndexRouter">
-        <view class="px-[34px]">
-            <view class="relative text-center">
+    <div class='init-top' />
+    <layout class-name='IndexRouter'>
+        <view class='px-[34px]'>
+            <view class='relative text-center'>
                 <image
-                    :src="userStore.userInfo.avatar ? userStore.userInfo.avatar : '/static/images/no-login.png'"
-                    class="w-[200px] h-[200px] rounded-full"
-                    @click="upload"
+                    :src="userStore.userInfo.avatar ? userStore.getAvatar() : '/static/images/no-login.png'"
+                    class='w-[200px] h-[200px] rounded-full'
+                    @click='upload'
                 ></image>
                 <image
-                    class="absolute right-[40%] bottom-[10px] w-[36px] h-[36px]"
-                    src="/static/images/icon-edit-avator.png"
+                    class='absolute right-[40%] bottom-[10px] w-[36px] h-[36px]'
+                    src='/static/images/icon-edit-avator.png'
                 ></image>
             </view>
-            <view class="input mt-[71px] p-[30px] rounded-[20px] bg-[#f5f7f9]">
-                <input v-model="userStore.userInfo.nickname" placeholder="Please enter the Nickname" type="text">
+            <view class='input mt-[71px] p-[30px] rounded-[20px] bg-[#f5f7f9]'>
+                <input v-model='userStore.userInfo.nickname' placeholder='Please enter the Nickname' type='text'>
             </view>
         </view>
-        <view class="btn-wrap text-center">
-            <view class="bg-black py-[33px] rounded-[20px]" @click="saveInfo">
-                <text class="text-[32px] font-bold text-white">
+        <view class='btn-wrap text-center'>
+            <view class='bg-black py-[33px] rounded-[20px]' @click='saveInfo'>
+                <text class='text-[32px] font-bold text-white'>
                     {{ t('mine.userInfo.Submit') }}
                 </text>
             </view>

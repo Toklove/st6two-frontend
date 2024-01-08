@@ -9,7 +9,7 @@
             <view class='flex items-center'>
                 <image class='w-[41px] h-[40px]' src='/static/images/msg.png'></image>
                 <image
-                    :src="userStore.userInfo.avatar ? userStore.userInfo.avatar : '/static/images/no-login.png'"
+                    :src="userStore.userInfo.avatar ? userStore.getAvatar() : '/static/images/no-login.png'"
                     class='ml-[25px] rounded-full w-[92px] h-[92px]'
                 ></image>
             </view>
@@ -67,12 +67,12 @@
             </view>
             <view class='mt-[20px]'>
                 <swiper
-                
+
                     :autoplay='true' :indicator-dots='true'
                     circular
                     class='h-[234px] bg-[#f5f7f9] rounded-[15px]' vertical
                 >
-                    <swiper-item v-if='!loading' v-for='item in newsList' :key='item.id'>
+                    <swiper-item v-for='item in newsList' v-if='!loading' :key='item.id'>
                         <view class='news mr-[56px]'>
                             <view class='teletext flex justify-between'>
                                 <view class='news-title text-[24px] line-clamp-3'>
@@ -93,13 +93,13 @@
                             </div>
                         </view>
                     </swiper-item>
-                    <view v-else class="scroll-x-skeleton relative">
-                    <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
-                    <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
-                    <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
+                    <view v-else class='scroll-x-skeleton relative'>
+                        <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
+                        <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
+                        <fui-skeleton :preload-list='home.swipers' outer-class='scroll-x-skeleton'></fui-skeleton>
                     </view>
                 </swiper>
-                
+
             </view>
         </view>
         <view class='mt-[40px] px-[34px]'>
@@ -284,11 +284,12 @@ function sendHeart() {
 }
 
 function timeHeart() {
-    if (socket === null)
+    if (socket == null)
         return
 
+    sendHeart()
+
     setTimeout(() => {
-        sendHeart()
         timeHeart()
     }, 3000)
 }

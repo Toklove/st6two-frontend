@@ -152,7 +152,10 @@
       "realName": "실명을 입력해 주세요",
       "idNumber": "ID 번호를 입력해 주세요",
       "Certified": "인증",
-      "UploadFailed": "업로드 실패"
+      "UploadFailed": "업로드 실패",
+      "SubmitSuccess": "성공적으로 제출되었습니다.",
+  "SubmitFailed": "제출 실패",
+  "InputAll": "아직 모든 입력이 이루어지지 않았습니다."
     },
     "changePassword": {
       "Submit": "전송",
@@ -249,7 +252,9 @@
       "Submit": "전송",
       "inputAmount": "금액을 입력해 주세요",
       "Purse": "지갑",
-      "BankCard": "은행 카드"
+      "BankCard": "은행 카드",
+      "SubmitSuccess": "성공적으로 제출되었습니다.",
+  "SubmitFailed": "제출 실패"
     }
   },
   "components": {

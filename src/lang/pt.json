@@ -152,7 +152,10 @@
       "realName": "Por favor, digite o Nome real",
       "idNumber": "Introduza o número de identificação",
       "Certified": "Certificado",
-      "UploadFailed": "Falha no carregamento"
+      "UploadFailed": "Falha no carregamento",
+      "SubmitSuccess": "Enviado com sucesso",
+  "SubmitFailed": "Falha no envio",
+  "InputAll": "Nem todas as entradas foram feitas ainda"
     },
     "changePassword": {
       "Submit": "Enviar",
@@ -249,7 +252,9 @@
       "Submit": "Enviar",
       "inputAmount": "Por favor, insira o valor",
       "Purse": "Bolsa",
-      "BankCard": "Cartão Bancário"
+      "BankCard": "Cartão Bancário",
+      "SubmitSuccess": "Enviado com sucesso",
+      "SubmitFailed": "Falha no envio"
     }
   },
   "components": {

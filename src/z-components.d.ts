@@ -142,8 +142,10 @@ declare module '@vue/runtime-core' {
     Layout: typeof import('./components/layout.vue')['default']
     LcyCheckbox: typeof import('./components/lcy-checkbox.vue')['default']
     Template: typeof import('./components/template.vue')['default']
+    TnCheckbox: typeof import('@tuniao/tnui-vue3-uniapp/components/checkbox/src/checkbox.vue')['default']
     TnEmpty: typeof import('@tuniao/tnui-vue3-uniapp/components/empty/src/empty.vue')['default']
     TnLoading: typeof import('@tuniao/tnui-vue3-uniapp/components/loading/src/loading.vue')['default']
+    TnPopup: typeof import('@tuniao/tnui-vue3-uniapp/components/popup/src/popup.vue')['default']
     TokloveSubSectionSubSection: typeof import('./components/toklove/sub-section/sub-section.vue')['default']
   }
 }

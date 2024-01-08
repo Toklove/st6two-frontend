@@ -181,6 +181,12 @@ navigationStyle: custom
 </route>
 
 <style>
+.nodata{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
 .row {
     width: 100%;
     height: 162px;

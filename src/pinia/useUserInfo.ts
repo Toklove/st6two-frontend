@@ -19,12 +19,16 @@ export const useUserStore = defineStore('userInfo', () => {
         }
     }
 
+    function getAvatar() {
+        return $api.staticUrl(state.userInfo?.avatar || '')
+    }
+
     function saveUserInfo() {
         ls.set('user-info', state.userInfo)
     }
 
     return {
         ...toRefs(state),
-        getUserInfo, saveUserInfo,
+        getUserInfo, saveUserInfo, getAvatar,
     }
 })

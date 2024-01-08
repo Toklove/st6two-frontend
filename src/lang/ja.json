@@ -152,7 +152,10 @@
       "realName": "本名を入力してください",
       "idNumber": "ID番号を入力してください",
       "Certified": "折り紙付き",
-      "UploadFailed": "アップロードに失敗しました"
+      "UploadFailed": "アップロードに失敗しました",
+      "SubmitSuccess": "正常に送信されました",
+  "SubmitFailed": "送信に失敗しました",
+  "InputAll": "まだすべての入力が行われているわけではありません"
     },
     "changePassword": {
       "Submit": "送信",
@@ -249,7 +252,10 @@
       "Submit": "送信",
       "inputAmount": "金額を入力してください",
       "Purse": "財布",
-      "BankCard": "銀行カード"
+      "BankCard": "銀行カード",
+      "SubmitSuccess": "正常に送信されました",
+      "SubmitFailed": "送信に失敗しました",
+      
     }
   },
   "components": {
