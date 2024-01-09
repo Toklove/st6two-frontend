@@ -1,5 +1,7 @@
+import coverDevice from '~/utils/device.js'
+
 const obj = {
-    market: [{
+    market: coverDevice([{
         left: 18,
         right: 365,
         top: 36,
@@ -25,6 +27,6 @@ const obj = {
         height: 26,
         type: 'round',
     },
-    ],
+    ]),
 }
 export default obj

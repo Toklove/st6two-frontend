@@ -1,120 +1,108 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='px-[34px]'>
-            <view class='flex items-center bg-[#f5f7f9] py-[31px] px-[30px] rounded-[50px]'>
-                <image class='w-[35px] h-[38px] mr-[21px]' src='/static/images/icon-search.png'></image>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="px-[34px]">
+            <view class="flex items-center bg-[#f5f7f9] py-[31px] px-[30px] rounded-[50px]">
+                <image class="w-[35px] h-[38px] mr-[21px]" src="/static/images/icon-search.png"></image>
                 <input
-                    v-model='filters' :placeholder="t('tabBar.quotes.EnterTheContentHere')"
-                    class='text-[#525252] text-[28px]'
-                    type='text'
+                    v-model="filters" :placeholder="t('tabBar.quotes.EnterTheContentHere')"
+                    class="text-[#525252] text-[28px]"
+                    type="text"
                 >
             </view>
-            <view class='mt-[59px] relative'>
-                <view class='flex items-center justify-between'>
-                    <text class='text-[45px]'>{{ t('tabBar.quotes.Market') }}</text>
+            <view class="mt-[59px] relative">
+                <view class="flex items-center justify-between">
+                    <text class="text-[45px]">{{ t('tabBar.quotes.Market') }}</text>
                     <view
-                        class='flex items-center justify-between bg-black dropdown'
-                        @click='showDropdown = !showDropdown'
+                        class="flex items-center justify-between bg-black dropdown"
+                        @click="showDropdown = !showDropdown"
                     >
-                        <text class='text-[26px] text-white px-[10px]'>{{ form.category }}</text>
+                        <text class="text-[26px] text-white px-[10px]">{{ form.category }}</text>
                         <image
                             :src="showDropdown ? '/static/images/icon-dropup.png' : '/static/images/icon-dropdown.png'"
-                            class='w-[18px] h-[18px]'
+                            class="w-[18px] h-[18px]"
                         ></image>
                     </view>
                 </view>
-                <view :class="showDropdown ? 'h-auto' : 'h-0'" class='dropdown-item bg-black text-white'>
-                    <view v-for='(item, index) in categoryList' :key='index' class='item' @click='changeList(item)'>
-                        <text class='text-[26px]'>{{ item.name }}</text>
+                <view :class="showDropdown ? 'h-auto' : 'h-0'" class="dropdown-item bg-black text-white">
+                    <view v-for="(item, index) in categoryList" :key="index" class="item" @click="changeList(item)">
+                        <text class="text-[26px]">{{ item.name }}</text>
                     </view>
                 </view>
 
-                <view class='mt-[20px]'>
-
-                    <view v-if='!loading'>
-                        <view v-if='filteredData.length > 0'>
+                <view class="mt-[20px]">
+                    <view v-if="!loading">
+                        <view v-if="filteredData.length > 0">
                             <view
-                                v-for='(item, index) in filteredData' :key='index' class='stock-row items-center'
-                                @click='toPage(`/pages/position/chart?pair=${item.symbol}`)'
+                                v-for="(item, index) in filteredData" :key="index" class="stock-row items-center"
+                                @click="toPage(`/pages/position/chart?pair=${item.symbol}`)"
                             >
-                                <view class='flex'>
+                                <view class="flex">
                                     <image
-                                        :src='item.logo'
-                                        class='rounded-full w-[72px] h-[72px]'
+                                        :src="item.logo"
+                                        class="rounded-full w-[72px] h-[72px]"
                                     ></image>
-                                    <view class='flex flex-col justify-between ml-[20px]'>
-                                        <text class='text-[30px]'>{{ item.name }}</text>
-                                        <text class='sub-title text-[22px]'>
+                                    <view class="flex flex-col justify-between ml-[20px]">
+                                        <text class="text-[30px]">{{ item.name }}</text>
+                                        <text class="sub-title text-[22px]">
                                             {{ dayjs(item.nowData.timestamp).format('HH:mm:ss') }}
                                         </text>
                                     </view>
                                 </view>
-                                <text class='text-[28px] text-right'>
+                                <text class="text-[28px] text-right">
                                     {{ item.nowData.close.toFixed(4) }}
                                 </text>
                                 <view
                                     :class="item.nowData.increase > 0 ? 'green-block' : 'red-block'"
-                                    class='h-[68px] ml-[20px] rounded-[10px] grid place-items-center green-block'
+                                    class="h-[68px] ml-[20px] rounded-[10px] grid place-items-center green-block"
                                 >
-                                    <text class='text-[22px] text-white'>
+                                    <text class="text-[22px] text-white">
                                         {{ item.nowData.increase }}
                                     </text>
                                 </view>
                             </view>
                         </view>
 
-                        <view v-else class='nodata'>
+                        <view v-else class="nodata">
                             <FuiEmpty
                                 :title="t('tabBar.quotes.NoDataAvailable')"
-                                src='/static/images/option.png'
+                                src="/static/images/option.png"
                             ></FuiEmpty>
                         </view>
                     </view>
 
                     <view v-else>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-                        <view class='market-skeleton relative h-[124px]'>
-                            <fui-skeleton :preloadList='quotes.market' outerClass='market-skeleton'
-                            ></fui-skeleton>
+                        <view class="market-skeleton relative h-[124px]">
+                            <fui-skeleton :preload-list="quotes.market" outer-class="market-skeleton"></fui-skeleton>
                         </view>
-
                     </view>
                 </view>
             </view>
@@ -155,7 +143,8 @@ const marketList = ref([])
 const filteredData = computed(() => {
     if (!filters.value) {
         return marketList.value
-    } else {
+    }
+    else {
         const filterRe = new RegExp(filters.value, 'i')
         return marketList.value.filter((item) => {
             return (
@@ -202,12 +191,12 @@ async function changeList(item) {
             console.log('连接成功')
         },
     })
-    socket.onOpen(function() {
+    socket.onOpen(() => {
         changeToSubscribe()
         // 设置定时器，每隔3秒请求一次
         timeHeart()
     })
-    socket.onMessage(function(e) {
+    socket.onMessage((e) => {
         loading.value = false
         handlerData(e.data)
     })
@@ -229,7 +218,8 @@ function handlerData(msg) {
     const data = JSON.parse(msg)
     if (data.ping) {
         socket.send({ data: JSON.stringify({ pong: data.ping }) })
-    } else {
+    }
+    else {
         marketList.value.forEach((item) => {
             data.forEach((item2) => {
                 if (item2.symbol === item.symbol)
@@ -289,12 +279,12 @@ async function loadData() {
             },
         })
 
-        socket.onOpen(function() {
+        socket.onOpen(() => {
             changeToSubscribe()
             // 设置定时器，每隔3秒请求一次
             timeHeart()
         })
-        socket.onMessage(function(e) {
+        socket.onMessage((e) => {
             loading.value = false
             handlerData(e.data)
         })
@@ -303,6 +293,7 @@ async function loadData() {
 
 onHide(() => {
     socket.close()
+    socket = null
 })
 onShow(async () => {
     await loadData()

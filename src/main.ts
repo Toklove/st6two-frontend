@@ -12,14 +12,18 @@ export function createApp() {
     // #ifdef H5
     // 根据HTTP类型生成ws链接
     const isHttps = document.location.protocol === 'https:'
-    if (isHttps)
+    if (isHttps) {
         app.config.globalProperties.$wsUrl = `wss://${document.location.host}/ws`
-    else
+        app.config.globalProperties.$wsControlUrl = `wss://${document.location.host}/ws-control`
+    }
+    else {
         app.config.globalProperties.$wsUrl = `ws://${document.location.host}/ws`
+        app.config.globalProperties.$wsControlUrl = `ws://127.0.0.1:9502/`
+    }
     // #endif
 
     // #ifdef APP-PLUS
-    app.config.globalProperties.$wsUrl = `wss://coinlim.cc/ws`
+    app.config.globalProperties.$wsUrl = `wss://api.gomarketes.com:8282/`
     // #endif
 
     const head = createHead()

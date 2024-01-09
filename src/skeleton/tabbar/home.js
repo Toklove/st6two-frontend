@@ -1,5 +1,7 @@
+import coverDevice from '~/utils/device.js'
+
 const obj = {
-    market: [{
+    market: coverDevice([{
         left: 10,
         top: 15,
         bottom: 220,
@@ -38,8 +40,8 @@ const obj = {
         width: 80,
         height: 40,
         type: 'rect',
-    }],
-    top: [
+    }]),
+    top: coverDevice([
         {
             left: 14,
             right: 365,
@@ -81,8 +83,8 @@ const obj = {
             height: 28,
             type: 'rect',
         },
-    ],
-    swipers: [
+    ]),
+    swipers: coverDevice([
         {
             left: 14,
             right: 365,
@@ -110,6 +112,6 @@ const obj = {
             height: 66,
             type: 'rect',
         },
-    ],
+    ]),
 }
 export default obj

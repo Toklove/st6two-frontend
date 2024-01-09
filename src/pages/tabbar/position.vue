@@ -54,79 +54,71 @@
             <FuiLoading :is-fixed="false" :loading="loading" type="row" />
         </view> -->
 
-        <view  class="px-[34px] pt-[20px]">
-            
+        <view class="px-[34px] pt-[20px]">
             <view v-if="!loading">
                 <scroll-view v-if="list.length > 0 " scroll-x>
-                <view
-                    v-for="item in list" :key="item.id"
-                    class="h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]" @click="showOrder(item)"
-                >
-                    <view class="flex flex-row">
-                        <image
-                            :src="item.market.logo"
-                            class="rounded-full w-[72px] h-[72px]"
-                        ></image>
-                        <view class="flex-1 ml-[12px]">
-                            <view class="grid items-center col">
-                                <view class="flex items-center">
-                                    <text class="text-[30px]">
-                                        {{ item.market.full_name }}
+                    <view
+                        v-for="item in list" :key="item.id"
+                        class="h-[120px] mt-[20px] p-[20px] bg-[#f5f7f9] rounded-[30px]" @click="showOrder(item)"
+                    >
+                        <view class="flex flex-row">
+                            <image
+                                :src="item.market.logo"
+                                class="rounded-full w-[72px] h-[72px]"
+                            ></image>
+                            <view class="flex-1 ml-[12px]">
+                                <view class="grid items-center col">
+                                    <view class="flex items-center">
+                                        <text class="text-[30px]">
+                                            {{ item.market.full_name }}
+                                        </text>
+                                        <text class="lever ml-[14px] text-[20px]">
+                                            x{{ item.lever }}
+                                        </text>
+                                    </view>
+                                    <text class="hands text-[22px] h-[32px] grid place-items-center text-center">
+                                        {{ item.quantity }}
                                     </text>
-                                    <text class="lever ml-[14px] text-[20px]">
-                                        x{{ item.lever }}
-                                    </text>
+                                    <text class="text-[28px] text-right text-red">-6.61</text>
                                 </view>
-                                <text class="hands text-[22px] h-[32px] grid place-items-center text-center">
-                                    {{ item.quantity }}
-                                </text>
-                                <text class="text-[28px] text-right text-red">-6.61</text>
-                            </view>
-                            <view class="flex mt-[20px] items-center justify-between">
-                                <view class="flex items-center text-[22px]">
-                                    <text>{{ item.paid_price }} -</text>
-                                    <text class="red-text">> 1.4896</text>
-                                </view>
-                                <view class="font-bold text-[22px]">
-                                    {{ item.type === 1 ? t('tabBar.position.Buy') : t('tabBar.position.Sell') }}
+                                <view class="flex mt-[20px] items-center justify-between">
+                                    <view class="flex items-center text-[22px]">
+                                        <text>{{ item.paid_price }} -</text>
+                                        <text class="red-text">> {{ item.nowData.close }}</text>
+                                    </view>
+                                    <view class="font-bold text-[22px]">
+                                        {{ item.type === 1 ? t('tabBar.position.Buy') : t('tabBar.position.Sell') }}
+                                    </view>
                                 </view>
                             </view>
                         </view>
                     </view>
-                </view>
                 </scroll-view>
                 <view v-else class="nodata">
                     <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
                 </view>
             </view>
-            <view v-else >
-                <view class='market-skeleton mt-[20px] relative h-[124px]'>
-                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
-                                      ></fui-skeleton>
+            <view v-else>
+                <view class="market-skeleton mt-[20px] relative h-[124px]">
+                    <fui-skeleton :preload-list="position.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='market-skeleton mt-[20px] relative h-[124px]'>
-                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
-                                      ></fui-skeleton>
+                <view class="market-skeleton mt-[20px] relative h-[124px]">
+                    <fui-skeleton :preload-list="position.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='market-skeleton mt-[20px] relative h-[124px]'>
-                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
-                                      ></fui-skeleton>
+                <view class="market-skeleton mt-[20px] relative h-[124px]">
+                    <fui-skeleton :preload-list="position.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='market-skeleton mt-[20px] relative h-[124px]'>
-                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
-                                      ></fui-skeleton>
+                <view class="market-skeleton mt-[20px] relative h-[124px]">
+                    <fui-skeleton :preload-list="position.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='market-skeleton mt-[20px] relative h-[124px]'>
-                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
-                                      ></fui-skeleton>
+                <view class="market-skeleton mt-[20px] relative h-[124px]">
+                    <fui-skeleton :preload-list="position.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='market-skeleton mt-[20px] relative h-[124px]'>
-                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
-                                      ></fui-skeleton>
+                <view class="market-skeleton mt-[20px] relative h-[124px]">
+                    <fui-skeleton :preload-list="position.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='market-skeleton mt-[20px] relative h-[124px]'>
-                        <fui-skeleton :preloadList='position.market' outerClass='market-skeleton'
-                                      ></fui-skeleton>
+                <view class="market-skeleton mt-[20px] relative h-[124px]">
+                    <fui-skeleton :preload-list="position.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
             </view>
         </view>
@@ -203,12 +195,94 @@
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
 import { useI18n } from 'vue-i18n'
 import FuiTabs from '~/components/firstui/fui-tabs/fui-tabs.vue'
-import FuiLoading from '~/components/firstui/fui-loading/fui-loading.vue'
 import position from '~/skeleton/tabbar/position.js'
+
 const loading = ref(false)
+const list = ref([])
+const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
+let socket = null
+const marketList = computed(() => {
+    return list.value
+})
+
+function createSubTickerRequest(symbol) {
+    return { symbol, type: 'price', language: 'en_US' }
+}
+
+function subscribeData(SYMBOL) {
+    socket.send({ data: JSON.stringify(createSubTickerRequest(SYMBOL)) })
+}
+
+onUnload(() => {
+    socket.close()
+})
+
+async function changeToSubscribe() {
+    let symbol = ''
+    marketList.value.forEach((item) => {
+        symbol += `${item.market.symbol}.`
+    })
+
+    // 去除最后一个点
+    symbol = symbol.substring(0, symbol.length - 1)
+
+    subscribeData(symbol)
+}
+
+function sendHeart() {
+    socket.send({ data: JSON.stringify({ type: 'heartbeat', msg: 'ping' }) })
+}
+
+function timeHeart() {
+    if (socket == null)
+        return
+
+    sendHeart()
+
+    setTimeout(() => {
+        timeHeart()
+    }, 3000)
+}
+
+function handlerData(msg) {
+    const data = JSON.parse(msg)
+    if (data.ping) {
+        socket.send({ data: JSON.stringify({ pong: data.ping }) })
+    }
+    else {
+        list.value.forEach((item) => {
+            data.forEach((item2) => {
+                if (item2.symbol === item.market.symbol)
+                    item.nowData = item2
+            })
+        })
+    }
+}
+
+async function loadData() {
+    loading.value = true
+    if (socket === null) {
+        socket = uni.connectSocket({
+            url: wsUrl,
+            success: () => {
+                console.log('连接成功')
+            },
+        })
+
+        socket.onOpen(() => {
+            changeToSubscribe()
+            // 设置定时器，每隔3秒请求一次
+            timeHeart()
+        })
+        socket.onMessage((e) => {
+            loading.value = false
+            handlerData(e.data)
+        })
+    }
+}
 
 const editInfo = ref({
     stop_surplus: 0,
@@ -236,8 +310,6 @@ const userStore = useUserStore()
 function toPage(url) {
     uni.navigateTo({ url })
 }
-
-const list = ref([])
 
 // 分页参数
 const page = ref({
@@ -284,6 +356,7 @@ function getHistory() {
         const data = res.data.data.map((item) => {
             item.show_detail = false
             item.market.logo = $api.staticUrl(item.market.logo)
+            item.nowData = {}
             return item
         })
         if (page.value.page === 1)
@@ -294,8 +367,13 @@ function getHistory() {
     })
 }
 
-onLoad(() => {
-    getHistory()
+onHide(() => {
+    socket.close()
+    socket = null
+})
+onShow(async () => {
+    await getHistory()
+    await loadData()
 })
 
 function handClose() {

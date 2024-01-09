@@ -10,12 +10,12 @@
                 {{ item.name }}
             </text>
         </view>
-        <view v-show="loading">
-            <view class="market-skeleton relative h-[500px] mt-[20px]">
-                <FuiSkeleton :preload-list="charts.market3" outer-class="market-skeleton"></FuiSkeleton>
-            </view>
-        </view>
-        <view v-show="!loading" class="w-full h-[500px] relative">
+        <!--        <view v-show="loading"> -->
+        <!--            <view class="market-skeleton relative h-[500px] mt-[20px]"> -->
+        <!--                <FuiSkeleton :preload-list="charts.market3" outer-class="market-skeleton"></FuiSkeleton> -->
+        <!--            </view> -->
+        <!--        </view> -->
+        <view class="w-full h-[500px] relative">
             <view id="chartContainer" ref="chartContainer" class="w-full h-full mt-[20px]" />
         </view>
     </view>
@@ -24,8 +24,6 @@
 <script lang='ts' setup>
 import { getCurrentInstance, reactive, ref } from 'vue'
 import { init } from 'klinecharts'
-import charts from '~/skeleton/position/chart.js'
-import FuiSkeleton from '~/components/firstui/fui-skeleton/fui-skeleton.vue'
 
 const props = defineProps({
     symbol: {
@@ -39,6 +37,7 @@ const props = defineProps({
 const chartContainer = ref()
 const SYMBOL = ref(props.symbol)
 const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
+// const wsControlUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsControlUrl
 
 let socket = uni.connectSocket({
     url: wsUrl,
@@ -46,27 +45,38 @@ let socket = uni.connectSocket({
         console.log('连接成功')
     },
 })
+
+// const socketControl = uni.connectSocket({
+//     url: wsControlUrl,
+//     success: () => {
+//         console.log('连接成功')
+//     },
+// })
 const Interval = ref('1M')
 const chart = ref()
 const loading = ref(false)
+const control = ref(false)
 onUnmounted(() => {
     socket.close()
+    // socketControl.close()
 })
 
 function handlerData(msg) {
-    const data = JSON.parse(msg)
+    if (!control.value) {
+        const data = JSON.parse(msg)
 
-    const result = {
-        timestamp: data.id * 1000,
-        open: data.open,
-        close: data.close,
-        high: data.high,
-        low: data.low,
-        volume: data.vol,
+        const result = {
+            timestamp: data.id * 1000,
+            open: data.open,
+            close: data.close,
+            high: data.high,
+            low: data.low,
+            volume: data.vol,
 
+        }
+
+        chart.value.updateData(result)
     }
-
-    chart.value.updateData(result)
 }
 
 function createHistoryKRequest(time) {
@@ -88,6 +98,36 @@ socket.onMessage((e) => {
     handlerData(e.data)
 })
 
+// function handlerControlData(msg) {
+//     // if (!control.value) return
+//     const data = JSON.parse(msg)
+//
+//     // console.log(data)
+//
+//     const result = {
+//         timestamp: data.timestamp,
+//         open: data.open,
+//         close: data.close,
+//         high: data.high,
+//         low: data.low,
+//         volume: data.volume,
+//
+//     }
+//
+//     // console.log(result)
+//     console.log('添加到图表的数据', result)
+//     chart.value.updateData(result)
+// }
+//
+// socketControl.onOpen(() => {
+//     socketControl.send({ data: JSON.stringify({ type: 'subscribe', symbol: `${SYMBOL.value}_${Interval.value}` }) })
+// })
+//
+// socketControl.onMessage((e) => {
+//     // control.value = true
+//     handlerControlData(e.data)
+// })
+
 function initTicker() {
     $api.get('/market/kline', { symbol: SYMBOL.value, time: Interval.value, num: 300 }).then((res) => {
         const result = res.data.map(item => ({
@@ -98,6 +138,8 @@ function initTicker() {
             low: item.low,
             volume: item.volume,
         }))
+        console.log('添加到图表的数据', result)
+        console.log(chart.value)
         chart.value.applyNewData(result)
     })
 }
