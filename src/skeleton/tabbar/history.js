@@ -47,7 +47,7 @@ const obj = {
         width: 16,
         height: 19,
         type: 'rect',
-    }
-],
+    },
+    ],
 }
 export default obj

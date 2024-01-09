@@ -109,7 +109,7 @@
       "Password": "Password",
       "ConfirmPassword": "Confirm Password",
       "VerificationCode": "Verification code",
-      "InvitationCode": "Invitation Code (optional)",
+      "InvitationCode": "Invitation Code",
       "PleaseEnterYourEmail": "Please enter your email",
       "PleaseEnterYourPassword": "Please enter your password",
       "PleaseEnterYourConfirmPassword": "Please enter your confirm password",

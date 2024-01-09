@@ -109,7 +109,7 @@
       "Password": "Пароль",
       "ConfirmPassword": "Подтвердите пароль",
       "VerificationCode": "Проверочный код",
-      "InvitationCode": "Пригласительный код (необязательно)",
+      "InvitationCode": "Пригласительный код",
       "PleaseEnterYourEmail": "Пожалуйста, введите свой адрес электронной почты",
       "PleaseEnterYourPassword": "Пожалуйста, введите свой пароль",
       "PleaseEnterYourConfirmPassword": "Пожалуйста, введите свой пароль для подтверждения",

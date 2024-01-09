@@ -109,7 +109,7 @@
       "Password": "密碼",
       "ConfirmPassword": "確認密碼",
       "VerificationCode": "驗證碼",
-      "InvitationCode": "邀請碼（可選）",
+      "InvitationCode": "邀請碼",
       "PleaseEnterYourEmail": "請輸入您的電子郵件",
       "PleaseEnterYourPassword": "請輸入您的密碼",
       "PleaseEnterYourConfirmPassword": "請輸入您的確認密碼",

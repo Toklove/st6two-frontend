@@ -109,7 +109,7 @@
       "Password": "パスワード",
       "ConfirmPassword": "パスワードの確認",
       "VerificationCode": "確認コード",
-      "InvitationCode": "招待コード(オプション)",
+      "InvitationCode": "招待コード",
       "PleaseEnterYourEmail": "メールアドレスを入力してください",
       "PleaseEnterYourPassword": "パスワードを入力してください",
       "PleaseEnterYourConfirmPassword": "確認用のパスワードを入力してください",
@@ -254,8 +254,7 @@
       "Purse": "財布",
       "BankCard": "銀行カード",
       "SubmitSuccess": "正常に送信されました",
-      "SubmitFailed": "送信に失敗しました",
-      
+      "SubmitFailed": "送信に失敗しました"
     }
   },
   "components": {

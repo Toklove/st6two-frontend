@@ -109,7 +109,7 @@
       "Password": "Mot de passe",
       "ConfirmPassword": "Confirmer le mot de passe",
       "VerificationCode": "Code de vérification",
-      "InvitationCode": "Code d’invitation (facultatif)",
+      "InvitationCode": "Code d’invitation",
       "PleaseEnterYourEmail": "S’il vous plaît entrez votre e-mail",
       "PleaseEnterYourPassword": "Veuillez saisir votre mot de passe",
       "PleaseEnterYourConfirmPassword": "Veuillez saisir votre mot de passe de confirmation",

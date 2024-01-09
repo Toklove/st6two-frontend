@@ -82,7 +82,7 @@ const obj = {
             type: 'rect',
         },
     ],
-    swipers:[
+    swipers: [
         {
             left: 14,
             right: 365,
@@ -109,7 +109,7 @@ const obj = {
             width: 107,
             height: 66,
             type: 'rect',
-        }
-    ]
+        },
+    ],
 }
 export default obj

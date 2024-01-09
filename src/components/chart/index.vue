@@ -1,30 +1,27 @@
 <template>
-    <view class='bg-white my-[40px]'>
-        <view class='flex items-center justify-between'>
+    <view class="bg-white my-[40px]">
+        <view class="flex items-center justify-between">
             <text
-                v-for='(item, index) in timeList' :key='index'
+                v-for="(item, index) in timeList" :key="index"
                 :class="index === activeNav ? 'text-white bg-black' : ''"
-                class='flex items-center justify-center w-[80px] h-[42px] text-[24px] bg-[#f5f7f9] rounded-[20px] transition-all'
-                @click='changeInterval(item)'
+                class="flex items-center justify-center w-[80px] h-[42px] text-[24px] bg-[#f5f7f9] rounded-[20px] transition-all"
+                @click="changeInterval(item)"
             >
                 {{ item.name }}
             </text>
         </view>
-        <view v-show='loading'>
-            <view class='market-skeleton relative h-[500px] mt-[20px]'>
-                <fui-skeleton :preloadList='charts.market3' outerClass='market-skeleton'
-                ></fui-skeleton>
+        <view v-show="loading">
+            <view class="market-skeleton relative h-[500px] mt-[20px]">
+                <FuiSkeleton :preload-list="charts.market3" outer-class="market-skeleton"></FuiSkeleton>
             </view>
-
         </view>
-        <view v-show='!loading' class='w-full h-[500px] relative'>
-            <view id='chartContainer' ref='chartContainer' class='w-full h-full mt-[20px]' />
+        <view v-show="!loading" class="w-full h-[500px] relative">
+            <view id="chartContainer" ref="chartContainer" class="w-full h-full mt-[20px]" />
         </view>
     </view>
 </template>
 
 <script lang='ts' setup>
-import { useI18n } from 'vue-i18n'
 import { getCurrentInstance, reactive, ref } from 'vue'
 import { init } from 'klinecharts'
 import charts from '~/skeleton/position/chart.js'
@@ -37,7 +34,7 @@ const props = defineProps({
     },
 })
 
-const { t } = useI18n()
+// const { t } = useI18n()
 
 const chartContainer = ref()
 const SYMBOL = ref(props.symbol)
@@ -80,13 +77,13 @@ function subscribeData() {
     socket.send({ data: JSON.stringify(createHistoryKRequest(Interval.value)) })
 }
 
-socket.onOpen(function() {
+socket.onOpen(() => {
     subscribeData()
     // 设置定时器，每隔3秒请求一次
     timeHeart()
 })
 
-socket.onMessage(function(e) {
+socket.onMessage((e) => {
     loading.value = false
     handlerData(e.data)
 })
@@ -173,23 +170,23 @@ function changeInterval(val) {
     })
 
     // 重新连接
-    socket = new uni.connectSocket({
+    socket = uni.connectSocket({
         url: wsUrl,
         success: () => {
             console.log('连接成功')
         },
     })
-    socket.onOpen(function() {
+    socket.onOpen(() => {
         subscribeData()
         // 设置定时器，每隔3秒请求一次
         timeHeart()
     })
-    socket.onMessage(function(e) {
+    socket.onMessage((e) => {
         loading.value = false
         handlerData(e.data)
     })
     initTicker()
-    socket.send(JSON.stringify(createHistoryKRequest(Interval.value)))
+    socket.send({ data: JSON.stringify(createHistoryKRequest(Interval.value)) })
     console.log(Interval.value)
 }
 </script>

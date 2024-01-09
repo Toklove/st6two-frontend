@@ -1,5 +1,5 @@
 const obj = {
-    market: [ {
+    market: [{
         left: 16,
         right: 365,
         top: 26,
@@ -87,7 +87,7 @@ const obj = {
         width: 50,
         height: 16,
         type: 'rect',
-    },{
+    }, {
         left: 244,
         right: 365,
         top: 146,
@@ -96,6 +96,6 @@ const obj = {
         height: 12,
         type: 'rect',
     },
-],
+    ],
 }
 export default obj

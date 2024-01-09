@@ -52,11 +52,18 @@
                             type="text"
                         >
                         <view
-                            class="w-[100px] text-[22px] rounded-[20px] text-center bg-black text-white py-[8px]"
-                            @click="send"
+                            class="w-[160px]"
+                            @click="change"
                         >
-                            {{ timer ?? t('common.forget.Send') }}
+                            <image :src="form.captcha_config.img" class="w-full h-[40px]"></image>
                         </view>
+
+                        <!--                        <view -->
+                        <!--                            class="w-[100px] text-[22px] rounded-[20px] text-center bg-black text-white py-[8px]" -->
+                        <!--                            @click="send" -->
+                        <!--                        > -->
+                        <!--                            {{ timer ?? t('common.forget.Send') }} -->
+                        <!--                        </view> -->
                     </view>
                 </view>
                 <view class="flex items-center p-[28px] mt-[30px] bg-[#f5f7f9] rounded-[20px]">
@@ -96,6 +103,8 @@ const form = ref({
     password_confirmation: '',
     code: '',
     invite_code: '',
+    captcha: '',
+    captcha_config: {},
 })
 
 function showToast(message) {
@@ -105,13 +114,22 @@ function showToast(message) {
     })
 }
 
+function change() {
+    uni.showLoading()
+    $api.get('/captcha').then((res) => {
+        form.value.captcha_config = res.data
+        uni.hideLoading()
+    })
+}
+
 async function submit() {
-    const fields = ['email', 'password', 'password_confirmation', 'code']
+    const fields = ['email', 'password', 'password_confirmation', 'code', 'invite_code']
     const messages = [
         t('common.register.PleaseEnterYourEmail'),
         t('common.register.PleaseEnterYourPassword'),
         t('common.register.PleaseEnterYourConfirmPassword'),
         t('common.register.PleaseEnterYourVerificationCode'),
+        t('common.register.PleaseEnterYourInviteCode'),
     ]
 
     for (let i = 0; i < fields.length; i++) {
@@ -125,6 +143,8 @@ async function submit() {
         showToast(t('common.register.TheTwoPasswordsAreInconsistent'))
         return
     }
+
+    form.value.captcha = form.value.captcha_config.key
 
     const { code, data, message } = await $api.post('/auth/register', form.value)
     console.log(data)
@@ -144,48 +164,13 @@ async function submit() {
     })
 }
 
-const timer = ref(null)
-
-async function send() {
-    if (!form.value.email) {
-        showToast(t('common.register.PleaseEnterYourEmail'))
-        return
-    }
-
-    if (timer.value)
-        return
-
-    const data = await $api.post('/auth/send', {
-        email: form.value.email,
-    })
-
-    if (data.code !== 1) {
-        showToast(data.message)
-        return
-    }
-
-    timer.value = 60
-    decTimer()
-
-    console.log(data)
-}
-
-function decTimer() {
-    setTimeout(() => {
-        if (timer.value > 0) {
-            timer.value--
-            decTimer()
-        }
-        else {
-            timer.value = null
-        }
-    }, 1000)
-}
-
 onLoad((e) => {
     console.log(e)
     if (e.invite_code)
         form.value.invite_code = e.invite_code
+    $api.get('/captcha').then((res) => {
+        form.value.captcha_config = res.data
+    })
 })
 
 const layoutData = ref({

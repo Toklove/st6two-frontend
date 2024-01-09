@@ -24,12 +24,15 @@
             </view>
             <view class="mt-[30px] text-center" @click="uploadFrontend">
                 <image
-                    :src="formData.front !== null ? formData.front : '/static/images/real-upload.png'"
+                    :src="formData.front !== null ? formData.front_url : '/static/images/real-upload.png'"
                     class="mt-[22px] icon-upload"
                 ></image>
             </view>
             <view class="mt-[30px] text-center" @click="uploadBackend">
-                <image :src="formData.back ?? '/static/images/real-upload.png'" class="mt-[22px] icon-upload"></image>
+                <image
+                    :src="formData.back !== null ? formData.back_url : '/static/images/real-upload.png'"
+                    class="mt-[22px] icon-upload"
+                ></image>
             </view>
             <view class="mt-[98px] text-center">
                 <text class="text-[22px] sub-title">
