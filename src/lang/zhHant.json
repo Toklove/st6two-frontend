@@ -110,6 +110,7 @@
       "ConfirmPassword": "確認密碼",
       "VerificationCode": "驗證碼",
       "InvitationCode": "邀請碼",
+      "PleaseEnterYourInviteCode": "請輸入您的邀請碼",
       "PleaseEnterYourEmail": "請輸入您的電子郵件",
       "PleaseEnterYourPassword": "請輸入您的密碼",
       "PleaseEnterYourConfirmPassword": "請輸入您的確認密碼",
@@ -156,7 +157,8 @@
       "UploadFailed": "上傳失敗",
       "SubmitSuccess": "提交成功",
       "SubmitFailed": "提交失敗",
-      "InputAll": "尚未進行所有輸入"
+      "InputAll": "尚未進行所有輸入",
+      "fail": "认证审核不通过,请重新提交"
     },
     "changePassword": {
       "Submit": "提交",

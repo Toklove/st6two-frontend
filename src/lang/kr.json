@@ -110,6 +110,7 @@
       "ConfirmPassword": "비밀번호 확인",
       "VerificationCode": "인증 코드",
       "InvitationCode": "초대 코드",
+      "PleaseEnterYourInviteCode": "초대 코드를 입력해 주세요",
       "PleaseEnterYourEmail": "이메일 주소를 입력해 주세요",
       "PleaseEnterYourPassword": "비밀번호를 입력해 주세요",
       "PleaseEnterYourConfirmPassword": "확인 비밀번호를 입력해 주세요",
@@ -154,7 +155,8 @@
       "Certified": "인증",
       "UploadFailed": "업로드 실패",
       "SubmitSuccess": "성공적으로 제출되었습니다.",
-  "SubmitFailed": "제출 실패",
+      "fail": "인증 승인이 통과되지 않았습니다. 다시 제출하십시오.",
+      "SubmitFailed": "제출 실패",
   "InputAll": "아직 모든 입력이 이루어지지 않았습니다."
     },
     "changePassword": {

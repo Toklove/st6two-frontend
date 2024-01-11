@@ -110,6 +110,7 @@
       "ConfirmPassword": "Подтвердите пароль",
       "VerificationCode": "Проверочный код",
       "InvitationCode": "Пригласительный код",
+      "PleaseEnterYourInviteCode": "Пожалуйста, введите свой код приглашения",
       "PleaseEnterYourEmail": "Пожалуйста, введите свой адрес электронной почты",
       "PleaseEnterYourPassword": "Пожалуйста, введите свой пароль",
       "PleaseEnterYourConfirmPassword": "Пожалуйста, введите свой пароль для подтверждения",
@@ -154,6 +155,7 @@
       "Certified": "Заверенный",
       "UploadFailed": "Ошибка загрузки",
       "SubmitSuccess": "Успешно отправлено",
+      "fail": "Проверка сертификации не прошла, пожалуйста, повторно",
   "SubmitFailed": "Ошибка отправки",
   "InputAll": "Еще не все входные данные были сделаны"
     },

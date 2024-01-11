@@ -110,6 +110,7 @@
       "ConfirmPassword": "Confirmer le mot de passe",
       "VerificationCode": "Code de vérification",
       "InvitationCode": "Code d’invitation",
+      "PleaseEnterYourInviteCode": "S’il vous plaît entrez votre code d’invitation",
       "PleaseEnterYourEmail": "S’il vous plaît entrez votre e-mail",
       "PleaseEnterYourPassword": "Veuillez saisir votre mot de passe",
       "PleaseEnterYourConfirmPassword": "Veuillez saisir votre mot de passe de confirmation",
@@ -155,7 +156,8 @@
       "UploadFailed": "Echec du téléchargement",
       "InputAll": "Toutes les entrées n’ont pas encore été faites",
       "SubmitSuccess": "Soumis avec succès",
-      "SubmitFailed": "Échec de la soumission"
+      "SubmitFailed": "Échec de la soumission",
+      "fail": "Audit de certification non réussi, veuillez soumettre à nouveau"
     },
     "changePassword": {
       "Submit": "Envoyer",

@@ -110,6 +110,7 @@
       "ConfirmPassword": "Confirmar senha",
       "VerificationCode": "Código de verificação",
       "InvitationCode": "Código de convite",
+      "PleaseEnterYourInviteCode": "Por favor, insira o seu código de convite",
       "PleaseEnterYourEmail": "Por favor, digite seu e-mail",
       "PleaseEnterYourPassword": "Introduza a sua palavra-passe",
       "PleaseEnterYourConfirmPassword": "Introduza a sua palavra-passe de confirmação",
@@ -154,7 +155,8 @@
       "Certified": "Certificado",
       "UploadFailed": "Falha no carregamento",
       "SubmitSuccess": "Enviado com sucesso",
-  "SubmitFailed": "Falha no envio",
+      "fail": "A revisão da certificação falhou, envie de novo",
+      "SubmitFailed": "Falha no envio",
   "InputAll": "Nem todas as entradas foram feitas ainda"
     },
     "changePassword": {

@@ -9,7 +9,10 @@
             <view class="text-[26px] sub-title leading-[36px]">
                 {{ t('mine.certified.MakeSureTheBorderIsComplete') }}
             </view>
-            <view class="bg-[#f5f7f9] mt-[50px] p-[28px] rounded-[20px]">
+            <view v-if="formData.is_certified === 2" class="mt-[40px]">
+                <FuiAlert :title="t('mine.certified.fail')" type="warn"></FuiAlert>
+            </view>
+            <view class="bg-[#f5f7f9] mt-[40px] p-[28px] rounded-[20px]">
                 <input
                     v-model="formData.real_name" :placeholder="t('mine.certified.realName')"
                     :disabled="formData.is_certified === 1" class="flex-1 ml-[19px] input" type="text"
@@ -40,7 +43,7 @@
                 </text>
             </view>
             <view
-                v-if="formData.is_certified === 0"
+                v-if="formData.is_certified !== 1"
                 :class="isInputAll ? 'bg-black text-white' : ''"
                 class="mt-[30px] py-[24px] text-center bg-[#f5f7f9] rounded-[40px] transition-all" @click="submit"
             >
@@ -55,6 +58,7 @@
 <script lang='ts' setup>
 import { useI18n } from 'vue-i18n'
 import { layoutDataKey } from '~/composables/provide'
+import FuiAlert from '~/components/firstui/fui-alert/fui-alert.vue'
 
 const { t } = useI18n()
 const layoutData = ref({

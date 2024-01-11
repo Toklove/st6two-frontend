@@ -110,6 +110,7 @@
       "ConfirmPassword": "Confirm Password",
       "VerificationCode": "Verification code",
       "InvitationCode": "Invitation Code",
+      "PleaseEnterYourInviteCode": "Please Enter Invitation Code",
       "PleaseEnterYourEmail": "Please enter your email",
       "PleaseEnterYourPassword": "Please enter your password",
       "PleaseEnterYourConfirmPassword": "Please enter your confirm password",
@@ -155,7 +156,8 @@
       "UploadFailed": "Upload failed",
       "InputAll":"Not all inputs have been made yet",
       "SubmitSuccess": "Submitted successfully",
-      "SubmitFailed": "Submission failed"
+      "SubmitFailed": "Submission failed",
+      "fail": "Certification review failed, please resubmit"
     },
     "changePassword": {
       "Submit": "Submit",

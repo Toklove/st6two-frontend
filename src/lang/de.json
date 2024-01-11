@@ -110,6 +110,7 @@
       "ConfirmPassword": "Passwort bestätigen",
       "VerificationCode": "Verifizierungscode",
       "InvitationCode": "Einladungscode",
+      "PleaseEnterYourInviteCode": "Bitte geben Sie Ihren Einladungscode ein",
       "PleaseEnterYourEmail": "Bitte geben Sie Ihre E-Mail-Adresse ein",
       "PleaseEnterYourPassword": "Bitte geben Sie Ihr Passwort ein",
       "PleaseEnterYourConfirmPassword": "Bitte geben Sie Ihr Bestätigungspasswort ein",
@@ -155,7 +156,8 @@
       "UploadFailed": "Upload fehlgeschlagen",
       "InputAll":"Es wurden noch nicht alle Eingaben gemacht",
       "SubmitSuccess": "Erfolgreich eingereicht",
-      "SubmitFailed": "Übermittlung fehlgeschlagen"
+      "SubmitFailed": "Übermittlung fehlgeschlagen",
+      "fail": "Zertifizierungsprüfung fehlgeschlagen, bitte erneut einreichen"
     },
     "changePassword": {
       "Submit": "Senden",

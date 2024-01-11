@@ -110,6 +110,7 @@
       "ConfirmPassword": "パスワードの確認",
       "VerificationCode": "確認コード",
       "InvitationCode": "招待コード",
+      "PleaseEnterYourInviteCode": "招待コードを入力してください",
       "PleaseEnterYourEmail": "メールアドレスを入力してください",
       "PleaseEnterYourPassword": "パスワードを入力してください",
       "PleaseEnterYourConfirmPassword": "確認用のパスワードを入力してください",
@@ -155,7 +156,9 @@
       "UploadFailed": "アップロードに失敗しました",
       "SubmitSuccess": "正常に送信されました",
   "SubmitFailed": "送信に失敗しました",
-  "InputAll": "まだすべての入力が行われているわけではありません"
+      "InputAll": "まだすべての入力が行われているわけではありません",
+      "fail": "資格認定レビューが失敗しました。再送信してください"
+
     },
     "changePassword": {
       "Submit": "送信",

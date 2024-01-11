@@ -110,6 +110,7 @@
       "ConfirmPassword": "Conferma password",
       "VerificationCode": "Codice di verifica",
       "InvitationCode": "Codice invito",
+      "PleaseEnterYourInviteCode": "Inserisci il tuo codice invito",
       "PleaseEnterYourEmail": "Inserisci la tua email",
       "PleaseEnterYourPassword": "Inserisci la tua password",
       "PleaseEnterYourConfirmPassword": "Inserisci la tua password di conferma",
@@ -155,7 +156,9 @@
       "UploadFailed": "Caricamento non riuscito",
       "InputAll": "Non tutti i dati sono stati ancora inseriti",
       "SubmitSuccess": "Inviato con successo",
-      "SubmitFailed": "Invio non riuscito"
+      "SubmitFailed": "Invio non riuscito",
+      "fail": "Revisione della certificazione non riuscita, invia nuovamente"
+
     },
     "changePassword": {
       "Submit": "Invia",
