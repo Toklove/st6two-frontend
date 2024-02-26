@@ -107,6 +107,7 @@ function toPage(url) {
 const wallet = reactive([{ balance: 0, currency: { name: '' } }])
 
 onShow(() => {
+    uni.showLoading({ mask: true })
     loading.value = true
     $api.get('/wallet/index').then((res) => {
         wallet.splice(0, wallet.length)
@@ -116,6 +117,7 @@ onShow(() => {
                 wallet.push(item)
             })
         }
+        uni.hideLoading()
     })
 })
 

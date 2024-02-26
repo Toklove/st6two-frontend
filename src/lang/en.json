@@ -276,6 +276,7 @@
       "Submit": "Submit",
       "inputAmount": "Please enter the amount",
       "Purse": "Purse",
+      "PurseRecord": "Purse record",
       "BankCard": "Bank Card",
       "SubmitSuccess": "Submitted successfully",
       "SubmitFailed": "Submission failed"

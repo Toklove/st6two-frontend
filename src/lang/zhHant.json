@@ -278,6 +278,7 @@
       "Submit": "提交",
       "inputAmount": "請輸入金額",
       "Purse": "錢包",
+      "PurseRecord": "錢包记录",
       "BankCard": "銀行卡",
       "SubmitSuccess": "提交成功",
       "SubmitFailed": "提交失敗"

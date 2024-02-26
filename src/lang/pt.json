@@ -273,6 +273,7 @@
       "Submit": "Enviar",
       "inputAmount": "Por favor, insira o valor",
       "Purse": "Bolsa",
+      "PurseRecord": "Registro de bolsa",
       "BankCard": "Cartão Bancário",
       "SubmitSuccess": "Enviado com sucesso",
       "SubmitFailed": "Falha no envio"

@@ -13,10 +13,11 @@
                         class='w-[40px] h-[40px]'
                     ></image>
                 </view>
-                <USubsection
-                    v-model='current'
-                    :list='subList()' active-color='white' button-color='#3640f0' class='w-[350px]' rounded
-                ></USubsection>
+                <view class="font-bold text-[36px]">{{ info.full_name }}</view>
+                <!--                <USubsection-->
+                <!--                    v-model='current'-->
+                <!--                    :list='subList()' active-color='white' button-color='#3640f0' class='w-[350px]' rounded-->
+                <!--                ></USubsection>-->
             </view>
         </FuiNavBar>
         <view class='px-[34px] mt-[20px]'>
@@ -340,7 +341,7 @@
 import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
-import USubsection from '~/components/toklove/sub-section/sub-section.vue'
+// import USubsection from '~/components/toklove/sub-section/sub-section.vue'
 import KLineChart from '~/components/chart/index.vue'
 import FuiInputNumber from '~/components/firstui/fui-input-number/fui-input-number.vue'
 import FuiSwitch from '~/components/firstui/fui-switch/fui-switch.vue'
@@ -355,18 +356,18 @@ const wsUrl = getCurrentInstance()?.appContext.config.globalProperties.$wsUrl
 // 从路由pair参数获取symbol
 const symbol = ref('')
 
-const current = ref(0)
+const current = ref(1)
 
-function subList() {
-    return [
-        {
-            name: t('position.chart.Contract'),
-        },
-        {
-            name: t('position.chart.Option'),
-        },
-    ]
-}
+// function subList() {
+//     return [
+//         {
+//             name: t('position.chart.Contract'),
+//         },
+//         {
+//             name: t('position.chart.Option'),
+//         },
+//     ]
+// }
 
 function clickBack() {
     $api.back()

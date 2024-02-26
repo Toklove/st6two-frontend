@@ -272,6 +272,7 @@
       "Submit": "Envoyer",
       "inputAmount": "S’il vous plaît entrer le montant",
       "Purse": "Porte-monnaie",
+      "PurseRecord": "Enregistrement du portefeuille",
       "BankCard": "Carte bancaire",
       "SubmitSuccess": "Soumis avec succès",
   "SubmitFailed": "Échec de la soumission"

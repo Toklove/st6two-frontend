@@ -61,17 +61,20 @@
             <view class="mt-[40px] p-[30px] bg-[#f5f7f9] rounded-[20px]">
                 <text class="text-[30px]">{{ t('position.deposit.uploadImage') }}</text>
                 <view
-                    v-if='form.my_image !== null'
-                    class='bg-white w-[180px] h-[180px] mt-[22px] grid place-center'
-                    @click='uploadImage'>
+                    v-if="form.my_image !== null"
+                    class="bg-white w-[180px] h-[180px] mt-[22px] grid place-center"
+                    @click="uploadImage"
+                >
                     <image
                         :src="form.my_image_url"
                         class="w-[180px] h-[180px]"
                     ></image>
                 </view>
-                <view v-else class='bg-white w-[180px] h-[180px] mt-[22px] grid place-center'
-                      @click='uploadImage'>
-                    <fui-icon name='plus' size='180'></fui-icon>
+                <view
+                    v-else class="bg-white w-[180px] h-[180px] mt-[22px] grid place-center"
+                    @click="uploadImage"
+                >
+                    <FuiIcon name="plus" size="180"></FuiIcon>
                 </view>
             </view>
             <view class="btn-wrap text-center">
@@ -115,10 +118,10 @@ function submit() {
         showToast(t('position.deposit.uploadImageEmpty'))
         return
     }
-    $api.post('/user/real', formData.value).then((res) => {
+    $api.post('/user/depositWallet', form.value).then((res) => {
         if (res.code === 1) {
             showToast(t('mine.certified.SubmitSuccess'))
-            $api.back()
+            uni.navigateTo({ url: '/pages/position/record' })
         }
         else {
             showToast(t('mine.certified.SubmitFailed'))
@@ -128,7 +131,6 @@ function submit() {
 }
 
 function uploadImage() {
-
     // 调用uniapp上传文件方法
     uni.chooseImage({
         count: 1, // 默认9
@@ -175,11 +177,16 @@ function changeCurrency(item) {
 
 const CurrencyList = ref([])
 onShow(() => {
+    // loading
+    uni.showLoading({
+        mask: true,
+    })
     $api.get('/user/getCurrency').then((res) => {
         CurrencyList.value = res.data
         form.value.currency_name = CurrencyList.value[0].name
         form.value.currency_id = CurrencyList.value[0].id
         form.value.address = CurrencyList.value[0].address
+        uni.hideLoading()
     })
 })
 

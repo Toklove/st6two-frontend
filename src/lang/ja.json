@@ -274,6 +274,7 @@
       "Submit": "送信",
       "inputAmount": "金額を入力してください",
       "Purse": "財布",
+      "PurseRecord": "財布の記録",
       "BankCard": "銀行カード",
       "SubmitSuccess": "正常に送信されました",
       "SubmitFailed": "送信に失敗しました"

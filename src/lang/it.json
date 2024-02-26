@@ -274,6 +274,7 @@
       "Submit": "Invia",
       "inputAmount": "Si prega di inserire l'importo",
       "Purse": "Borsa",
+      "PurseRecord": "Registro della borsa",
       "BankCard": "Carta di credito",
       "SubmitSuccess": "Inviato con successo",
       "SubmitFailed": "Invio non riuscito"

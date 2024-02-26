@@ -44,20 +44,20 @@ export default defineUniPages({
                 iconPath: 'static/tabbar/quotes-unselect.png',
                 selectedIconPath: 'static/tabbar/quotes-select.png',
             },
+            // {
+            //     pagePath: 'pages/tabbar/position',
+            //     iconPath: 'static/tabbar/position-unselect.png',
+            //     selectedIconPath: 'static/tabbar/position-select.png',
+            // },
             {
-                pagePath: 'pages/tabbar/position',
-                iconPath: 'static/tabbar/position-unselect.png',
-                selectedIconPath: 'static/tabbar/position-select.png',
+                pagePath: 'pages/tabbar/assets',
+                iconPath: 'static/tabbar/assets-unselect.png',
+                selectedIconPath: 'static/tabbar/assets-select.png',
             },
             {
                 pagePath: 'pages/tabbar/history',
                 iconPath: 'static/tabbar/history-unselect.png',
                 selectedIconPath: 'static/tabbar/history-select.png',
-            },
-            {
-                pagePath: 'pages/tabbar/assets',
-                iconPath: 'static/tabbar/assets-unselect.png',
-                selectedIconPath: 'static/tabbar/assets-select.png',
             },
             {
                 pagePath: 'pages/tabbar/mine',

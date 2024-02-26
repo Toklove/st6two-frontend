@@ -34,7 +34,7 @@ interface NavigateToOptions {
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "pages/tabbar/home" | "pages/tabbar/quotes" | "pages/tabbar/position" | "pages/tabbar/history" | "pages/tabbar/assets" | "pages/tabbar/mine"
+    url: 'pages/tabbar/home' | 'pages/tabbar/quotes' | 'pages/tabbar/assets' | 'pages/tabbar/history' | 'pages/tabbar/mine'
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;

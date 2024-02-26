@@ -53,6 +53,13 @@
                     </view>
                     <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/position/record')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-option.png"></image>
+                        <text class="text-[28px]">{{ t('position.withDraw.PurseRecord') }}</text>
+                    </view>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
+                </view>
                 <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/certified')">
                     <view class="flex items-center">
                         <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-real.png"></image>

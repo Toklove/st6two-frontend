@@ -273,6 +273,7 @@
       "Submit": "Senden",
       "inputAmount": "Bitte geben Sie den Betrag ein",
       "Purse": "Geldbeutel",
+      "PurseRecord": "Geldbörsenrekord",
       "BankCard": "Bankkarte",
       "SubmitSuccess": "Erfolgreich eingereicht",
       "SubmitFailed": "Übermittlung fehlgeschlagen"

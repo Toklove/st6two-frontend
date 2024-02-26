@@ -177,6 +177,9 @@ async function showBankPopup() {
 }
 
 onLoad(async () => {
+    uni.showLoading({
+        mask: true,
+    })
     const res = await $api.get('/user/cryptoList')
     if (res.data.length === 0) {
         showToast(t('position.withDraw.NoWallet'))
@@ -186,6 +189,7 @@ onLoad(async () => {
     }
     CryptoList.value = res.data
     currentWallet.value = CryptoList.value[0]
+    uni.hideLoading()
 })
 
 function showPopup() {
