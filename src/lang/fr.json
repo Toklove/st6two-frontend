@@ -1,5 +1,14 @@
 {
   "tabBar": {
+    "assets": {
+      "Assets": "Actifs",
+      "Recharge": "Recharge",
+      "Withdraw": "Retirer",
+      "Exchange": "Échange",
+      "Usable": "Utilisable",
+      "InProcess": "En cours",
+      "ConvertInto": "Convertir en"
+    },
     "history": {
       "HistoricalOrders": "Historique des commandes",
       "buy": "acheter",
@@ -40,7 +49,8 @@
       "LogOutFailed": "La déconnexion a échoué",
       "LogOut": "Déconnexion",
       "ConfigLout": "Êtes - vous sûr de vouloir vous déconnecter?",
-      "CopySuccess": "Copie réussie"
+      "CopySuccess": "Copie réussie",
+      "realName": "Nom réel"
     },
     "position": {
       "RealAccount": "Compte réel",
@@ -205,6 +215,8 @@
       "bill": "facture"
     },
     "chart": {
+      "BuyLong": "Acheter long",
+      "SellShort": "Sell short",
       "Statistics": "Statistiques",
       "Open": "Ouvrir",
       "Low": "Bas",

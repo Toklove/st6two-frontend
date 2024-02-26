@@ -1,5 +1,14 @@
 {
   "tabBar": {
+    "assets": {
+      "Assets": "자산",
+      "Recharge": "충전",
+      "Withdraw": "물러서다",
+      "Exchange": "환전",
+      "Usable": "사용 가능",
+      "InProcess": "진행 중",
+      "ConvertInto": "변환"
+    },
     "history": {
       "HistoricalOrders": "과거 주문",
       "buy": "사다",
@@ -12,7 +21,8 @@
       "ClosingTime": "폐관 시간",
       "ClosingType": "닫는 유형",
       "ManualOperation": "수동 조작",
-      "NoMoreData": "더 이상 데이터가 없습니다."
+      "NoMoreData": "더 이상 데이터가 없습니다.",
+      "realName": "실명"
     },
     "home": {
       "hot": "인기 있는",
@@ -205,6 +215,8 @@
       "bill": "계산서"
     },
     "chart": {
+      "BuyLong": "매수",
+      "SellShort": "매도",
       "Statistics": "통계",
       "Open": "열다",
       "Low": "낮다",

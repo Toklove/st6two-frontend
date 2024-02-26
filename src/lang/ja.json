@@ -1,5 +1,14 @@
 {
   "tabBar": {
+    "assets": {
+      "Assets": "資産",
+      "Recharge": "チャージ",
+      "Withdraw": "引き上げる",
+      "Exchange": "交換",
+      "Usable": "利用可能",
+      "InProcess": "処理中",
+      "ConvertInto": "変換する"
+    },
     "history": {
       "HistoricalOrders": "注文履歴",
       "buy": "買う",
@@ -40,7 +49,8 @@
       "LogOutFailed": "ログアウトに失敗しました",
       "LogOut": "ログアウト",
       "ConfigLout": "本当にログアウトしますか。",
-      "CopySuccess": "コピー成功"
+      "CopySuccess": "コピー成功",
+      "realName": "本名"
     },
     "position": {
       "RealAccount": "リアル口座",
@@ -206,6 +216,8 @@
       "bill": "請求書"
     },
     "chart": {
+      "BuyLong": "買い",
+      "SellShort": "売る",
       "Statistics": "統計学",
       "Open": "開ける",
       "Low": "低い",

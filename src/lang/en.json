@@ -1,5 +1,14 @@
 {
   "tabBar": {
+    "assets": {
+      "Assets": "Assets",
+      "Recharge": "Recharge",
+      "Withdraw": "Withdraw",
+      "Exchange": "Exchange",
+      "Usable": "Usable",
+      "InProcess": "InProcess",
+      "ConvertInto": "ConvertInto"
+    },
     "history": {
       "HistoricalOrders": "Historical orders",
       "buy": "buy",
@@ -40,7 +49,9 @@
       "LogOutFailed": "Log out failed",
       "LogOut": "Log out",
       "ConfigLout": "Are you sure you want to log out?",
-      "CopySuccess": "Copy success"
+      "CopySuccess": "Copy success",
+      "Credit": "Credit Score",
+      "realName": "Real name"
     },
     "position": {
       "RealAccount": "Real account",
@@ -205,6 +216,8 @@
       "bill": "bill"
     },
     "chart": {
+      "BuyLong": "Buy long",
+      "SellShort": "Sell short",
       "Statistics": "Statistics",
       "Open": "Open",
       "Low": "Low",

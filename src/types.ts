@@ -13,6 +13,8 @@ export interface LayoutOtherDataType {
     className?: string
     /** 导航条返回按钮颜色 */
     backIconColor?: string
+    /** 展示body padding */
+    showBodyPadding?: boolean
 }
 
 export interface _LayoutDataType {

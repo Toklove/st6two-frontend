@@ -98,7 +98,7 @@
                         </view>
                     </swiper-item>
                 </swiper>
-                <view v-else class="scroll-x-skeleton relative">
+                <view v-else class="scroll-x-skeleton relative h-[234px] bg-[#f5f7f9] rounded-[15px]">
                     <FuiSkeleton :preload-list="home.swipers" outer-class="scroll-x-skeleton"></FuiSkeleton>
                     <FuiSkeleton :preload-list="home.swipers" outer-class="scroll-x-skeleton"></FuiSkeleton>
                     <FuiSkeleton :preload-list="home.swipers" outer-class="scroll-x-skeleton"></FuiSkeleton>

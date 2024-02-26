@@ -55,6 +55,11 @@ export default defineUniPages({
                 selectedIconPath: 'static/tabbar/history-select.png',
             },
             {
+                pagePath: 'pages/tabbar/assets',
+                iconPath: 'static/tabbar/assets-unselect.png',
+                selectedIconPath: 'static/tabbar/assets-select.png',
+            },
+            {
                 pagePath: 'pages/tabbar/mine',
                 iconPath: 'static/tabbar/mine-unselect.png',
                 selectedIconPath: 'static/tabbar/mine-select.png',

@@ -40,7 +40,18 @@
       "LogOutFailed": "註銷失敗",
       "LogOut": "註銷",
       "ConfigLout": "你確定要註銷嗎？",
-      "CopySuccess": "複製成功"
+      "CopySuccess": "複製成功",
+      "Credit": "信用分",
+      "realName": "實名認證"
+    },
+    "assets": {
+      "Assets": "資產",
+      "Recharge": "充值",
+      "Withdraw": "提現",
+      "Exchange": "兌換",
+      "Usable": "可用",
+      "InProcess": "處理中",
+      "ConvertInto": "折合"
     },
     "position": {
       "RealAccount": "真實帳戶",
@@ -206,6 +217,8 @@
       "bill": "账单"
     },
     "chart": {
+      "BuyLong": "買漲",
+      "SellShort": "買跌",
       "Statistics": "統計",
       "Open": "開",
       "Low": "低",

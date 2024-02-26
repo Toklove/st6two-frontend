@@ -1,5 +1,14 @@
 {
   "tabBar": {
+    "assets": {
+      "Assets": "Vermögenswerte",
+      "Recharge": "Aufladen",
+      "Withdraw": "Zurückziehen",
+      "Exchange": "Austausch",
+      "Usable": "Verwendbar",
+      "InProcess": "In Bearbeitung",
+      "ConvertInto": "Umwandeln in"
+    },
     "history": {
       "HistoricalOrders": "Historische Aufträge",
       "buy": "kaufen",
@@ -40,7 +49,8 @@
       "LogOutFailed": "Abmelden fehlgeschlagen",
       "LogOut": "Abmelden",
       "ConfigLout": "Sind Sie sicher, dass Sie sich abmelden möchten?",
-      "CopySuccess": "Kopiererfolg"
+      "CopySuccess": "Kopiererfolg",
+      "realName": "Echter Name"
     },
     "position": {
       "RealAccount": "Echtgeldkonto",
@@ -205,6 +215,8 @@
       "bill": "Rechnung"
     },
     "chart": {
+      "BuyLong": "BuyLong",
+      "SellShort": "SellShort",
       "Statistics": "Statistik",
       "Open": "Offen",
       "Low": "Niedrig",

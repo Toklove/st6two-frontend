@@ -25,11 +25,11 @@ let locale = uni.getStorageSync('lang')
 if (!locale) {
     const sysInfo = uni.getSystemInfoSync()
     locale = sysInfo.language
-    if (locale === 'zh_CN') {
+    if (locale === 'zh_CN')
         locale = 'zhHant'
-    } else {
+    else
         locale = 'en'
-    }
+
     uni.setStorageSync('lang', locale)
 }
 

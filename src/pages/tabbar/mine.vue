@@ -1,143 +1,148 @@
 <template>
     <page-meta />
-    <div class='init-top' />
-    <layout class-name='IndexRouter'>
-        <view class='card mx-auto'>
-            <view class='flex'>
+    <div class="init-top" />
+    <layout class-name="IndexRouter">
+        <view class="card mx-auto">
+            <view class="flex">
                 <image
                     :src="userStore.userInfo.avatar ? userStore.getAvatar() : '/static/images/avatar.png'"
-                    class='w-[132px] h-[132px] rounded-full'
+                    class="w-[132px] h-[132px] rounded-full"
                 ></image>
-                <view class='flex-1 ml-[19px]'>
-                    <view class='flex items-center justify-between text-white'>
-                        <text class='text-[38px] font-bold'>
+                <view class="flex-1 ml-[19px]">
+                    <view class="flex items-center justify-between text-white">
+                        <text class="text-[38px] font-bold">
                             {{ userStore.userInfo.nickname }}
                         </text>
                         <image
-                            class='w-[54px] h-[54px]' src='/static/images/icon-edit.png'
+                            class="w-[54px] h-[54px]" src="/static/images/icon-edit.png"
                             @click="toPage('/pages/mine/userInfo')"
                         ></image>
                     </view>
-                    <view class='text-[25px] text-white'>
+                    <view class="text-[25px] text-white">
+                        <text>{{ t('tabBar.mine.Credit') }}:&nbsp;{{ userStore.userInfo.credit }}</text>
+                    </view>
+                    <view class="text-[25px] text-white mt-[10px]">
                         <text>ID:&nbsp;{{ userStore.userInfo.id }}</text>
                     </view>
                     <view
-                        class='copy-wrap flex items-center text-center h-[40px] mt-[24px] px-[24px] bg-white rounded-[20px]'
-                        @click='copyInviteCode'
+                        class="copy-wrap flex items-center text-center h-[40px] mt-[24px] px-[24px] bg-white rounded-[20px]"
+                        @click="copyInviteCode"
                     >
-                        <view class='mr-[14px] grid place-items-center'>
-                            <image class='w-[24px] h-[24px]' src='/static/images/icon-small-invite.png'></image>
+                        <view class="mr-[14px] grid place-items-center">
+                            <image class="w-[24px] h-[24px]" src="/static/images/icon-small-invite.png"></image>
                         </view>
-                        <text class='text-[24px]'>{{ userStore.userInfo.invite_code }}</text>
+                        <text class="text-[24px]">{{ userStore.userInfo.invite_code }}</text>
                     </view>
                 </view>
             </view>
         </view>
-        <view class='mt-[40px] px-[34px]'>
-            <text class='text-[45px]'>{{ t('tabBar.mine.AccountDetails') }}</text>
-            <view class='mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]'>
-                <view class='flex items-center justify-between' @click="toPage('/pages/mine/option')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-option.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.OptionOrders') }}</text>
+        <view class="mt-[40px] px-[34px]">
+            <text class="text-[45px]">{{ t('tabBar.mine.AccountDetails') }}</text>
+            <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
+                <view class="flex items-center justify-between" @click="toPage('/pages/mine/option')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-option.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.OptionOrders') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/wallet')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-wallet.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.Purse') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/wallet')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-wallet.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Purse') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/certified')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-real.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.Certified') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/certified')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-real.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Certified') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image v-if="userStore.getUserInfo().is_certified == 1" class="h-[18px] w-[18px]"
+                           src="/static/images/icon-right-arrow.png"></image>
+                    <view v-else class="green-text">{{ t('tabBar.mine.realName') }}</view>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click='showChangeLang = true'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-small-language.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.Language') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="showChangeLang = true">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-language.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Language') }}</text>
                     </view>
-                    <text class='sub-title'>{{ nowLocale.title }}</text>
+                    <text class="sub-title">{{ nowLocale.title }}</text>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/changePassword')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-small-password.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.ChangePassword') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/changePassword')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-small-password.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.ChangePassword') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
             </view>
         </view>
-        <view class='mt-[40px] px-[34px]'>
-            <text class='text-[45px]'>{{ t('tabBar.mine.HelpAndSupport') }}</text>
-            <view class='mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]'>
-                <view class='flex items-center justify-between'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-market.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.MarketPattern') }}</text>
+        <view class="mt-[40px] px-[34px]">
+            <text class="text-[45px]">{{ t('tabBar.mine.HelpAndSupport') }}</text>
+            <view class="mt-[20px] p-[30px] bg-[#f5f7f9] rounded-[30px]">
+                <view class="flex items-center justify-between">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-market.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.MarketPattern') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/service')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-service.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.CustomerService') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/service')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-service.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.CustomerService') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click='copyInviteCode'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-invite.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.InvitationLink') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="copyInviteCode">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-invite.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.InvitationLink') }}</text>
                     </view>
-                    <text class='text-[28px] sub-title'>
+                    <text class="text-[28px] sub-title">
                         {{ t('tabBar.mine.ClickToCopy') }}
                     </text>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click="toPage('/pages/mine/about')">
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-about.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.AboutUs') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="toPage('/pages/mine/about')">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-about.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.AboutUs') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
-                <view class='flex items-center justify-between mt-[35px]' @click='logout'>
-                    <view class='flex items-center'>
-                        <image class='w-[40px] h-[40px] mr-[18px]' src='/static/images/icon-logout.png'></image>
-                        <text class='text-[28px]'>{{ t('tabBar.mine.Logout') }}</text>
+                <view class="flex items-center justify-between mt-[35px]" @click="logout">
+                    <view class="flex items-center">
+                        <image class="w-[40px] h-[40px] mr-[18px]" src="/static/images/icon-logout.png"></image>
+                        <text class="text-[28px]">{{ t('tabBar.mine.Logout') }}</text>
                     </view>
-                    <image class='h-[18px] w-[18px]' src='/static/images/icon-right-arrow.png'></image>
+                    <image class="h-[18px] w-[18px]" src="/static/images/icon-right-arrow.png"></image>
                 </view>
             </view>
         </view>
-        <view :class="showChangeLang ? '' : 'hidden'" class='transition'>
-            <view class='popup-wrap'>
-                <view class='container'>
-                    <view class='text-center'>
-                        <image class='icon' src='/static/images/icon-popup-language.png'></image>
+        <view :class="showChangeLang ? '' : 'hidden'" class="transition">
+            <view class="popup-wrap">
+                <view class="container">
+                    <view class="text-center">
+                        <image class="icon" src="/static/images/icon-popup-language.png"></image>
                     </view>
-                    <view class='slot-wrap text-center'>
-                        <view class='mt-[120px]'>
+                    <view class="slot-wrap text-center">
+                        <view class="mt-[120px]">
                             <view
-                                v-for='(item) in LangList' :key='item.code'
+                                v-for="(item) in LangList" :key="item.code"
                                 :class="item.value === locale ? 'active' : ''"
-                                class='p-[15px] text-[26px] sub-title'
-                                @click='changeLang(item.value)'
+                                class="p-[15px] text-[26px] sub-title"
+                                @click="changeLang(item.value)"
                             >
                                 <text>{{ item.title }}</text>
                             </view>
                         </view>
                     </view>
-                    <view class='btn-wrap flex justify-around items-center font-bold'>
-                        <text class='btn sub-title bg-[#f5f7f9]' @click='showChangeLang = false'>
+                    <view class="btn-wrap flex justify-around items-center font-bold">
+                        <text class="btn sub-title bg-[#f5f7f9]" @click="showChangeLang = false">
                             {{ t('tabBar.mine.Cancel') }}
                         </text>
-                        <text class='btn text-white bg-black' @click='showChangeLang = false'>
+                        <text class="btn text-white bg-black" @click="showChangeLang = false">
                             {{ t('tabBar.mine.Confirm') }}
                         </text>
                     </view>
@@ -147,7 +152,7 @@
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '~/pinia/useUserInfo'
 

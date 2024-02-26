@@ -1,5 +1,14 @@
 {
   "tabBar": {
+    "assets": {
+      "Assets": "Активы",
+      "Recharge": "Заряжать",
+      "Withdraw": "Отводить",
+      "Exchange": "Обмен",
+      "Usable": "Используемый",
+      "InProcess": "В процессе",
+      "ConvertInto": "Преобразовать в"
+    },
     "history": {
       "HistoricalOrders": "Исторические заказы",
       "buy": "покупать",
@@ -40,7 +49,8 @@
       "LogOutFailed": "Ошибка отмены",
       "LogOut": "Списание",
       "ConfigLout": "Вы уверены, что хотите его списать?",
-      "CopySuccess": "Копировать успешно"
+      "CopySuccess": "Копировать успешно",
+      "realName": "Настоящее имя"
     },
     "position": {
       "RealAccount": "Реальный счет",
@@ -205,6 +215,8 @@
       "bill": "счет"
     },
     "chart": {
+      "BuyLong": "Купить длинный",
+      "SellShort": "Продать короткий",
       "Statistics": "Статистика",
       "Open": "Открытый",
       "Low": "Низкий",

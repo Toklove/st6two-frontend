@@ -113,9 +113,13 @@
 
             </view>
         </view>
-        <view class='btn-wrap flex items-center justify-around font-bold py-[20px] bg-white'>
-            <view class='btn font-bold btn-0' @click='createOrder(0)'>{{ t('position.chart.Sell') }}</view>
-            <view class='btn font-bold btn-1' @click='createOrder(1)'>{{ t('position.chart.Buy') }}</view>
+        <view v-if="current === 0" class='btn-wrap flex items-center justify-around font-bold py-[20px] bg-white'>
+            <view class='btn font-bold btn-0' @click='createOrder(0)'>{{ t('position.chart.Buy') }}</view>
+            <view class='btn font-bold btn-1' @click='createOrder(1)'>{{ t('position.chart.Sell') }}</view>
+        </view>
+        <view v-else class='btn-wrap flex items-center justify-around font-bold py-[20px] bg-white'>
+            <view class='btn font-bold btn-2' @click='createOrder(0)'>{{ t('position.chart.BuyLong') }}</view>
+            <view class='btn font-bold btn-0' @click='createOrder(1)'>{{ t('position.chart.SellShort') }}</view>
         </view>
         <view v-show='showContract' class='order-wrap'>
             <view class='place'>
@@ -609,6 +613,10 @@ navigationStyle: custom
 
     .btn-1 {
         background-color: #3a7ff6;
+    }
+
+    .btn-2 {
+        background-color: rgb(51, 205, 153);
     }
 
     .btn {

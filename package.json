@@ -78,7 +78,6 @@
     "@vue-macros/volar": "^0.18.0",
     "eslint": "^8.55.0",
     "eslint-plugin-format": "^0.1.0",
-    "lint-staged": "^15.2.0",
     "miniprogram-api-typings": "^3.12.2",
     "pnpm": "^8.12.1",
     "postcss-px-to-viewport-8-plugin": "^1.2.3",
