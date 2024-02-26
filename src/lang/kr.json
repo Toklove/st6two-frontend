@@ -1,4 +1,8 @@
 {
+  "Forex": "외환",
+  "Indices": "지수",
+  "Commodities": "상품",
+  "Cryptos": "암호화폐",
   "tabBar": {
     "assets": {
       "Assets": "자산",
@@ -252,7 +256,10 @@
       "ChoiceCurrency": "통화 선택",
       "TokenAddress": "TOKEN을 다음 주소로 이체",
       "CopySuccess": "복사 성공",
-      "deposit": "보증금"
+      "deposit": "보증금",
+      "address": "주소",
+      "count": "수량",
+      "uploadImage": "이미지 업로드"
     },
     "record": {
       "pass": "합격",

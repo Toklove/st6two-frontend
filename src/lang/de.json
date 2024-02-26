@@ -1,4 +1,8 @@
 {
+  "Forex": "Forex",
+  "Indices": "Indices",
+  "Commodities": "Commodities",
+  "Cryptos": "Cryptos",
   "tabBar": {
     "assets": {
       "Assets": "Vermögenswerte",
@@ -252,7 +256,10 @@
       "ChoiceCurrency": "Wahl der Währung",
       "TokenAddress": "Überweisen Sie TOKEN an die folgende Adresse",
       "CopySuccess": "Erfolg beim Kopieren",
-      "deposit": "deponieren"
+      "deposit": "deponieren",
+      "address": "Adresse",
+      "count": "Menge",
+      "uploadImage": "Bild hochladen"
     },
     "record": {
       "pass": "bestehen",

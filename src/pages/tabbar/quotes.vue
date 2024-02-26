@@ -18,7 +18,7 @@
                         class="flex items-center justify-between bg-black dropdown"
                         @click="showDropdown = !showDropdown"
                     >
-                        <text class="text-[26px] text-white px-[10px]">{{ form.category }}</text>
+                        <text class="text-[26px] text-white px-[10px]">{{ t(form.category) }}</text>
                         <image
                             :src="showDropdown ? '/static/images/icon-dropup.png' : '/static/images/icon-dropdown.png'"
                             class="w-[18px] h-[18px]"
@@ -27,7 +27,7 @@
                 </view>
                 <view :class="showDropdown ? 'h-auto' : 'h-0'" class="dropdown-item bg-black text-white">
                     <view v-for="(item, index) in categoryList" :key="index" class="item" @click="changeList(item)">
-                        <text class="text-[26px]">{{ item.name }}</text>
+                        <text class="text-[26px]">{{ t(item.name) }}</text>
                     </view>
                 </view>
 

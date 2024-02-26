@@ -1,4 +1,8 @@
 {
+  "Forex": "Форекс",
+  "Indices": "индекс",
+  "Commodities": "товар",
+  "Cryptos": "криптовалюта",
   "tabBar": {
     "assets": {
       "Assets": "Активы",
@@ -252,7 +256,10 @@
       "ChoiceCurrency": "Выбор валюты",
       "TokenAddress": "Переведите TOKEN на следующий адрес",
       "CopySuccess": "Успешное копирование",
-      "deposit": "задаток"
+      "deposit": "задаток",
+      "address": "адрес",
+      "count": "количество",
+      "uploadImage": "Загрузить изображение"
     },
     "record": {
       "pass": "проходить",

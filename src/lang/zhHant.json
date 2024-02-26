@@ -1,4 +1,8 @@
 {
+  "Forex": "外匯",
+  "Indices": "指數",
+  "Commodities": "商品",
+  "Cryptos": "加密貨幣",
   "tabBar": {
     "history": {
       "HistoricalOrders": "歷史訂單",
@@ -254,7 +258,10 @@
       "ChoiceCurrency": "貨幣選擇",
       "TokenAddress": "將TOKEN轉帳至以下地址",
       "CopySuccess": "複製成功",
-      "deposit": "存款"
+      "deposit": "存款",
+      "address": "地址",
+      "count": "數量",
+      "uploadImage": "上傳圖片"
     },
     "record": {
       "pass": "通過",

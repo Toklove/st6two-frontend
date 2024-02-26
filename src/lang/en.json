@@ -1,4 +1,8 @@
 {
+  "Forex": "Forex",
+  "Indices": "Indices",
+  "Commodities": "Commodities",
+  "Cryptos": "Cryptos",
   "tabBar": {
     "assets": {
       "Assets": "Assets",
@@ -241,6 +245,7 @@
       "direction": "direction",
       "BuyLess": "Buy less",
       "BuyMore": "Buy more",
+      "BuyMore": "Buy more",
       "SelectExpirationDate": "Select expiration date",
       "RateOfReturn": "Expected rate of return",
       "TransactionQuantity": "Transaction quantity",
@@ -253,7 +258,10 @@
       "ChoiceCurrency": "Choice of currency",
       "TokenAddress": "Transfer TOKEN to the following address",
       "CopySuccess": "Copy success",
-      "deposit": "deposit"
+      "deposit": "deposit",
+      "address": "address",
+      "count": "count",
+      "uploadImage": "upload image"
     },
     "record": {
       "pass": "pass",

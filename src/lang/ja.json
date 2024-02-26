@@ -1,4 +1,8 @@
 {
+  "Forex": "外国為替",
+  "Indices": "指数",
+  "Commodities": "商品",
+  "Cryptos": "暗号",
   "tabBar": {
     "assets": {
       "Assets": "資産",
@@ -253,7 +257,10 @@
       "ChoiceCurrency": "通貨の選択",
       "TokenAddress": "TOKENを以下のアドレスに送金する",
       "CopySuccess": "コピー成功",
-      "deposit": "預金"
+      "deposit": "預金",
+      "address": "アドレス",
+      "count": "量",
+      "uploadImage": "画像をアップロード"
     },
     "record": {
       "pass": "通る",
