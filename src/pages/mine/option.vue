@@ -16,75 +16,76 @@
         </FuiNavBar>
         <view class="mt-[20px] mx-[34px]">
             <view v-if="!loading">
-                <view v-if="list.length > 0  ">
-                <view v-for="item in list" :key="item.id" class="order-row px-[30px] py-[40px] text-[22px]">
-                    <view class="flex items-center justify-between text-[30px]">
-                        <text>{{ item.market.full_name }}</text>
-                        <text>{{ item.buy_price }}</text>
-                    </view>
-                    <view :class="item.type === 1 ? &quot;buy-2&quot; : &quot;buy-1&quot;" class="font-bold text-right mt-[14px]">
-                        {{ item.type === 1 ? t('mine.option.Sell') : t('mine.option.Buy') }}
-                    </view>
-                    <view class="line mt-[30px]"></view>
-                    <view class="flex items-center justify-between mt-[20px]">
-                        <view class="flex flex-1 items-center justify-between">
-                            <text class="sub-title">{{ t('mine.option.amount') }}</text>
-                            <text>{{ item.quantity }}</text>
+                <view v-if="list.length > 0 ">
+                    <view v-for="item in list" :key="item.id" class="order-row px-[30px] py-[40px] text-[22px]">
+                        <view class="flex items-center justify-between text-[30px]">
+                            <text>{{ item.market.full_name }}</text>
+                            <text>{{ item.buy_price }}</text>
                         </view>
-                        <view class="flex flex-1 items-center justify-between ml-[50px]">
-                            <text class="sub-title">{{ t('mine.option.duration') }}</text>
-                            <text>{{ item.hold_time }}</text>
+                        <view :class="item.type === 1 ? 'buy-2' : 'buy-1'" class="font-bold text-right mt-[14px]">
+                            {{ item.type === 1 ? t('mine.option.Sell') : t('mine.option.Buy') }}
+                        </view>
+                        <view class="line mt-[30px]"></view>
+                        <view class="flex items-center justify-between mt-[20px]">
+                            <view class="flex flex-1 items-center justify-between">
+                                <text class="sub-title">{{ t('mine.option.amount') }}</text>
+                                <text>{{ item.quantity }}</text>
+                            </view>
+                            <view class="flex flex-1 items-center justify-between ml-[50px]">
+                                <text class="sub-title">{{ t('mine.option.duration') }}</text>
+                                <text>{{ item.hold_time }}</text>
+                            </view>
+                        </view>
+                        <view class="flex items-center justify-between mt-[20px]">
+                            <text class="sub-title">{{ t('mine.option.HandlingFee') }}</text>
+                            <text>{{ item.all_fee }}</text>
+                        </view>
+                        <view class="flex items-center justify-between mt-[20px] sub-title">
+                            <text>{{ t('mine.option.OrderTime') }}</text>
+                            <text>{{ item.created_at }}</text>
+                        </view>
+                        <view v-if="item.status === 1" class="flex items-center justify-between mt-[20px] sub-title">
+                            <text>{{ t('mine.option.SettlementTime') }}</text>
+                            <text>{{ item.sell_time }}</text>
+                        </view>
+                        <view v-if="item.status === 1" class="flex items-center justify-between mt-[20px] sub-title">
+                            <text>{{ t('mine.option.ProfitLoss') }}</text>
+                            <text class="win">{{ item.profit }}</text>
                         </view>
                     </view>
-                    <view class="flex items-center justify-between mt-[20px]">
-                        <text class="sub-title">{{ t('mine.option.HandlingFee') }}</text>
-                        <text>{{ item.all_fee }}</text>
-                    </view>
-                    <view class="flex items-center justify-between mt-[20px] sub-title">
-                        <text>{{ t('mine.option.OrderTime') }}</text>
-                        <text>{{ item.created_at }}</text>
-                    </view>
-                    <view v-if="item.status === 1" class="flex items-center justify-between mt-[20px] sub-title">
-                        <text>{{ t('mine.option.SettlementTime') }}</text>
-                        <text>{{ item.sell_time }}</text>
-                    </view>
-                    <view v-if="item.status === 1" class="flex items-center justify-between mt-[20px] sub-title">
-                        <text>{{ t('mine.option.ProfitLoss') }}</text>
-                        <text class="win">{{ item.profit }}</text>
-                    </view>
+                </view>
+                <view v-else class="nodata">
+                    <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
                 </view>
             </view>
-            <view v-else class="nodata">
-                <image class="w-[340px] h-[340px]" src="/static/images/option.png"></image>
-            </view>
-            </view>
-            <view v-else >
-                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
-                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+            <view v-else>
+                <view class="relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton">
+                    <fui-skeleton :preload-list="option.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
-                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                <view class="relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton">
+                    <fui-skeleton :preload-list="option.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
-                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                <view class="relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton">
+                    <fui-skeleton :preload-list="option.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
-                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                <view class="relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton">
+                    <fui-skeleton :preload-list="option.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
-                <view class='relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton'>
-                    <fui-skeleton :preloadList='option.market' outerClass='market-skeleton'></fui-skeleton>
+                <view class="relative flex items-center justify-between mt-[30px] h-[300px]  market-skeleton">
+                    <fui-skeleton :preload-list="option.market" outer-class="market-skeleton"></fui-skeleton>
                 </view>
             </view>
         </view>
     </layout>
 </template>
 
-<script lang='ts' setup>
+<script setup>
 import { useI18n } from 'vue-i18n'
 import FuiNavBar from '~/components/firstui/fui-nav-bar/fui-nav-bar.vue'
 import FuiIcon from '~/components/firstui/fui-icon/fui-icon.vue'
 import USubsection from '~/components/toklove/sub-section/sub-section.vue'
 import option from '~/skeleton/mine/option.js'
+
 function clickBack() {
     $api.back()
 }

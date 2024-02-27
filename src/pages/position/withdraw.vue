@@ -153,9 +153,9 @@ function subList() {
         {
             name: t('position.withDraw.Purse'),
         },
-        {
-            name: t('position.withDraw.BankCard'),
-        },
+        // {
+        //     name: t('position.withDraw.BankCard'),
+        // },
     ]
 }
 
