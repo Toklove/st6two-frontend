@@ -1,7 +1,7 @@
 {
   "Forex": "外匯",
   "Indices": "指數",
-  "Commodities": "商品",
+  "Commodities": "金属",
   "Cryptos": "加密貨幣",
   "tabBar": {
     "history": {
@@ -244,8 +244,8 @@
       "AvailableBalance": "可用餘額",
       "TransactionPairs": "交易對",
       "direction": "方向",
-      "BuyLess": "購買更少",
-      "BuyMore": "購買更多",
+      "BuyLess": "下跌",
+      "BuyMore": "上涨",
       "SelectExpirationDate": "選擇到期日期",
       "RateOfReturn": "預期回報率",
       "TransactionQuantity": "交易數量",
@@ -277,7 +277,7 @@
       "SelectBank": "選擇銀行卡",
       "Submit": "提交",
       "inputAmount": "請輸入金額",
-      "Purse": "錢包",
+      "Purse": "提領申請",
       "PurseRecord": "錢包记录",
       "BankCard": "銀行卡",
       "SubmitSuccess": "提交成功",

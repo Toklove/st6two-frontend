@@ -138,7 +138,7 @@
                         class="h-[68px] ml-[20px] rounded-[10px] grid place-items-center"
                     >
                         <text class="text-[22px] text-white">
-                            {{ item.nowData.increase }}
+                            {{ item.nowData.increase > 0 ?'+':'' }}{{ ((item.nowData.increase / item.nowData.close) * 100).toFixed(2) }}%
                         </text>
                     </view>
                 </view>
